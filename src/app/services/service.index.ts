@@ -4,3 +4,4 @@ export { LoginGuardGuard } from './guard/login-guard.guard';
 export { SharedService } from './shared/shared.service';
 export { SidebarService } from './shared/sidebar.service';
 export { UsuarioService } from './usuario/usuario.service';
+export { SolicitanteService } from './solicitante/solicitante.service';

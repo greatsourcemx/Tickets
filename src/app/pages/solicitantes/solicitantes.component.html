@@ -3,7 +3,7 @@
         <div class="card">
             <div class="card-body">
 
-                <input #input (keyup)="buscarUsuario( input.value )" type="text" class="form-control" placeholder="Buscar usuario por nombre...">
+                <input #input (keyup)="buscarSolicitante( input.value )" type="text" class="form-control" placeholder="Buscar solicitante por nombre...">
 
             </div>
         </div>
@@ -30,13 +30,13 @@
             <div class="card-body">
 
                 <div class="text-right">
-                    <button [routerLink]="['/usuario']" type="button" class="btn waves-effect waves-light btn-rounded btn-primary">
-                        <i class="fa fa-plus"></i> 
-                        Crear Usuario
-                    </button>
+                    <button [routerLink]="['/solicitante']" type="button" class="btn waves-effect waves-light btn-rounded btn-primary">
+                      <i class="fa fa-plus"></i>
+                      Crear Solicitante
+                  </button>
                 </div>
 
-                <h3 class="card-title">Usuarios registrados ( <small>{{ totalRegistros }}</small> )</h3>
+                <h3 class="card-title">Solicitantes registrados ( <small>{{ totalRegistros }}</small> )</h3>
 
 
                 <table class="table table-hover">
@@ -52,35 +52,35 @@
                     </thead>
 
                     <tbody>
-                        <tr *ngFor="let usuario of usuarios">
+                        <tr *ngFor="let solicitante of solicitantes">
                             <td class="w70">
-                                {{ usuario.nombre }}
+                                {{ solicitante.nombre }}
                             </td>
                             <td>
-                                {{ usuario.correo }}
+                                {{ solicitante.correo }}
                             </td>
                             <td>
-                                <select [(ngModel)]="usuario.estado" name="estado" class="form-control">
-                                  <option *ngFor="let rol of estados.Estados" [ngValue]="rol.value">{{ rol.value }}</option>
-                                </select>
+                                <select [(ngModel)]="solicitante.estado" name="estado" class="form-control">
+                                <option *ngFor="let rol of estados.Estados" [ngValue]="rol.value">{{ rol.value }}</option>
+                              </select>
                             </td>
                             <td>
-                                <input [(ngModel)]="usuario.password" name="password" type="password" class="form-control" placeholder="Constraseña" />
+                                <input [(ngModel)]="solicitante.password" name="password" type="password" class="form-control" placeholder="Constraseña" />
                             </td>
                             <td>
                                 <div class="checkbox checkbox-info pull-left p-t-0">
-                                    <input [(ngModel)]="usuario.actualizarPassword" name="actualizarPassword" [id]="usuario.id" type="checkbox" class="filled-in chk-col-light-blue" />
-                                    <label [for]="usuario.id">  </label>
+                                    <input [(ngModel)]="solicitante.actualizarPassword" name="actualizarPassword" [id]="solicitante.id" type="checkbox" class="filled-in chk-col-light-blue" />
+                                    <label [for]="solicitante.id">  </label>
                                 </div>
                             </td>
                             <td>
-                                <button (click)="modificarUsuario( usuario )" class="btn btn-primary">
-                                    <i class="fa fa-save"></i>
-                                </button>
+                                <button (click)="modificarSolicitante( solicitante )" class="btn btn-primary">
+                                  <i class="fa fa-save"></i>
+                              </button>
 
-                                <button [routerLink]="['/usuario', usuario.id ]" class="btn btn-primary" title="Editar Usuario">
-                                    <i class="fa fa-edit"></i>
-                                </button>
+                                <button [routerLink]="['/solicitante', solicitante.id ]" class="btn btn-primary" title="Editar Solicitante">
+                                  <i class="fa fa-edit"></i>
+                              </button>
                             </td>
                         </tr>
 
@@ -89,12 +89,12 @@
                 </table>
 
                 <button (click)="cambiarDesde(-1)" class="btn btn-secondary">
-                    Anteriores
-                </button>
+                  Anteriores
+              </button>
 
                 <button (click)="cambiarDesde(1)" class="btn btn-secondary">
-                    Siguientes
-                </button>
+                  Siguientes
+              </button>
 
             </div>
         </div>

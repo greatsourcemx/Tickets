@@ -18,6 +18,7 @@ export class SidebarService {
       titulo: 'Catálogos',
       icono: 'mdi mdi-account',
       submenu: [
+        { titulo: 'Solicitantes', url: '/solicitantes' },
         { titulo: 'Usuarios', url: '/usuarios' },
         { titulo: 'Tiempos', url: '/tiempos' }
       ]

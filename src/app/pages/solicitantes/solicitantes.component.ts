@@ -1,37 +1,37 @@
 import { Component, OnInit } from '@angular/core';
 import { ESTATUS_USUARIOS } from '../../config/config';
 import { Usuario } from '../../models/usuario.model';
-import { UsuarioService } from '../../services/service.index';
-
+import { SolicitanteService } from '../../services/service.index';
 
 @Component({
-  selector: 'app-usuario',
-  templateUrl: './usuario.component.html'
+  selector: 'app-solicitantes',
+  templateUrl: './solicitantes.component.html',
+  styles: []
 })
-export class UsuarioComponent implements OnInit {
+export class SolicitantesComponent implements OnInit {
 
-  usuarios: Usuario[] = [];
+  solicitantes: Usuario[] = [];
   desde: number = 0;
 
   totalRegistros: number = 0;
   cargando: boolean = true;
   estados: any = JSON.parse(ESTATUS_USUARIOS.toString());
 
-  constructor( public _usuarioService: UsuarioService ) { }
+  constructor( public _solicitanteService: SolicitanteService ) { }
 
   ngOnInit() {
-    this.cargarUsuarios();
+    this.cargarSolicitantes();
   }
 
-  cargarUsuarios() {
+  cargarSolicitantes() {
 
     this.cargando = true;
 
-    this._usuarioService.cargarUsuarios( this.desde )
+    this._solicitanteService.cargarSolicitantes( this.desde )
               .subscribe( (resp: any) => {
                 if (resp.length !== 0) {
                   this.totalRegistros = resp[0].totalUsuarios;
-                  this.usuarios = resp;
+                  this.solicitantes = resp;
                 }
                 this.cargando = false;
               });
@@ -51,33 +51,33 @@ export class UsuarioComponent implements OnInit {
     }
 
     this.desde += valor;
-    this.cargarUsuarios();
+    this.cargarSolicitantes();
 
   }
 
-  buscarUsuario( termino: string ) {
+  buscarSolicitante( termino: string ) {
 
     if ( termino.length <= 0 ) {
-      this.cargarUsuarios();
+      this.cargarSolicitantes();
       return;
     }
 
     this.cargando = true;
 
-    this._usuarioService.buscarUsuarios( termino )
-            .subscribe( (usuarios: Usuario[]) => {
+    this._solicitanteService.buscarSolicitante( termino )
+            .subscribe( (soli: Usuario[]) => {
 
-              this.usuarios = usuarios;
+              this.solicitantes = soli;
               this.cargando = false;
             });
 
   }
 
-  modificarUsuario (usuario: Usuario) {
+  modificarSolicitante (solicitante: Usuario) {
 
-    this._usuarioService.modificarUsuario( usuario )
+    this._solicitanteService.modificarSolicitante( solicitante )
         .subscribe( usr => {
-          usuario.password = '';
+          solicitante.password = '';
           swal('Aviso!', 'Se registrarón los cambios', 'success');
         },
         error => {

@@ -15,6 +15,9 @@ import { Graficas1Component } from './graficas1/graficas1.component';
 import { UsuarioComponent } from './usuario/usuario.component';
 import { NuevoUsuarioComponent } from './usuario/nuevo-usuario.component';
 import { EditUsuarioComponent } from './usuario/edit-usuario.component';
+import { SolicitantesComponent } from './solicitantes/solicitantes.component';
+import { SolicitanteComponent } from './solicitantes/solicitante.component';
+import { EditarSolicitanteComponent } from './solicitantes/editar-solicitante.component';
 
 @NgModule({
     declarations: [
@@ -24,7 +27,10 @@ import { EditUsuarioComponent } from './usuario/edit-usuario.component';
         Graficas1Component,
         UsuarioComponent,
         NuevoUsuarioComponent,
-        EditUsuarioComponent
+        EditUsuarioComponent,
+        SolicitantesComponent,
+        SolicitanteComponent,
+        EditarSolicitanteComponent
     ],
     exports: [
         DashboardComponent,
