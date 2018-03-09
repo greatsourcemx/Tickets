@@ -1,0 +1,106 @@
+<div class="row animated fadeIn">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+
+                <input #input (keyup)="buscarUsuario( input.value )" type="text" class="form-control" placeholder="Buscar usuario por nombre...">
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row animated fadeIn" *ngIf="cargando">
+
+    <div class="col-sm-12">
+
+        <div class="alert alert-warning text-center">
+            <strong>Cargando</strong>
+            <br />
+            <i class="fa fa-refresh fa-spin fa-2x"></i>
+            <br />
+            <span>Espere por favor</span>
+        </div>
+    </div>
+</div>
+
+<div class="row animated fadeIn" *ngIf="!cargando">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+
+                <div class="text-right">
+                    <button [routerLink]="['/usuario']" type="button" class="btn waves-effect waves-light btn-rounded btn-primary">
+                        <i class="fa fa-plus"></i> 
+                        Crear Usuario
+                    </button>
+                </div>
+
+                <h3 class="card-title">Usuarios registrados ( <small>{{ totalRegistros }}</small> )</h3>
+
+
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Correo</th>
+                            <th>Usuario</th>
+                            <th>Estatus</th>
+                            <th>Contraseña</th>
+                            <th>Cambiar Clave</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr *ngFor="let usuario of usuarios">
+                            <td class="w70">
+                                {{ usuario.nombre }}
+                            </td>
+                            <td>
+                                {{ usuario.correo }}
+                            </td>
+                            <td>
+                                {{ usuario.usuario }}
+                            </td>
+                            <td>
+                                <select [(ngModel)]="usuario.estado" name="estado" class="form-control">
+                                  <option *ngFor="let rol of estados.Estados" [ngValue]="rol.value">{{ rol.value }}</option>
+                                </select>
+                            </td>
+                            <td>
+                                <input [(ngModel)]="usuario.password" name="password" type="password" class="form-control" placeholder="Constraseña" />
+                            </td>
+                            <td>
+                                <div class="checkbox checkbox-info pull-left p-t-0">
+                                    <input [(ngModel)]="usuario.actualizarPassword" name="actualizarPassword" [id]="usuario.id" type="checkbox" class="filled-in chk-col-light-blue" />
+                                    <label for="checkbox-signup">  </label>
+                                </div>
+                            </td>
+                            <td>
+                                <button (click)="modificarUsuario( usuario )" class="btn btn-primary">
+                                    <i class="fa fa-save"></i>
+                                </button>
+
+                                <button [routerLink]="['/usuario', usuario.id ]" class="btn btn-primary" title="Editar Usuario">
+                                    <i class="fa fa-edit"></i>
+                                </button>
+                            </td>
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+                <button (click)="cambiarDesde(-1)" class="btn btn-secondary">
+                    Anteriores
+                </button>
+
+                <button (click)="cambiarDesde(1)" class="btn btn-secondary">
+                    Siguientes
+                </button>
+
+            </div>
+        </div>
+    </div>
+</div>

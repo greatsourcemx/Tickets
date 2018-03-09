@@ -1,0 +1,12 @@
+{
+    "Estados": [{
+        "id": 0,
+        "value": "Abierto"
+    }, {
+        "id": 1,
+        "value": "Baja"
+    }, {
+        "id": 2,
+        "value": "Bloqueado"
+    }]
+}
