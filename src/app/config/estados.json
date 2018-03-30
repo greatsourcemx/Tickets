@@ -1,7 +1,7 @@
 {
     "Estados": [{
         "id": 0,
-        "value": "Abierto"
+        "value": "Activo"
     }, {
         "id": 1,
         "value": "Baja"

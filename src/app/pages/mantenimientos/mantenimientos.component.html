@@ -1,0 +1,92 @@
+<div class="row animated fadeIn">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+
+                <input #input (keyup)="buscar( input.value )" type="text" class="form-control" placeholder="Buscar Equipo..." />
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row animated fadeIn" *ngIf="cargando">
+
+    <div class="col-sm-12">
+
+        <div class="alert alert-warning text-center">
+            <strong>Cargando</strong>
+            <br />
+            <i class="fa fa-refresh fa-spin fa-2x"></i>
+            <br />
+            <span>Espere por favor</span>
+        </div>
+    </div>
+</div>
+
+<div class="row animated fadeIn" *ngIf="!cargando">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+
+                <div class="text-right">
+                    <button type="button" class="btn waves-effect waves-light btn-rounded btn-primary">
+                      <i class="fa fa-plus"></i> 
+                      Crear Mantenimiento
+                  </button>
+                </div>
+
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Equipo</th>
+                            <th>Tipo</th>
+                            <th>Periodicidad</th>
+                            <th>Fec Ult Mant</th>
+                            <th>Fec Sig Mant</th>
+                            <th>Activo</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr *ngFor="let mante of mantenimientos">
+                            <td>{{ this.separarEquipo(mante.EquiId) }}</td>
+                            <td>{{ this.separarTipo(mante.EquiId) }}</td>
+                            <td>{{ mante.Periodicidad }} Meses</td>
+                            <td>
+                                {{ mante.FecUltMant | date:'yyyy-MM-dd' }}
+                            </td>
+                            <td>
+
+                                <input [ngModel]="mante.FecSiguiente | date:'yyyy-MM-dd'" (ngModelChange)="mante.FecSiguiente = $event" class="form-control" type="date" name="daterange" />
+                            </td>
+                            <td>
+                                <div class="checkbox checkbox-info pull-left p-t-0">
+                                    <input [(ngModel)]="mante.Activo" name="activo" [id]="mante.id" type="checkbox" class="filled-in chk-col-light-blue" />
+                                    <label [for]="mante.id">  </label>
+                                </div>
+                            </td>
+                            <td>
+                                <button (click)="actualizarMante( mante )" class="btn btn-primary">
+                                    <i class="fa fa-save"></i>
+                                </button>
+                            </td>
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+                <button (click)="cambiarDesde(-1)" class="btn btn-secondary">
+                    Anteriores
+                </button>
+
+                <button (click)="cambiarDesde(1)" class="btn btn-secondary">
+                    Siguientes
+                </button>
+
+            </div>
+        </div>
+    </div>
+</div>

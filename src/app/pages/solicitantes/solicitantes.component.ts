@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { ESTATUS_USUARIOS } from '../../config/config';
 import { Usuario } from '../../models/usuario.model';
-import { SolicitanteService } from '../../services/service.index';
+import { SolicitanteService, EmpresasService } from '../../services/service.index';
+import * as data from '../../config/estados.json';
+import { Empresa } from '../../models/empresa.model';
+
 
 @Component({
   selector: 'app-solicitantes',
@@ -11,15 +13,19 @@ import { SolicitanteService } from '../../services/service.index';
 export class SolicitantesComponent implements OnInit {
 
   solicitantes: Usuario[] = [];
+  Empresas: Empresa[] = [];
   desde: number = 0;
 
   totalRegistros: number = 0;
   cargando: boolean = true;
-  estados: any = JSON.parse(ESTATUS_USUARIOS.toString());
+  estados: any = data;
 
-  constructor( public _solicitanteService: SolicitanteService ) { }
+  constructor( public _solicitanteService: SolicitanteService,
+    public _empresaService: EmpresasService ) { }
 
   ngOnInit() {
+    this.cargando = true;
+    this.cargarEmpresas();
     this.cargarSolicitantes();
   }
 
@@ -35,6 +41,13 @@ export class SolicitantesComponent implements OnInit {
                 }
                 this.cargando = false;
               });
+  }
+
+  cargarEmpresas () {
+    this._empresaService.cargarEmpresasActivas()
+    .subscribe( (resp: any) => {
+      this.Empresas = resp;
+    });
   }
 
   cambiarDesde( valor: number ) {
@@ -74,6 +87,10 @@ export class SolicitantesComponent implements OnInit {
   }
 
   modificarSolicitante (solicitante: Usuario) {
+
+    // Asignacion de Empresa
+    let emprId = solicitante.empresa.id;
+    solicitante.empresa = this.Empresas.find(e => e.id === emprId);
 
     this._solicitanteService.modificarSolicitante( solicitante )
         .subscribe( usr => {

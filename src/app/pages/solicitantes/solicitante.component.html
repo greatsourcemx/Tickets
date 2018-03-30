@@ -17,7 +17,14 @@
 
                         <div class="form-group">
                             <label>Usuario</label>
-                            <input [(ngModel)]="solicitante.usuario" name="correo" type="text" class="form-control" placeholder="Nombre de Usuario" required />
+                            <input [(ngModel)]="solicitante.usuario" name="usuario" type="text" class="form-control" placeholder="Nombre de Usuario" required />
+                        </div>
+
+                        <div class="form-group">
+                            <label>Empresa</label>
+                            <select [(ngModel)]="solicitante.empresa" name="empresa" class="form-control">
+                                <option *ngFor="let empre of Empresas" [ngValue]="empre">{{ empre.nombre }}</option>
+                            </select>
                         </div>
 
                         <div class="form-group">

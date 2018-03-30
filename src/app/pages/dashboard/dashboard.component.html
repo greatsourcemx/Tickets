@@ -1,4 +1,6 @@
-<div class="row">
+<app-nuevo-servicio *ngIf="nuevo"></app-nuevo-servicio>
+
+<div class="row" *ngIf="!nuevo">
     <div class="col-12">
         <div class="card">
             <div class="card-body">
@@ -7,7 +9,7 @@
                     <!-- Column -->
                     <div class="col-md-6 col-lg-3 col-xlg-3">
 
-                        <button name="new" class="btn btn-info"> <i class="fa fa-plus"></i> Nuevo</button>
+                        <button (click)="nuevo = true" name="new" class="btn btn-info"> <i class="fa fa-plus"></i> Nuevo</button>
                         <!-- <div class="card">
                             <div class="box bg-info text-center">
                                 <h1 class="font-light text-white">2,064</h1>
@@ -18,18 +20,9 @@
                     <!-- Column -->
                     <div class="col-md-6 col-lg-3 col-xlg-3">
                         <div class="card">
-                            <div class="box bg-primary text-center">
-                                <h1 class="font-light text-white">1,738</h1>
-                                <h6 class="text-white">Atendidos</h6>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Column -->
-                    <div class="col-md-6 col-lg-3 col-xlg-3">
-                        <div class="card">
-                            <div class="box bg-success text-center">
-                                <h1 class="font-light text-white">1100</h1>
-                                <h6 class="text-white">Resueltos</h6>
+                            <div class="box bg-warning text-center">
+                                <h1 class="font-light text-white"> {{ totalAbiertos() }} </h1>
+                                <h6 class="text-white">Abiertas</h6>
                             </div>
                         </div>
                     </div>
@@ -37,329 +30,57 @@
                     <div class="col-md-6 col-lg-3 col-xlg-3">
                         <div class="card">
                             <div class="box bg-info text-center">
-                                <h1 class="font-light text-white">2,064</h1>
-                                <h6 class="text-white">Pendientes</h6>
+                                <h1 class="font-light text-white"> {{ totalProceso() }} </h1>
+                                <h6 class="text-white">En Proceso</h6>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Column -->
+                    <div class="col-md-6 col-lg-3 col-xlg-3">
+                        <div class="card">
+                            <div class="box bg-success text-center">
+                                <h1 class="font-light text-white">0</h1>
+                                <h6 class="text-white">Resueltos</h6>
                             </div>
                         </div>
                     </div>
                     <!-- Column -->
                 </div>
+
                 <div class="table-responsive">
                     <table id="demo-foo-addrow" class="table m-t-30 table-hover no-wrap contact-list footable-loaded footable" data-page-size="10">
                         <thead>
                             <tr>
-                                <th class="footable-sortable">ID #<span class="footable-sort-indicator"></span></th>
-                                <th class="footable-sortable">Opened By<span class="footable-sort-indicator"></span></th>
-                                <th class="footable-sortable">Cust. Email<span class="footable-sort-indicator"></span></th>
-                                <th class="footable-sortable">Sbuject<span class="footable-sort-indicator"></span></th>
-                                <th class="footable-sortable">Status<span class="footable-sort-indicator"></span></th>
-                                <th class="footable-sortable">Assign to<span class="footable-sort-indicator"></span></th>
-                                <th class="footable-sortable">Date<span class="footable-sort-indicator"></span></th>
+                                <th class="footable-sortable"># Folio<span class="footable-sort-indicator"></span></th>
+                                <th class="footable-sortable">Titulo<span class="footable-sort-indicator"></span></th>
+                                <th class="footable-sortable">Tiempo<span class="footable-sort-indicator"></span></th>
+                                <th class="footable-sortable">Estatus<span class="footable-sort-indicator"></span></th>
+                                <th class="footable-sortable">Asignado a<span class="footable-sort-indicator"></span></th>
                                 <th class="footable-sortable">Action<span class="footable-sort-indicator"></span></th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>1011</td>
+                            <tr *ngFor="let serv of servicios">
+                                <td>{{ serv.Id }}</td>
+                                <td>{{ serv.Titulo }}</td>
+                                <td>{{ serv.TiempoTranscurrido }}</td>
                                 <td>
-                                    <a href="javascript:void(0)"><img src="../assets/images/users/1.jpg" alt="user" class="img-circle" /> Genelia Deshmukh</a>
+                                    <span class="label" [ngClass]="( serv.Estatus == 'Abierta' ) ? 'label-warning' :
+                                    ( serv.Estatus == 'Cerrada' ) ? 'label-success' : 'label-info'">{{ serv.Estatus }}</span>
                                 </td>
-                                <td>genelia@gmail.com</td>
-                                <td>How to customize the template?</td>
-                                <td><span class="label label-warning">New</span> </td>
-                                <td>Johnathon</td>
-                                <td>14-10-2017</td>
-                                <td>
-                                    <button type="button" class="btn btn-sm btn-icon btn-pure btn-outline delete-row-btn" data-toggle="tooltip" data-original-title="Delete"><i class="ti-close" aria-hidden="true"></i></button>
+                                <!-- <td>{{ serv.FecRegistro | date }}</td> -->
+                                <td style="width:50px;">
+                                    <span *ngIf="!serv.AsignadoA">Sin Asignacion</span>
+                                    <span *ngIf="serv.AsignadoA">{{ serv.AsignadoA?.nombre }}</span>
                                 </td>
-                            </tr>
-                            <tr>
-                                <td>1224</td>
                                 <td>
-                                    <a href="javascript:void(0)"><img src="../assets/images/users/2.jpg" alt="user" class="img-circle" /> Ritesh Deshmukh</a>
-                                </td>
-                                <td>ritesh@gmail.com</td>
-                                <td>How to change colors</td>
-                                <td><span class="label label-success">Complete</span> </td>
-                                <td>Salman khan</td>
-                                <td>13-10-2017</td>
-                                <td>
-                                    <button type="button" class="btn btn-sm btn-icon btn-pure btn-outline delete-row-btn" data-toggle="tooltip" data-original-title="Delete"><i class="ti-close" aria-hidden="true"></i></button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>1024</td>
-                                <td>
-                                    <a href="javascript:void(0)"><img src="../assets/images/users/3.jpg" alt="user" class="img-circle" /> Govinda Mauli</a>
-                                </td>
-                                <td>govinda@gmail.com</td>
-                                <td>How to set Horizontal nav</td>
-                                <td><span class="label label-success">Complete</span> </td>
-                                <td>Hritik Roshan</td>
-                                <td>13-10-2017</td>
-                                <td>
-                                    <button type="button" class="btn btn-sm btn-icon btn-pure btn-outline delete-row-btn" data-toggle="tooltip" data-original-title="Delete"><i class="ti-close" aria-hidden="true"></i></button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>2124</td>
-                                <td>
-                                    <a href="javascript:void(0)"><img src="../assets/images/users/4.jpg" alt="user" class="img-circle" /> Raja Mauli</a>
-                                </td>
-                                <td>bahubali@gmail.com</td>
-                                <td>How this will connect with bahubali</td>
-                                <td><span class="label label-inverse">Pending</span> </td>
-                                <td>Hritik Roshan</td>
-                                <td>12-10-2017</td>
-                                <td>
-                                    <button type="button" class="btn btn-sm btn-icon btn-pure btn-outline delete-row-btn" data-toggle="tooltip" data-original-title="Delete"><i class="ti-close" aria-hidden="true"></i></button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>3124</td>
-                                <td>
-                                    <a href="javascript:void(0)"><img src="../assets/images/users/5.jpg" alt="user" class="img-circle" /> Rana Dagubati</a>
-                                </td>
-                                <td>ranabati@gmail.com</td>
-                                <td>How to set navigation</td>
-                                <td><span class="label label-success">Complete</span> </td>
-                                <td>Hritik Roshan</td>
-                                <td>12-10-2017</td>
-                                <td>
-                                    <button type="button" class="btn btn-sm btn-icon btn-pure btn-outline delete-row-btn" data-toggle="tooltip" data-original-title="Delete"><i class="ti-close" aria-hidden="true"></i></button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>1611</td>
-                                <td>
-                                    <a href="javascript:void(0)"><img src="../assets/images/users/6.jpg" alt="user" class="img-circle" /> Tony Deshmukh</a>
-                                </td>
-                                <td>genelia@gmail.com</td>
-                                <td>How to customize the template?</td>
-                                <td><span class="label label-warning">New</span> </td>
-                                <td>Johnathon</td>
-                                <td>14-10-2017</td>
-                                <td>
-                                    <button type="button" class="btn btn-sm btn-icon btn-pure btn-outline delete-row-btn" data-toggle="tooltip" data-original-title="Delete"><i class="ti-close" aria-hidden="true"></i></button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>4224</td>
-                                <td>
-                                    <a href="javascript:void(0)"><img src="../assets/images/users/7.jpg" alt="user" class="img-circle" /> Ritesh Deshmukh</a>
-                                </td>
-                                <td>ritesh@gmail.com</td>
-                                <td>How to change colors</td>
-                                <td><span class="label label-success">Complete</span> </td>
-                                <td>Salman khan</td>
-                                <td>13-10-2017</td>
-                                <td>
-                                    <button type="button" class="btn btn-sm btn-icon btn-pure btn-outline delete-row-btn" data-toggle="tooltip" data-original-title="Delete"><i class="ti-close" aria-hidden="true"></i></button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>2524</td>
-                                <td>
-                                    <a href="javascript:void(0)"><img src="../assets/images/users/3.jpg" alt="user" class="img-circle" /> Govinda Mauli</a>
-                                </td>
-                                <td>govinda@gmail.com</td>
-                                <td>How to set Horizontal nav</td>
-                                <td><span class="label label-success">Complete</span> </td>
-                                <td>Hritik Roshan</td>
-                                <td>13-10-2017</td>
-                                <td>
-                                    <button type="button" class="btn btn-sm btn-icon btn-pure btn-outline delete-row-btn" data-toggle="tooltip" data-original-title="Delete"><i class="ti-close" aria-hidden="true"></i></button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>7524</td>
-                                <td>
-                                    <a href="javascript:void(0)"><img src="../assets/images/users/4.jpg" alt="user" class="img-circle" /> Raja Mauli</a>
-                                </td>
-                                <td>bahubali@gmail.com</td>
-                                <td>How this will connect with bahubali</td>
-                                <td><span class="label label-inverse">Pending</span> </td>
-                                <td>Hritik Roshan</td>
-                                <td>12-10-2017</td>
-                                <td>
-                                    <button type="button" class="btn btn-sm btn-icon btn-pure btn-outline delete-row-btn" data-toggle="tooltip" data-original-title="Delete"><i class="ti-close" aria-hidden="true"></i></button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>4124</td>
-                                <td>
-                                    <a href="javascript:void(0)"><img src="../assets/images/users/5.jpg" alt="user" class="img-circle" /> Rana Dagubati</a>
-                                </td>
-                                <td>ranabati@gmail.com</td>
-                                <td>How to set navigation</td>
-                                <td><span class="label label-success">Complete</span> </td>
-                                <td>Hritik Roshan</td>
-                                <td>12-10-2017</td>
-                                <td>
-                                    <button type="button" class="btn btn-sm btn-icon btn-pure btn-outline delete-row-btn" data-toggle="tooltip" data-original-title="Delete"><i class="ti-close" aria-hidden="true"></i></button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>1011</td>
-                                <td>
-                                    <a href="javascript:void(0)"><img src="../assets/images/users/8.jpg" alt="user" class="img-circle" /> Ama Deshmukh</a>
-                                </td>
-                                <td>genelia@gmail.com</td>
-                                <td>How to customize the template?</td>
-                                <td><span class="label label-warning">New</span> </td>
-                                <td>Johnathon</td>
-                                <td>14-10-2017</td>
-                                <td>
-                                    <button type="button" class="btn btn-sm btn-icon btn-pure btn-outline delete-row-btn" data-toggle="tooltip" data-original-title="Delete"><i class="ti-close" aria-hidden="true"></i></button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>1224</td>
-                                <td>
-                                    <a href="javascript:void(0)"><img src="../assets/images/users/7.jpg" alt="user" class="img-circle" /> adfh abraham</a>
-                                </td>
-                                <td>ritesh@gmail.com</td>
-                                <td>How to change colors</td>
-                                <td><span class="label label-success">Complete</span> </td>
-                                <td>Salman khan</td>
-                                <td>13-10-2017</td>
-                                <td>
-                                    <button type="button" class="btn btn-sm btn-icon btn-pure btn-outline delete-row-btn" data-toggle="tooltip" data-original-title="Delete"><i class="ti-close" aria-hidden="true"></i></button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>8024</td>
-                                <td>
-                                    <a href="javascript:void(0)"><img src="../assets/images/users/6.jpg" alt="user" class="img-circle" /> atest adg</a>
-                                </td>
-                                <td>govinda@gmail.com</td>
-                                <td>How to set Horizontal nav</td>
-                                <td><span class="label label-success">Complete</span> </td>
-                                <td>Hritik Roshan</td>
-                                <td>13-10-2017</td>
-                                <td>
-                                    <button type="button" class="btn btn-sm btn-icon btn-pure btn-outline delete-row-btn" data-toggle="tooltip" data-original-title="Delete"><i class="ti-close" aria-hidden="true"></i></button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>5124</td>
-                                <td>
-                                    <a href="javascript:void(0)"><img src="../assets/images/users/5.jpg" alt="user" class="img-circle" /> Raja Mauli</a>
-                                </td>
-                                <td>bahubali@gmail.com</td>
-                                <td>How this will connect with bahubali</td>
-                                <td><span class="label label-inverse">Pending</span> </td>
-                                <td>Hritik Roshan</td>
-                                <td>12-10-2017</td>
-                                <td>
-                                    <button type="button" class="btn btn-sm btn-icon btn-pure btn-outline delete-row-btn" data-toggle="tooltip" data-original-title="Delete"><i class="ti-close" aria-hidden="true"></i></button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>3144</td>
-                                <td>
-                                    <a href="javascript:void(0)"><img src="../assets/images/users/4.jpg" alt="user" class="img-circle" /> Rana Dagubati</a>
-                                </td>
-                                <td>ranabati@gmail.com</td>
-                                <td>How to set navigation</td>
-                                <td><span class="label label-success">Complete</span> </td>
-                                <td>Hritik Roshan</td>
-                                <td>12-10-2017</td>
-                                <td>
-                                    <button type="button" class="btn btn-sm btn-icon btn-pure btn-outline delete-row-btn" data-toggle="tooltip" data-original-title="Delete"><i class="ti-close" aria-hidden="true"></i></button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>1621</td>
-                                <td>
-                                    <a href="javascript:void(0)"><img src="../assets/images/users/3.jpg" alt="user" class="img-circle" /> Tony Deshmukh</a>
-                                </td>
-                                <td>genelia@gmail.com</td>
-                                <td>How to customize the template?</td>
-                                <td><span class="label label-warning">New</span> </td>
-                                <td>Johnathon</td>
-                                <td>14-10-2017</td>
-                                <td>
-                                    <button type="button" class="btn btn-sm btn-icon btn-pure btn-outline delete-row-btn" data-toggle="tooltip" data-original-title="Delete"><i class="ti-close" aria-hidden="true"></i></button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>4724</td>
-                                <td>
-                                    <a href="javascript:void(0)"><img src="../assets/images/users/2.jpg" alt="user" class="img-circle" /> Ritesh Deshmukh</a>
-                                </td>
-                                <td>ritesh@gmail.com</td>
-                                <td>How to change colors</td>
-                                <td><span class="label label-success">Complete</span> </td>
-                                <td>Salman khan</td>
-                                <td>13-10-2017</td>
-                                <td>
-                                    <button type="button" class="btn btn-sm btn-icon btn-pure btn-outline delete-row-btn" data-toggle="tooltip" data-original-title="Delete"><i class="ti-close" aria-hidden="true"></i></button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>2594</td>
-                                <td>
-                                    <a href="javascript:void(0)"><img src="../assets/images/users/1.jpg" alt="user" class="img-circle" /> Govinda Mauli</a>
-                                </td>
-                                <td>govinda@gmail.com</td>
-                                <td>How to set Horizontal nav</td>
-                                <td><span class="label label-success">Complete</span> </td>
-                                <td>Hritik Roshan</td>
-                                <td>13-10-2017</td>
-                                <td>
-                                    <button type="button" class="btn btn-sm btn-icon btn-pure btn-outline delete-row-btn" data-toggle="tooltip" data-original-title="Delete"><i class="ti-close" aria-hidden="true"></i></button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>7524</td>
-                                <td>
-                                    <a href="javascript:void(0)"><img src="../assets/images/users/4.jpg" alt="user" class="img-circle" /> Raja Mauli</a>
-                                </td>
-                                <td>bahubali@gmail.com</td>
-                                <td>How this will connect with bahubali</td>
-                                <td><span class="label label-inverse">Pending</span> </td>
-                                <td>Hritik Roshan</td>
-                                <td>12-10-2017</td>
-                                <td>
-                                    <button type="button" class="btn btn-sm btn-icon btn-pure btn-outline delete-row-btn" data-toggle="tooltip" data-original-title="Delete"><i class="ti-close" aria-hidden="true"></i></button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>4124</td>
-                                <td>
-                                    <a href="javascript:void(0)"><img src="../assets/images/users/5.jpg" alt="user" class="img-circle" /> Rana Dagubati</a>
-                                </td>
-                                <td>ranabati@gmail.com</td>
-                                <td>How to set navigation</td>
-                                <td><span class="label label-success">Complete</span> </td>
-                                <td>Hritik Roshan</td>
-                                <td>12-10-2017</td>
-                                <td>
-                                    <button type="button" class="btn btn-sm btn-icon btn-pure btn-outline delete-row-btn" data-toggle="tooltip" data-original-title="Delete"><i class="ti-close" aria-hidden="true"></i></button>
+                                    <button [routerLink]="['/servicio', serv.Id ]" class="btn btn-primary" title="Detalles">
+                                        <i class="fa fa-bars"></i> Detalles
+                                    </button>
                                 </td>
                             </tr>
                         </tbody>
-                        <tfoot>
-                            <tr>
-                                <td colspan="2">
-                                    <button type="button" class="btn btn-info btn-rounded" data-toggle="modal" data-target="#add-contact">Add New Contact</button>
-                                </td>
 
-                                <td colspan="6">
-                                    <div class="text-right">
-                                        <ul class="pagination">
-                                            <li class="footable-page-arrow disabled"><a data-page="first" href="#first">«</a></li>
-                                            <li class="footable-page-arrow disabled"><a data-page="prev" href="#prev">‹</a></li>
-                                            <li class="footable-page active"><a data-page="0" href="#">1</a></li>
-                                            <li class="footable-page"><a data-page="1" href="#">2</a></li>
-                                            <li class="footable-page-arrow"><a data-page="next" href="#next">›</a></li>
-                                            <li class="footable-page-arrow"><a data-page="last" href="#last">»</a></li>
-                                        </ul>
-                                    </div>
-                                </td>
-                            </tr>
-                        </tfoot>
                     </table>
                 </div>
             </div>

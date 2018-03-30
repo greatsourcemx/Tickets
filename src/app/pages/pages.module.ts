@@ -5,6 +5,9 @@ import { CommonModule } from '@angular/common';
 // Modulos
 import { SharedModule } from '../shared/shared.module';
 
+// Pipe Module
+import { PipesModule } from '../pipes/pipes.module';
+
 // Rutas
 import { PAGES_ROUTES } from './pages.routes';
 
@@ -18,6 +21,14 @@ import { EditUsuarioComponent } from './usuario/edit-usuario.component';
 import { SolicitantesComponent } from './solicitantes/solicitantes.component';
 import { SolicitanteComponent } from './solicitantes/solicitante.component';
 import { EditarSolicitanteComponent } from './solicitantes/editar-solicitante.component';
+import { TiemposComponent } from './tiempos/tiempos.component';
+import { MantenimientosComponent } from './mantenimientos/mantenimientos.component';
+import { PrioridadComponent } from './prioridad/prioridad.component';
+import { ServiciosComponent } from './servicios/servicios.component';
+import { NuevoServicioComponent } from './servicios/nuevo-servicio.component';
+import { DetallesServicioComponent } from './servicios/detalles-servicio.component';
+import { PrincipalComponent } from './principal/principal.component';
+import { EmpresasComponent } from './empresas/empresas.component';
 
 @NgModule({
     declarations: [
@@ -30,7 +41,15 @@ import { EditarSolicitanteComponent } from './solicitantes/editar-solicitante.co
         EditUsuarioComponent,
         SolicitantesComponent,
         SolicitanteComponent,
-        EditarSolicitanteComponent
+        EditarSolicitanteComponent,
+        TiemposComponent,
+        MantenimientosComponent,
+        PrioridadComponent,
+        ServiciosComponent,
+        NuevoServicioComponent,
+        DetallesServicioComponent,
+        PrincipalComponent,
+        EmpresasComponent
     ],
     exports: [
         DashboardComponent,
@@ -41,7 +60,8 @@ import { EditarSolicitanteComponent } from './solicitantes/editar-solicitante.co
         SharedModule,
         PAGES_ROUTES,
         CommonModule,
-        FormsModule
+        FormsModule,
+        PipesModule
     ]
 })
 

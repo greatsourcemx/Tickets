@@ -64,6 +64,7 @@ export class UsuarioService {
     return this.http.post(url, usuario)
     .map( (resp: any) => {
       this.guardarStorage(resp);
+      return resp;
     });
   }
 

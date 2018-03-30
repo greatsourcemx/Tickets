@@ -41,8 +41,12 @@ export class LoginComponent implements OnInit {
     const usuario = new Usuario(forma.value.correo, forma.value.password);
 
     this._usuarioService.login(usuario, forma.value.recordar)
-      .subscribe(resp => {
-        this.router.navigate(['/dashboard']);
+      .subscribe( (resp: any) => {
+        if (resp.rol === 'ADMIN_ROLE') {
+          this.router.navigate(['/principal']);
+        } else {
+          this.router.navigate(['/dashboard']);
+        }
       },
       error => {
         swal('Aviso!', 'Usuario o contraseña incorrectos', 'warning');

@@ -1,0 +1,37 @@
+{
+    "menu": [{
+        "titulo": "Principal",
+        "icono": "fa fa-tasks",
+        "submenu": [
+            { "titulo": "Tickets", "url": "/dashboard" },
+            { "titulo": "Cerrados", "url": "/cerrados" }
+        ]
+    }],
+    "menuAdmin": [{
+        "titulo": "Principal",
+        "icono": "fa fa-tasks",
+        "submenu": [
+            { "titulo": "Inicio", "url": "/principal" },
+            { "titulo": "ProgressBar", "url": "/progress" },
+            { "titulo": "Gráficas", "url": "/graficas1" },
+            { "titulo": "Promesas", "url": "/promesas" },
+            { "titulo": "RxJs", "url": "/rxjs" }
+        ]
+    }, {
+        "titulo": "Mantenimientos",
+        "icono": "fa fa-laptop",
+        "submenu": [
+            { "titulo": "Listado", "url": "/mantenimientos" }
+        ]
+    }, {
+        "titulo": "Catálogos",
+        "icono": "mdi mdi-account",
+        "submenu": [
+            { "titulo": "Solicitantes", "url": "/solicitantes" },
+            { "titulo": "Usuarios", "url": "/usuarios" },
+            { "titulo": "Empresas", "url": "/empresas" },
+            { "titulo": "Tiempos", "url": "/tiempos" },
+            { "titulo": "Prioridades", "url": "/prioridades" }
+        ]
+    }]
+}

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ESTATUS_USUARIOS } from '../../config/config';
 import { Usuario } from '../../models/usuario.model';
 import { UsuarioService } from '../../services/service.index';
+import * as data from '../../config/estados.json';
 
 
 @Component({
@@ -15,7 +15,7 @@ export class UsuarioComponent implements OnInit {
 
   totalRegistros: number = 0;
   cargando: boolean = true;
-  estados: any = JSON.parse(ESTATUS_USUARIOS.toString());
+  estados: any = data;
 
   constructor( public _usuarioService: UsuarioService ) { }
 

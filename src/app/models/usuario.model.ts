@@ -1,4 +1,5 @@
 
+import { Empresa } from './empresa.model';
 
 export class Usuario {
     constructor (
@@ -12,5 +13,6 @@ export class Usuario {
         public estado?: string,
         public actualizarPassword: boolean = false,
         public totalUsuarios: number = 0,
+        public empresa: Empresa = new Empresa('')
     ) { }
 }

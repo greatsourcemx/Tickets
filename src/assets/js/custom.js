@@ -1,7 +1,5 @@
 /*
-Template Name: Admin Pro Admin
-Author: Wrappixel
-Email: niravjoshi87@gmail.com
+Template Name: Admin Pro
 File: js
 */
 

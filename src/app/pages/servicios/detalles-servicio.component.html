@@ -1,0 +1,48 @@
+<div class="row">
+    <div class="col-12">
+
+        <!-- General del Ticket -->
+        <div class="card">
+            <div class="card-body">
+                <h6 class="card-subtitle mb-2 text-muted">Título</h6>
+                <h4 class="card-title"># {{ servicio.Id }} {{ servicio.Titulo }}
+                    <span class="label" [ngClass]="( servicio.Estatus == 'Abierta' ) ? 'label-warning' :
+                    ( servicio.Estatus == 'Cerrada' ) ? 'label-success' : 'label-info'"> {{ servicio.Estatus }}</span></h4>
+
+                <h6 class="card-subtitle mb-2 text-muted">Descripción</h6>
+                <p class="card-text">{{ servicio.Descripcion }}</p>
+
+                <div class="pull-right">
+                    <div *ngIf="servicio.AsignadoA">
+                        <i class="fa fa-user"></i> <span class="label label-success"> {{ servicio.AsignadoA?.nombre }}</span>
+                    </div>
+                    <div *ngIf="!servicio.AsignadoA">
+                        <i class="fa fa-user"></i> <span class="label label-warning"> Sin Responsable</span>
+                    </div>
+                </div>
+
+                <div class="pull-left">
+                    <small class="text-muted"><i class="fa fa-clock-o"></i> {{ servicio.TiempoTranscurrido }} </small>
+                    <span class="label" [ngClass]="( servicio.Urgencia.Nombre == 'Inmediatamente' || servicio.Urgencia.Nombre == 'Urgente' ) ? 'label-warning' : 'label-info'">{{ servicio.Urgencia?.Nombre }}</span>
+                </div>
+
+                <br /><br />
+                <a href="#" class="card-link">Regresar</a>
+            </div>
+        </div>
+
+        <!-- Avances -->
+        <div class="card" *ngIf="servicio.avances">
+            <div class="card-body">
+                <h4 class="card-title text-muted">Avances</h4>
+                <h6 class="card-subtitle mb-2 text-muted">Descripción</h6>
+                <p class="card-text"> Sin Avances </p>
+
+                <small class="text-muted pull-right"><i class="fa fa-user"></i> {{ servicio.AsignadoA?.nombre }} </small>
+                <small class="text-muted pull-left"><i class="fa fa-clock-o"></i> {{ servicio.TiempoTranscurrido }} </small>
+
+            </div>
+        </div>
+
+    </div>
+</div>

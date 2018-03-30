@@ -1,0 +1,135 @@
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Hoy</h4>
+                <div class="row m-t-40">
+
+                    <!-- Column -->
+                    <div class="col-md-6 col-lg-3 col-xlg-3">
+                        <div class="card">
+                            <div class="box bg-info text-center">
+                                <h1 class="font-light text-white">2,064</h1>
+                                <h6 class="text-white">Total Tickets</h6>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Column -->
+                    <div class="col-md-6 col-lg-3 col-xlg-3">
+                        <div class="card">
+                            <div class="box bg-primary text-center">
+                                <h1 class="font-light text-white">1,738</h1>
+                                <h6 class="text-white">Responded</h6>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Column -->
+                    <div class="col-md-6 col-lg-3 col-xlg-3">
+                        <div class="card">
+                            <div class="box bg-success text-center">
+                                <h1 class="font-light text-white">1100</h1>
+                                <h6 class="text-white">Resolve</h6>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Column -->
+                    <div class="col-md-6 col-lg-3 col-xlg-3">
+                        <div class="card">
+                            <div class="box bg-dark text-center">
+                                <h1 class="font-light text-white">964</h1>
+                                <h6 class="text-white">Pending</h6>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Column -->
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-4">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title"><span class="lstick"></span>Nuevos</h4>
+            </div>
+            <!-- ============================================================== -->
+            <!-- Comment widgets -->
+            <!-- ============================================================== -->
+            <div class="comment-widgets">
+                <!-- Comment Row -->
+                <div class="d-flex flex-row comment-row" *ngFor="let serv of servNuevos">
+                    <div class="p-2"><span class="round"><img [src]="serv.Solicitor.id | imagen" alt="user" width="50" height="50px"></span></div>
+                    <div class="comment-text w-100">
+                        <h5># {{ serv.Id }} {{ serv.Titulo }} </h5>
+                        <h6> {{ serv.Solicitor.nombre }} </h6>
+                        <p class="m-b-5"> {{ serv.Descripcion }} </p>
+                        <div class="comment-footer">
+                            <span class="text-muted pull-right"> {{ serv.TiempoTranscurrido }} </span>
+                            <span class="label label-rounded" [ngClass]="( serv.Urgencia.Nombre == 'Inmediatamente' || serv.Urgencia.Nombre == 'Urgente' ) ? 'label-warning' : 'label-info'">
+                                {{ serv.Urgencia.Nombre }}
+                            </span>
+                            <span class="action-icons">
+                                <a href="javascript:void(0)" class="btn btn-info btn-sm text-white" title="Avances"><i class="icon icon-layers"></i></a>
+                                <a href="javascript:void(0)" class="btn btn-danger btn-sm text-white" title="Cerrar"><i class="icon icon-check"></i></a>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+    <div class="col-lg-8">
+        <div class="card">
+            <div class="card-body">
+
+                <div class="d-flex">
+                    <div>
+                        <h4 class="card-title"><span class="lstick"></span>Mis Tickets</h4>
+                    </div>
+                </div>
+                <div class="table-responsive m-t-20">
+                    <table class="table vm no-th-brd no-wrap pro-of-month">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th colspan="2">Solicitante</th>
+                                <th>Título</th>
+                                <th>Estatus</th>
+                                <th>Horas</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let tick of myTickets">
+                                <td style="width:20px;">{{ tick.Id }}</td>
+                                <td style="width:50px;"><span class="round"><img [src]="tick.Solicitor.id | imagen" alt="user" width="50" height="50px"></span></td>
+                                <td>
+                                    <h6> {{ tick.Solicitor.nombre }} </h6>
+                                    <!-- <small class="text-muted">Puesto Departamento Empresa</small> -->
+                                </td>
+                                <td> {{ tick.Titulo }} </td>
+                                <td><span class="label label-rounded" [ngClass]="( tick.Estatus == 'Abierta' ) ? 'label-warning' :
+                                    ( tick.Estatus == 'Cerrada' ) ? 'label-success' : 'label-info'">{{ tick.Estatus }}</span></td>
+                                <td> {{ tick.TiempoTranscurrido }} </td>
+                                <td>
+                                    <span class="action-icons">
+                                        <a href="javascript:void(0)" class="btn btn-info btn-sm text-white" title="Avances"><i class="icon icon-layers"></i></a>
+                                        <a href="javascript:void(0)" class="btn btn-danger btn-sm text-white" title="Cerrar"><i class="icon icon-check"></i></a>
+                                    </span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</div>

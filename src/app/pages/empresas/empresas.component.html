@@ -1,0 +1,70 @@
+<div class="row animated fadeIn">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+
+                <input #input (keyup)="buscarEmpresa( input.value )" type="text" class="form-control" placeholder="Buscar Empresa..." />
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row animated fadeIn" *ngIf="cargando">
+
+    <div class="col-sm-12">
+
+        <div class="alert alert-warning text-center">
+            <strong>Cargando</strong>
+            <br />
+            <i class="fa fa-refresh fa-spin fa-2x"></i>
+            <br />
+            <span>Espere por favor</span>
+        </div>
+    </div>
+</div>
+
+<div class="row animated fadeIn" *ngIf="!cargando">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+
+                <div class="text-right">
+                    <button (click)="crearEmpresa()" type="button" class="btn waves-effect waves-light btn-rounded btn-primary">
+                      <i class="fa fa-plus"></i> 
+                      Crear Empresa
+                  </button>
+                </div>
+
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Activo</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let empre of Empresas">
+                            <td>
+                                <input [(ngModel)]="empre.nombre" name="nombre" type="text" class="form-control" placeholder="Nombre" required />
+                            </td>
+                            <td>
+                                <div class="checkbox checkbox-info pull-left p-t-0">
+                                    <input [(ngModel)]="empre.activo" name="activo" [id]="empre.id" type="checkbox" class="filled-in chk-col-light-blue" />
+                                    <label [for]="empre.id">  </label>
+                                </div>
+                            </td>
+                            <td>
+                                <button (click)="modificarEmpresa( empre )" class="btn btn-primary">
+                                  <i class="fa fa-save"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+</div>

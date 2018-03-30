@@ -46,6 +46,7 @@
                             <th>Correo</th>
                             <th>Estatus</th>
                             <th>Contraseña</th>
+                            <th>Empresa</th>
                             <th>Cambiar Clave</th>
                             <th></th>
                         </tr>
@@ -54,7 +55,7 @@
                     <tbody>
                         <tr *ngFor="let solicitante of solicitantes">
                             <td class="w70">
-                                {{ solicitante.nombre }}
+                                {{ solicitante.nombre }} ({{ solicitante.noEmpleado }})
                             </td>
                             <td>
                                 {{ solicitante.correo }}
@@ -66,6 +67,11 @@
                             </td>
                             <td>
                                 <input [(ngModel)]="solicitante.password" name="password" type="password" class="form-control" placeholder="Constraseña" />
+                            </td>
+                            <td>
+                                <select [(ngModel)]="solicitante.empresa.id" name="empresa" class="form-control">
+                                    <option *ngFor="let empre of Empresas" [ngValue]="empre.id">{{ empre.nombre }}</option>
+                                </select>
                             </td>
                             <td>
                                 <div class="checkbox checkbox-info pull-left p-t-0">
