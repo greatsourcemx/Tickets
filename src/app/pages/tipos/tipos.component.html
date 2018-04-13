@@ -3,7 +3,7 @@
         <div class="card">
             <div class="card-body">
 
-                <input #input (keyup)="buscar( input.value )" type="text" class="form-control" placeholder="Buscar Equipo..." />
+                <input #input (keyup)="buscarTipo( input.value )" type="text" class="form-control" placeholder="Buscar Tipo de Servicio..." />
 
             </div>
         </div>
@@ -30,46 +30,40 @@
             <div class="card-body">
 
                 <div class="text-right">
-                    <button type="button" class="btn waves-effect waves-light btn-rounded btn-primary">
-                      <i class="fa fa-plus"></i> 
-                      Crear Mantenimiento
-                  </button>
+                    <button (click)="crearTipo()" type="button" class="btn waves-effect waves-light btn-rounded btn-primary">
+                        <i class="fa fa-plus"></i> 
+                        Crear Tipo de Servicio
+                    </button>
                 </div>
 
                 <table class="table table-hover">
                     <thead>
                         <tr>
-                            <th>Equipo</th>
-                            <th>Tipo</th>
-                            <th>Periodicidad</th>
-                            <th>Fec Ult Mant</th>
-                            <th>Fec Sig Mant</th>
+                            <th>#</th>
+                            <th>Descripción</th>
                             <th>Activo</th>
                             <th></th>
                         </tr>
                     </thead>
 
                     <tbody>
-                        <tr *ngFor="let mante of mantenimientos">
-                            <td>{{ this.separarEquipo(mante.EquiId) }}</td>
-                            <td>{{ this.separarTipo(mante.EquiId) }}</td>
-                            <td>{{ mante.Periodicidad }} Meses</td>
+                        <tr *ngFor="let tipo of tipos">
                             <td>
-                                {{ mante.FecUltMant | date:'yyyy-MM-dd' }}
+                                {{ tipo.id }}
                             </td>
                             <td>
-                                <input [ngModel]="mante.FecSiguiente | date:'yyyy-MM-dd'" (ngModelChange)="mante.FecSiguiente = $event" class="form-control" type="date" name="daterange" />
+                                <input [(ngModel)]="tipo.descripcion" name="Descripcion" type="text" class="form-control" placeholder="Descripción" required />
                             </td>
                             <td>
                                 <div class="checkbox checkbox-info pull-left p-t-0">
-                                    <input [(ngModel)]="mante.Activo" name="activo" [id]="mante.id" type="checkbox" class="filled-in chk-col-light-blue" />
-                                    <label [for]="mante.id">  </label>
+                                    <input [(ngModel)]="tipo.activo" name="activo" [id]="tipo.id" type="checkbox" class="filled-in chk-col-light-blue" />
+                                    <label [for]="tipo.id">  </label>
                                 </div>
                             </td>
                             <td>
-                                <button (click)="actualizarMante( mante )" class="btn btn-primary">
-                                    <i class="fa fa-save"></i>
-                                </button>
+                                <button (click)="actualizarTipo( tipo )" class="btn btn-primary">
+                                <i class="fa fa-save"></i>
+                              </button>
                             </td>
                         </tr>
 

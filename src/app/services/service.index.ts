@@ -1,6 +1,8 @@
 
 // export { SettingsService } from './settings/settings.service'
 
+export { TiposService } from './tipo/tipos.service';
+export { AvancesService } from './avances/avances.service';
 export { EmpresasService } from './empresas/empresas.service';
 export { PrioridadService } from './prioridad/prioridad.service';
 export { ServiciosService } from './servicios/servicios.service';

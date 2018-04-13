@@ -2,6 +2,12 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
+// Ng- Bootstrap (DatePicker)
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
+// ng- Select
+import { NgSelectModule } from '@ng-select/ng-select';
+
 // Modulos
 import { SharedModule } from '../shared/shared.module';
 
@@ -29,6 +35,12 @@ import { NuevoServicioComponent } from './servicios/nuevo-servicio.component';
 import { DetallesServicioComponent } from './servicios/detalles-servicio.component';
 import { PrincipalComponent } from './principal/principal.component';
 import { EmpresasComponent } from './empresas/empresas.component';
+import { AvancesComponent } from './avances/avances.component';
+import { TicketsComponent } from './tickets/tickets.component';
+import { TiposComponent } from './tipos/tipos.component';
+import { TicketComponent } from './tickets/ticket.component';
+import { TrabajosComponent } from './tickets/trabajos.component';
+import { CerradosComponent } from './tickets/cerrados.component';
 
 @NgModule({
     declarations: [
@@ -49,7 +61,13 @@ import { EmpresasComponent } from './empresas/empresas.component';
         NuevoServicioComponent,
         DetallesServicioComponent,
         PrincipalComponent,
-        EmpresasComponent
+        EmpresasComponent,
+        AvancesComponent,
+        TicketsComponent,
+        TiposComponent,
+        TicketComponent,
+        TrabajosComponent,
+        CerradosComponent
     ],
     exports: [
         DashboardComponent,
@@ -61,7 +79,9 @@ import { EmpresasComponent } from './empresas/empresas.component';
         PAGES_ROUTES,
         CommonModule,
         FormsModule,
-        PipesModule
+        PipesModule,
+        NgbModule.forRoot(),
+        NgSelectModule
     ]
 })
 

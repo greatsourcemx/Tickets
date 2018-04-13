@@ -16,6 +16,11 @@ export class TiempoService {
       return this.http.get( url );
   }
 
+  cargarTiemposActivos () {
+    let url = URL_SERVICIOS + '/Tiempos/1';
+    return this.http.get( url );
+  }
+
   buscarTiempo (termino: string) {
 
     let url = URL_SERVICIOS + '/Tiempos?termino=' + termino;

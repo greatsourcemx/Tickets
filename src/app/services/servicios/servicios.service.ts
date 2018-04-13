@@ -26,8 +26,8 @@ export class ServiciosService {
     return this.http.get( url );
   }
 
-  guardarServicio ( id: number = 0, servicio: Servicio ) {
-    let url = URL_SERVICIOS + '/Servicios/' + id;
+  guardarServicio ( Soliid: number = 0, servicio: Servicio ) {
+    let url = URL_SERVICIOS + '/Servicios/' + Soliid;
 
     return this.http.post( url, servicio )
     .map( (resp: any) => {
@@ -36,9 +36,39 @@ export class ServiciosService {
     });
   }
 
+  modificarServicio (ticket: Servicio) {
+    let url = URL_SERVICIOS + '/Servicios';
+
+    return this.http.put( url, ticket )
+    .map( (resp: any) => {
+      swal('Ticket Actualizado', ticket.Titulo, 'success');
+      return resp;
+    });
+  }
+
   cargarTickets ( id: number = 0) {
     let url = URL_SERVICIOS + '/Tickets/' + id;
     return this.http.get( url );
+  }
+
+  cargarDetTickets ( id: number = 0 ) {
+    let url = URL_SERVICIOS + '/Tickets?folio=' + id;
+    return this.http.get( url );
+  }
+
+  cargarInfoPrincipal ( id: number = 0 ) {
+    let url = URL_SERVICIOS + '/Principal/' + id;
+    return this.http.get( url );
+  }
+
+  cargarTicketsTrabajo ( servicio: Servicio ) {
+    let url = URL_SERVICIOS + '/Tickets';
+    return this.http.post( url, servicio );
+  }
+
+  cargarTicketsCerrados (servicio: Servicio) {
+    let url = URL_SERVICIOS + '/Tickets/1';
+    return this.http.put( url, servicio );
   }
 
 }

@@ -1,0 +1,88 @@
+<div class="card card-body">
+    <div class="row">
+        <div class="col-sm-12 col-xs-12">
+            <form #f="ngForm" ngNativeValidate (ngSubmit)="guardar(f)">
+
+                <div class="form-group">
+                    <label for="titulo">Título</label>
+                    <input type="text" class="form-control" name="dp" [(ngModel)]="ticket.Titulo" id="Titulo" name="Titulo" placeholder="Titulo" required />
+                </div>
+                <div class="form-group">
+                    <label for="descripcion">Descripción</label>
+                    <textarea [(ngModel)]="ticket.Descripcion" id="Descripcion" name="Descripcion" class="form-control" rows="4" placeholder="Descripcion"></textarea>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-6">
+                        <label for="solicitante">Solicitante</label>
+                        <ng-select [(ngModel)]="ticket.Solicitor" name="solicitante" [items]="users" bindLabel="nombre" required>
+                        </ng-select>
+                    </div>
+                    <div class="col-lg-6">
+                        <label for="responsable">Responsable</label>
+                        <ng-select [(ngModel)]="ticket.AsignadoA" name="responsable" [items]="admins" bindLabel="nombre" required>
+                            <ng-template ng-option-tmp let-item="item">
+                                {{item.nombre}} <small>{{item.noEmpleado}}</small>
+                            </ng-template>
+                        </ng-select>
+                    </div>
+                </div>
+
+                <label class="control-label m-t-20"></label>
+
+                <div class="row">
+                    <div class="col-lg-4">
+                        <label for="estatus">Estatus</label>
+                        <div class="input-group">
+                            <select [(ngModel)]="ticket.Estatus" id="estatus" name="estatus" class="form-control" (change)="estatusChange()" required>
+                                <option *ngFor="let esta of estados.Estatus" [ngValue]="esta.value">{{ esta.value }}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <label for="fecha">Fecha Cierre</label>
+                        <div class="input-group">
+                            <input class="form-control" placeholder="yyyy-mm-dd" name="dp" [(ngModel)]="fecCerrado" ngbDatepicker #d="ngbDatepicker" required />
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-secondary" (click)="d.toggle()" type="button">
+                                <i class="fa fa-calendar"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <label for="tipo">Tipo</label>
+                        <div class="input-group">
+                            <select [(ngModel)]="ticket.TipoServicio.id" name="tipo" class="form-control" required>
+                                <option *ngFor="let tipo of tipos" [ngValue]="tipo.id">{{ tipo.descripcion }}</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <label class="control-label m-t-20"></label>
+
+                <div *ngIf="cerrado" class="row">
+                    <div class="col-lg-12">
+                        <label for="duracion">Duración</label>
+                        <ng-select [(ngModel)]="ticket.Duracion" name="Duracion" [items]="duracion" bindLabel="Descripcion" [(ngModel)]="ticket.Duracion">
+                        </ng-select>
+                    </div>
+                    <!-- <div class="col-lg-6">
+                        <label for="software">Software</label>
+                        <div class="input-group">
+                            <input type="text" id="software" name="software" class="form-control" placeholder="Software" />
+                        </div>
+                    </div> -->
+                </div>
+
+                <label *ngIf="cerrado" class="control-label m-t-20" for="solucion">Solución</label>
+                <textarea *ngIf="cerrado" [(ngModel)]="ticket.Solucion" id="solucion" name="solucion" class="form-control" rows="4"></textarea>
+
+                <button type="submit" class="btn btn-success waves-effect waves-light m-r-10">Guardar</button>
+                <a [routerLink]="['/principal']" class="btn btn-inverse waves-effect waves-light"><b>Cancelar</b></a>
+            </form>
+
+        </div>
+    </div>
+</div>

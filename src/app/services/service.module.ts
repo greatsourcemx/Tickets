@@ -12,7 +12,9 @@ import {
   UsuarioService,
   ServiciosService,
   PrioridadService,
-  EmpresasService } from './service.index';
+  EmpresasService,
+  AvancesService,
+  TiposService } from './service.index';
 
 @NgModule({
   imports: [
@@ -29,7 +31,9 @@ import {
     MantenimientoService,
     ServiciosService,
     PrioridadService,
-    EmpresasService
+    EmpresasService,
+    AvancesService,
+    TiposService
   ],
   declarations: []
 })

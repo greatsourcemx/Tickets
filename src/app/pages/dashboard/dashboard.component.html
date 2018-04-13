@@ -74,9 +74,9 @@
                                     <span *ngIf="serv.AsignadoA">{{ serv.AsignadoA?.nombre }}</span>
                                 </td>
                                 <td>
-                                    <button [routerLink]="['/servicio', serv.Id ]" class="btn btn-primary" title="Detalles">
-                                        <i class="fa fa-bars"></i> Detalles
-                                    </button>
+                                    <span class="action-icons">
+                                        <a href="javascript:void(0)" [routerLink]="['/servicio', serv.Id ]" class="btn btn-primary btn-sm text-white" title="Detalles"><i class="fa fa-bars"></i> Detalles</a>
+                                    </span>
                                 </td>
                             </tr>
                         </tbody>

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ServiciosService } from '../../services/service.index';
+import { ServiciosService, UsuarioService } from '../../services/service.index';
+import { Servicio, Principal } from '../../models/models.index';
+import * as data from '../../config/estatus.json';
 
 @Component({
   selector: 'app-principal',
@@ -10,12 +12,25 @@ export class PrincipalComponent implements OnInit {
 
   servNuevos: any = [];
   myTickets: any = [];
+  estados: any = data;
 
-  constructor( public _servicioService: ServiciosService ) { }
+  principal: Principal = new Principal(0, 0, 0, '');
+
+  constructor(
+    public _servicioService: ServiciosService,
+    public _usuarioService: UsuarioService ) { }
 
   ngOnInit() {
+    this.cargarInfoPrincipal();
     this.cargarNuevos();
     this.cargarTickets();
+  }
+
+  cargarInfoPrincipal () {
+    this._servicioService.cargarInfoPrincipal( this._usuarioService.usuario.id )
+    .subscribe( (resp: any) => {
+      this.principal = resp;
+    });
   }
 
   cargarNuevos () {
@@ -26,7 +41,7 @@ export class PrincipalComponent implements OnInit {
   }
 
   cargarTickets ( ) {
-    this._servicioService.cargarTickets(1)
+    this._servicioService.cargarTickets( this._usuarioService.usuario.id )
     .subscribe( (resp) => {
       this.myTickets = resp;
     });

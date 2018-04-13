@@ -12,9 +12,9 @@
         "icono": "fa fa-tasks",
         "submenu": [
             { "titulo": "Inicio", "url": "/principal" },
-            { "titulo": "ProgressBar", "url": "/progress" },
+            { "titulo": "Tickets", "url": "/tickets" },
+            { "titulo": "Cerrados", "url": "/tickets/cerrados" },
             { "titulo": "Gráficas", "url": "/graficas1" },
-            { "titulo": "Promesas", "url": "/promesas" },
             { "titulo": "RxJs", "url": "/rxjs" }
         ]
     }, {
@@ -31,7 +31,8 @@
             { "titulo": "Usuarios", "url": "/usuarios" },
             { "titulo": "Empresas", "url": "/empresas" },
             { "titulo": "Tiempos", "url": "/tiempos" },
-            { "titulo": "Prioridades", "url": "/prioridades" }
+            { "titulo": "Prioridades", "url": "/prioridades" },
+            { "titulo": "Tipo Servicio", "url": "/tipos" }
         ]
     }]
 }

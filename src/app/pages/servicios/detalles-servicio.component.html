@@ -31,18 +31,34 @@
             </div>
         </div>
 
-        <!-- Avances -->
-        <div class="card" *ngIf="servicio.avances">
-            <div class="card-body">
-                <h4 class="card-title text-muted">Avances</h4>
-                <h6 class="card-subtitle mb-2 text-muted">Descripción</h6>
-                <p class="card-text"> Sin Avances </p>
+    </div>
+</div>
+<!-- Avances -->
+<div class="row">
+    <div class="col-sm-12">
+        <div class="card card-body">
+            <h6 class="card-subtitle"> Historial de Avances </h6>
 
-                <small class="text-muted pull-right"><i class="fa fa-user"></i> {{ servicio.AsignadoA?.nombre }} </small>
-                <small class="text-muted pull-left"><i class="fa fa-clock-o"></i> {{ servicio.TiempoTranscurrido }} </small>
+            <table class="table table-sm">
+                <thead>
+                    <tr>
+                        <th scope="col">Duración</th>
+                        <th scope="col">Fecha</th>
+                        <th scope="col">Comentario</th>
+                        <th scope="col" colspan="2">Responsable</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let avance of servicio.avances">
+                        <td> {{ avance.Duracion?.Descripcion }} </td>
+                        <td> {{ avance.Fecha | date: 'yyyy-MM-dd' }} </td>
+                        <td> {{ avance.Comentario }} </td>
+                        <td style="width:50px;"><span class="round"><img [src]="avance.Responsable.id | imagen" alt="user" width="50" height="50px"></span></td>
+                        <td> {{ avance.Responsable?.nombre }} </td>
+                    </tr>
+                </tbody>
+            </table>
 
-            </div>
         </div>
-
     </div>
 </div>

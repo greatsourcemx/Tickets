@@ -2,6 +2,9 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
+// Ng- Bootstrap (DatePicker)
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
 // Rutas
 import { APP_ROUTES } from './app.routes';
 
@@ -16,6 +19,7 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './login/register.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -28,7 +32,8 @@ import { RegisterComponent } from './login/register.component';
     PagesModule,
     FormsModule,
     ReactiveFormsModule,
-    ServiceModule
+    ServiceModule,
+    NgbModule
   ],
   providers: [],
   bootstrap: [AppComponent]

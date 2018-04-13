@@ -19,7 +19,7 @@ export class AvancesService {
 
     return this.http.post( url, avance )
     .map( (resp: any) => {
-      swal('Se agregó el avance', 'success');
+      swal('Info', 'Se agregó el avance', 'success');
       return resp;
     });
   }

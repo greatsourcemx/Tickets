@@ -1,0 +1,69 @@
+<div class="row">
+    <div class="col-sm-12">
+        <div class="card card-body">
+            <h4 class="card-title"> # {{ servicio.Id }} {{ servicio.Titulo }} </h4>
+            <h6 class="card-subtitle"> {{ servicio.Descripcion }} </h6>
+            <form class="form-horizontal m-t-40" #f="ngForm" ngNativeValidate (ngSubmit)="guardarAvance(f)">
+
+                <div class="form-group">
+                    <div class="input-group">
+                        <input class="form-control" placeholder="yyyy-mm-dd" name="dp" [(ngModel)]="_fecha" ngbDatepicker #d="ngbDatepicker">
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary" (click)="d.toggle()" type="button">
+                              <i class="fa fa-calendar"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Duración</label>
+                    <select [(ngModel)]="avance.Duracion" name="Duracion" name="duracion" class="form-control" required>
+                        <option disabled="disabled" value="undefined" >Seleccionar Duracion</option>
+                        <option *ngFor="let dura of duracion" [ngValue]="dura">{{ dura.Descripcion }}</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Comentarios</label>
+                    <textarea [(ngModel)]="avance.Comentario" name="Comentario" class="form-control" rows="5"></textarea>
+                </div>
+
+                <button type="submit" class="btn btn-success waves-effect waves-light m-r-10">
+                  <i class="fa fa-save"></i> Guardar
+                </button>
+
+                <button type="button" name="volver" (click)="regresar()" class="btn btn-inverse waves-effect waves-light">Cancelar</button>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="card card-body">
+            <h6 class="card-subtitle"> Historial de Avances </h6>
+
+            <table class="table table-sm">
+                <thead>
+                    <tr>
+                        <th scope="col">Duración</th>
+                        <th scope="col">Fecha</th>
+                        <th scope="col">Comentario</th>
+                        <th scope="col">Responsable</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let avance of servicio.avances">
+                        <td> {{ avance.Duracion?.Descripcion }} </td>
+                        <td> {{ avance.Fecha | date: 'yyyy-MM-dd' }} </td>
+                        <td> {{ avance.Comentario }} </td>
+                        <td> {{ avance.Responsable?.nombre }} </td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</div>

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { UsuarioService } from '../../services/usuario/usuario.service';
-import { Usuario } from '../../models/usuario.model';
+import { UsuarioService, ServiciosService } from '../../services/service.index';
+import { Usuario, Principal } from '../../models/models.index';
 
 @Component({
   selector: 'app-header',
@@ -10,12 +10,23 @@ import { Usuario } from '../../models/usuario.model';
 export class HeaderComponent implements OnInit {
 
   usuario: Usuario;
+  principal: Principal = new Principal();
 
-  constructor( public _usuarioService: UsuarioService ) {
+  constructor(
+    public _usuarioService: UsuarioService,
+    public _servicioService: ServiciosService ) {
     this.usuario = _usuarioService.usuario;
   }
 
   ngOnInit() {
+    this.cargarInfo();
+  }
+
+  cargarInfo () {
+    this._servicioService.cargarInfoPrincipal( this.usuario.id )
+    .subscribe((resp: any) => {
+      this.principal = resp;
+    });
   }
 
 }

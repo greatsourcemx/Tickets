@@ -75,6 +75,13 @@ export class UsuarioService {
 
   }
 
+  cargarUsuaActivos( ) {
+
+    let url = URL_SERVICIOS + '/Usuarios?activo=si';
+    return this.http.get( url );
+
+  }
+
   buscarUsuarios( termino: string ) {
 
     let url = URL_SERVICIOS + '/Usuarios?termino=' + termino;

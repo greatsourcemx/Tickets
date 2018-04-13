@@ -2,24 +2,15 @@
     <div class="col-12">
         <div class="card">
             <div class="card-body">
-                <h4 class="card-title">Hoy</h4>
+                <button class="btn btn-info pull-right" [routerLink]="['/ticket']" name="new"> <i class="fa fa-plus"></i> Nuevo</button>
+                <h4 class="card-title pull-left">Hoy</h4>
                 <div class="row m-t-40">
-
                     <!-- Column -->
                     <div class="col-md-6 col-lg-3 col-xlg-3">
                         <div class="card">
-                            <div class="box bg-info text-center">
-                                <h1 class="font-light text-white">2,064</h1>
-                                <h6 class="text-white">Total Tickets</h6>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Column -->
-                    <div class="col-md-6 col-lg-3 col-xlg-3">
-                        <div class="card">
-                            <div class="box bg-primary text-center">
-                                <h1 class="font-light text-white">1,738</h1>
-                                <h6 class="text-white">Responded</h6>
+                            <div class="box bg-dark text-center">
+                                <h1 class="font-light text-white"> {{ principal.tiempoInvertido | tiempo }} </h1>
+                                <h6 class="text-white">{{ principal.tiempoInvertido | tiempo: true }}</h6>
                             </div>
                         </div>
                     </div>
@@ -27,17 +18,26 @@
                     <div class="col-md-6 col-lg-3 col-xlg-3">
                         <div class="card">
                             <div class="box bg-success text-center">
-                                <h1 class="font-light text-white">1100</h1>
-                                <h6 class="text-white">Resolve</h6>
+                                <h1 class="font-light text-white"> {{ principal.cerrados }} </h1>
+                                <h6 class="text-white">Cerrados</h6>
                             </div>
                         </div>
                     </div>
                     <!-- Column -->
                     <div class="col-md-6 col-lg-3 col-xlg-3">
                         <div class="card">
-                            <div class="box bg-dark text-center">
-                                <h1 class="font-light text-white">964</h1>
-                                <h6 class="text-white">Pending</h6>
+                            <div class="box bg-info text-center">
+                                <h1 class="font-light text-white"> {{ principal.proceso }} </h1>
+                                <h6 class="text-white">En Proceso</h6>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Column -->
+                    <div class="col-md-6 col-lg-3 col-xlg-3">
+                        <div class="card">
+                            <div class="box bg-warning text-center">
+                                <h1 class="font-light text-white"> {{ principal.abiertos }} </h1>
+                                <h6 class="text-white">Abiertas</h6>
                             </div>
                         </div>
                     </div>
@@ -50,7 +50,7 @@
 </div>
 
 <div class="row">
-    <div class="col-lg-4">
+    <div *ngIf="(servNuevos.length > 0)" class="col-lg-4">
         <div class="card">
             <div class="card-body">
                 <h4 class="card-title"><span class="lstick"></span>Nuevos</h4>
@@ -64,16 +64,17 @@
                     <div class="p-2"><span class="round"><img [src]="serv.Solicitor.id | imagen" alt="user" width="50" height="50px"></span></div>
                     <div class="comment-text w-100">
                         <h5># {{ serv.Id }} {{ serv.Titulo }} </h5>
-                        <h6> {{ serv.Solicitor.nombre }} </h6>
-                        <p class="m-b-5"> {{ serv.Descripcion }} </p>
-                        <div class="comment-footer">
-                            <span class="text-muted pull-right"> {{ serv.TiempoTranscurrido }} </span>
+                        <h6> {{ serv.Solicitor.nombre }}
                             <span class="label label-rounded" [ngClass]="( serv.Urgencia.Nombre == 'Inmediatamente' || serv.Urgencia.Nombre == 'Urgente' ) ? 'label-warning' : 'label-info'">
                                 {{ serv.Urgencia.Nombre }}
                             </span>
+                        </h6>
+                        <p class="m-b-5"> {{ serv.Descripcion }} </p>
+                        <div class="comment-footer">
+                            <span class="text-muted"> {{ serv.TiempoTranscurrido }} </span>
                             <span class="action-icons">
-                                <a href="javascript:void(0)" class="btn btn-info btn-sm text-white" title="Avances"><i class="icon icon-layers"></i></a>
-                                <a href="javascript:void(0)" class="btn btn-danger btn-sm text-white" title="Cerrar"><i class="icon icon-check"></i></a>
+                                <a href="javascript:void(0)" [routerLink]="['/avances', serv.Id ]"  class="btn btn-info btn-sm text-white" title="Avances"><i class="icon icon-layers"></i></a>
+                                <a href="javascript:void(0)" [routerLink]="['/tickets', serv.Id ]" class="btn btn-danger btn-sm text-white" title="Cerrar"><i class="icon icon-check"></i></a>
                             </span>
                         </div>
                     </div>
@@ -84,7 +85,7 @@
     </div>
 
 
-    <div class="col-lg-8">
+    <div [ngClass]="(servNuevos.length > 0) ? 'col-lg-8' : 'col-lg-12'">
         <div class="card">
             <div class="card-body">
 
@@ -98,7 +99,7 @@
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th colspan="2">Solicitante</th>
+                                <th>Solicitante</th>
                                 <th>Título</th>
                                 <th>Estatus</th>
                                 <th>Horas</th>
@@ -108,7 +109,7 @@
                         <tbody>
                             <tr *ngFor="let tick of myTickets">
                                 <td style="width:20px;">{{ tick.Id }}</td>
-                                <td style="width:50px;"><span class="round"><img [src]="tick.Solicitor.id | imagen" alt="user" width="50" height="50px"></span></td>
+                                <!-- <td style="width:50px;"><span class="round"><img [src]="tick.Solicitor.id | imagen" alt="user" width="50" height="50px"></span></td> -->
                                 <td>
                                     <h6> {{ tick.Solicitor.nombre }} </h6>
                                     <!-- <small class="text-muted">Puesto Departamento Empresa</small> -->
@@ -119,8 +120,8 @@
                                 <td> {{ tick.TiempoTranscurrido }} </td>
                                 <td>
                                     <span class="action-icons">
-                                        <a href="javascript:void(0)" class="btn btn-info btn-sm text-white" title="Avances"><i class="icon icon-layers"></i></a>
-                                        <a href="javascript:void(0)" class="btn btn-danger btn-sm text-white" title="Cerrar"><i class="icon icon-check"></i></a>
+                                        <a href="javascript:void(0)" [routerLink]="['/avances', tick.Id ]" class="btn btn-info btn-sm text-white" title="Avances"><i class="icon icon-layers"></i></a>
+                                        <a href="javascript:void(0)" [routerLink]="['/tickets', tick.Id ]" class="btn btn-danger btn-sm text-white" title="Cerrar"><i class="icon icon-check"></i></a>
                                     </span>
                                 </td>
                             </tr>

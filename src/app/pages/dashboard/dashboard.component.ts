@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Usuario } from '../../models/usuario.model';
 import { Servicio } from '../../models/servicio.model';
-import { ServiciosService, UsuarioService } from '../../services/service.index';
+import { ServiciosService, UsuarioService, TiposService } from '../../services/service.index';
 import * as data from '../../config/estatus.json';
 
 @Component({
@@ -22,8 +22,8 @@ export class DashboardComponent implements OnInit {
 
   constructor(
     public _serviciosService: ServiciosService,
-    public _usuarioService: UsuarioService
-  ) { }
+    public _usuarioService: UsuarioService,
+    public _tiposService: TiposService ) { }
 
   ngOnInit() {
     this.usuario = this._usuarioService.usuario;

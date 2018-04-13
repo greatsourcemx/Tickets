@@ -19,6 +19,11 @@ export class SolicitanteService {
       return this.http.get( url );
     }
 
+    cargarSoliActivos( ) {
+      let url = URL_SERVICIOS + '/Solicitantes?activo=si';
+      return this.http.get( url );
+    }
+
     buscarSolicitante( termino: string ) {
 
       let url = URL_SERVICIOS + '/Solicitantes?termino=' + termino;

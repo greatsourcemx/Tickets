@@ -1,0 +1,159 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Filtros de Busqueda</h4>
+
+                <div class="row">
+                    <div class="col-md-5">
+                        <div class="card">
+                            <div class="card-body">
+
+                                <ngb-datepicker #dp (select)="onDateSelection($event)" [displayMonths]="2" [dayTemplate]="t">
+                                </ngb-datepicker>
+                                <ng-template #t let-date="date" let-focused="focused">
+                                    <span class="custom-day" [class.focused]="focused" [class.range]="isFrom(date) || isTo(date) || isInside(date) || isHovered(date)" [class.faded]="isHovered(date) || isInside(date)" (mouseenter)="hoveredDate = date" (mouseleave)="hoveredDate = null">
+                                            {{ date.day }}
+                                        </span>
+                                </ng-template>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-7">
+                        <div class="card">
+                            <div class="card-body">
+
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <label for="folio">Folio</label>
+                                        <div class="form-group">
+                                            <input type="number" [(ngModel)]="filtros.Id" class="form-control" id="folio" name="folio" placeholder="#" />
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-6">
+                                        <label for="titulo">Título</label>
+                                        <div class="form-group">
+                                            <input type="text" [(ngModel)]="filtros.Titulo" class="form-control" id="titulo" name="titulo" placeholder="Título" />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-sm-6 nopadding">
+                                        <label for="solicitante">Solicitante</label>
+                                        <div class="form-group">
+                                            <ng-select [(ngModel)]="filtros.Solicitor" name="solicitante" [items]="users" bindLabel="nombre">
+                                                <ng-template ng-option-tmp let-item="item">
+                                                    {{item.nombre}} <small>{{item.noEmpleado}}</small>
+                                                </ng-template>
+                                            </ng-select>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-6 nopadding">
+                                        <label for="responsable">Responsable</label>
+                                        <div class="form-group">
+                                            <ng-select [(ngModel)]="filtros.AsignadoA" name="responsable" [items]="admins" bindLabel="nombre">
+                                                <ng-template ng-option-tmp let-item="item">
+                                                    {{item.nombre}} <small>{{item.noEmpleado}}</small>
+                                                </ng-template>
+                                            </ng-select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-6 nopadding">
+                                        <div class="form-group">
+                                            <label for="tipo">Tipo</label>
+                                            <div class="input-group">
+                                                <select [(ngModel)]="filtros.TipoServicio.id" name="tipo" class="form-control" required>
+                                                                  <option value="0">Todos los Tipos</option>
+                                                              <option *ngFor="let tipo of tipos" [ngValue]="tipo.id">{{ tipo.descripcion }}</option>
+                                                          </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6 nopadding">
+                                        <div class="form-group">
+                                            <button type="button" (click)="cargarTickets()" class="btn btn-info waves-effect waves-light m-t-10">Buscar</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row animated fadeIn" *ngIf="!cargando">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+
+                <button type="button" (click)="quitarFiltros()" class="btn btn-info waves-effect waves-light m-t-10 pull-right">Quitar Filtros</button>
+                <div class="d-flex pull-left">
+                    <div>
+                        <h4 class="card-title"><span class="lstick"></span>Tickets Cerrados ({{ totalRegistros }})</h4>
+                    </div>
+                </div>
+
+                <div class="table-responsive m-t-20">
+                    <table class="table vm no-th-brd no-wrap pro-of-month">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th colspan="2">Solicitante</th>
+                                <th>Título</th>
+                                <th>Fec. Creado</th>
+                                <th>Fec. Cerrado</th>
+                                <th>Tipo</th>
+                                <th>Horas</th>
+                                <th>Responsable</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let tick of Tickets">
+                                <td style="width:20px;">{{ tick.Id }}</td>
+                                <td style="width:50px;"><span class="round"><img [src]="tick.Solicitor.id | imagen" alt="user" width="50" height="50px"></span></td>
+                                <td>
+                                    <h6> {{ tick.Solicitor.nombre }} </h6>
+                                </td>
+                                <td> {{ tick.Titulo }} </td>
+                                <td> {{ tick.FecRegistro | date: 'yyyy-MM-dd' }} </td>
+                                <td> {{ tick.FecCerrado | date: 'yyyy-MM-dd' }} </td>
+                                <td> {{ tick.TipoServicio.descripcion }} </td>
+                                <td> {{ tick.tiempoTotal | tiempo }} </td>
+                                <td> {{ tick.AsignadoA.nombre }} </td>
+                                <td>
+                                    <span class="action-icons">
+                                      <a href="javascript:void(0)" [routerLink]="['/avances', tick.Id ]" class="btn btn-info btn-sm text-white" title="Avances"><i class="icon icon-layers"></i></a>
+                                      <a href="javascript:void(0)" [routerLink]="['/tickets', tick.Id ]" class="btn btn-danger btn-sm text-white" title="Cerrar"><i class="icon icon-check"></i></a>
+                                  </span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <button (click)="cambiarDesde(-1)" class="btn btn-secondary">
+                      Anteriores
+                  </button>
+
+                    <button (click)="cambiarDesde(1)" class="btn btn-secondary">
+                      Siguientes
+                  </button>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
