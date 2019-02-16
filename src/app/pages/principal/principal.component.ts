@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ServiciosService, UsuarioService } from '../../services/service.index';
-import { Servicio, Principal } from '../../models/models.index';
+import { Servicio, Principal, Usuario } from '../../models/models.index';
 import * as data from '../../config/estatus.json';
 
 @Component({
@@ -13,6 +13,8 @@ export class PrincipalComponent implements OnInit {
   servNuevos: any = [];
   myTickets: any = [];
   estados: any = data;
+  admins: Usuario[];
+  users: Usuario[];
 
   principal: Principal = new Principal(0, 0, 0, '');
 
@@ -27,7 +29,7 @@ export class PrincipalComponent implements OnInit {
   }
 
   cargarInfoPrincipal () {
-    this._servicioService.cargarInfoPrincipal( this._usuarioService.usuario.id )
+    this._servicioService.cargarDashboard()
     .subscribe( (resp: any) => {
       this.principal = resp;
     });
@@ -41,7 +43,7 @@ export class PrincipalComponent implements OnInit {
   }
 
   cargarTickets ( ) {
-    this._servicioService.cargarTickets( this._usuarioService.usuario.id )
+    this._servicioService.cargarTickets()
     .subscribe( (resp) => {
       this.myTickets = resp;
     });

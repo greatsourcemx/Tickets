@@ -32,6 +32,16 @@ export class SolicitanteComponent implements OnInit {
     });
   }
 
+  generaNombreUsuario() {
+    let username = this.solicitante.correo;
+    if (username !== '') {
+      if (username.indexOf('@') !== -1) {
+        this.solicitante.usuario = username.substr(0, username.indexOf('@'));
+      }
+    }
+
+  }
+
   guardarSolicitante( f: NgForm ) {
 
     if ( f.invalid ) {

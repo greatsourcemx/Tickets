@@ -69,29 +69,23 @@ export class UsuarioService {
   }
 
   cargarUsuarios( desde: number = 0 ) {
-
-    let url = URL_SERVICIOS + '/Usuarios?desde=' + desde;
+    let url = URL_SERVICIOS + '/usuarios?desde=' + desde;
     return this.http.get( url );
-
-  }
-
-  cargarUsuaActivos( ) {
-
-    let url = URL_SERVICIOS + '/Usuarios?activo=si';
-    return this.http.get( url );
-
   }
 
   buscarUsuarios( termino: string ) {
-
-    let url = URL_SERVICIOS + '/Usuarios?termino=' + termino;
+    let url = URL_SERVICIOS + '/usuarios?termino=' + termino;
     return this.http.get( url )
                 .map( (resp: any) => resp );
+  }
 
+  cargarUsuaActivos( ) {
+    let url = URL_SERVICIOS + '/usuarios/activos';
+    return this.http.get( url );
   }
 
   guardarUsuario (usuario: Usuario) {
-    let url = URL_SERVICIOS + '/Usuarios';
+    let url = URL_SERVICIOS + '/usuario';
 
     return this.http.post( url, usuario )
               .map( (resp: any) => {
@@ -101,7 +95,7 @@ export class UsuarioService {
   }
 
   modificarUsuario (usuario: Usuario) {
-    let url = URL_SERVICIOS + '/Usuarios/' + usuario.id;
+    let url = URL_SERVICIOS + '/usuario';
 
     return this.http.put( url, usuario )
                 .map( (resp: any) => {
@@ -112,7 +106,7 @@ export class UsuarioService {
 
   cargarUsuario (id: number) {
 
-    let url = URL_SERVICIOS + '/Usuarios/' + id;
+    let url = URL_SERVICIOS + '/usuario?id=' + id;
 
     return this.http.get( url )
               .map( (resp: any) => resp );

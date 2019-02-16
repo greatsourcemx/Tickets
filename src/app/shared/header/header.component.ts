@@ -23,10 +23,10 @@ export class HeaderComponent implements OnInit {
   }
 
   cargarInfo () {
-    this._servicioService.cargarInfoPrincipal( this.usuario.id )
-    .subscribe((resp: any) => {
-      this.principal = resp;
-    });
+    // this._servicioService.cargarInfoPrincipal( this.usuario.id, this.usuario.rol )
+    // .subscribe((resp: any) => {
+    //   this.principal = resp;
+    // });
   }
 
 }

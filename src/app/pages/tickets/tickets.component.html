@@ -1,6 +1,4 @@
 <div class="card card-body">
-    <!-- <h3 class="box-title m-b-0">Sample Basic Forms</h3>
-    <p class="text-muted m-b-30 font-13"> Bootstrap Elements </p> -->
     <div class="row">
         <div class="col-sm-12 col-xs-12">
             <form #f="ngForm" ngNativeValidate (ngSubmit)="guardar(f)">
@@ -36,7 +34,7 @@
                     <div class="col-lg-4">
                         <label for="estatus">Estatus</label>
                         <div class="input-group">
-                            <select [(ngModel)]="ticket.Estatus" id="estatus" name="estatus" class="form-control" required>
+                            <select [(ngModel)]="ticket.Estado" id="estatus" name="estatus" class="form-control" required>
                                 <option *ngFor="let esta of estados.Estatus" [ngValue]="esta.value">{{ esta.value }}</option>
                             </select>
                         </div>
@@ -70,12 +68,6 @@
                         <ng-select [(ngModel)]="ticket.Duracion" name="Duracion" [items]="duracion" bindLabel="Descripcion" [(ngModel)]="ticket.Duracion">
                         </ng-select>
                     </div>
-                    <!-- <div class="col-lg-6">
-                        <label for="software">Software</label>
-                        <div class="input-group">
-                            <input type="text" id="software" name="software" class="form-control" placeholder="Software" />
-                        </div>
-                    </div> -->
                 </div>
 
                 <label class="control-label m-t-20" for="solucion">Solución</label>

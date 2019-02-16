@@ -10,23 +10,24 @@ export class PrioridadService {
   constructor( public http: HttpClient) { }
 
   cargarPrioridades ( desde: number = 0 ) {
-    let url = URL_SERVICIOS + '/Prioridad?desde=' + desde;
-    return this.http.get( url );
-  }
-
-  cargarActivos ( ) {
-    let url = URL_SERVICIOS + '/Prioridad/1';
+    let url = URL_SERVICIOS + '/prioridades?desde=' + desde;
     return this.http.get( url );
   }
 
   buscarPrioridad ( termino: string ) {
-    let url = URL_SERVICIOS + '/Prioridad?termino=' + termino;
+    let url = URL_SERVICIOS + '/prioridades?termino=' + termino;
     return this.http.get( url )
           .map( (resp: any) => resp );
   }
 
+  cargarActivos ( ) {
+    let url = URL_SERVICIOS + '/prioridad/activos';
+    return this.http.get( url );
+  }
+
+
   guardarPrioridad ( prioridad: Prioridad ) {
-    let url = URL_SERVICIOS + '/Prioridad';
+    let url = URL_SERVICIOS + '/prioridad';
     return this.http.post( url, prioridad )
           .map( (resp: any) => {
             swal('Prioridad Creada', prioridad.Nombre, 'success');
@@ -35,7 +36,7 @@ export class PrioridadService {
   }
 
   modificarPrioridad ( prioridad: Prioridad ) {
-    let url = URL_SERVICIOS + '/Prioridad/' + prioridad.Id;
+    let url = URL_SERVICIOS + '/prioridad';
     return this.http.put( url, prioridad )
               .map( (resp) => {
                 swal('Prioridad Actualizada', prioridad.Nombre, 'success');

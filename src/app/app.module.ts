@@ -8,6 +8,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 // Rutas
 import { APP_ROUTES } from './app.routes';
 
+// pipes
+import { GroupByPipe } from './pipes/group-by.pipe';
+
 // Modulos
 import { PagesModule } from './pages/pages.module';
 
@@ -35,7 +38,7 @@ import { RegisterComponent } from './login/register.component';
     ServiceModule,
     NgbModule
   ],
-  providers: [],
+  providers: [GroupByPipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,0 +1,97 @@
+<div class="row animated fadeIn">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+
+                <div class="row">
+                    <div class="col-3">
+
+                        <div>
+                            <span>Empresa</span>
+                        </div>
+                        <div class="btn-group" role="group" aria-label="Basic example">
+                            <button type="button" (click)="seleccionEmpresa( 'EBR' )" [ngClass]="{ 'active': empresa==='EBR' }" class="btn btn-secondary">EBR</button>
+                            <button type="button" (click)="seleccionEmpresa( 'SYN' )" [ngClass]="{ 'active': empresa==='SYN' }" class="btn btn-secondary">SYN</button>
+                            <button type="button" (click)="seleccionEmpresa( 'IMA' )" [ngClass]="{ 'active': empresa==='IMA' }" class="btn btn-secondary">IMA</button>
+                        </div>
+
+                    </div>
+                    <div class="col-9">
+                        <div>
+                            <span>Busqueda...</span>
+                        </div>
+                        <input type="text" class="form-control" placeholder="Buscar Folio..." />
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row animated fadeIn" *ngIf="cargando">
+
+    <div class="col-sm-12">
+
+        <div class="alert alert-warning text-center">
+            <strong>Cargando</strong>
+            <br />
+            <i class="fa fa-refresh fa-spin fa-2x"></i>
+            <br />
+            <span>Espere por favor</span>
+        </div>
+    </div>
+</div>
+
+<div class="row" *ngIf="!cargando">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <form #f="ngForm" ngNativeValidate (ngSubmit)="guardar()" class="form-horizontal">
+                    <div class="form-group">
+                        <label for="empleado">Empleado </label>
+                        <!-- [(ngModel)]="usuario.estado" -->
+                        <ng-select [(ngModel)]="responsiva.empleado" name="empleado" [items]="empleados" bindLabel="Nombre">
+                            <ng-template ng-option-tmp let-item="item">
+                                {{item.Nombre}} <small>{{item.NoEmpleado}}</small>
+                            </ng-template>
+                        </ng-select>
+                    </div>
+                    <div class="form-group">
+                        <label for="locacion">Locación</label>
+                        <ng-select [(ngModel)]="responsiva.locacion" name="locacion" [items]="locacion" bindLabel="Descripcion">
+                            <ng-template ng-option-tmp let-item="item">
+                                {{item.Descripcion}}
+                            </ng-template>
+                        </ng-select>
+                    </div>
+
+                    <label for="equipo">Equipo</label>
+                    <div class="form-group input-group">
+                        <ng-select [(ngModel)]="equipo" name="equipo" class="col-lg-11" [items]="equipos" bindLabel="Nombre">
+                            <ng-template ng-option-tmp let-item="item">
+                                {{item.Nombre}}
+                            </ng-template>
+                        </ng-select>
+                        <div class="input-group-prepend">
+                            <button class="btn btn-info" (click)="agregarEquipo()" type="button">Agregar!</button>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <input [(ngModel)]="responsiva.firmado" type="checkbox" name="usrFirma" id="usrFirma" class="filled-in" />
+                        <label for="usrFirma">Firmada</label>
+                    </div>
+                    <div class="form-group">
+                        <label for="notas">Notas</label>
+                        <textarea [(ngModel)]="responsiva.notas" name="notas" id="notas" class="form-control" rows="2"></textarea>
+                    </div>
+                    <hr>
+                    <button name="btn-guardar" type="submit" class="btn btn-success">Guardar</button>
+                    <button type="button" name="btn-ver" class="btn btn-info">Preview</button>
+                    <button type="button" name="btn-nuevo" class="btn btn-danger">Nuevo</button>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>

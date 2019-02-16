@@ -10,18 +10,13 @@
                     <div class="col-md-6 col-lg-3 col-xlg-3">
 
                         <button (click)="nuevo = true" name="new" class="btn btn-info"> <i class="fa fa-plus"></i> Nuevo</button>
-                        <!-- <div class="card">
-                            <div class="box bg-info text-center">
-                                <h1 class="font-light text-white">2,064</h1>
-                                <h6 class="text-white">Total Tickets</h6>
-                            </div>
-                        </div> -->
+
                     </div>
                     <!-- Column -->
                     <div class="col-md-6 col-lg-3 col-xlg-3">
                         <div class="card">
                             <div class="box bg-warning text-center">
-                                <h1 class="font-light text-white"> {{ totalAbiertos() }} </h1>
+                                <h1 class="font-light text-white"> {{ principal.abiertos }} </h1>
                                 <h6 class="text-white">Abiertas</h6>
                             </div>
                         </div>
@@ -30,7 +25,7 @@
                     <div class="col-md-6 col-lg-3 col-xlg-3">
                         <div class="card">
                             <div class="box bg-info text-center">
-                                <h1 class="font-light text-white"> {{ totalProceso() }} </h1>
+                                <h1 class="font-light text-white"> {{ principal.proceso }} </h1>
                                 <h6 class="text-white">En Proceso</h6>
                             </div>
                         </div>
@@ -39,7 +34,7 @@
                     <div class="col-md-6 col-lg-3 col-xlg-3">
                         <div class="card">
                             <div class="box bg-success text-center">
-                                <h1 class="font-light text-white">0</h1>
+                                <h1 class="font-light text-white"> {{ principal.cerrados }} </h1>
                                 <h6 class="text-white">Resueltos</h6>
                             </div>
                         </div>
@@ -47,7 +42,7 @@
                     <!-- Column -->
                 </div>
 
-                <div class="table-responsive">
+                <div class="table-responsive animated fadeIn" *ngIf="!cargando">
                     <table id="demo-foo-addrow" class="table m-t-30 table-hover no-wrap contact-list footable-loaded footable" data-page-size="10">
                         <thead>
                             <tr>
@@ -65,8 +60,8 @@
                                 <td>{{ serv.Titulo }}</td>
                                 <td>{{ serv.TiempoTranscurrido }}</td>
                                 <td>
-                                    <span class="label" [ngClass]="( serv.Estatus == 'Abierta' ) ? 'label-warning' :
-                                    ( serv.Estatus == 'Cerrada' ) ? 'label-success' : 'label-info'">{{ serv.Estatus }}</span>
+                                    <span class="label" [ngClass]="( serv.Estado == 'Abierta' ) ? 'label-warning' :
+                                                ( serv.Estado == 'Cerrada' ) ? 'label-success' : 'label-info'">{{ serv.Estado }}</span>
                                 </td>
                                 <!-- <td>{{ serv.FecRegistro | date }}</td> -->
                                 <td style="width:50px;">
@@ -75,14 +70,23 @@
                                 </td>
                                 <td>
                                     <span class="action-icons">
-                                        <a href="javascript:void(0)" [routerLink]="['/servicio', serv.Id ]" class="btn btn-primary btn-sm text-white" title="Detalles"><i class="fa fa-bars"></i> Detalles</a>
-                                    </span>
+                                                    <a href="javascript:void(0)" [routerLink]="['/servicio', serv.Id ]" class="btn btn-primary btn-sm text-white" title="Detalles"><i class="fa fa-bars"></i> Detalles</a>
+                                                </span>
                                 </td>
                             </tr>
                         </tbody>
 
                     </table>
+
                 </div>
+
+                <button (click)="cambiarDesde(-1)" class="btn btn-secondary">
+                        Anteriores
+                    </button>
+
+                <button (click)="cambiarDesde(1)" class="btn btn-secondary">
+                        Siguientes
+                    </button>
             </div>
         </div>
     </div>

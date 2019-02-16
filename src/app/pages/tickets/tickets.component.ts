@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { NgbDateStruct, NgbCalendar } from '@ng-bootstrap/ng-bootstrap';
 import { ServiciosService, TiempoService, UsuarioService, SolicitanteService, TiposService } from '../../services/service.index';
 import { Servicio, Tiempo, Usuario, Tipo } from '../../models/models.index';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -79,7 +78,7 @@ export class TicketsComponent implements OnInit {
     this._ticketService.cargarDetTickets(id)
     .subscribe( (resp: any) => {
       this.ticket = resp;
-      if ( this.ticket.Estatus === this.estados.Estatus[0].value && this.ticket.AsignadoA.id === 0 ) {
+      if ( this.ticket.Estado === this.estados.Estatus[0].value && this.ticket.AsignadoA.id === 0 ) {
         this.ticket.AsignadoA = this._adminService.usuario;
       }
     });

@@ -15,7 +15,7 @@ export class SidebardComponent implements OnInit {
   constructor( public _sidebar: SidebarService,
     public _usuarioService: UsuarioService ) {
       this.usuario = JSON.parse( localStorage.getItem('usuario') );
-      if ( this.usuario.rol === 'ADMIN_ROLE' ) {
+      if ( this.usuario.root === 'principal' ) {
         this.menu = _sidebar.Menus.menuAdmin;
       } else {
         this.menu = _sidebar.Menus.menu;

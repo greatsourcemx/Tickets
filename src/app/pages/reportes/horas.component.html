@@ -1,0 +1,114 @@
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+
+                    <div class="col-md-5">
+                        <div class="card">
+                            <div class="card-body">
+
+                                <ngb-datepicker #dp (select)="onDateSelection($event)" [displayMonths]="2" [dayTemplate]="t">
+                                </ngb-datepicker>
+                                <ng-template #t let-date="date" let-focused="focused">
+                                    <span class="custom-day" [class.focused]="focused" [class.range]="isFrom(date) || isTo(date) || isInside(date) || isHovered(date)" [class.faded]="isHovered(date) || isInside(date)" (mouseenter)="hoveredDate = date" (mouseleave)="hoveredDate = null">
+                                          {{ date.day }}
+                                      </span>
+                                </ng-template>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-7">
+                        <div class="card">
+                            <div class="card-body">
+
+                                <div class="row">
+
+                                    <div class="col-sm-12 nopadding">
+                                        <label for="responsable">Responsable</label>
+                                        <div class="form-group">
+                                            <ng-select [(ngModel)]="filtros.responsable" name="responsable" [items]="admins" bindLabel="nombre">
+                                                <ng-template ng-option-tmp let-item="item">
+                                                    {{item.nombre}} <small>{{item.noEmpleado}}</small>
+                                                </ng-template>
+                                            </ng-select>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="row">
+
+                                    <div class="col-sm-12 nopadding">
+                                        <div class="form-group">
+                                            <button type="button" (click)="cargarReporte()" class="btn btn-info waves-effect waves-light m-t-10">Buscar</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row animated fadeIn" *ngIf="(horas.length > 0) && !cargando">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+
+                <h1>Total Tiempo: {{ TotalHoras | horas }}</h1>
+
+                <ngb-accordion #acc="ngbAccordion">
+                    <ngb-panel *ngFor="let unidad of horas | groupBy:'Unidad'" [id]="unidad.key">
+                        <ng-template ngbPanelTitle>
+                            <!-- <span class="text-white">{{ unidad.key }}</span> -->
+                            <div class="pull-left">
+                                <h4 class="m-b-0 text-white">{{ unidad.key }}</h4>
+                            </div>
+                            <div class="pull-right">
+                                <h4 class="m-b-0 text-white">{{ TotalUnidad(unidad.value) | horas }}</h4>
+                            </div>
+                        </ng-template>
+                        <ng-template ngbPanelContent>
+
+                            <div class="card-body">
+                                <h6 class="card-subtitle"> Tickets </h6>
+
+                                <table class="table table-sm">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">#</th>
+                                            <th scope="col">Título</th>
+                                            <th scope="col">Solicitante</th>
+                                            <th scope="col">Responsable</th>
+                                            <th scope="col">Tiempo Invertido</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let ticket of unidad.value">
+                                            <td> {{ ticket.Id }} </td>
+                                            <td> {{ ticket.Eventos }} </td>
+                                            <td> {{ ticket.Solicitante }} </td>
+                                            <td> {{ ticket.Responsable }} </td>
+                                            <td> {{ ticket.Horas | horas }} </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </ng-template>
+                    </ngb-panel>
+                </ngb-accordion>
+
+            </div>
+        </div>
+    </div>
+</div>

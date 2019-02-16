@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Usuario } from '../../models/usuario.model';
+import { Empresa } from '../../models/empresa.model';
 import { NgForm } from '@angular/forms';
-import { UsuarioService } from '../../services/service.index';
+import { UsuarioService, EmpresasService } from '../../services/service.index';
 import { Router } from '@angular/router';
 
 @Component({
@@ -12,11 +13,21 @@ import { Router } from '@angular/router';
 export class NuevoUsuarioComponent implements OnInit {
 
   usuario: Usuario = new Usuario('', '', '', '');
+  Empresas: Empresa[] = [];
 
-  constructor( public _usuarioService: UsuarioService,
-                public router: Router) { }
+  constructor(public _usuarioService: UsuarioService,
+              public _empresaService: EmpresasService,
+              public router: Router) { }
 
   ngOnInit() {
+    this.cargarEmpresas();
+  }
+
+  cargarEmpresas () {
+    this._empresaService.cargarEmpresasActivas()
+    .subscribe( (resp: Empresa[]) => {
+      this.Empresas = resp;
+    });
   }
 
 

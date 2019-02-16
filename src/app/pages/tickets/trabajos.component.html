@@ -91,8 +91,8 @@
                                 </td>
                                 <td> {{ tick.Titulo }} </td>
                                 <td> {{ tick.FecRegistro | date: 'yyyy-MM-dd' }} </td>
-                                <td><span class="label label-rounded" [ngClass]="( tick.Estatus == 'Abierta' ) ? 'label-warning' :
-                                    ( tick.Estatus == 'Cerrada' ) ? 'label-success' : 'label-info'">{{ tick.Estatus }}</span>
+                                <td><span class="label label-rounded" [ngClass]="( tick.Estado == 'Abierta' ) ? 'label-warning' :
+                                    ( tick.Estado == 'Cerrada' ) ? 'label-success' : 'label-info'">{{ tick.Estado }}</span>
                                 </td>
                                 <td> {{ tick.TipoServicio.descripcion }} </td>
                                 <td> {{ tick.tiempoTotal | tiempo }} </td>

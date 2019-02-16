@@ -34,7 +34,7 @@
                     <div class="col-lg-4">
                         <label for="estatus">Estatus</label>
                         <div class="input-group">
-                            <select [(ngModel)]="ticket.Estatus" id="estatus" name="estatus" class="form-control" (change)="estatusChange()" required>
+                            <select [(ngModel)]="ticket.Estado" id="estatus" name="estatus" class="form-control" (change)="estatusChange()" required>
                                 <option *ngFor="let esta of estados.Estatus" [ngValue]="esta.value">{{ esta.value }}</option>
                             </select>
                         </div>

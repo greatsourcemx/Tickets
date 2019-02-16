@@ -10,22 +10,23 @@ export class EmpresasService {
   constructor( public http: HttpClient ) { }
 
   cargarEmpresas ( desde: number = 0 ) {
-    let url = URL_SERVICIOS + '/Empresa?desde=' + desde;
-    return this.http.get( url );
-  }
-
-  cargarEmpresasActivas () {
-    let url = URL_SERVICIOS + '/Empresa/1';
+    let url = URL_SERVICIOS + '/empresa?desde=' + desde;
     return this.http.get( url );
   }
 
   buscarEmpresa ( termino: string ) {
-    let url = URL_SERVICIOS + '/Empresa?termino=' + termino;
+    let url = URL_SERVICIOS + '/empresa?termino=' + termino;
     return this.http.get( url );
   }
 
+  cargarEmpresasActivas () {
+    let url = URL_SERVICIOS + '/empresas';
+    return this.http.get( url );
+  }
+
+
   guardarEmpresa ( empresa: Empresa ) {
-    let url = URL_SERVICIOS + '/Empresa';
+    let url = URL_SERVICIOS + '/empresa';
 
     return this.http.post( url, empresa )
                 .map( (resp: any) => {
@@ -35,7 +36,7 @@ export class EmpresasService {
   }
 
   modificarEmpresa ( empresa: Empresa ) {
-    let url = URL_SERVICIOS + '/Empresa';
+    let url = URL_SERVICIOS + '/empresa';
 
     return this.http.put( url, empresa )
                   .map( (resp: any) => {

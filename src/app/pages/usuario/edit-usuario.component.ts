@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Usuario } from '../../models/usuario.model';
+import { Empresa } from '../../models/empresa.model';
 import { UsuarioService } from '../../services/usuario/usuario.service';
+import { EmpresasService } from '../../services/empresas/empresas.service';
 import { NgForm } from '@angular/forms';
 
 @Component({
@@ -12,9 +14,11 @@ import { NgForm } from '@angular/forms';
 export class EditUsuarioComponent implements OnInit {
 
   usuario: Usuario = new Usuario('', '', '', '');
+  Empresas: Empresa[] = [];
 
   constructor(public activatedRoute: ActivatedRoute,
               public _usuarioService: UsuarioService,
+              public _empresaService: EmpresasService,
               public router: Router ) {
     activatedRoute.params.subscribe( params => {
 
@@ -25,6 +29,7 @@ export class EditUsuarioComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.cargarEmpresas();
   }
 
   cargarUsuario( id: number ) {
@@ -32,6 +37,13 @@ export class EditUsuarioComponent implements OnInit {
           .subscribe( user => {
             this.usuario = user;
           });
+  }
+
+  cargarEmpresas () {
+    this._empresaService.cargarEmpresasActivas()
+    .subscribe( (resp: Empresa[]) => {
+      this.Empresas = resp;
+    });
   }
 
   guardar ( f: NgForm ) {

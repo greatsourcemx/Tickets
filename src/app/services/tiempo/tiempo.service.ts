@@ -12,18 +12,18 @@ export class TiempoService {
   constructor( public http: HttpClient ) { }
 
   cargarTiempos( desde: number = 0 ) {
-      let url = URL_SERVICIOS + '/Tiempos?desde=' + desde;
+      let url = URL_SERVICIOS + '/tiempos?desde=' + desde;
       return this.http.get( url );
   }
 
   cargarTiemposActivos () {
-    let url = URL_SERVICIOS + '/Tiempos/1';
+    let url = URL_SERVICIOS + '/tiempos/activos';
     return this.http.get( url );
   }
 
   buscarTiempo (termino: string) {
 
-    let url = URL_SERVICIOS + '/Tiempos?termino=' + termino;
+    let url = URL_SERVICIOS + '/tiempos?termino=' + termino;
       return this.http.get( url )
               .map( (resp: any) => resp );
 
@@ -39,7 +39,7 @@ export class TiempoService {
     }
 
     let tiempo = new Tiempo(min, descr);
-    let url = URL_SERVICIOS + '/Tiempos';
+    let url = URL_SERVICIOS + '/tiempo';
 
     return this.http.post( url, tiempo )
             .map( (resp: any) => {
@@ -50,7 +50,7 @@ export class TiempoService {
 
   modificarTiempo (tiempo: Tiempo) {
 
-    let url = URL_SERVICIOS + '/Tiempos/' + tiempo.Id;
+    let url = URL_SERVICIOS + '/tiempo';
 
       return this.http.put( url, tiempo )
             .map( (resp: any) => {

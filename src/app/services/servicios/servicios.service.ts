@@ -3,6 +3,7 @@ import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { Servicio } from '../../models/servicio.model';
 import { URL_SERVICIOS } from '../../config/config';
 import 'rxjs/add/operator/map';
+import { Usuario } from '../../models/usuario.model';
 
 @Injectable()
 export class ServiciosService {
@@ -12,22 +13,28 @@ export class ServiciosService {
   constructor(public http: HttpClient) { }
 
   cargarServiciosNuevos() {
-    let url = URL_SERVICIOS + '/Servicios';
+    let url = URL_SERVICIOS + '/nuevos';
     return this.http.get( url );
   }
 
-  cargarServicios( id: number = 0 ) {
-    let url = URL_SERVICIOS + '/Servicios/' + id;
+  cargarTickets () {
+    let url = URL_SERVICIOS + '/servicios';
     return this.http.get( url );
   }
 
-  cargarDetalles ( id: number, numero: number ) {
-    let url = URL_SERVICIOS + '/Servicios/' + id + '?numero=' + numero;
+  cargarServicios( id: number = 0, desde: number = 0 ) {
+    // let url = URL_SERVICIOS + '/Servicios/' + id + '?desde=' + desde;
+    let url = URL_SERVICIOS + '/soli/servicios?desde=' + desde;
+    return this.http.get( url );
+  }
+
+  cargarDetalles ( ServId: number ) {
+    let url = URL_SERVICIOS + '/servicio/detalle?id=' + ServId;
     return this.http.get( url );
   }
 
   guardarServicio ( Soliid: number = 0, servicio: Servicio ) {
-    let url = URL_SERVICIOS + '/Servicios/' + Soliid;
+    let url = URL_SERVICIOS + '/servicio';
 
     return this.http.post( url, servicio )
     .map( (resp: any) => {
@@ -37,7 +44,7 @@ export class ServiciosService {
   }
 
   modificarServicio (ticket: Servicio) {
-    let url = URL_SERVICIOS + '/Servicios';
+    let url = URL_SERVICIOS + '/servicio';
 
     return this.http.put( url, ticket )
     .map( (resp: any) => {
@@ -46,29 +53,24 @@ export class ServiciosService {
     });
   }
 
-  cargarTickets ( id: number = 0) {
-    let url = URL_SERVICIOS + '/Tickets/' + id;
-    return this.http.get( url );
-  }
-
   cargarDetTickets ( id: number = 0 ) {
-    let url = URL_SERVICIOS + '/Tickets?folio=' + id;
+    let url = URL_SERVICIOS + '/servicio?folio=' + id;
     return this.http.get( url );
   }
 
-  cargarInfoPrincipal ( id: number = 0 ) {
-    let url = URL_SERVICIOS + '/Principal/' + id;
+  cargarDashboard () {
+    let url = URL_SERVICIOS + '/principal';
     return this.http.get( url );
   }
 
   cargarTicketsTrabajo ( servicio: Servicio ) {
-    let url = URL_SERVICIOS + '/Tickets';
+    let url = URL_SERVICIOS + '/tickets';
     return this.http.post( url, servicio );
   }
 
   cargarTicketsCerrados (servicio: Servicio) {
-    let url = URL_SERVICIOS + '/Tickets/1';
-    return this.http.put( url, servicio );
+    let url = URL_SERVICIOS + '/tickets/cerrados';
+    return this.http.post( url, servicio );
   }
 
 }

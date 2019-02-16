@@ -8,6 +8,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 // ng- Select
 import { NgSelectModule } from '@ng-select/ng-select';
 
+// Graficas
+import { ChartsModule } from 'ng2-charts';
+
 // Modulos
 import { SharedModule } from '../shared/shared.module';
 
@@ -41,6 +44,13 @@ import { TiposComponent } from './tipos/tipos.component';
 import { TicketComponent } from './tickets/ticket.component';
 import { TrabajosComponent } from './tickets/trabajos.component';
 import { CerradosComponent } from './tickets/cerrados.component';
+import { ReportesComponent } from './reportes/reportes.component';
+import { HorasComponent } from './reportes/horas.component';
+import { ProyectosComponent } from './proyectos/proyectos.component';
+import { EntregaComponent } from './equipos/entrega/entrega.component';
+import { SalidaComponent } from './equipos/salida/salida.component';
+import { SinFirmaComponent } from './equipos/sin-firma/sin-firma.component';
+import { TransferenciaComponent } from './equipos/transferencia/transferencia.component';
 
 @NgModule({
     declarations: [
@@ -67,7 +77,14 @@ import { CerradosComponent } from './tickets/cerrados.component';
         TiposComponent,
         TicketComponent,
         TrabajosComponent,
-        CerradosComponent
+        CerradosComponent,
+        ReportesComponent,
+        HorasComponent,
+        ProyectosComponent,
+        EntregaComponent,
+        SalidaComponent,
+        SinFirmaComponent,
+        TransferenciaComponent
     ],
     exports: [
         DashboardComponent,
@@ -81,7 +98,8 @@ import { CerradosComponent } from './tickets/cerrados.component';
         FormsModule,
         PipesModule,
         NgbModule.forRoot(),
-        NgSelectModule
+        NgSelectModule,
+        ChartsModule
     ]
 })
 

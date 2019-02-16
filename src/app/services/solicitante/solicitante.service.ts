@@ -10,30 +10,30 @@ export class SolicitanteService {
 
   solicitante: Usuario;
 
-  constructor(
-    public http: HttpClient,
-    public router: Router) { }
+  constructor(public http: HttpClient,
+              public router: Router) { }
 
     cargarSolicitantes( desde: number = 0 ) {
-      let url = URL_SERVICIOS + '/Solicitantes?desde=' + desde;
-      return this.http.get( url );
-    }
-
-    cargarSoliActivos( ) {
-      let url = URL_SERVICIOS + '/Solicitantes?activo=si';
+      let url = URL_SERVICIOS + '/solicitante?desde=' + desde;
       return this.http.get( url );
     }
 
     buscarSolicitante( termino: string ) {
 
-      let url = URL_SERVICIOS + '/Solicitantes?termino=' + termino;
+      let url = URL_SERVICIOS + '/solicitante?termino=' + termino;
       return this.http.get( url )
                   .map( (resp: any) => resp );
 
     }
 
+    cargarSoliActivos( ) {
+      let url = URL_SERVICIOS + '/solicitante/activos';
+      return this.http.get( url );
+    }
+
+
     guardarSolicitante (usuario: Usuario) {
-      let url = URL_SERVICIOS + '/Solicitantes';
+      let url = URL_SERVICIOS + '/solicitante';
 
       return this.http.post( url, usuario )
                 .map( (resp: any) => {
@@ -43,7 +43,7 @@ export class SolicitanteService {
     }
 
     modificarSolicitante (usuario: Usuario) {
-      let url = URL_SERVICIOS + '/Solicitantes/' + usuario.id;
+      let url = URL_SERVICIOS + '/solicitante';
 
       return this.http.put( url, usuario )
                   .map( (resp: any) => {
@@ -54,7 +54,7 @@ export class SolicitanteService {
 
     cargarSolici (id: number) {
 
-      let url = URL_SERVICIOS + '/Usuarios/' + id;
+      let url = URL_SERVICIOS + '/solicitor?id=' + id;
 
       return this.http.get( url )
                 .map( (resp: any) => resp );

@@ -43,7 +43,7 @@ export class TicketComponent implements OnInit {
     this.cargarAdmins();
     this.cargarUsers();
     this.cargarTipos();
-    this.ticket.Estatus = this.estados.Estatus[2].value;
+    this.ticket.Estado = this.estados.Estatus[2].value;
   }
 
   cargarTiempos () {
@@ -77,7 +77,7 @@ export class TicketComponent implements OnInit {
   }
 
   estatusChange ( ) {
-    if ( this.ticket.Estatus === this.estados.Estatus[2].value ) {
+    if ( this.ticket.Estado === this.estados.Estatus[2].value ) {
       this.cerrado = true;
     } else {
       this.cerrado = false;

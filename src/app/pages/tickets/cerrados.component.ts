@@ -60,6 +60,7 @@ export class CerradosComponent implements OnInit {
     public _soliService: SolicitanteService,
     public _adminService: UsuarioService,
     public _tiposService: TiposService,
+    public _usuarioService: UsuarioService,
     public calendar: NgbCalendar ) {
       this.fromDate = calendar.getToday(); // calendar.getNext(calendar.getToday(), 'd', -10);
       this.toDate = calendar.getToday();
@@ -101,13 +102,20 @@ export class CerradosComponent implements OnInit {
     } else {
       this.filtros.FecCerrado = new Date(1800, 0, 1);
     }
+    if (this._usuarioService.usuario.rol === 'USER_ROLE') {
+      this.filtros.Solicitor = this._usuarioService.usuario;
+    }
 
     this._servicioService.cargarTicketsCerrados( this.filtros )
     .subscribe((resp: any) => {
       if (resp.length !== 0) {
         this.totalRegistros = resp[0].Total;
       }
-      this.Tickets = resp;
+      if (this._usuarioService.usuario.rol === 'USER_ROLE') {
+        this.Tickets = resp.filter(t => t.TipoServicio.id === 1);
+      } else {
+        this.Tickets = resp;
+      }
       this.cargando = false;
     });
   }

@@ -9,7 +9,7 @@ export class Servicio {
     constructor (
         public Titulo: string,
         public Descripcion: string = '',
-        public Estatus?: string,
+        public Estado?: string,
         public Id: number = 0,
         public FecRegistro?: Date,
         public FecCerrado?: Date,
@@ -22,6 +22,7 @@ export class Servicio {
         public Solucion: string = '',
         public TipoServicio: Tipo = new Tipo(''),
         public tiempoTotal: string = 'Sin Avances',
-        public desde: number = 0
+        public desde: number = 0,
+        public Total: number = 0
     ) { }
 }

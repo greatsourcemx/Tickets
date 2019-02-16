@@ -3,7 +3,7 @@
         <div class="card">
             <div class="card-body">
 
-                <input #input (keyup)="buscarTipo( input.value )" type="text" class="form-control" placeholder="Buscar Tipo de Servicio..." />
+                <input #input (keyup)="buscarTipo( input.value )" name="search" type="text" class="form-control" placeholder="Buscar Tipo de Servicio..." />
 
             </div>
         </div>
@@ -36,7 +36,7 @@
                     </button>
                 </div>
 
-                <table class="table table-hover">
+                <table class="table table-hover table-sm">
                     <thead>
                         <tr>
                             <th>#</th>
@@ -56,7 +56,7 @@
                             </td>
                             <td>
                                 <div class="checkbox checkbox-info pull-left p-t-0">
-                                    <input [(ngModel)]="tipo.activo" name="activo" [id]="tipo.id" type="checkbox" class="filled-in chk-col-light-blue" />
+                                    <input [(ngModel)]="tipo.activo" name="actualizarPassword" [id]="tipo.id" type="checkbox" class="filled-in chk-col-light-blue" />
                                     <label [for]="tipo.id">  </label>
                                 </div>
                             </td>

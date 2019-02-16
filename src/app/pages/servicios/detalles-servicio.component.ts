@@ -29,11 +29,15 @@ export class DetallesServicioComponent implements OnInit {
   }
 
   cargarDetalles ( id: number ) {
-    this._servicioService.cargarDetalles( this.usuario.id, id )
+    this._servicioService.cargarDetalles( id )
     .subscribe( (resp: Servicio) => {
       this.servicio = resp;
-      console.log(this.servicio);
     });
+  }
+
+  regresar() {
+    let url = localStorage.getItem('url');
+    this.router.navigate([url]);
   }
 
 }

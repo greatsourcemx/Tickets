@@ -6,6 +6,12 @@
             { "titulo": "Tickets", "url": "/dashboard" },
             { "titulo": "Cerrados", "url": "/cerrados" }
         ]
+    }, {
+        "titulo": "Equipo",
+        "icono": "fa fa-laptop",
+        "submenu": [
+            { "titulo": "Asignado", "url": "/asignado" }
+        ]
     }],
     "menuAdmin": [{
         "titulo": "Principal",
@@ -13,9 +19,24 @@
         "submenu": [
             { "titulo": "Inicio", "url": "/principal" },
             { "titulo": "Tickets", "url": "/tickets" },
-            { "titulo": "Cerrados", "url": "/tickets/cerrados" },
-            { "titulo": "Gráficas", "url": "/graficas1" },
-            { "titulo": "RxJs", "url": "/rxjs" }
+            { "titulo": "Cerrados", "url": "/cerrados" },
+            { "titulo": "Gráficas", "url": "/graficas" }
+        ]
+    }, {
+        "titulo": "Equipos",
+        "icono": "fa fa-desktop",
+        "submenu": [
+            { "titulo": "Entrega", "url": "/entrega" },
+            { "titulo": "Salida", "url": "/salida" },
+            { "titulo": "Responsivas sin firmas", "url": "/nofirmas" },
+            { "titulo": "Trasnferencias", "url": "/transferencias" }
+        ]
+    }, {
+        "titulo": "Reportes",
+        "icono": "ti ti-pie-chart",
+        "submenu": [
+            { "titulo": "Porcentaje", "url": "/reporte" },
+            { "titulo": "Horas", "url": "/horas" }
         ]
     }, {
         "titulo": "Mantenimientos",

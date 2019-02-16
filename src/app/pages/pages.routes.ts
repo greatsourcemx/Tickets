@@ -22,6 +22,10 @@ import { TiposComponent } from './tipos/tipos.component';
 import { TicketComponent } from './tickets/ticket.component';
 import { TrabajosComponent } from './tickets/trabajos.component';
 import { CerradosComponent } from './tickets/cerrados.component';
+import { ReportesComponent } from './reportes/reportes.component';
+import { Graficas1Component } from './graficas1/graficas1.component';
+import { HorasComponent } from './reportes/horas.component';
+import * as Equipos from './equipos/equipos.index';
 
 const pagesRoutes: Routes = [
     {
@@ -32,6 +36,7 @@ const pagesRoutes: Routes = [
             { path: 'principal', component: PrincipalComponent, data: { titulo: 'Principal' } },
             { path: 'dashboard', component: DashboardComponent, data: { titulo: 'Dashboard' } },
             { path: 'empresas', component: EmpresasComponent, data: { titulo: 'Empresas' } },
+            { path: 'graficas', component: Graficas1Component, data: { titulo: 'Gráficas' } },
             { path: 'usuarios', component: UsuarioComponent, data: { titulo: 'Usuarios' }  },
             { path: 'usuario', component: NuevoUsuarioComponent, data: { titulo: 'Nuevo Usuario' }  },
             { path: 'usuario/:id', component: EditUsuarioComponent, data: { titulo: 'Editar Usuario' }  },
@@ -45,9 +50,15 @@ const pagesRoutes: Routes = [
             { path: 'servicio/:id', component: DetallesServicioComponent, data: { titulo: 'Detalle del Servicio' }  },
             { path: 'ticket', component: TicketComponent, data: { titulo: 'Nuevo Ticket' }  },
             { path: 'tickets', component: TrabajosComponent, data: { titulo: 'Tickets Globales' }  },
-            { path: 'tickets/cerrados', component: CerradosComponent, data: { titulo: 'Tickets Cerrados' }  },
+            { path: 'cerrados', component: CerradosComponent, data: { titulo: 'Tickets Cerrados' }  },
             { path: 'tickets/:id', component: TicketsComponent, data: { titulo: 'Detalle del Ticket' }  },
             { path: 'avances/:id', component: AvancesComponent, data: { titulo: 'Avances' }  },
+            { path: 'reporte', component: ReportesComponent, data: { titulo: 'Reporte de Porcentajes' }  },
+            { path: 'horas', component: HorasComponent, data: { titulo: 'Reporte de Horas' }  },
+            { path: 'entrega', component: Equipos.EntregaComponent, data: { titulo: 'Entrega de Equipo' }  },
+            { path: 'salida', component: Equipos.SalidaComponent, data: { titulo: 'Salida de Equipo' }  },
+            { path: 'transferencias', component: Equipos.TransferenciaComponent, data: { titulo: 'Transferencia de Equipos' }  },
+            { path: 'nofirmas', component: Equipos.SinFirmaComponent, data: { titulo: 'Responsiva sin Firmar' }  },
             { path: '', redirectTo: '/dashboard', pathMatch: 'full'  },
         ]
     }

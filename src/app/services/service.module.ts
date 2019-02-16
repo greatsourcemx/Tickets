@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { TokenInterceptor } from './token.interceptor';
 
 import {
   MantenimientoService,
@@ -14,7 +15,9 @@ import {
   PrioridadService,
   EmpresasService,
   AvancesService,
-  TiposService } from './service.index';
+  TiposService,
+  GlpiService,
+  ReportesService } from './service.index';
 
 @NgModule({
   imports: [
@@ -22,6 +25,11 @@ import {
     HttpClientModule
   ],
   providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true
+    },
     SharedService,
     SidebarService,
     UsuarioService,
@@ -33,7 +41,9 @@ import {
     PrioridadService,
     EmpresasService,
     AvancesService,
-    TiposService
+    TiposService,
+    GlpiService,
+    ReportesService
   ],
   declarations: []
 })

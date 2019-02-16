@@ -6,17 +6,17 @@
             <div class="card-body">
                 <h6 class="card-subtitle mb-2 text-muted">Título</h6>
                 <h4 class="card-title"># {{ servicio.Id }} {{ servicio.Titulo }}
-                    <span class="label" [ngClass]="( servicio.Estatus == 'Abierta' ) ? 'label-warning' :
-                    ( servicio.Estatus == 'Cerrada' ) ? 'label-success' : 'label-info'"> {{ servicio.Estatus }}</span></h4>
+                    <span class="label" [ngClass]="( servicio.Estado == 'Abierta' ) ? 'label-warning' :
+                    ( servicio.Estado == 'Cerrada' ) ? 'label-success' : 'label-info'"> {{ servicio.Estado }}</span></h4>
 
                 <h6 class="card-subtitle mb-2 text-muted">Descripción</h6>
                 <p class="card-text">{{ servicio.Descripcion }}</p>
 
                 <div class="pull-right">
-                    <div *ngIf="servicio.AsignadoA">
+                    <div *ngIf="servicio.AsignadoA.id !== 0">
                         <i class="fa fa-user"></i> <span class="label label-success"> {{ servicio.AsignadoA?.nombre }}</span>
                     </div>
-                    <div *ngIf="!servicio.AsignadoA">
+                    <div *ngIf="servicio.AsignadoA.id === 0">
                         <i class="fa fa-user"></i> <span class="label label-warning"> Sin Responsable</span>
                     </div>
                 </div>
@@ -27,7 +27,11 @@
                 </div>
 
                 <br /><br />
-                <a href="#" class="card-link">Regresar</a>
+                <div class="pull-left"><button class="btn btn-inverse waves-effect waves-light" name="regresar" (click)="regresar()">Regresar</button></div>
+                <div class="pull-right">
+                    <h3>Tiempo Invertido: {{ servicio.tiempoTotal | tiempo: 'comp' }} </h3>
+                </div>
+
             </div>
         </div>
 

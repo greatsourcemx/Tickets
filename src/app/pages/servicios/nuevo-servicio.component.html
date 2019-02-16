@@ -13,13 +13,12 @@
                                 <form #f="ngForm" ngNativeValidate (ngSubmit)="guardarServicio(f)">
                                     <div class="form-group">
                                         <label for="titulo">Título</label>
-                                        <!-- <input type="text" [(ngModel)]="servicio.Titulo" name="Titulo" class="form-control" placeholder="Ingresa el Título" required /> -->
                                         <input [(ngModel)]="servicio.Titulo" name="Titulo" type="text" class="form-control" placeholder="Título" required />
                                     </div>
 
                                     <div class="form-group">
                                         <label for="descripcion">Descripción</label>
-                                        <input type="text" [(ngModel)]="servicio.Descripcion" name="Descripcion" class="form-control" placeholder="Ingresa la descripcion (opcional)" />
+                                        <textarea name="descripcion" id="descripcion" class="form-control" [(ngModel)]="servicio.Descripcion" rows="4"></textarea>
                                     </div>
 
                                     <div class="form-group">

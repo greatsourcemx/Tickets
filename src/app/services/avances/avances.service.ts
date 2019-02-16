@@ -9,7 +9,7 @@ export class AvancesService {
   constructor( public http: HttpClient ) { }
 
   cargarAvances ( id: number = 0 ) {
-    let url = URL_SERVICIOS + '/Avances/' + id;
+    let url = URL_SERVICIOS + '/avances?id=' + id;
 
     return this.http.get( url );
   }
