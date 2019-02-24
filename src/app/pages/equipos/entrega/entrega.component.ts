@@ -18,6 +18,7 @@ export class EntregaComponent implements OnInit {
   responsiva: Responsiva = new Responsiva();
   equipo: GLPIEquipos = new GLPIEquipos();
   cargando = false;
+  folio = '';
 
   constructor(public glpiService: GlpiService) { }
 
@@ -35,23 +36,65 @@ export class EntregaComponent implements OnInit {
       this.empleados = data.Empleados;
       this.locacion = data.Locacion;
       this.cargando = false;
+      this.responsiva = new Responsiva();
+      this.equipo = new GLPIEquipos();
     });
+  }
+
+  onKeydown(event) {
+    if (event.key === 'Enter') {
+      this.cargando = true;
+      this.responsiva = new Responsiva();
+      this.equipo = new GLPIEquipos();
+      this.glpiService.cargarResponsiva( this.folio, this.empresa)
+      .subscribe((data: Responsiva) => {
+        this.cargando = false;
+        this.responsiva = data;
+      });
+    }
   }
 
   agregarEquipo() {
     if (this.equipo.Id !== 0) {
-      this.responsiva.detalle.push( new DetalleResponsiva(0, 3, new Date(), new Date(),
-      false, 0, this.responsiva.locacion, this.responsiva.empleado, this.equipo));
+      if (!this.responsiva.detalle.some((item) => item.equipo.Id === this.equipo.Id)) {
+        this.responsiva.detalle.push( new DetalleResponsiva(0, 3, new Date(), new Date(),
+        false, 0, this.responsiva.locacion, this.responsiva.empleado, this.equipo));
+      }
     }
+  }
+
+  removerEquipo( index: number ) {
+    this.responsiva.detalle.splice( index, 1 );
   }
 
   guardar() {
     this.cargando = true;
+    this.responsiva.empresa = this.empresa;
     this.glpiService.guardarResponsiva( this.responsiva )
-    .subscribe((data: Responsiva) => {
+    .subscribe((data: any) => {
       this.cargando = false;
-      console.log(data);
+      this.responsiva.id = 1;
+      const fileURL = URL.createObjectURL(data);
+        window.open(fileURL, '_blank');
     });
+  }
+
+  verPDF() {
+    this.cargando = true;
+    this.responsiva.empresa = this.empresa;
+    this.glpiService.verPDF( this.responsiva )
+      .subscribe((data: any) => {
+        this.cargando = false;
+        const fileURL = URL.createObjectURL(data);
+        window.open(fileURL, '_blank');
+    });
+  }
+
+  nuevo() {
+    this.responsiva = new Responsiva();
+    this.equipo = new GLPIEquipos();
+    this.cargando = false;
+    this.folio = '';
   }
 
 }

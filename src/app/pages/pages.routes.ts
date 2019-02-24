@@ -56,7 +56,7 @@ const pagesRoutes: Routes = [
             { path: 'reporte', component: ReportesComponent, data: { titulo: 'Reporte de Porcentajes' }  },
             { path: 'horas', component: HorasComponent, data: { titulo: 'Reporte de Horas' }  },
             { path: 'entrega', component: Equipos.EntregaComponent, data: { titulo: 'Entrega de Equipo' }  },
-            { path: 'salida', component: Equipos.SalidaComponent, data: { titulo: 'Salida de Equipo' }  },
+            { path: 'retorno', component: Equipos.SalidaComponent, data: { titulo: 'Retorno de Equipo' }  },
             { path: 'transferencias', component: Equipos.TransferenciaComponent, data: { titulo: 'Transferencia de Equipos' }  },
             { path: 'nofirmas', component: Equipos.SinFirmaComponent, data: { titulo: 'Responsiva sin Firmar' }  },
             { path: '', redirectTo: '/dashboard', pathMatch: 'full'  },

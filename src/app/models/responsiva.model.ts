@@ -9,6 +9,7 @@ export class Responsiva {
         public firmado: boolean = false,
         public fechaEntrega: Date = new Date(),
         public folio: string = '',
+        public empresa: string = '',
         public empleado: GLPIEmpleado = new GLPIEmpleado(),
         public locacion: GLPILocacion = new GLPILocacion(),
         public detalle: DetalleResponsiva[] = []

@@ -20,7 +20,7 @@
                         <div>
                             <span>Busqueda...</span>
                         </div>
-                        <input type="text" class="form-control" placeholder="Buscar Folio..." />
+                        <input type="text" [(ngModel)]="folio" name="folio" (keydown)="onKeydown($event)" class="form-control" placeholder="Buscar Folio..." />
                     </div>
                 </div>
 
@@ -50,7 +50,6 @@
                 <form #f="ngForm" ngNativeValidate (ngSubmit)="guardar()" class="form-horizontal">
                     <div class="form-group">
                         <label for="empleado">Empleado </label>
-                        <!-- [(ngModel)]="usuario.estado" -->
                         <ng-select [(ngModel)]="responsiva.empleado" name="empleado" [items]="empleados" bindLabel="Nombre">
                             <ng-template ng-option-tmp let-item="item">
                                 {{item.Nombre}} <small>{{item.NoEmpleado}}</small>
@@ -66,8 +65,8 @@
                         </ng-select>
                     </div>
 
-                    <label for="equipo">Equipo</label>
-                    <div class="form-group input-group">
+                    <label *ngIf="responsiva.id === 0" for="equipo">Equipo</label>
+                    <div *ngIf="responsiva.id === 0" class="form-group input-group">
                         <ng-select [(ngModel)]="equipo" name="equipo" class="col-lg-11" [items]="equipos" bindLabel="Nombre">
                             <ng-template ng-option-tmp let-item="item">
                                 {{item.Nombre}}
@@ -85,11 +84,41 @@
                         <label for="notas">Notas</label>
                         <textarea [(ngModel)]="responsiva.notas" name="notas" id="notas" class="form-control" rows="2"></textarea>
                     </div>
-                    <hr>
-                    <button name="btn-guardar" type="submit" class="btn btn-success">Guardar</button>
-                    <button type="button" name="btn-ver" class="btn btn-info">Preview</button>
-                    <button type="button" name="btn-nuevo" class="btn btn-danger">Nuevo</button>
+                    <button *ngIf="responsiva.id === 0 && responsiva.detalle.length > 0" name="btn-guardar" type="submit" class="btn btn-success">Guardar</button>
+                    <button *ngIf="responsiva.detalle.length > 0" (click)="verPDF()" type="button" name="btn-ver" class="btn btn-info">Preview</button>
+                    <button *ngIf="responsiva.id !== 0" (click)="nuevo()" type="button" name="btn-nuevo" class="btn btn-danger">Nuevo</button>
                 </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row" *ngIf="responsiva.detalle?.length > 0">
+    <div class=" col-12 ">
+        <div class="card ">
+            <div class="card-body ">
+                <h4 class="card-title ">Equipos a Entregar</h4>
+                <div class="table-responsive ">
+                    <table class="table table-sm">
+                        <thead>
+                            <tr>
+                                <!-- <th>Folio</th> -->
+                                <th>Equipo</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let equi of responsiva.detalle; index as i">
+                                <!-- <td> {{ responsiva.folio }} </td> -->
+                                <td> {{ equi.equipo.Nombre }} : {{ equi.equipo.Descripcion }} </td>
+                                <td>
+                                    <button *ngIf="responsiva.id === 0" name="btn-remover" (click)="removerEquipo( i )" class="btn btn-danger btn-sm"><i class="fa fa-eraser"></i></button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
 
             </div>
         </div>

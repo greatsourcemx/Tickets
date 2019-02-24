@@ -13,3 +13,4 @@ export { Usuario } from './usuario.model';
 export { GLPIEmpleado } from './GLPIEmpleado.model';
 export { GLPIEquipos } from './GLPIEquipos.model';
 export { GLPILocacion } from './GLPILocacion.model';
+export { RetornoEquipo } from './retorno.model';

@@ -27,7 +27,7 @@
         "icono": "fa fa-desktop",
         "submenu": [
             { "titulo": "Entrega", "url": "/entrega" },
-            { "titulo": "Salida", "url": "/salida" },
+            { "titulo": "Retorno", "url": "/retorno" },
             { "titulo": "Responsivas sin firmas", "url": "/nofirmas" },
             { "titulo": "Trasnferencias", "url": "/transferencias" }
         ]

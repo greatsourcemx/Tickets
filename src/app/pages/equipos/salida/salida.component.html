@@ -1,3 +1,105 @@
-<p>
-  salida works!
-</p>
+<div class="row animated fadeIn">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body" id="cuerpo">
+
+                <div class="row">
+                    <div class="col-3">
+                        <div>
+                            <span>Empresa</span>
+                        </div>
+                        <div class="btn-group" role="group" aria-label="Basic example">
+                            <button type="button" (click)="seleccionEmpresa( 'EBR' )" [ngClass]="{ 'active': empresa==='EBR' }" class="btn btn-secondary">EBR</button>
+                            <button type="button" (click)="seleccionEmpresa( 'SYN' )" [ngClass]="{ 'active': empresa==='SYN' }" class="btn btn-secondary">SYN</button>
+                            <button type="button" (click)="seleccionEmpresa( 'IMA' )" [ngClass]="{ 'active': empresa==='IMA' }" class="btn btn-secondary">IMA</button>
+                        </div>
+                    </div>
+
+                    <div class="col-9">
+                        <div>
+                            <span>Seleccionar Empleado</span>
+                        </div>
+                        <div class="input-group">
+                            <ng-select [(ngModel)]="empleado" appendTo="body" name="empleado" class="col-lg-11" [items]="empleados" bindLabel="Nombre">
+                                <ng-template ng-option-tmp let-item="item">
+                                    {{item.Nombre}} <small>{{item.NoEmpleado}}</small>
+                                </ng-template>
+                            </ng-select>
+                            <div class="input-group-prepend">
+                                <button class="btn btn-info" (click)="buscarEquipo()" name="find" type="button">Buscar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row animated fadeIn" *ngIf="cargando">
+    <div class="col-sm-12">
+        <div class="alert alert-warning text-center">
+            <strong>Cargando</strong>
+            <br />
+            <i class="fa fa-refresh fa-spin fa-2x"></i>
+            <br />
+            <span>Espere por favor</span>
+        </div>
+    </div>
+</div>
+
+<div class="row animated fadeIn" *ngIf="msg && equipos.length === 0 && empleado.Id !== 0">
+    <div class="col-sm-12">
+        <div class="alert alert-warning text-center">
+            <strong>No se encontraron resultados</strong>
+        </div>
+    </div>
+</div>
+
+<div class="row" *ngIf="!cargando && equipos.length > 0">
+    <div class="col-sm-12">
+        <div class="card card-body">
+
+            <table class="table table-sm table-hover">
+                <thead>
+                    <tr>
+                        <th>Folio</th>
+                        <th>Dispositivo</th>
+                        <th>Equipo</th>
+                        <th>Tipo</th>
+                        <th>Modelo</th>
+                        <th>Locación</th>
+                        <th>Fec. Entrega</th>
+                        <th>
+                            <div>
+                                <input name="reto-all" [(ngModel)]="retorTodos" id="reto-all" type="checkbox" (change)="RetorTodos()" class="filled-in chk-col-light-blue" />
+                                <label for="reto-all"> Retornar </label>
+                            </div>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let equi of equipos; index as i">
+                        <td class="pointer" (click)="verPDF(equi.folio)"><strong>{{ equi.folio }}</strong></td>
+                        <td>{{ equi.dispositivo }}</td>
+                        <td>{{ equi.nombre }}</td>
+                        <td>{{ equi.tipo }}</td>
+                        <td>{{ equi.modelo }}</td>
+                        <td>{{ equi.locacion.Descripcion }}</td>
+                        <td>{{ equi.fecEntrega | date: 'yyyy-MM-dd' }}</td>
+                        <td>
+                            <div>
+                                <input name="retronar" (change)="verBotones()" [(ngModel)]="equi.retornar" [id]="equi.id" type="checkbox" class="filled-in chk-col-light-blue" />
+                                <label [for]="equi.id">  </label>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="button-group">
+                <button *ngIf="verRetorno" name="retorno" (click)="retornar()" class="btn btn-danger">Retornar</button>
+            </div>
+        </div>
+    </div>
+</div>
