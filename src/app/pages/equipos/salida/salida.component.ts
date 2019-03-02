@@ -32,6 +32,7 @@ export class SalidaComponent implements OnInit {
     .subscribe((data: any) => {
       this.empleado = new GLPIEmpleado();
       this.empleados = data.Empleados;
+      this.equipos = [];
       this.cargando = false;
     });
   }

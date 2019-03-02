@@ -39,13 +39,15 @@
     "sshpk": "^1.16.1",
     "ssri": "^6.0.1",
     "sweetalert": "^2.1.2",
+    "tslib": "^1.9.0",
     "url-parse": "^1.4.4",
     "webpack-dev-server": "^3.1.14",
     "zone.js": "^0.8.29"
   },
   "devDependencies": {
+    "@angular-devkit/build-angular": "~0.13.0",
     "@angular-devkit/core": "^0.3.2",
-    "@angular/cli": "1.5.4",
+    "@angular/cli": "^7.3.3",
     "@angular/compiler-cli": "^5.2.11",
     "@angular/language-service": "^5.2.11",
     "@types/jasmine": "~2.5.53",

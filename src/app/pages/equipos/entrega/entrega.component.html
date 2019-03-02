@@ -65,8 +65,8 @@
                         </ng-select>
                     </div>
 
-                    <label *ngIf="responsiva.id === 0" for="equipo">Equipo</label>
-                    <div *ngIf="responsiva.id === 0" class="form-group input-group">
+                    <label *ngIf="(responsiva.id === 0 && !esTelefono )" for="equipo">Equipo</label>
+                    <div *ngIf="(responsiva.id === 0 && !esTelefono )" class="form-group input-group">
                         <ng-select [(ngModel)]="equipo" name="equipo" class="col-lg-11" [items]="equipos" bindLabel="Nombre">
                             <ng-template ng-option-tmp let-item="item">
                                 {{item.Nombre}}

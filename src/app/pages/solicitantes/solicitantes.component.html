@@ -3,7 +3,27 @@
         <div class="card">
             <div class="card-body">
 
-                <input #input (keyup)="buscarSolicitante( input.value )" type="text" class="form-control" placeholder="Buscar solicitante por nombre...">
+                <div class="row">
+                    <div class="col-3">
+
+                        <div>
+                            <span>Empresa</span>
+                        </div>
+                        <div class="btn-group" role="group" aria-label="Basic example">
+                            <button type="button" (click)="seleccionEmpresa( 'EBR' )" [ngClass]="{ 'active': empresa==='EBR' }" class="btn btn-secondary">EBR</button>
+                            <button type="button" (click)="seleccionEmpresa( 'SYN' )" [ngClass]="{ 'active': empresa==='SYN' }" class="btn btn-secondary">SYN</button>
+                            <button type="button" (click)="seleccionEmpresa( 'IMA' )" [ngClass]="{ 'active': empresa==='IMA' }" class="btn btn-secondary">IMA</button>
+                        </div>
+
+                    </div>
+                    <div class="col-9">
+                        <div>
+                            <span>Busqueda...</span>
+                        </div>
+                        <!-- <input type="text" [(ngModel)]="folio" name="folio" (keydown)="onKeydown($event)" class="form-control" placeholder="Buscar Folio..." /> -->
+                        <input #input (keyup)="buscarSolicitante( input.value )" type="text" class="form-control" placeholder="Buscar solicitante por nombre...">
+                    </div>
+                </div>
 
             </div>
         </div>
@@ -11,9 +31,7 @@
 </div>
 
 <div class="row animated fadeIn" *ngIf="cargando">
-
     <div class="col-sm-12">
-
         <div class="alert alert-warning text-center">
             <strong>Cargando</strong>
             <br />

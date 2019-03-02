@@ -16,11 +16,11 @@ export class SidebardComponent implements OnInit {
     public _usuarioService: UsuarioService ) {
       this.usuario = JSON.parse( localStorage.getItem('usuario') );
       if ( this.usuario.root === 'principal' ) {
-        this.menu = _sidebar.Menus.menuAdmin;
+        this.menu = this._sidebar.cargarMenus(true);
       } else {
-        this.menu = _sidebar.Menus.menu;
+        this.menu = this._sidebar.cargarMenus(false);
       }
-  }
+    }
 
   ngOnInit() {
   }

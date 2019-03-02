@@ -18,6 +18,7 @@ export class EntregaComponent implements OnInit {
   responsiva: Responsiva = new Responsiva();
   equipo: GLPIEquipos = new GLPIEquipos();
   cargando = false;
+  esTelefono = false;
   folio = '';
 
   constructor(public glpiService: GlpiService) { }
@@ -59,12 +60,16 @@ export class EntregaComponent implements OnInit {
       if (!this.responsiva.detalle.some((item) => item.equipo.Id === this.equipo.Id)) {
         this.responsiva.detalle.push( new DetalleResponsiva(0, 3, new Date(), new Date(),
         false, 0, this.responsiva.locacion, this.responsiva.empleado, this.equipo));
+        this.esTelefono = this.equipo.Tipo === 'Phone' ? true : false;
       }
     }
   }
 
   removerEquipo( index: number ) {
     this.responsiva.detalle.splice( index, 1 );
+    if (this.esTelefono) {
+      this.esTelefono = false;
+    }
   }
 
   guardar() {

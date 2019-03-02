@@ -90,8 +90,8 @@
                         <td>{{ equi.fecEntrega | date: 'yyyy-MM-dd' }}</td>
                         <td>
                             <div>
-                                <input name="retronar" (change)="verBotones()" [(ngModel)]="equi.retornar" [id]="equi.id" type="checkbox" class="filled-in chk-col-light-blue" />
-                                <label [for]="equi.id">  </label>
+                                <input name="retronar" (change)="verBotones()" [(ngModel)]="equi.retornar" [id]="equi.nombre" type="checkbox" class="filled-in chk-col-light-blue" />
+                                <label [for]="equi.nombre">  </label>
                             </div>
                         </td>
                     </tr>

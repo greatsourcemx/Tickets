@@ -1,3 +1,72 @@
-<p>
-  sin-firma works!
-</p>
+<div class="row animated fadeIn">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+
+                <div class="row">
+                    <div class="col-3">
+
+                        <div>
+                            <span>Empresa</span>
+                        </div>
+                        <div class="btn-group" role="group" aria-label="Basic example">
+                            <button type="button" (click)="seleccionEmpresa( 'EBR' )" [ngClass]="{ 'active': empresa==='EBR' }" class="btn btn-secondary">EBR</button>
+                            <button type="button" (click)="seleccionEmpresa( 'SYN' )" [ngClass]="{ 'active': empresa==='SYN' }" class="btn btn-secondary">SYN</button>
+                            <button type="button" (click)="seleccionEmpresa( 'IMA' )" [ngClass]="{ 'active': empresa==='IMA' }" class="btn btn-secondary">IMA</button>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="row animated fadeIn" *ngIf="cargando">
+                    <div class="col-sm-12">
+                        <div class="alert alert-warning text-center">
+                            <strong>Cargando</strong>
+                            <br />
+                            <i class="fa fa-refresh fa-spin fa-2x"></i>
+                            <br />
+                            <span>Espere por favor</span>
+                        </div>
+                    </div>
+                </div>
+
+                <table *ngIf="!cargando" class="table table-sm table-hover">
+                    <thead>
+                        <tr>
+                            <th>Folio</th>
+                            <th>Fec Entrega</th>
+                            <th>Empleado</th>
+                            <th>Locación</th>
+                            <th>Entregó</th>
+                            <th>
+                                <div>
+                                    <input name="reto-all" [(ngModel)]="firmarTodos" id="reto-all" type="checkbox" (change)="Todos()" class="filled-in chk-col-light-blue" />
+                                    <label for="reto-all"> Firmado? </label>
+                                </div>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let resp of responsivas; index as i">
+                            <td class="pointer" (click)="verPDF(resp.folio)"><strong>{{ resp.folio }}</strong></td>
+                            <td>{{ resp.fechaEntrega | date: 'yyyy-MM-dd' }}</td>
+                            <td>{{ resp.empleado.Nombre }}</td>
+                            <td>{{ resp.locacion.Descripcion }}</td>
+                            <td>{{ resp.responsable.nombre }}</td>
+                            <td>
+                                <div>
+                                    <input name="firmar" (change)="verBotones()" [(ngModel)]="resp.firmado" [id]="resp.id" type="checkbox" class="filled-in chk-col-light-blue" />
+                                    <label [for]="resp.id">  </label>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="button-group">
+                    <button *ngIf="verBoton" name="retorno" (click)="firmados()" class="btn btn-primary">Firmado</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

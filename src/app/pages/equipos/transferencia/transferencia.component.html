@@ -1,3 +1,105 @@
-<p>
-  transferencia works!
-</p>
+<div class="row animated fadeIn">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-3">
+                        <div>
+                            <span>Empresa</span>
+                        </div>
+                        <div class="btn-group" role="group" aria-label="Basic example">
+                            <button type="button" (click)="seleccionEmpresa( 'EBR' )" [ngClass]="{ 'active': empresa==='EBR' }" class="btn btn-secondary">EBR</button>
+                            <button type="button" (click)="seleccionEmpresa( 'SYN' )" [ngClass]="{ 'active': empresa==='SYN' }" class="btn btn-secondary">SYN</button>
+                            <button type="button" (click)="seleccionEmpresa( 'IMA' )" [ngClass]="{ 'active': empresa==='IMA' }" class="btn btn-secondary">IMA</button>
+                        </div>
+
+                    </div>
+                </div>
+                <br />
+
+                <div class="row animated fadeIn" *ngIf="cargando">
+                    <div class="col-sm-12">
+                        <div class="alert alert-warning text-center">
+                            <strong>Cargando</strong>
+                            <br />
+                            <i class="fa fa-refresh fa-spin fa-2x"></i>
+                            <br />
+                            <span>Espere por favor</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div *ngIf="!cargando" class="form-horizontal">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <label for="solicitante">Empleado Entrega</label>
+                            <ng-select [(ngModel)]="emplSource" (change)="source()" name="solicitante" [items]="empleados" bindLabel="Nombre" required>
+                            </ng-select>
+                        </div>
+                        <div class="col-lg-6">
+                            <label for="responsable">Empleado Recíbe</label>
+                            <ng-select [(ngModel)]="emplTarget" name="responsable" [items]="empleados" bindLabel="Nombre" required>
+                            </ng-select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="locacion">Locación</label>
+                        <ng-select [(ngModel)]="locacion" name="locacion" [items]="locaciones" bindLabel="Descripcion" required>
+                        </ng-select>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-3">
+                            <input [(ngModel)]="firmado" type="checkbox" name="usrFirma" id="usrFirma" class="filled-in" />
+                            <label for="usrFirma">Firmada</label>
+                        </div>
+                        <div class="col-lg-9">
+                            <label for="notas">Notas</label>
+                            <textarea [(ngModel)]="notas" class="form-control" name="nota" id="nota" rows="4"></textarea>
+                        </div>
+                    </div>
+
+                    <table class="table table-sm table-hover">
+                        <thead>
+                            <tr>
+                                <th>Folio</th>
+                                <th>Equipo</th>
+                                <th>Tipo</th>
+                                <th>Modelo</th>
+                                <th>Locación</th>
+                                <th>Fec. Entrega</th>
+                                <th>
+                                    <div>
+                                        <input name="reto-all" [(ngModel)]="transTodos" id="reto-all" type="checkbox" (change)="TransTodos()" class="filled-in chk-col-light-blue" />
+                                        <label for="reto-all"> Transferir </label>
+                                    </div>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let equi of equipos; index as i">
+                                <td class="pointer" (click)="verPDF(equi.folio)"><strong>{{ equi.folio }}</strong></td>
+                                <td>{{ equi.nombre }}</td>
+                                <td>{{ equi.tipo }}</td>
+                                <td>{{ equi.modelo }}</td>
+                                <td>{{ equi.locacion.Descripcion }}</td>
+                                <td>{{ equi.fecEntrega | date: 'yyyy-MM-dd' }}</td>
+                                <td>
+                                    <div>
+                                        <input name="firmar" (change)="verBotones()" [(ngModel)]="equi.transferir" [id]="equi.nombre" type="checkbox" class="filled-in chk-col-light-blue" />
+                                        <label [for]="equi.nombre">  </label>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="button-group">
+                        <button *ngIf="verTransfer" name="retorno" (click)="transferir()" class="btn btn-danger">Transferir</button>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

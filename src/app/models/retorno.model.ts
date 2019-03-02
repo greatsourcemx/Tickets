@@ -16,5 +16,17 @@ export class RetornoEquipo {
         public usuario: Usuario = new Usuario(),
         public empleado: GLPIEmpleado = new GLPIEmpleado(),
         public empresa: string = '',
+        /* Transferencia de Equipo */
+        public transferir: boolean = false,
+        public transEmpleado: GLPIEmpleado = new GLPIEmpleado(),
+        public transLocacion: GLPILocacion = new GLPILocacion(),
+        public transFirmado: boolean = false,
+        public transNotas: string = '',
+        public descripcion: string = '',
+        public serie: string = '',
+        public sistemaOperativo: string = '',
+        public procesador: string = '',
+        public ram: string = '',
+        public discoDuro: string = ''
     ) { }
 }

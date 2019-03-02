@@ -33,12 +33,19 @@ export class GlpiService {
     });
   }
 
-  retornarEquipo( equipos: RetornoEquipo[], empr: string ) {
+  retornarEquipo( equipos: RetornoEquipo[], empr: string, trasnf: boolean = false ) {
     const url = URL_SERVICIOS + '/glpi/responsiva?empr=' + empr;
-    return this.http.put( url, equipos )
-    .map((data: any) => {
-      return data;
-    });
+    if (trasnf) {
+      return this.http.put( url, equipos, { responseType: 'blob' } )
+      .map((data: any) => {
+          return new Blob([data], { type: 'application/pdf' });
+      });
+    } else {
+      return this.http.put( url, equipos )
+      .map((data: any) => {
+        return data;
+      });
+    }
   }
 
   verPDF( responsiva: Responsiva ) {
@@ -52,6 +59,21 @@ export class GlpiService {
   verPDFFolio( folio: number, empr: string ) {
     const url = URL_SERVICIOS + '/glpi/view?folio=' + folio + '&empr=' + empr;
     return this.http.get( url, { responseType: 'blob' } );
+  }
+
+  /* [FIRMAS DE RESPONSIVAS] */
+
+  cargarResponsivasSinFirma( empresa: string ) {
+    const url = URL_SERVICIOS + '/sinfirma?empr=' + empresa;
+    return this.http.get( url );
+  }
+
+  guardarFirmas( responsivas: Responsiva[] ) {
+    const url = URL_SERVICIOS + '/sinfirma';
+    return this.http.post( url, responsivas )
+    .map((data: any) => {
+      return data;
+    });
   }
 
 }

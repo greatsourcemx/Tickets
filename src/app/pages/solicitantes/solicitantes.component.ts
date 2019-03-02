@@ -3,6 +3,8 @@ import { Usuario } from '../../models/usuario.model';
 import { SolicitanteService, EmpresasService } from '../../services/service.index';
 import * as data from '../../config/estados.json';
 import { Empresa } from '../../models/empresa.model';
+import { GlpiService } from '../../services/GLPI/glpi.service';
+import { GLPIEmpleado } from '../../models/GLPIEmpleado.model';
 
 
 @Component({
@@ -13,20 +15,37 @@ import { Empresa } from '../../models/empresa.model';
 export class SolicitantesComponent implements OnInit {
 
   solicitantes: Usuario[] = [];
+  empleados: GLPIEmpleado = new GLPIEmpleado();
   Empresas: Empresa[] = [];
   desde: number = 0;
-
   totalRegistros: number = 0;
   cargando: boolean = true;
   estados: any = data;
+  empresa = 'EBR';
 
-  constructor( public _solicitanteService: SolicitanteService,
-    public _empresaService: EmpresasService ) { }
+  constructor(public _solicitanteService: SolicitanteService,
+              public glpiServicio: GlpiService,
+              public _empresaService: EmpresasService ) { }
 
   ngOnInit() {
     this.cargando = true;
     this.cargarEmpresas();
     this.cargarSolicitantes();
+    this.cargarEmpleados();
+  }
+
+  seleccionEmpresa( empr: string ) {
+    this.empresa = empr;
+    this.cargarEmpleados();
+  }
+
+  cargarEmpleados() {
+    this.glpiServicio.cargarEntregaGLPI( this.empresa )
+    .subscribe((resp: any) => {
+      this.cargando = false;
+      this.empleados = resp.Empleados;
+      console.log(this.empleados);
+    });
   }
 
   cargarSolicitantes() {
