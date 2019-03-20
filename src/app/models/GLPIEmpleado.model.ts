@@ -11,6 +11,7 @@ export class GLPIEmpleado {
         public Activo: boolean = false,
         public Estatus: string = '',
         public UUID: string = '',
-        public GRUPO: string = ''
+        public GRUPO: string = '',
+        public empresaId: number = 0
     ) { }
 }

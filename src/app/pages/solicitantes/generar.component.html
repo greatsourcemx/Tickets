@@ -1,0 +1,92 @@
+<div class="row animated fadeIn">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+
+                <div class="row">
+                    <div class="col-3">
+
+                        <div>
+                            <span>Empresa</span>
+                        </div>
+                        <div class="btn-group" role="group" aria-label="Basic example">
+                            <button type="button" (click)="seleccionEmpresa( 'EBR' )" [ngClass]="{ 'active': empresa==='EBR' }" class="btn btn-secondary">EBR</button>
+                            <button type="button" (click)="seleccionEmpresa( 'IMA' )" [ngClass]="{ 'active': empresa==='IMA' }" class="btn btn-secondary">IMA</button>
+                        </div>
+
+                    </div>
+                    <div class="col-9">
+                        <div>
+                            <span>Busqueda...</span>
+                        </div>
+                        <input [(ngModel)]="query" type="text" class="form-control" placeholder="Término de busqueda...">
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row animated fadeIn" *ngIf="cargando">
+    <div class="col-sm-12">
+        <div class="alert alert-warning text-center">
+            <strong>Cargando</strong>
+            <br />
+            <i class="fa fa-refresh fa-spin fa-2x"></i>
+            <br />
+            <span>Espere por favor</span>
+        </div>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title pull-left">Solicitantes Nuevos ( <small>{{ empleados.length }}</small> ) </h4>
+                <div class="text-right">
+                    <button type="button" title="Generar Todos" class="btn btn-circle btn-primary">
+                      <i class="fa fa-cogs"></i>
+                    </button>
+                </div>
+
+                <table class="table table-sm">
+                    <thead>
+                        <tr>
+                            <th>No Empleado</th>
+                            <th>Nombre</th>
+                            <th>Correo</th>
+                            <th>Contraseña</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr *ngFor="let soli of empleados | filter: 'NoEmpleado,Nombre,Correo': query">
+                            <td class="w70">
+                                <input [(ngModel)]="soli.NoEmpleado" name="NoEmpleado" type="number" class="form-control" placeholder="Número de Empleado" required />
+                            </td>
+                            <td>
+                                {{ soli.Nombre }}
+                            </td>
+                            <td>
+                                <input [(ngModel)]="soli.Correo" name="correo" type="email" class="form-control" placeholder="Correo" required />
+                            </td>
+                            <td>
+                                <input name="password" type="password" class="form-control" placeholder="Contraseña" />
+                            </td>
+                            <td>
+                                <button (click)="crearSolicitante( soli )" *ngIf="soli.Correo !== '' && soli.NoEmpleado > 0 " class="btn btn-circle btn-primary btn-sm" title="Convertir Solicitante">
+                                  <i class="fa fa-user-plus"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+</div>

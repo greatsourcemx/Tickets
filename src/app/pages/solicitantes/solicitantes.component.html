@@ -9,10 +9,8 @@
                         <div>
                             <span>Empresa</span>
                         </div>
-                        <div class="btn-group" role="group" aria-label="Basic example">
-                            <button type="button" (click)="seleccionEmpresa( 'EBR' )" [ngClass]="{ 'active': empresa==='EBR' }" class="btn btn-secondary">EBR</button>
-                            <button type="button" (click)="seleccionEmpresa( 'SYN' )" [ngClass]="{ 'active': empresa==='SYN' }" class="btn btn-secondary">SYN</button>
-                            <button type="button" (click)="seleccionEmpresa( 'IMA' )" [ngClass]="{ 'active': empresa==='IMA' }" class="btn btn-secondary">IMA</button>
+                        <div *ngIf="Empresas.length > 0" class="btn-group" role="group" aria-label="Basic example">
+                            <button *ngFor="let empr of Empresas" type="button" (click)="seleccionEmpresa( empr.nombre )" [ngClass]="{ 'active': empresa===empr.nombre }" class="btn btn-secondary">{{ empr.nombre }}</button>
                         </div>
 
                     </div>
@@ -20,7 +18,6 @@
                         <div>
                             <span>Busqueda...</span>
                         </div>
-                        <!-- <input type="text" [(ngModel)]="folio" name="folio" (keydown)="onKeydown($event)" class="form-control" placeholder="Buscar Folio..." /> -->
                         <input #input (keyup)="buscarSolicitante( input.value )" type="text" class="form-control" placeholder="Buscar solicitante por nombre...">
                     </div>
                 </div>
@@ -47,14 +44,16 @@
         <div class="card">
             <div class="card-body">
 
+                <h4 class="card-title pull-left">Solicitantes registrados ( <small>{{ totalRegistros }}</small> )</h4>
                 <div class="text-right">
-                    <button [routerLink]="['/solicitante']" type="button" class="btn waves-effect waves-light btn-rounded btn-primary">
+                    <button [routerLink]="['/solicitante']" type="button" title="Agregar Solicitante" class="btn btn-circle btn-primary">
                       <i class="fa fa-plus"></i>
-                      Crear Solicitante
-                  </button>
+                    </button>
+                    <button [routerLink]="['/solicitante/nuevos']" type="button" title="Generar Solicitantes GLPI" class="btn btn-circle btn-primary">
+                      <i class="fa fa-users"></i>
+                    </button>
                 </div>
 
-                <h3 class="card-title">Solicitantes registrados ( <small>{{ totalRegistros }}</small> )</h3>
 
 
                 <table class="table table-hover table-sm">
@@ -62,9 +61,7 @@
                         <tr>
                             <th>Nombre</th>
                             <th>Correo</th>
-                            <th>Estatus</th>
                             <th>Contraseña</th>
-                            <th>Empresa</th>
                             <th>Cambiar Clave</th>
                             <th></th>
                         </tr>
@@ -79,17 +76,7 @@
                                 {{ solicitante.correo }}
                             </td>
                             <td>
-                                <select [(ngModel)]="solicitante.estado" name="estado" class="form-control">
-                                <option *ngFor="let rol of estados.Estados" [ngValue]="rol.value">{{ rol.value }}</option>
-                              </select>
-                            </td>
-                            <td>
                                 <input [(ngModel)]="solicitante.password" name="password" type="password" class="form-control" placeholder="Constraseña" />
-                            </td>
-                            <td>
-                                <select [(ngModel)]="solicitante.empresa.id" name="empresa" class="form-control">
-                                    <option *ngFor="let empre of Empresas" [ngValue]="empre.id">{{ empre.nombre }}</option>
-                                </select>
                             </td>
                             <td>
                                 <div class="checkbox checkbox-info pull-left p-t-0">

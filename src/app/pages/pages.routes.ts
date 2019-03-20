@@ -26,6 +26,7 @@ import { ReportesComponent } from './reportes/reportes.component';
 import { Graficas1Component } from './graficas1/graficas1.component';
 import { HorasComponent } from './reportes/horas.component';
 import * as Equipos from './equipos/equipos.index';
+import { GenerarComponent } from './solicitantes/generar.component';
 
 const pagesRoutes: Routes = [
     {
@@ -41,6 +42,7 @@ const pagesRoutes: Routes = [
             { path: 'usuario', component: NuevoUsuarioComponent, data: { titulo: 'Nuevo Usuario' }  },
             { path: 'usuario/:id', component: EditUsuarioComponent, data: { titulo: 'Editar Usuario' }  },
             { path: 'solicitantes', component: SolicitantesComponent, data: { titulo: 'Solicitantes' }  },
+            { path: 'solicitante/nuevos', component: GenerarComponent, data: { titulo: 'Solicitantes' }  },
             { path: 'solicitante', component: SolicitanteComponent, data: { titulo: 'Nuevo Solicitante' }  },
             { path: 'solicitante/:id', component: EditarSolicitanteComponent, data: { titulo: 'Editar Solicitante' }  },
             { path: 'tiempos', component: TiemposComponent, data: { titulo: 'Tiempos' }  },

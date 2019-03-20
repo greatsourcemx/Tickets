@@ -10,7 +10,6 @@ import { RetornoEquipo } from '../../../models/retorno.model';
 })
 export class SalidaComponent implements OnInit {
 
-  empresa = 'EBR';
   empleados: GLPIEmpleado[] = [];
   empleado: GLPIEmpleado = new GLPIEmpleado();
   equipos: RetornoEquipo[] = [];
@@ -22,24 +21,20 @@ export class SalidaComponent implements OnInit {
   constructor(public glpiService: GlpiService) { }
 
   ngOnInit() {
-    this.seleccionEmpresa( this.empresa );
+    this.cargarEmpleados();
   }
 
-  seleccionEmpresa( empresa: string ) {
+  cargarEmpleados() {
     this.cargando = true;
-    this.empresa = empresa;
-    this.glpiService.cargarEntregaGLPI( this.empresa )
+    this.glpiService.cargarTodosEmpleados()
     .subscribe((data: any) => {
-      this.empleado = new GLPIEmpleado();
-      this.empleados = data.Empleados;
-      this.equipos = [];
       this.cargando = false;
+      this.empleados = data;
     });
   }
-
   buscarEquipo() {
     this.cargando = true;
-    this.glpiService.cargarEquipoEmpleado( this.empleado, this.empresa )
+    this.glpiService.cargarTodoEquipoEmpleado( this.empleado )
     .subscribe((data: RetornoEquipo[]) => {
       this.cargando = false;
       this.msg = true;
@@ -52,7 +47,7 @@ export class SalidaComponent implements OnInit {
 
   retornar() {
     this.cargando = true;
-    this.glpiService.retornarEquipo( this.equipos, this.empresa )
+    this.glpiService.retornarEquipo( this.equipos, '')
     .subscribe((data: RetornoEquipo[]) => {
       this.cargando = false;
       this.retorTodos = false;
@@ -76,9 +71,9 @@ export class SalidaComponent implements OnInit {
     this.verBotones();
   }
 
-  verPDF( folio: number ) {
+  verPDF( folio: number, empr: string ) {
     this.cargando = true;
-    this.glpiService.verPDFFolio( folio, this.empresa )
+    this.glpiService.verPDFFolio( folio, empr )
     .subscribe((data: any) => {
       this.cargando = false;
       const fileURL = URL.createObjectURL(data);

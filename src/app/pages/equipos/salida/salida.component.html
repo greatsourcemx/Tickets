@@ -2,20 +2,8 @@
     <div class="col-12">
         <div class="card">
             <div class="card-body" id="cuerpo">
-
                 <div class="row">
-                    <div class="col-3">
-                        <div>
-                            <span>Empresa</span>
-                        </div>
-                        <div class="btn-group" role="group" aria-label="Basic example">
-                            <button type="button" (click)="seleccionEmpresa( 'EBR' )" [ngClass]="{ 'active': empresa==='EBR' }" class="btn btn-secondary">EBR</button>
-                            <button type="button" (click)="seleccionEmpresa( 'SYN' )" [ngClass]="{ 'active': empresa==='SYN' }" class="btn btn-secondary">SYN</button>
-                            <button type="button" (click)="seleccionEmpresa( 'IMA' )" [ngClass]="{ 'active': empresa==='IMA' }" class="btn btn-secondary">IMA</button>
-                        </div>
-                    </div>
-
-                    <div class="col-9">
+                    <div class="col-12">
                         <div>
                             <span>Seleccionar Empleado</span>
                         </div>
@@ -65,6 +53,7 @@
                 <thead>
                     <tr>
                         <th>Folio</th>
+                        <th>Empresa</th>
                         <th>Dispositivo</th>
                         <th>Equipo</th>
                         <th>Tipo</th>
@@ -81,7 +70,8 @@
                 </thead>
                 <tbody>
                     <tr *ngFor="let equi of equipos; index as i">
-                        <td class="pointer" (click)="verPDF(equi.folio)"><strong>{{ equi.folio }}</strong></td>
+                        <td class="pointer" (click)="verPDF(equi.folio, equi.empresa)"><strong>{{ equi.folio }}</strong></td>
+                        <td><b>{{ equi.empresa }}</b></td>
                         <td>{{ equi.dispositivo }}</td>
                         <td>{{ equi.nombre }}</td>
                         <td>{{ equi.tipo }}</td>

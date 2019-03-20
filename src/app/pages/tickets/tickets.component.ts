@@ -18,7 +18,7 @@ export class TicketsComponent implements OnInit {
 
   admins: Usuario[];
   users: Usuario[];
-  estados: any = data;
+  estados: any = data.default;
   tipos: Tipo[];
 
   constructor(

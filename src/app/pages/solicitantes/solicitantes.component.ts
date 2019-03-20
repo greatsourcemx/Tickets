@@ -15,22 +15,20 @@ import { GLPIEmpleado } from '../../models/GLPIEmpleado.model';
 export class SolicitantesComponent implements OnInit {
 
   solicitantes: Usuario[] = [];
-  empleados: GLPIEmpleado = new GLPIEmpleado();
   Empresas: Empresa[] = [];
+  empresa = 'EBR';
   desde: number = 0;
   totalRegistros: number = 0;
   cargando: boolean = true;
-  estados: any = data;
-  empresa = 'EBR';
 
   constructor(public _solicitanteService: SolicitanteService,
               public glpiServicio: GlpiService,
-              public _empresaService: EmpresasService ) { }
+              public _empresaService: EmpresasService ) {
+                this.cargarEmpresas();
+              }
 
   ngOnInit() {
     this.cargando = true;
-    this.cargarEmpresas();
-    this.cargarSolicitantes();
     this.cargarEmpleados();
   }
 
@@ -39,33 +37,26 @@ export class SolicitantesComponent implements OnInit {
     this.cargarEmpleados();
   }
 
-  cargarEmpleados() {
-    this.glpiServicio.cargarEntregaGLPI( this.empresa )
-    .subscribe((resp: any) => {
+  cargarEmpresas() {
+    this.cargando = true;
+    this._empresaService.cargarEmpresasActivas()
+    .subscribe((resp: Empresa[]) => {
       this.cargando = false;
-      this.empleados = resp.Empleados;
-      console.log(this.empleados);
+      this.Empresas = resp;
+      console.log(this.Empresas);
     });
   }
 
-  cargarSolicitantes() {
-
-    this.cargando = true;
-
-    this._solicitanteService.cargarSolicitantes( this.desde )
-              .subscribe( (resp: any) => {
-                if (resp.length !== 0) {
-                  this.totalRegistros = resp[0].totalUsuarios;
-                  this.solicitantes = resp;
-                }
-                this.cargando = false;
-              });
-  }
-
-  cargarEmpresas () {
-    this._empresaService.cargarEmpresasActivas()
-    .subscribe( (resp: any) => {
-      this.Empresas = resp;
+  cargarEmpleados( termino = '' ) {
+    this.glpiServicio.cargarSolicitantes( this.empresa, this.desde, termino )
+    .subscribe((resp: any) => {
+      this.cargando = false;
+      if (resp.length !== 0) {
+        this.totalRegistros = resp[0].totalUsuarios;
+        this.solicitantes = resp;
+      } else {
+        this.solicitantes = [];
+      }
     });
   }
 
@@ -83,25 +74,17 @@ export class SolicitantesComponent implements OnInit {
     }
 
     this.desde += valor;
-    this.cargarSolicitantes();
+    this.cargarEmpleados();
 
   }
 
   buscarSolicitante( termino: string ) {
 
     if ( termino.length <= 0 ) {
-      this.cargarSolicitantes();
+      this.cargarEmpleados();
       return;
     }
-
-    this.cargando = true;
-
-    this._solicitanteService.buscarSolicitante( termino )
-            .subscribe( (soli: Usuario[]) => {
-
-              this.solicitantes = soli;
-              this.cargando = false;
-            });
+    this.cargarEmpleados( termino );
 
   }
 

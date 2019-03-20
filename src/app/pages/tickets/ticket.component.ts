@@ -19,7 +19,7 @@ export class TicketComponent implements OnInit {
   ticket: Servicio = new Servicio('', '');
   admins: Usuario[];
   users: Usuario[];
-  estados: any = data;
+  estados: any = data.default;
   tipos: Tipo[];
   duracion: Tiempo;
   cerrado: boolean = true;

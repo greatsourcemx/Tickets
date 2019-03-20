@@ -3,6 +3,7 @@ import { ImagenPipe } from './imagen.pipe';
 import { TiempoPipe } from './tiempo.pipe';
 import { GroupByPipe } from './group-by.pipe';
 import { HorasPipe } from './horas.pipe';
+import { FilterPipe } from './filter.pipe';
 
 @NgModule({
   imports: [],
@@ -10,13 +11,15 @@ import { HorasPipe } from './horas.pipe';
     ImagenPipe,
     TiempoPipe,
     GroupByPipe,
-    HorasPipe
+    HorasPipe,
+    FilterPipe
   ],
   exports: [
     ImagenPipe,
     TiempoPipe,
     GroupByPipe,
-    HorasPipe
+    HorasPipe,
+    FilterPipe
   ]
 })
 export class PipesModule { }

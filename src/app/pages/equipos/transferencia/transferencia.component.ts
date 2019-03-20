@@ -103,6 +103,7 @@ export class TransferenciaComponent implements OnInit {
     for ( const entr of this.equipos ) {
         entr.retornar = entr.transferir;
         entr.empresa = this.empresa;
+        entr.empleado = this.emplSource;
         entr.transEmpleado = this.emplTarget;
         entr.transLocacion = this.locacion;
         entr.transFirmado = this.firmado;
