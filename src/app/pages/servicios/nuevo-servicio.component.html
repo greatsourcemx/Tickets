@@ -13,7 +13,7 @@
                                 <form #f="ngForm" ngNativeValidate (ngSubmit)="guardarServicio(f)">
                                     <div class="form-group">
                                         <label for="titulo">Título</label>
-                                        <input [(ngModel)]="servicio.Titulo" name="Titulo" type="text" class="form-control" placeholder="Título" required />
+                                        <input [(ngModel)]="servicio.Titulo" name="Titulo" type="text" maxlength="50" class="form-control" placeholder="Título" required />
                                     </div>
 
                                     <div class="form-group">
@@ -22,8 +22,19 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="prioridad">Prioridad</label>
+                                        <label for="fecha">Fecha Compromiso</label>
+                                        <div class="input-group">
+                                            <input class="form-control" [minDate]="{year: fecha.year, month: fecha.month, day: fecha.day}" placeholder="yyyy-mm-dd" name="dp" [(ngModel)]="fecCompr" ngbDatepicker #d="ngbDatepicker" required />
+                                            <div class="input-group-append">
+                                                <button class="btn btn-outline-secondary" (click)="d.toggle()" type="button">
+                                                    <i class="fa fa-calendar"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
 
+                                    <div class="form-group">
+                                        <label for="prioridad">Prioridad</label>
                                         <select [(ngModel)]="servicio.Urgencia" name="urgencia" class="form-control" required>
                                             <option disabled="disabled" value="undefined" >Seleccionar Prioridad</option>
                                             <option *ngFor="let prio of prioridades" [ngValue]="prio">{{ prio.Nombre }}</option>
@@ -32,7 +43,7 @@
                                     </div>
 
                                     <button type="submit" class="btn btn-success waves-effect waves-light m-r-10">Guardar</button>
-                                    <button type="button" (click)="nuevo = false" class="btn btn-inverse waves-effect waves-light m-r-10">Cancelar</button>
+                                    <button type="button" (click)="nuevo = false" class="btn btn-info waves-effect waves-light m-r-10">Cancelar</button>
 
                                 </form>
                             </div>

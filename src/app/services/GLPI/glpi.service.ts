@@ -10,6 +10,11 @@ export class GlpiService {
 
   constructor(public http: HttpClient) { }
 
+  cargarEmpleadoGLPI() {
+    const url = URL_SERVICIOS + '/glpi/empleado';
+    return this.http.get( url );
+  }
+
   cargarEntregaGLPI( empresa: string ) {
     const url = URL_SERVICIOS + '/glpi/equipos?empresa=' +  empresa;
     return this.http.get( url );

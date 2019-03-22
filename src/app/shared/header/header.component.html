@@ -54,23 +54,23 @@
                 <!-- Messages -->
                 <!-- ============================================================== -->
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle waves-effect waves-dark" (click)="cargarInfo()" href="" id="2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="fa fa-bell"></i>
-                        <div class="notify" *ngIf="principal.servicios.length > 0"> <span class="heartbit"></span> <span class="point"></span> </div>
+                    <a class="nav-link dropdown-toggle waves-effect waves-dark" (click)="cargarNotificaciones()" href="" id="2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="fa fa-bell"></i>
+                        <div class="notify" *ngIf="notifica"> <span class="heartbit"></span> <span class="point"></span> </div>
                     </a>
                     <div class="dropdown-menu mailbox dropdown-menu-right animated fadeIn" aria-labelledby="2">
                         <ul>
                             <li>
-                                <div class="drop-title">{{ principal.servicios.length }} Tickets Atendidos Hoy </div>
+                                <div class="drop-title">{{ servicios.length }} Tickets Atendidos Hoy </div>
                             </li>
                             <li>
                                 <div class="message-center">
                                     <!-- Message -->
-                                    <a *ngFor="let serv of principal.servicios" href="#" [title]="serv.Solicitor.nombre">
+                                    <a *ngFor="let serv of servicios" (mouseover)="marcarLeido(serv)" href="" [title]="serv.Solicitor.nombre">
                                         <div class="user-img"> <img [src]="serv.Solicitor.id | imagen" alt="user" class="img-circle" /></div>
                                         <div class="mail-contnet">
                                             <h6># {{ serv.Id }} {{ serv.Titulo }} </h6>
-                                            <span class="label label-rounded" [ngClass]="( serv.Estatus == 'Abierta' ) ? 'label-warning' :
-                                            ( serv.Estatus == 'Cerrada' ) ? 'label-success' : 'label-info'">{{ serv.Estatus }}</span>
+                                            <span class="label label-rounded" [ngClass]="( serv.Estado == 'Abierta' ) ? 'label-warning' :
+                                            ( serv.Estado == 'Cerrada' ) ? 'label-success' : 'label-info'">{{ serv.Estado }}</span>
                                             <span class="mail-desc"> {{ serv.tiempoTotal | tiempo }} </span>
                                         </div>
                                     </a>

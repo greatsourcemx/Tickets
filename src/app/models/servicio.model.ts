@@ -9,10 +9,12 @@ export class Servicio {
     constructor (
         public Titulo: string,
         public Descripcion: string = '',
+        public leido: boolean = false,
         public Estado?: string,
         public Id: number = 0,
         public FecRegistro?: Date,
         public FecCerrado?: Date,
+        public FecCompromiso?: Date,
         public AsignadoA: Usuario = new Usuario('', ''),
         public Solicitor: Usuario = new Usuario('', ''),
         public Urgencia: Prioridad = new Prioridad(''),

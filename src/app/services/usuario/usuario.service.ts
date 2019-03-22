@@ -112,4 +112,17 @@ export class UsuarioService {
               .map( (resp: any) => resp );
   }
 
+  cargarLoagueado() {
+    const url = URL_SERVICIOS + '/user';
+    return this.http.get( url );
+  }
+
+  notificaciones( serv: Servicio[] ) {
+    const url = URL_SERVICIOS + '/notificaciones';
+    return this.http.post( url, serv )
+    .map((data: any) => {
+      return data;
+    });
+  }
+
 }

@@ -8,9 +8,7 @@
                 <div class="row m-t-40">
                     <!-- Column -->
                     <div class="col-md-6 col-lg-3 col-xlg-3">
-
                         <button (click)="nuevo = true" name="new" class="btn btn-info"> <i class="fa fa-plus"></i> Nuevo</button>
-
                     </div>
                     <!-- Column -->
                     <div class="col-md-6 col-lg-3 col-xlg-3">
@@ -43,19 +41,31 @@
                 </div>
 
                 <div class="table-responsive animated fadeIn" *ngIf="!cargando">
-                    <table id="demo-foo-addrow" class="table m-t-30 table-hover no-wrap contact-list footable-loaded footable" data-page-size="10">
+                    <table id="demo-foo-addrow" class="table m-t-30 table-sm table-hover no-wrap contact-list footable-loaded footable" data-page-size="10">
                         <thead>
                             <tr>
-                                <th class="footable-sortable"># Folio<span class="footable-sort-indicator"></span></th>
-                                <th class="footable-sortable">Titulo<span class="footable-sort-indicator"></span></th>
-                                <th class="footable-sortable">Tiempo<span class="footable-sort-indicator"></span></th>
-                                <th class="footable-sortable">Estatus<span class="footable-sort-indicator"></span></th>
-                                <th class="footable-sortable">Asignado a<span class="footable-sort-indicator"></span></th>
-                                <th class="footable-sortable">Action<span class="footable-sort-indicator"></span></th>
+                                <th class="pointer" (click)="sort('Id')">
+                                    # Folio
+                                    <i class="fa" [ngClass]="{'fa-sort': column != 'Id', 'fa-sort-asc': (column == 'Id' && isDesc), 'fa-sort-desc': (column == 'Id' && !isDesc) }" aria-hidden="true"> </i>
+                                </th>
+                                <th class="pointer" (click)="sort('Titulo')">
+                                    Titulo
+                                    <i class="fa" [ngClass]="{'fa-sort': column != 'Titulo', 'fa-sort-asc': (column == 'Titulo' && isDesc), 'fa-sort-desc': (column == 'Titulo' && !isDesc) }" aria-hidden="true"> </i>
+                                </th>
+                                <th class="pointer" (click)="sort('TiempoTranscurrido')">
+                                    Tiempo
+                                    <i class="fa" [ngClass]="{'fa-sort': column != 'TiempoTranscurrido', 'fa-sort-asc': (column == 'TiempoTranscurrido' && isDesc), 'fa-sort-desc': (column == 'TiempoTranscurrido' && !isDesc) }" aria-hidden="true"> </i>
+                                </th>
+                                <th class="pointer" (click)="sort('Estado')">
+                                    Estatus
+                                    <i class="fa" [ngClass]="{'fa-sort': column != 'Estado', 'fa-sort-asc': (column == 'Estado' && isDesc), 'fa-sort-desc': (column == 'Estado' && !isDesc) }" aria-hidden="true"> </i>
+                                </th>
+                                <th>Asignado a<span class="footable-sort-indicator"></span></th>
+                                <th>Action<span class="footable-sort-indicator"></span></th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let serv of servicios">
+                            <tr *ngFor="let serv of servicios | orderby: {property: column, direction: direction}">
                                 <td>{{ serv.Id }}</td>
                                 <td>{{ serv.Titulo }}</td>
                                 <td>{{ serv.TiempoTranscurrido }}</td>
@@ -63,7 +73,6 @@
                                     <span class="label" [ngClass]="( serv.Estado == 'Abierta' ) ? 'label-warning' :
                                                 ( serv.Estado == 'Cerrada' ) ? 'label-success' : 'label-info'">{{ serv.Estado }}</span>
                                 </td>
-                                <!-- <td>{{ serv.FecRegistro | date }}</td> -->
                                 <td style="width:50px;">
                                     <span *ngIf="!serv.AsignadoA">Sin Asignacion</span>
                                     <span *ngIf="serv.AsignadoA">{{ serv.AsignadoA?.nombre }}</span>
@@ -75,18 +84,16 @@
                                 </td>
                             </tr>
                         </tbody>
-
                     </table>
-
                 </div>
 
                 <button (click)="cambiarDesde(-1)" class="btn btn-secondary">
-                        Anteriores
-                    </button>
+                    Anteriores
+                </button>
 
                 <button (click)="cambiarDesde(1)" class="btn btn-secondary">
-                        Siguientes
-                    </button>
+                    Siguientes
+                </button>
             </div>
         </div>
     </div>

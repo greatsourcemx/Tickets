@@ -42,7 +42,7 @@
                                 </div>
 
                                 <div class="row">
-                                    <div *ngIf="!(_usuarioService.usuario.rol === 'USER_ROLE')" class="col-sm-6 nopadding">
+                                    <div *ngIf="!(_usuarioService.usuario.root === 'dashboard')" class="col-sm-6 nopadding">
                                         <label for="solicitante">Solicitante</label>
                                         <div class="form-group">
                                             <ng-select [(ngModel)]="filtros.Solicitor" name="solicitante" [items]="users" bindLabel="nombre">
@@ -53,7 +53,7 @@
                                         </div>
                                     </div>
 
-                                    <div [ngClass]="(_usuarioService.usuario.rol === 'USER_ROLE') ? 'col-sm-12' : 'col-sm-6'" class=" nopadding">
+                                    <div [ngClass]="(_usuarioService.usuario.root === 'dashboard') ? 'col-sm-12' : 'col-sm-6'" class=" nopadding">
                                         <label for="responsable">Responsable</label>
                                         <div class="form-group">
                                             <ng-select [(ngModel)]="filtros.AsignadoA" name="responsable" [items]="admins" bindLabel="nombre">

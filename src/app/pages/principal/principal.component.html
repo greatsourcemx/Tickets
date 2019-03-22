@@ -49,51 +49,6 @@
     </div>
 </div>
 
-<!-- <div class="row">
-    <div class="col-12">
-        <div class="card">
-            <div class="card-body">
-
-                <h4 class="card-title">Ticket Rápido</h4>
-                <div id="filters"></div>
-                <div class="row">
-
-                    <div class="col-sm-2 nopadding">
-                        <div class="form-group">
-                            <input type="text" class="form-control" id="titulo" name="titulo" placeholder="Título" />
-                        </div>
-                    </div>
-                    <div class="col-sm-2 nopadding">
-                        <div class="form-group">
-                            <ng-select name="solicitante" [items]="users" bindLabel="nombre">
-                                <ng-template ng-option-tmp let-item="item">
-                                    {{item.nombre}} <small>{{item.noEmpleado}}</small>
-                                </ng-template>
-                            </ng-select>
-                        </div>
-                    </div>
-                    <div class="col-sm-2 nopadding">
-                        <div class="form-group">
-                            <ng-select name="responsable" [items]="admins" bindLabel="nombre">
-                                <ng-template ng-option-tmp let-item="item">
-                                    {{item.nombre}} <small>{{item.noEmpleado}}</small>
-                                </ng-template>
-                            </ng-select>
-                        </div>
-                    </div>
-
-                    <div class="col-sm-3 nopadding">
-                        <div class="form-group">
-                            <button type="button" (click)="cargarTickets()" class="btn btn-info waves-effect waves-light m-t-10">Guardar</button>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </div>
-</div> -->
-
 <div class="row">
     <div *ngIf="(servNuevos.length > 0)" class="col-lg-4">
         <div class="card">
@@ -154,10 +109,8 @@
                         <tbody>
                             <tr *ngFor="let tick of myTickets">
                                 <td style="width:20px;">{{ tick.Id }}</td>
-                                <!-- <td style="width:50px;"><span class="round"><img [src]="tick.Solicitor.id | imagen" alt="user" width="50" height="50px"></span></td> -->
                                 <td>
                                     <h6> {{ tick.Solicitor.nombre }} </h6>
-                                    <!-- <small class="text-muted">Puesto Departamento Empresa</small> -->
                                 </td>
                                 <td> {{ tick.Titulo }} </td>
                                 <td><span class="label label-rounded" [ngClass]="( tick.Estatus == 'Abierta' ) ? 'label-warning' :

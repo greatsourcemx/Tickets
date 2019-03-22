@@ -111,7 +111,7 @@ export class CerradosComponent implements OnInit {
       if (resp.length !== 0) {
         this.totalRegistros = resp[0].Total;
       }
-      if (this._usuarioService.usuario.rol === 'USER_ROLE') {
+      if (this._usuarioService.usuario.rol === 'USER') {
         this.Tickets = resp.filter(t => t.TipoServicio.id === 1);
       } else {
         this.Tickets = resp;

@@ -21,6 +21,9 @@ export class DashboardComponent implements OnInit {
   nuevo: boolean = false;
   estados: any = data;
   principal: Principal = new Principal(0, 0, 0, '');
+  isDesc: boolean = false;
+  column: string = 'CategoryName';
+  direction: number;
 
   constructor(public _serviciosService: ServiciosService,
               public _usuarioService: UsuarioService,
@@ -50,6 +53,12 @@ export class DashboardComponent implements OnInit {
     .subscribe( (resp: any) => {
       this.principal = resp;
     });
+  }
+
+  sort(property) {
+    this.isDesc = !this.isDesc; // change the direction
+    this.column = property;
+    this.direction = this.isDesc ? 1 : -1;
   }
 
   cambiarDesde( valor: number ) {

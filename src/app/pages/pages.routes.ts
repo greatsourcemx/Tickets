@@ -35,7 +35,7 @@ const pagesRoutes: Routes = [
         canActivate: [ LoginGuardGuard ],
         children: [
             { path: 'principal', component: PrincipalComponent, data: { titulo: 'Principal' } },
-            { path: 'dashboard', component: DashboardComponent, data: { titulo: 'Dashboard' } },
+            { path: 'dashboard', component: DashboardComponent, data: { titulo: 'Solicitudes' } },
             { path: 'empresas', component: EmpresasComponent, data: { titulo: 'Empresas' } },
             { path: 'graficas', component: Graficas1Component, data: { titulo: 'Gráficas' } },
             { path: 'usuarios', component: UsuarioComponent, data: { titulo: 'Usuarios' }  },
@@ -61,6 +61,7 @@ const pagesRoutes: Routes = [
             { path: 'retorno', component: Equipos.SalidaComponent, data: { titulo: 'Retorno de Equipo' }  },
             { path: 'transferencias', component: Equipos.TransferenciaComponent, data: { titulo: 'Transferencia de Equipos' }  },
             { path: 'nofirmas', component: Equipos.SinFirmaComponent, data: { titulo: 'Responsiva sin Firmar' }  },
+            { path: 'asignado', component: Equipos.AsignadoComponent, data: { titulo: 'Equipo Asignado' }  },
             { path: '', redirectTo: '/dashboard', pathMatch: 'full'  },
         ]
     }

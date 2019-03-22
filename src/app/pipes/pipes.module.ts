@@ -4,6 +4,7 @@ import { TiempoPipe } from './tiempo.pipe';
 import { GroupByPipe } from './group-by.pipe';
 import { HorasPipe } from './horas.pipe';
 import { FilterPipe } from './filter.pipe';
+import { OrderbyPipe } from './orderby.pipe';
 
 @NgModule({
   imports: [],
@@ -12,14 +13,16 @@ import { FilterPipe } from './filter.pipe';
     TiempoPipe,
     GroupByPipe,
     HorasPipe,
-    FilterPipe
+    FilterPipe,
+    OrderbyPipe
   ],
   exports: [
     ImagenPipe,
     TiempoPipe,
     GroupByPipe,
     HorasPipe,
-    FilterPipe
+    FilterPipe,
+    OrderbyPipe
   ]
 })
 export class PipesModule { }

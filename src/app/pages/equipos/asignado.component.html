@@ -1,0 +1,63 @@
+<div class="row animated fadeIn" *ngIf="cargando">
+    <div class="col-sm-12">
+        <div class="alert alert-warning text-center">
+            <strong>Cargando</strong>
+            <br />
+            <i class="fa fa-refresh fa-spin fa-2x"></i>
+            <br />
+            <span>Espere por favor</span>
+        </div>
+    </div>
+</div>
+<div class="row" *ngIf="!cargando && equipos.length > 0">
+    <div class="col-sm-12">
+        <div class="card card-body">
+
+            <table class="table table-sm table-hover">
+                <thead>
+                    <tr>
+                        <th class="pointer" (click)="sort('folio')">
+                            Folio
+                            <i class="fa" [ngClass]="{'fa-sort': column != 'folio', 'fa-sort-asc': (column == 'folio' && isDesc), 'fa-sort-desc': (column == 'folio' && !isDesc) }" aria-hidden="true"> </i>
+                        </th>
+                        <th class="pointer" (click)="sort('dispositivo')">
+                            Dispositivo
+                            <i class="fa" [ngClass]="{'fa-sort': column != 'dispositivo', 'fa-sort-asc': (column == 'dispositivo' && isDesc), 'fa-sort-desc': (column == 'dispositivo' && !isDesc) }" aria-hidden="true"> </i>
+                        </th>
+                        <th class="pointer" (click)="sort('nombre')">
+                            Equipo
+                            <i class="fa" [ngClass]="{'fa-sort': column != 'nombre', 'fa-sort-asc': (column == 'nombre' && isDesc), 'fa-sort-desc': (column == 'nombre' && !isDesc) }" aria-hidden="true"> </i>
+                        </th>
+                        <th class="pointer" (click)="sort('tipo')">
+                            Tipo
+                            <i class="fa" [ngClass]="{'fa-sort': column != 'tipo', 'fa-sort-asc': (column == 'tipo' && isDesc), 'fa-sort-desc': (column == 'tipo' && !isDesc) }" aria-hidden="true"> </i>
+                        </th>
+                        <th class="pointer" (click)="sort('modelo')">
+                            Modelo
+                            <i class="fa" [ngClass]="{'fa-sort': column != 'modelo', 'fa-sort-asc': (column == 'modelo' && isDesc), 'fa-sort-desc': (column == 'modelo' && !isDesc) }" aria-hidden="true"> </i>
+                        </th>
+                        <th class="pointer" (click)="sort('locacion.Descripcion')">
+                            Locación
+                            <i class="fa" [ngClass]="{'fa-sort': column != 'locacion.Descripcion', 'fa-sort-asc': (column == 'locacion.Descripcion' && isDesc), 'fa-sort-desc': (column == 'locacion.Descripcion' && !isDesc) }" aria-hidden="true"> </i>
+                        </th>
+                        <th class="pointer" (click)="sort('fecEntrega')">
+                            Fec. Entrega
+                            <i class="fa" [ngClass]="{'fa-sort': column != 'fecEntrega', 'fa-sort-asc': (column == 'fecEntrega' && isDesc), 'fa-sort-desc': (column == 'fecEntrega' && !isDesc) }" aria-hidden="true"> </i>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let equi of equipos | orderby: {property: column, direction: direction}">
+                        <td class="pointer" (click)="verPDF(equi.folio, equi.empresa)"><strong>{{ equi.folio }}</strong></td>
+                        <td>{{ equi.dispositivo }}</td>
+                        <td>{{ equi.nombre }}</td>
+                        <td>{{ equi.tipo }}</td>
+                        <td>{{ equi.modelo }}</td>
+                        <td>{{ equi.locacion.Descripcion }}</td>
+                        <td>{{ equi.fecEntrega | date: 'yyyy-MM-dd' }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

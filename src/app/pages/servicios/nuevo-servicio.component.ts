@@ -16,6 +16,16 @@ export class NuevoServicioComponent implements OnInit {
   usuario: Usuario;
   prioridades: any= [];
   nuevo: boolean = true;
+  fecha = {
+    year: new Date().getFullYear(),
+    month: new Date().getMonth() + 1,
+    day: new Date().getDate()
+  };
+  fecCompr: any = {
+    year: new Date().getFullYear(),
+    month: new Date().getMonth() + 1,
+    day: new Date().getDate()
+  };
 
   constructor(
     public _servicioService: ServiciosService,
@@ -36,20 +46,18 @@ export class NuevoServicioComponent implements OnInit {
   }
 
   guardarServicio( f: NgForm ) {
-
     if ( f.invalid ) {
       return;
     }
-
+    this.servicio.FecCompromiso = new Date(this.fecCompr.year, this.fecCompr.month - 1, this.fecCompr.day);
     this._servicioService.guardarServicio(this.usuario.id, this.servicio )
-            .subscribe( usuario => {
-              swal('Servicio Creado', this.servicio.Titulo, 'success' );
-              this.nuevo = false;
-            },
-            error => {
-              swal('Aviso!', error.error, 'warning');
-            });
-
+    .subscribe( usuario => {
+      swal('Servicio Creado', this.servicio.Titulo, 'success' );
+      this.nuevo = false;
+    },
+    error => {
+      swal('Aviso!', error.error, 'warning');
+    });
   }
 
 }
