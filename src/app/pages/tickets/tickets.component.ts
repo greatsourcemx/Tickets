@@ -92,15 +92,12 @@ export class TicketsComponent implements OnInit {
   }
 
   guardar ( f: NgForm ) {
-
     if (f.invalid) {
       return;
     }
-
     this.ticket.FecCerrado = new Date(this.fecCerrado.year, this.fecCerrado.month - 1, this.fecCerrado.day);
     this._ticketService.modificarServicio( this.ticket )
     .subscribe( (resp: any) => { this.router.navigate(['/principal']); });
-
   }
 
 }

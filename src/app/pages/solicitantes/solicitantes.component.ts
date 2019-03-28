@@ -20,6 +20,7 @@ export class SolicitantesComponent implements OnInit {
   desde: number = 0;
   totalRegistros: number = 0;
   cargando: boolean = true;
+  showNavegacion = false;
 
   constructor(public _solicitanteService: SolicitanteService,
               public glpiServicio: GlpiService,
@@ -43,7 +44,6 @@ export class SolicitantesComponent implements OnInit {
     .subscribe((resp: Empresa[]) => {
       this.cargando = false;
       this.Empresas = resp;
-      console.log(this.Empresas);
     });
   }
 
@@ -53,6 +53,7 @@ export class SolicitantesComponent implements OnInit {
       this.cargando = false;
       if (resp.length !== 0) {
         this.totalRegistros = resp[0].totalUsuarios;
+        this.showNavegacion = this.totalRegistros >= 15;
         this.solicitantes = resp;
       } else {
         this.solicitantes = [];

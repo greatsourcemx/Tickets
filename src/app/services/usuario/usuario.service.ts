@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { Usuario } from '../../models/usuario.model';
+import { Servicio } from '../../models/servicio.model';
 import { URL_SERVICIOS } from '../../config/config';
 import 'rxjs/add/operator/map';
 import { Router } from '@angular/router';
@@ -120,6 +121,19 @@ export class UsuarioService {
   notificaciones( serv: Servicio[] ) {
     const url = URL_SERVICIOS + '/notificaciones';
     return this.http.post( url, serv )
+    .map((data: any) => {
+      return data;
+    });
+  }
+
+  cargarPerfil() {
+    const url = URL_SERVICIOS + '/perfil';
+    return this.http.get( url );
+  }
+
+  cambiarClave( perfil: any ) {
+    const url = URL_SERVICIOS + '/change/password';
+    return this.http.post( url, perfil )
     .map((data: any) => {
       return data;
     });

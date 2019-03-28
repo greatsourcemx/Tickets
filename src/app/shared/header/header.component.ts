@@ -1,4 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Router } from '@angular/router';
 import { UsuarioService, ServiciosService } from '../../services/service.index';
 import { Usuario, Servicio } from '../../models/models.index';
 
@@ -12,16 +13,18 @@ export class HeaderComponent implements OnInit, OnDestroy {
   usuario: Usuario;
   servicios: Servicio[] = [];
   notifica = false;
+  intervalo;
 
   constructor(
     public _usuarioService: UsuarioService,
+    public router: Router,
     public _servicioService: ServiciosService ) {
-    this.usuario = _usuarioService.usuario;
+    this.usuario = JSON.parse( localStorage.getItem('usuario') );
     this.cargarNotificaciones();
   }
 
   ngOnInit() {
-    let intervalo = setInterval( () => {
+    this.intervalo = setInterval( () => {
       this.cargarNotificaciones();
     }, 60000 );
     this.cargarInfo();
@@ -53,10 +56,19 @@ export class HeaderComponent implements OnInit, OnDestroy {
         return false;
       }
     }
-    return true;
+    return this.servicios.length === 0 ? false : true;
+  }
+
+  detalle( folio ) {
+    this.router.navigate(['/servicio', folio]);
+  }
+
+  recargar() {
+    this.router.navigate([this.usuario.root]);
   }
 
   ngOnDestroy() {
+    clearInterval(this.intervalo);
   }
 
 }

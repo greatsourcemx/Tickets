@@ -53,6 +53,7 @@ import { SinFirmaComponent } from './equipos/sin-firma/sin-firma.component';
 import { TransferenciaComponent } from './equipos/transferencia/transferencia.component';
 import { GenerarComponent } from './solicitantes/generar.component';
 import { AsignadoComponent } from './equipos/asignado.component';
+import { PerfilComponent } from './perfil/perfil.component';
 
 @NgModule({
     declarations: [
@@ -88,7 +89,8 @@ import { AsignadoComponent } from './equipos/asignado.component';
         SinFirmaComponent,
         TransferenciaComponent,
         GenerarComponent,
-        AsignadoComponent
+        AsignadoComponent,
+        PerfilComponent
     ],
     exports: [
         DashboardComponent,

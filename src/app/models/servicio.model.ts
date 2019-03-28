@@ -25,6 +25,7 @@ export class Servicio {
         public TipoServicio: Tipo = new Tipo(''),
         public tiempoTotal: string = 'Sin Avances',
         public desde: number = 0,
-        public Total: number = 0
+        public Total: number = 0,
+        public termino: string = ''
     ) { }
 }

@@ -16,6 +16,7 @@ export class TrabajosComponent implements OnInit {
   filtros: Servicio = new Servicio('');
   totalRegistros: number = 0;
   cargando = false;
+  showNavegacion = false;
 
   constructor(
     public _servicioService: ServiciosService,
@@ -51,6 +52,7 @@ export class TrabajosComponent implements OnInit {
       if (resp.length !== 0) {
         this.totalRegistros = resp[0].Total;
       }
+      this.showNavegacion = this.totalRegistros >= 15;
       this.Tickets = resp;
       this.cargando = false;
     });

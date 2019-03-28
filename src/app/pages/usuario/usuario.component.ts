@@ -14,8 +14,9 @@ export class UsuarioComponent implements OnInit {
   desde: number = 0;
 
   totalRegistros: number = 0;
-  cargando: boolean = true;
   estados: any = data.default;
+  cargando: boolean = true;
+  showNavegacion = false;
 
   constructor( public _usuarioService: UsuarioService ) { }
 
@@ -24,17 +25,16 @@ export class UsuarioComponent implements OnInit {
   }
 
   cargarUsuarios() {
-
     this.cargando = true;
-
     this._usuarioService.cargarUsuarios( this.desde )
-              .subscribe( (resp: any) => {
-                if (resp.length !== 0) {
-                  this.totalRegistros = resp[0].totalUsuarios;
-                  this.usuarios = resp;
-                }
-                this.cargando = false;
-              });
+    .subscribe( (resp: any) => {
+      if (resp.length !== 0) {
+        this.totalRegistros = resp[0].totalUsuarios;
+        this.showNavegacion = this.totalRegistros >= 15;
+        this.usuarios = resp;
+      }
+      this.cargando = false;
+    });
   }
 
   cambiarDesde( valor: number ) {
@@ -56,25 +56,21 @@ export class UsuarioComponent implements OnInit {
   }
 
   buscarUsuario( termino: string ) {
-
     if ( termino.length <= 0 ) {
       this.cargarUsuarios();
       return;
     }
 
     this.cargando = true;
-
     this._usuarioService.buscarUsuarios( termino )
-            .subscribe( (usuarios: Usuario[]) => {
+      .subscribe( (usuarios: Usuario[]) => {
 
-              this.usuarios = usuarios;
-              this.cargando = false;
-            });
-
+        this.usuarios = usuarios;
+        this.cargando = false;
+      });
   }
 
   modificarUsuario (usuario: Usuario) {
-
     this._usuarioService.modificarUsuario( usuario )
         .subscribe( usr => {
           usuario.password = '';

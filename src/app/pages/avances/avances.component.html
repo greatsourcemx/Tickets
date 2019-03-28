@@ -5,23 +5,31 @@
             <h6 class="card-subtitle"> {{ servicio.Descripcion }} </h6>
             <form class="form-horizontal m-t-40" #f="ngForm" ngNativeValidate (ngSubmit)="guardarAvance(f)">
 
-                <div class="form-group">
-                    <div class="input-group">
-                        <input class="form-control" placeholder="yyyy-mm-dd" name="dp" [(ngModel)]="_fecha" ngbDatepicker #d="ngbDatepicker">
-                        <div class="input-group-append">
-                            <button class="btn btn-outline-secondary" (click)="d.toggle()" type="button">
-                              <i class="fa fa-calendar"></i>
-                            </button>
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label>Fecha</label>
+                            <div class="input-group">
+                                <input class="form-control" placeholder="yyyy-mm-dd" name="dp" [(ngModel)]="_fecha" maxDate="maxdate" autoClose="true" ngbDatepicker #d="ngbDatepicker">
+                                <div class="input-group-append">
+                                    <button class="btn btn-outline-secondary" (click)="d.toggle()" type="button">
+                                        <i class="fa fa-calendar"></i>
+                                    </button>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="form-group">
-                    <label>Duración</label>
-                    <select [(ngModel)]="avance.Duracion" name="Duracion" name="duracion" class="form-control" required>
-                        <option disabled="disabled" value="undefined" >Seleccionar Duracion</option>
-                        <option *ngFor="let dura of duracion" [ngValue]="dura">{{ dura.Descripcion }}</option>
-                    </select>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>Duración</label>
+                            <select [(ngModel)]="avance.Duracion" name="Duracion" name="duracion" class="form-control" required>
+                                <option disabled="disabled" value="undefined" >Seleccionar Duracion</option>
+                                <option *ngFor="let dura of duracion" [ngValue]="dura">{{ dura.Descripcion }}</option>
+                            </select>
+                        </div>
+
+                    </div>
                 </div>
 
                 <div class="form-group">
@@ -33,7 +41,7 @@
                   <i class="fa fa-save"></i> Guardar
                 </button>
 
-                <button type="button" name="volver" (click)="regresar()" class="btn btn-inverse waves-effect waves-light">Cancelar</button>
+                <button type="button" name="volver" (click)="regresar()" class="btn btn-info waves-effect waves-light">Cancelar</button>
 
             </form>
         </div>

@@ -63,7 +63,7 @@
                 <div class="d-flex flex-row comment-row" *ngFor="let serv of servNuevos">
                     <div class="p-2"><span class="round"><img [src]="serv.Solicitor.id | imagen" alt="user" width="50" height="50px"></span></div>
                     <div class="comment-text w-100">
-                        <h5># {{ serv.Id }} {{ serv.Titulo }} </h5>
+                        <h5 data-toggle="tooltip" data-placement="top" [title]="serv.Descripcion"># {{ serv.Id }} {{ serv.Titulo }} </h5>
                         <h6> {{ serv.Solicitor.nombre }}
                             <span class="label label-rounded" [ngClass]="( serv.Urgencia.Nombre == 'Inmediatamente' || serv.Urgencia.Nombre == 'Urgente' ) ? 'label-warning' : 'label-info'">
                                 {{ serv.Urgencia.Nombre }}
@@ -79,21 +79,19 @@
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
     </div>
 
-
     <div [ngClass]="(servNuevos.length > 0) ? 'col-lg-8' : 'col-lg-12'">
         <div class="card">
             <div class="card-body">
-
                 <div class="d-flex">
                     <div>
                         <h4 class="card-title"><span class="lstick"></span>Mis Tickets</h4>
                     </div>
                 </div>
+                <input [(ngModel)]="query" type="text" class="form-control" placeholder="Término de busqueda...">
                 <div class="table-responsive m-t-20">
                     <table class="table vm no-th-brd no-wrap pro-of-month">
                         <thead>
@@ -107,8 +105,8 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let tick of myTickets">
-                                <td style="width:20px;">{{ tick.Id }}</td>
+                            <tr *ngFor="let tick of myTickets  | filter: 'Id,termino,Titulo': query">
+                                <td data-toggle="tooltip" data-placement="top" [title]="tick.Descripcion" style="width:20px;">{{ tick.Id }}</td>
                                 <td>
                                     <h6> {{ tick.Solicitor.nombre }} </h6>
                                 </td>

@@ -27,6 +27,7 @@ import { Graficas1Component } from './graficas1/graficas1.component';
 import { HorasComponent } from './reportes/horas.component';
 import * as Equipos from './equipos/equipos.index';
 import { GenerarComponent } from './solicitantes/generar.component';
+import { PerfilComponent } from './perfil/perfil.component';
 
 const pagesRoutes: Routes = [
     {
@@ -62,6 +63,7 @@ const pagesRoutes: Routes = [
             { path: 'transferencias', component: Equipos.TransferenciaComponent, data: { titulo: 'Transferencia de Equipos' }  },
             { path: 'nofirmas', component: Equipos.SinFirmaComponent, data: { titulo: 'Responsiva sin Firmar' }  },
             { path: 'asignado', component: Equipos.AsignadoComponent, data: { titulo: 'Equipo Asignado' }  },
+            { path: 'perfil', component: PerfilComponent, data: { titulo: 'Mi Perfil' }  },
             { path: '', redirectTo: '/dashboard', pathMatch: 'full'  },
         ]
     }

@@ -7,12 +7,12 @@
         <!-- Logo -->
         <!-- ============================================================== -->
         <div class="navbar-header">
-            <a class="navbar-brand" href="index.html">
+            <a class="navbar-brand" (click)="recargar()" href="javascript:void(0);">
                 <!-- Logo icon -->
                 <b>
                     <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
                     <!-- Dark Logo icon -->
-                    <img src="assets/images/logo-icon.png" alt="homepage" class="dark-logo" />
+                    <img src="assets/images/logo-icon.png" width="50" height="50" alt="homepage" class="dark-logo" />
                     <!-- Light Logo icon -->
                     <img src="assets/images/logo-light-icon.png" alt="homepage" class="light-logo" />
                 </b>
@@ -65,9 +65,9 @@
                             <li>
                                 <div class="message-center">
                                     <!-- Message -->
-                                    <a *ngFor="let serv of servicios" (mouseover)="marcarLeido(serv)" href="" [title]="serv.Solicitor.nombre">
+                                    <a *ngFor="let serv of servicios" (mouseover)="marcarLeido(serv)" href="javascript:void(0)" [title]="serv.Solicitor.nombre">
                                         <div class="user-img"> <img [src]="serv.Solicitor.id | imagen" alt="user" class="img-circle" /></div>
-                                        <div class="mail-contnet">
+                                        <div (click)="detalle( serv.Id )" class="mail-contnet">
                                             <h6># {{ serv.Id }} {{ serv.Titulo }} </h6>
                                             <span class="label label-rounded" [ngClass]="( serv.Estado == 'Abierta' ) ? 'label-warning' :
                                             ( serv.Estado == 'Cerrada' ) ? 'label-success' : 'label-info'">{{ serv.Estado }}</span>
@@ -93,15 +93,12 @@
                                     <div class="u-img"><img [src]="usuario.id | imagen" alt="user"></div>
                                     <div class="u-text">
                                         <h4> {{ usuario.nombre }} </h4>
-                                        <p class="text-muted"> {{ usuario.correo }} </p><a href="pages-profile.html" class="btn btn-rounded btn-danger btn-sm">View Profile</a></div>
+                                        <p class="text-muted"> {{ usuario.correo }} </p>
+                                    </div>
                                 </div>
                             </li>
                             <li role="separator" class="divider"></li>
-                            <li><a href="#"><i class="ti-user"></i> My Profile</a></li>
-                            <li><a href="#"><i class="ti-wallet"></i> My Balance</a></li>
-                            <li><a href="#"><i class="ti-email"></i> Inbox</a></li>
-                            <li role="separator" class="divider"></li>
-                            <li><a href="#"><i class="ti-settings"></i> Account Setting</a></li>
+                            <li><a href="#" [routerLink]="['/perfil']"><i class="ti-user"></i> Mi Perfil</a></li>
                             <li role="separator" class="divider"></li>
                             <li><a href="#" (click)="_usuarioService.cerrarSesion()" class="pointer"><i class="fa fa-power-off"></i> Salir</a></li>
                         </ul>

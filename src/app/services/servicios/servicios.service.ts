@@ -23,7 +23,6 @@ export class ServiciosService {
   }
 
   cargarServicios( id: number = 0, desde: number = 0 ) {
-    // let url = URL_SERVICIOS + '/Servicios/' + id + '?desde=' + desde;
     let url = URL_SERVICIOS + '/soli/servicios?desde=' + desde;
     return this.http.get( url );
   }

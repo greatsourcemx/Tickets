@@ -46,6 +46,7 @@ export class CerradosComponent implements OnInit {
   filtros: Servicio = new Servicio('');
   totalRegistros: number = 0;
   cargando = false;
+  showNavegacion = false;
 
   // Para rango de fechas
   displayMonths = 2;
@@ -102,14 +103,12 @@ export class CerradosComponent implements OnInit {
     } else {
       this.filtros.FecCerrado = new Date(1800, 0, 1);
     }
-    if (this._usuarioService.usuario.rol === 'USER_ROLE') {
-      this.filtros.Solicitor = this._usuarioService.usuario;
-    }
 
     this._servicioService.cargarTicketsCerrados( this.filtros )
     .subscribe((resp: any) => {
       if (resp.length !== 0) {
         this.totalRegistros = resp[0].Total;
+        this.showNavegacion = this.totalRegistros >= 15;
       }
       if (this._usuarioService.usuario.rol === 'USER') {
         this.Tickets = resp.filter(t => t.TipoServicio.id === 1);

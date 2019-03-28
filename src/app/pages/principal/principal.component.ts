@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ServiciosService, UsuarioService } from '../../services/service.index';
-import { Servicio, Principal, Usuario } from '../../models/models.index';
-import * as data from '../../config/estatus.json';
+import { Principal, Usuario } from '../../models/models.index';
 
 @Component({
   selector: 'app-principal',
@@ -12,11 +11,10 @@ export class PrincipalComponent implements OnInit {
 
   servNuevos: any = [];
   myTickets: any = [];
-  estados: any = data;
   admins: Usuario[];
   users: Usuario[];
-
   principal: Principal = new Principal(0, 0, 0, '');
+  query = '';
 
   constructor(
     public _servicioService: ServiciosService,

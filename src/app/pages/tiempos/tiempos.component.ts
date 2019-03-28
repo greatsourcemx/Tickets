@@ -13,8 +13,9 @@ export class TiemposComponent implements OnInit {
 
   desde: number = 0;
   totalRegistros: number = 0;
-  cargando: boolean = false;
   tiempos: any = [];
+  cargando = false;
+  showNavegacion = false;
 
   constructor( public _tiemposService: TiempoService) { }
 
@@ -23,17 +24,16 @@ export class TiemposComponent implements OnInit {
   }
 
   cargarTiempos () {
-
     this.cargando = true;
-
     this._tiemposService.cargarTiempos( this.desde )
-              .subscribe( (resp: any) => {
-                if (resp.length !== 0) {
-                  this.totalRegistros = resp[0].TotalRegistros;
-                  this.tiempos = resp;
-                }
-                this.cargando = false;
-              });
+    .subscribe( (resp: any) => {
+      if (resp.length !== 0) {
+        this.totalRegistros = resp[0].TotalRegistros;
+        this.showNavegacion = this.totalRegistros >= 15;
+        this.tiempos = resp;
+      }
+      this.cargando = false;
+    });
   }
 
   actualizarTiempo (tiempo: any) {

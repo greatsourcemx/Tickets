@@ -99,13 +99,8 @@
 
                 </table>
 
-                <button (click)="cambiarDesde(-1)" class="btn btn-secondary">
-                  Anteriores
-              </button>
-
-                <button (click)="cambiarDesde(1)" class="btn btn-secondary">
-                  Siguientes
-              </button>
+                <button *ngIf="showNavegacion" (click)="cambiarDesde(-1)" class="btn btn-secondary">Anteriores</button>
+                <button *ngIf="showNavegacion" (click)="cambiarDesde(1)" class="btn btn-secondary">Siguientes</button>
 
             </div>
         </div>

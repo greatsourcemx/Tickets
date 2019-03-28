@@ -12,8 +12,9 @@ export class TiposComponent implements OnInit {
 
   desde: number = 0;
   totalRegistros: number = 0;
-  cargando: boolean = false;
   tipos: any = [];
+  cargando = false;
+  showNavegacion = false;
 
   constructor( public _tipoService: TiposService) { }
 
@@ -27,6 +28,7 @@ export class TiposComponent implements OnInit {
     .subscribe( (resp: any) => {
       if (resp.length !== 0) {
         this.totalRegistros = resp[0].TotalRegistros;
+        this.showNavegacion = this.totalRegistros >= 15;
         this.tipos = resp;
       }
       this.cargando = false;

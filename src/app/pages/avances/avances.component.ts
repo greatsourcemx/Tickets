@@ -17,6 +17,7 @@ export class AvancesComponent implements OnInit {
   duracion: Tiempo;
   avance: Avances = new Avances('', new Date());
   _fecha: any = { year: 1800, month: 1, day: 1 };
+  maxdate: Date = new Date();
 
   constructor(
     public _avancesService: AvancesService,
@@ -28,6 +29,7 @@ export class AvancesComponent implements OnInit {
         this.usuario = this._usuarioService.usuario;
         let id = params['id'];
         this.cargarAvances( id );
+        this.maxdate = new Date();
       });
     }
 
