@@ -30,7 +30,6 @@ export class TicketsComponent implements OnInit {
     public router: Router,
     public activatedRoute: ActivatedRoute ) {
       activatedRoute.params.subscribe( params => {
-        // this.usuario = this._usuarioService.usuario;
         let id = params['id'];
         this.cargarDetalles( id );
       });

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, NavigationEnd } from '@angular/router';
 import 'rxjs/add/operator/pairwise';
 
 @Component({
@@ -10,14 +10,20 @@ import 'rxjs/add/operator/pairwise';
 export class AppComponent implements OnInit {
   title = 'app';
 
+  previousUrl: string;
+  currentUrl: string;
+
   constructor(public router: Router) {}
 
   ngOnInit() {
-    this.router.events
-      .filter(e => e.constructor.name === 'RoutesRecognized')
-      .pairwise()
-      .subscribe((e: any[]) => {
-        localStorage.setItem('url', e[0].urlAfterRedirects);
+    this.currentUrl = this.router.url;
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {
+        this.previousUrl = this.currentUrl;
+        this.currentUrl = event.url;
+        localStorage.setItem('url', this.previousUrl);
+      }
     });
+
   }
 }

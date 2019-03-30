@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ServiciosService, UsuarioService } from '../../services/service.index';
 import { Principal, Usuario } from '../../models/models.index';
 
@@ -7,7 +7,7 @@ import { Principal, Usuario } from '../../models/models.index';
   templateUrl: './principal.component.html',
   styles: []
 })
-export class PrincipalComponent implements OnInit {
+export class PrincipalComponent implements OnInit, OnDestroy {
 
   servNuevos: any = [];
   myTickets: any = [];
@@ -15,6 +15,7 @@ export class PrincipalComponent implements OnInit {
   users: Usuario[];
   principal: Principal = new Principal(0, 0, 0, '');
   query = '';
+  intervalo;
 
   constructor(
     public _servicioService: ServiciosService,
@@ -24,6 +25,9 @@ export class PrincipalComponent implements OnInit {
     this.cargarInfoPrincipal();
     this.cargarNuevos();
     this.cargarTickets();
+    this.intervalo = setInterval( () => {
+      this.cargarNuevos();
+    }, 60000 );
   }
 
   cargarInfoPrincipal () {
@@ -45,6 +49,10 @@ export class PrincipalComponent implements OnInit {
     .subscribe( (resp) => {
       this.myTickets = resp;
     });
+  }
+
+  ngOnDestroy() {
+    clearInterval(this.intervalo);
   }
 
 }

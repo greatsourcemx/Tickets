@@ -58,7 +58,6 @@
                             <th>No Empleado</th>
                             <th>Nombre</th>
                             <th>Correo</th>
-                            <th>Contraseña</th>
                             <th></th>
                         </tr>
                     </thead>
@@ -73,9 +72,6 @@
                             </td>
                             <td>
                                 <input [(ngModel)]="soli.Correo" name="correo" type="email" class="form-control" placeholder="Correo" required />
-                            </td>
-                            <td>
-                                <input name="password" type="password" class="form-control" placeholder="Contraseña" />
                             </td>
                             <td>
                                 <button (click)="crearSolicitante( soli )" *ngIf="soli.Correo !== '' && soli.NoEmpleado > 0 " class="btn btn-circle btn-primary btn-sm" title="Convertir Solicitante">

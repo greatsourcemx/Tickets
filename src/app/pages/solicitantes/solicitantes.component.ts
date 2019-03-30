@@ -34,6 +34,8 @@ export class SolicitantesComponent implements OnInit {
   }
 
   seleccionEmpresa( empr: string ) {
+    this.desde = 0;
+    this.totalRegistros = 0;
     this.empresa = empr;
     this.cargarEmpleados();
   }
@@ -62,7 +64,6 @@ export class SolicitantesComponent implements OnInit {
   }
 
   cambiarDesde( valor: number ) {
-
     let desde = this.desde + valor;
     let totalPages = Math.ceil(this.totalRegistros / 15);
 
@@ -76,21 +77,17 @@ export class SolicitantesComponent implements OnInit {
 
     this.desde += valor;
     this.cargarEmpleados();
-
   }
 
   buscarSolicitante( termino: string ) {
-
     if ( termino.length <= 0 ) {
       this.cargarEmpleados();
       return;
     }
     this.cargarEmpleados( termino );
-
   }
 
   modificarSolicitante (solicitante: Usuario) {
-
     // Asignacion de Empresa
     let emprId = solicitante.empresa.id;
     solicitante.empresa = this.Empresas.find(e => e.id === emprId);
@@ -103,6 +100,13 @@ export class SolicitantesComponent implements OnInit {
         error => {
           swal('Aviso!', error.error, 'warning');
         });
+  }
+
+  enviarClave( usuario: Usuario ) {
+    this._solicitanteService.enviarPassword( usuario )
+    .subscribe((resp: any) => {
+      swal('Se envio la contraseña', 'a ' + usuario.nombre , 'success');
+    });
   }
 
 }

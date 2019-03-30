@@ -19,7 +19,6 @@ export class SolicitanteService {
     }
 
     buscarSolicitante( termino: string ) {
-
       let url = URL_SERVICIOS + '/solicitante?termino=' + termino;
       return this.http.get( url )
                   .map( (resp: any) => resp );
@@ -34,7 +33,6 @@ export class SolicitanteService {
 
     guardarSolicitante (usuario: Usuario) {
       let url = URL_SERVICIOS + '/solicitante';
-
       return this.http.post( url, usuario )
                 .map( (resp: any) => {
                   swal('Solicitante Creado', usuario.nombre, 'success');
@@ -44,7 +42,6 @@ export class SolicitanteService {
 
     modificarSolicitante (usuario: Usuario) {
       let url = URL_SERVICIOS + '/solicitante';
-
       return this.http.put( url, usuario )
                   .map( (resp: any) => {
                     swal('Solicitante Actualizado', usuario.nombre, 'success');
@@ -53,11 +50,17 @@ export class SolicitanteService {
     }
 
     cargarSolici (id: number) {
-
       let url = URL_SERVICIOS + '/solicitor?id=' + id;
-
       return this.http.get( url )
                 .map( (resp: any) => resp );
+    }
+
+    enviarPassword( soli: Usuario ) {
+      const url = URL_SERVICIOS + '/solicitante/correo';
+      return this.http.post( url, soli )
+      .map((data: any) => {
+        return data;
+      });
     }
 
 }

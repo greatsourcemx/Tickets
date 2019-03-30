@@ -33,13 +33,10 @@ export class LoginComponent implements OnInit {
   }
 
   ingresar( forma: NgForm) {
-
     if ( forma.invalid ) {
       return;
     }
-
     const usuario = new Usuario(forma.value.correo, forma.value.password);
-
     this._usuarioService.login(usuario, forma.value.recordar)
       .subscribe( (resp: any) => {
         this.router.navigate(['/' + resp.root]);

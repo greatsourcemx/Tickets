@@ -53,16 +53,12 @@
                       <i class="fa fa-users"></i>
                     </button>
                 </div>
-
-
-
                 <table class="table table-hover table-sm">
                     <thead>
                         <tr>
                             <th>Nombre</th>
                             <th>Correo</th>
-                            <th>Contraseña</th>
-                            <th>Cambiar Clave</th>
+                            <th>Empresa</th>
                             <th></th>
                         </tr>
                     </thead>
@@ -76,27 +72,26 @@
                                 {{ solicitante.correo }}
                             </td>
                             <td>
-                                <input [(ngModel)]="solicitante.password" name="password" type="password" class="form-control" placeholder="Constraseña" />
+                                <select [(ngModel)]="solicitante.empresa.id" name="empr" class="form-control">
+                                    <option *ngFor="let empre of Empresas" [ngValue]="empre.id">{{ empre.nombre }}</option>
+                                </select>
                             </td>
                             <td>
-                                <div class="checkbox checkbox-info pull-left p-t-0">
-                                    <input [(ngModel)]="solicitante.actualizarPassword" name="actualizarPassword" [id]="solicitante.id" type="checkbox" class="filled-in chk-col-light-blue" />
-                                    <label [for]="solicitante.id">  </label>
-                                </div>
-                            </td>
-                            <td>
-                                <button (click)="modificarSolicitante( solicitante )" class="btn btn-primary">
-                                  <i class="fa fa-save"></i>
-                              </button>
+                                <button (click)="modificarSolicitante( solicitante )" title="Guardar" class="btn btn-primary">
+                                    <i class="fa fa-save"></i>
+                                </button>
 
                                 <button [routerLink]="['/solicitante', solicitante.id ]" class="btn btn-primary" title="Editar Solicitante">
-                                  <i class="fa fa-edit"></i>
-                              </button>
+                                    <i class="fa fa-edit"></i>
+                                </button>
+
+                                <button (click)="enviarClave( solicitante )" title="Enviar contraseña" class="btn btn-primary">
+                                    <i class="fa fa-envelope"></i>
+                                </button>
                             </td>
                         </tr>
 
                     </tbody>
-
                 </table>
 
                 <button *ngIf="showNavegacion" (click)="cambiarDesde(-1)" class="btn btn-secondary">Anteriores</button>

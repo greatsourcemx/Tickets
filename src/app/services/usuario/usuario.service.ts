@@ -11,7 +11,6 @@ import { Router } from '@angular/router';
 export class UsuarioService {
 
   usuario: Usuario;
-  // token: string;
 
   constructor(
     public http: HttpClient,
@@ -25,41 +24,32 @@ export class UsuarioService {
 
   cargarStorage() {
     if ( localStorage.getItem('usuario') ) {
-      // this.token = localStorage.getItem('token');
       this.usuario = JSON.parse( localStorage.getItem('usuario') );
     } else {
-      // this.token = '';
       this.usuario = null;
     }
 
   }
 
   guardarStorage( usuario: Usuario ) {
-    // localStorage.setItem('id', id);
-    // localStorage.setItem('token', token);
     localStorage.setItem('usuario', JSON.stringify( usuario ));
-
+    localStorage.setItem('url', usuario.root);
     this.usuario = usuario;
-    // this.token = token;
   }
 
   cerrarSesion() {
     this.usuario = null;
-    // this.token = '';
-    // localStorage.removeItem('id');
-    // localStorage.removeItem('token');
     localStorage.removeItem('usuario');
+    localStorage.removeItem('url');
     this.router.navigate(['/login']);
   }
 
   login (usuario: Usuario, recordar: boolean = false) {
-
     if ( recordar ) {
       localStorage.setItem('email', usuario.correo);
     } else {
       localStorage.removeItem('email');
     }
-
 
     const url = URL_SERVICIOS + '/Login';
     return this.http.post(url, usuario)
