@@ -42,6 +42,14 @@ export class ServiciosService {
     });
   }
 
+  guardaTicketRapido( servicio: Servicio ) {
+    const url = URL_SERVICIOS + '/ticket/quick';
+    return this.http.post( url, servicio )
+    .map((data: any) => {
+      return data;
+    });
+  }
+
   modificarServicio (ticket: Servicio) {
     let url = URL_SERVICIOS + '/servicio';
 

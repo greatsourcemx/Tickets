@@ -1,9 +1,13 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 
 // Pipes Modulo
 import { PipesModule } from '../pipes/pipes.module';
+
+// ng- Select
+import { NgSelectModule } from '@ng-select/ng-select';
 
 import { NopagefoundComponent } from './nopagefound/nopagefound.component';
 import { HeaderComponent } from './header/header.component';
@@ -14,7 +18,9 @@ import { BreadcrumbsComponent } from './breadcrumbs/breadcrumbs.component';
     imports: [
         RouterModule,
         CommonModule,
-        PipesModule
+        PipesModule,
+        NgSelectModule,
+        FormsModule
     ],
     declarations: [
         NopagefoundComponent,
