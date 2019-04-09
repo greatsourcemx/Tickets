@@ -1,0 +1,26 @@
+[{
+    "id": 1,
+    "nombre": "Lunes",
+    "valor": "2",
+    "seleccionado": false
+}, {
+    "id": 2,
+    "nombre": "Martes",
+    "valor": "3",
+    "seleccionado": false
+}, {
+    "id": 3,
+    "nombre": "Miercoles",
+    "valor": "4",
+    "seleccionado": false
+}, {
+    "id": 4,
+    "nombre": "Jueves",
+    "valor": "5",
+    "seleccionado": false
+}, {
+    "id": 5,
+    "nombre": "Viernes",
+    "valor": "6",
+    "seleccionado": false
+}]

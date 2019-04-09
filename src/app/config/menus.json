@@ -20,6 +20,7 @@
             { "titulo": "Inicio", "url": "/principal" },
             { "titulo": "Tickets", "url": "/tickets" },
             { "titulo": "Cerrados", "url": "/cerrados" },
+            { "titulo": "Recurrentes", "url": "/recurrentes" },
             { "titulo": "Gráficas", "url": "/graficas" }
         ]
     }, {

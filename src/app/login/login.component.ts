@@ -18,10 +18,10 @@ export class LoginComponent implements OnInit {
   recordar = false;
   correo: string;
 
-  constructor(
-    public router: Router,
-    public _usuarioService: UsuarioService
-   ) { }
+  constructor(public router: Router,
+              public _usuarioService: UsuarioService) {
+                this._usuarioService.cerrarSesion();
+              }
 
   ngOnInit() {
     init_plugins();

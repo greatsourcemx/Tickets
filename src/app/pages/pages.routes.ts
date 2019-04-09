@@ -1,6 +1,5 @@
 import { RouterModule, Routes } from '@angular/router';
 
-
 import { PagesComponent } from './pages.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { LoginGuardGuard } from '../services/guard/login-guard.guard';
@@ -28,6 +27,9 @@ import { HorasComponent } from './reportes/horas.component';
 import * as Equipos from './equipos/equipos.index';
 import { GenerarComponent } from './solicitantes/generar.component';
 import { PerfilComponent } from './perfil/perfil.component';
+import { RecurrentesComponent } from './recurrentes/recurrentes.component';
+import { NuevoComponent } from './recurrentes/nuevo.component';
+import { EditRecurrenteComponent } from './recurrentes/edit-recurrente.component';
 
 const pagesRoutes: Routes = [
     {
@@ -64,6 +66,9 @@ const pagesRoutes: Routes = [
             { path: 'nofirmas', component: Equipos.SinFirmaComponent, data: { titulo: 'Responsiva sin Firmar' }  },
             { path: 'asignado', component: Equipos.AsignadoComponent, data: { titulo: 'Equipo Asignado' }  },
             { path: 'perfil', component: PerfilComponent, data: { titulo: 'Mi Perfil' }  },
+            { path: 'recurrentes', component: RecurrentesComponent, data: { titulo: 'Recurrentes' }  },
+            { path: 'recurrente/nuevo', component: NuevoComponent, data: { titulo: 'Recurrente' }  },
+            { path: 'recurrente/:id', component: EditRecurrenteComponent, data: { titulo: 'Recurrente' }  },
             { path: '', redirectTo: '/dashboard', pathMatch: 'full'  },
         ]
     }

@@ -1,0 +1,119 @@
+<div class="row animated fadeIn">
+
+    <div class="col-md-12">
+        <div class="card card-body">
+            <div class="row">
+                <div class="col-sm-12 col-xs-12">
+                    <form #f="ngForm" ngNativeValidate (ngSubmit)="modificar()">
+                        <div class="form-group-sm">
+                            <label>Título</label>
+                            <input [(ngModel)]="recurrente.titulo" name="titulo" type="text" maxlength="50" class="form-control" placeholder="Título" required />
+                        </div>
+
+                        <div class="form-group-sm">
+                            <label>Descripción</label>
+                            <textarea [(ngModel)]="recurrente.descripcion" class="form-control" placeholder="Descripción" name="descr" id="descr" rows="2"></textarea>
+                        </div>
+
+                        <div class="form-group-sm">
+                            <label>Tipo de Servicio</label>
+                            <select [(ngModel)]="recurrente.tipoServicio" name="tipo" class="form-control" required>
+                              <option *ngFor="let tip of tipos" [ngValue]="tip">{{ tip.descripcion }}</option>
+                            </select>
+                        </div>
+
+                        <div class="row form-group-sm">
+                            <div class="col-lg-6">
+                                <label for="solicitante">Solicitante</label>
+                                <ng-select [(ngModel)]="recurrente.solicitante" name="solicitante" [items]="solicitantes" bindLabel="nombre" required>
+                                </ng-select>
+                            </div>
+                            <div class="col-lg-6">
+                                <label for="responsable">Responsable</label>
+                                <ng-select [(ngModel)]="recurrente.responsable" name="responsable" [items]="responsables" bindLabel="nombre" required>
+                                    <ng-template ng-option-tmp let-item="item">
+                                        {{item.nombre}} <small>{{item.noEmpleado}}</small>
+                                    </ng-template>
+                                </ng-select>
+                            </div>
+                        </div>
+
+                        <div class="row form-group-sm">
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label>Frecuencia</label>
+                                    <select [(ngModel)]="recurrente.frecuencia" name="frc" class="form-control" required>
+                                        <option>Diario</option>
+                                        <option>Semanal</option>
+                                        <option>Mensual</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div [ngClass]="recurrente.frecuencia === 'Mensual' ? 'col-lg-3' : 'col-lg-6'">
+                                <div class="form-group">
+                                    <label>Recurrencia</label>
+                                    <input [(ngModel)]="recurrente.recurrencia" name="recur" type="number" min="1" class="form-control" required />
+                                </div>
+                            </div>
+                            <div *ngIf="recurrente.frecuencia === 'Mensual'" class="col-lg-3">
+                                <div class="form-group">
+                                    <label>Día del Mes</label>
+                                    <input [(ngModel)]="recurrente.mes" name="mes" type="number" min="1" max="31" class="form-control" required />
+                                </div>
+                            </div>
+                        </div>
+                        <!-- CheckBoxes -->
+                        <div *ngIf="recurrente.frecuencia === 'Semanal'" class="form-group-sm">
+                            <div *ngFor="let dia of dias" class="form-check form-check-inline">
+                                <input class="form-check-input" (change)="selDia($event, dia)" type="checkbox" [(ngModel)]="dia.seleccionado" [id]="dia.nombre" [name]="dia.nombre" />
+                                <label class="form-check-label" [for]="dia.nombre">{{ dia.nombre }}</label>
+                            </div>
+                        </div>
+
+                        <div class="row form-group">
+                            <div class="col-lg-6">
+                                <label for="fecha">Fecha Inicio</label>
+                                <div class="input-group">
+                                    <input class="form-control" [autoClose]="true" [minDate]="minfecha" [(ngModel)]="fecha" placeholder="yyyy-mm-dd" name="dInit" ngbDatepicker #dInit="ngbDatepicker" />
+                                    <div class="input-group-append">
+                                        <span class="btn btn-outline-secondary" (click)="dInit.toggle()">
+                                            <i class="fa fa-calendar"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-2">
+                                <div class="form-group row">
+                                    <div class="col-md-12">
+                                        <div class="checkbox checkbox-info pull-left p-t-0">
+                                            <input name="end" [(ngModel)]="recurrente.finaliza" id="end-date" type="checkbox" class="filled-in chk-col-light-blue" />
+                                            <label for="end-date"> Finaliza? </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <label for="fecha">Fecha Final</label>
+                                <div class="input-group">
+                                    <input class="form-control" [autoClose]="true" [(ngModel)]="fechaFin" name="dEnd" [disabled]="!recurrente.finaliza" ngbDatepicker #dEnd="ngbDatepicker" />
+                                    <div class="input-group-append">
+                                        <button [disabled]="!recurrente.finaliza" class="btn btn-outline-secondary" (click)="dEnd.toggle()" type="button">
+                                            <i class="fa fa-calendar"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-success waves-effect waves-light m-r-10">
+                            <i class="fa fa-save"></i> Guardar
+                        </button>
+                        <a routerLink="/recurrentes" class="btn btn-info waves-effect waves-light m-r-10">Cancelar</a>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

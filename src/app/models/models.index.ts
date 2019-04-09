@@ -15,3 +15,4 @@ export { GLPIEquipos } from './GLPIEquipos.model';
 export { GLPILocacion } from './GLPILocacion.model';
 export { RetornoEquipo } from './retorno.model';
 export { Perfil } from './perfil.model';
+export { Recurrentes } from './recurrentes.model';

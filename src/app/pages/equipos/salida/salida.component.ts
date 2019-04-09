@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { GlpiService } from '../../../services/GLPI/glpi.service';
+import { GlpiService, ExcelService } from '../../../services/service.index';
 import { GLPIEmpleado } from '../../../models/models.index';
 import { RetornoEquipo } from '../../../models/retorno.model';
+
 
 @Component({
   selector: 'app-salida',
@@ -18,7 +19,8 @@ export class SalidaComponent implements OnInit {
   verRetorno = false;
   retorTodos = false;
 
-  constructor(public glpiService: GlpiService) { }
+  constructor(public glpiService: GlpiService,
+              public excelService: ExcelService) { }
 
   ngOnInit() {
     this.cargarEmpleados();
@@ -69,6 +71,11 @@ export class SalidaComponent implements OnInit {
       entr.retornar = this.retorTodos;
     }
     this.verBotones();
+  }
+
+  exportAsXLSX(): void {
+    const tabla = document.getElementById('myTable');
+    this.excelService.exportTabletoExcel(tabla, 'equipo_Asignado');
   }
 
   verPDF( folio: number, empr: string ) {

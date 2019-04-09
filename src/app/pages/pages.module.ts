@@ -54,6 +54,9 @@ import { TransferenciaComponent } from './equipos/transferencia/transferencia.co
 import { GenerarComponent } from './solicitantes/generar.component';
 import { AsignadoComponent } from './equipos/asignado.component';
 import { PerfilComponent } from './perfil/perfil.component';
+import { RecurrentesComponent } from './recurrentes/recurrentes.component';
+import { NuevoComponent } from './recurrentes/nuevo.component';
+import { EditRecurrenteComponent } from './recurrentes/edit-recurrente.component';
 
 @NgModule({
     declarations: [
@@ -90,7 +93,10 @@ import { PerfilComponent } from './perfil/perfil.component';
         TransferenciaComponent,
         GenerarComponent,
         AsignadoComponent,
-        PerfilComponent
+        PerfilComponent,
+        RecurrentesComponent,
+        NuevoComponent,
+        EditRecurrenteComponent
     ],
     exports: [
         DashboardComponent,

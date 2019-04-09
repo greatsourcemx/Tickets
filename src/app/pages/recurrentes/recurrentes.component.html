@@ -1,0 +1,68 @@
+<div class="row animated fadeIn" *ngIf="cargando">
+    <div class="col-sm-12">
+        <div class="alert alert-warning text-center">
+            <strong>Cargando</strong>
+            <br />
+            <i class="fa fa-refresh fa-spin fa-2x"></i>
+            <br />
+            <span>Espere por favor</span>
+        </div>
+    </div>
+</div>
+
+<div class="row animated fadeIn" *ngIf="!cargando">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="text-right">
+                    <button [routerLink]="['/recurrente/nuevo']" type="button" class="btn waves-effect waves-light btn-rounded btn-primary">
+                      <i class="fa fa-plus"></i> Crear Recurrente
+                    </button>
+                </div>
+                <div *ngIf="recurrentes.length > 0" class="table-responsive m-t-20">
+                    <table class="table table-hover table-sm">
+                        <thead>
+                            <tr>
+                                <th>Título</th>
+                                <th>Recurrencia</th>
+                                <th>Fec Inicio</th>
+                                <th>Fec Final</th>
+                                <th>Activo</th>
+                                <th>Solicitante</th>
+                                <th>Responsable</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let recu of recurrentes">
+                                <td>{{ recu.titulo }}</td>
+                                <td>{{ recu.recurrencia }} {{ recu.frecuencia }}</td>
+                                <td>{{ recu.fecInicio | date: 'yyyy-MM-dd' }}</td>
+                                <td>
+                                    <span *ngIf="mostrarFecFinal( recu )">{{ recu.fecFinal | date: 'yyyy-MM-dd' }}</span>
+                                </td>
+                                <td>
+                                    <div class="checkbox checkbox-info pull-left p-t-0">
+                                        <input [(ngModel)]="recu.activo" name="activo" [id]="'r'+recu.id" type="checkbox" class="filled-in chk-col-light-blue" />
+                                        <label [for]="'r'+recu.id">  </label>
+                                    </div>
+                                </td>
+                                <td>{{ recu.solicitante.nombre }}</td>
+                                <td>{{ recu.responsable.nombre }}</td>
+                                <td>
+                                    <button (click)="modificar( recu )" class="btn btn-primary">
+                                        <i class="fa fa-save"></i>
+                                    </button>
+                                    <button [routerLink]="['/recurrente', recu.id ]" class="btn btn-primary">
+                                        <i class="fa fa-edit"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

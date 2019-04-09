@@ -17,7 +17,9 @@ import {
   AvancesService,
   TiposService,
   GlpiService,
-  ReportesService } from './service.index';
+  ReportesService,
+  RecurrentesService,
+  ExcelService } from './service.index';
 
 @NgModule({
   imports: [
@@ -43,7 +45,9 @@ import {
     AvancesService,
     TiposService,
     GlpiService,
-    ReportesService
+    ReportesService,
+    RecurrentesService,
+    ExcelService
   ],
   declarations: []
 })
