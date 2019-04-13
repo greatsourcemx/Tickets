@@ -10,6 +10,7 @@ export class Usuario {
         public noEmpleado: number = 0,
         public id: number = 0,
         public rol: string = '',
+        public rolId: number = 0,
         public estado: string = '',
         public token: string = '',
         public root: string = '',

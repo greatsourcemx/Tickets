@@ -21,13 +21,15 @@ import { ServiceModule } from './services/service.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './login/register.component';
+import { RecoverComponent } from './login/recover.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    RecoverComponent
   ],
   imports: [
     BrowserModule,

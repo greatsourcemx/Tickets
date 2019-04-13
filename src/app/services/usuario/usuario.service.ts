@@ -5,6 +5,7 @@ import { Servicio } from '../../models/servicio.model';
 import { URL_SERVICIOS } from '../../config/config';
 import 'rxjs/add/operator/map';
 import { Router } from '@angular/router';
+import swal from 'sweetalert';
 
 
 @Injectable()
@@ -28,7 +29,6 @@ export class UsuarioService {
     } else {
       this.usuario = null;
     }
-
   }
 
   guardarStorage( usuario: Usuario ) {
@@ -124,6 +124,19 @@ export class UsuarioService {
   cambiarClave( perfil: any ) {
     const url = URL_SERVICIOS + '/change/password';
     return this.http.post( url, perfil )
+    .map((data: any) => {
+      return data;
+    });
+  }
+
+  generaTokenRecuperacion( correo: string ) {
+    const url = URL_SERVICIOS + '/login/recover?correo=' + correo;
+    return this.http.get( url );
+  }
+
+  validarToken( tk: Usuario ) {
+    const url = URL_SERVICIOS + '/login/recover';
+    return this.http.post( url, tk )
     .map((data: any) => {
       return data;
     });

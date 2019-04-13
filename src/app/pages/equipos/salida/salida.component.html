@@ -59,44 +59,46 @@
                     <h3 class="card-title">Total de Equipos ( <small>{{ equipos.length }}</small> )</h3>
                 </div>
             </div>
-            <table id="myTable" class="table table-sm table-hover">
-                <thead>
-                    <tr>
-                        <th>Folio</th>
-                        <th>Empresa</th>
-                        <th>Dispositivo</th>
-                        <th>Equipo</th>
-                        <th>Tipo</th>
-                        <th>Modelo</th>
-                        <th>Locación</th>
-                        <th>Fec. Entrega</th>
-                        <th>
-                            <div>
-                                <input name="reto-all" [(ngModel)]="retorTodos" id="reto-all" type="checkbox" (change)="RetorTodos()" class="filled-in chk-col-light-blue" />
-                                <label for="reto-all"> Retornar </label>
-                            </div>
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let equi of equipos; index as i">
-                        <td class="pointer" (click)="verPDF(equi.folio, equi.empresa)"><strong>{{ equi.folio }}</strong></td>
-                        <td><b>{{ equi.empresa }}</b></td>
-                        <td>{{ equi.dispositivo }}</td>
-                        <td>{{ equi.nombre }}</td>
-                        <td>{{ equi.tipo }}</td>
-                        <td>{{ equi.modelo }}</td>
-                        <td>{{ equi.locacion.Descripcion }}</td>
-                        <td>{{ equi.fecEntrega | date: 'yyyy-MM-dd' }}</td>
-                        <td>
-                            <div>
-                                <input name="retronar" (change)="verBotones()" [(ngModel)]="equi.retornar" [id]="equi.nombre" type="checkbox" class="filled-in chk-col-light-blue" />
-                                <label [for]="equi.nombre">  </label>
-                            </div>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+            <div class="table-responsive m-t-20">
+                <table id="myTable" class="table table-sm table-hover">
+                    <thead>
+                        <tr>
+                            <th>Folio</th>
+                            <th>Empresa</th>
+                            <th>Dispositivo</th>
+                            <th>Equipo</th>
+                            <th>Tipo</th>
+                            <th>Modelo</th>
+                            <th>Locación</th>
+                            <th>Fec. Entrega</th>
+                            <th>
+                                <div>
+                                    <input name="reto-all" [(ngModel)]="retorTodos" id="reto-all" type="checkbox" (change)="RetorTodos()" class="filled-in chk-col-light-blue" />
+                                    <label for="reto-all"> Retornar </label>
+                                </div>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let equi of equipos; index as i">
+                            <td class="pointer" (click)="verPDF(equi.folio, equi.empresa)"><strong>{{ equi.folio }}</strong></td>
+                            <td><b>{{ equi.empresa }}</b></td>
+                            <td>{{ equi.dispositivo }}</td>
+                            <td>{{ equi.nombre }}</td>
+                            <td>{{ equi.tipo }}</td>
+                            <td>{{ equi.modelo }}</td>
+                            <td>{{ equi.locacion.Descripcion }}</td>
+                            <td>{{ equi.fecEntrega | date: 'yyyy-MM-dd' }}</td>
+                            <td>
+                                <div>
+                                    <input name="retronar" (change)="verBotones()" [(ngModel)]="equi.retornar" [id]="equi.nombre" type="checkbox" class="filled-in chk-col-light-blue" />
+                                    <label [for]="equi.nombre">  </label>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
             <div class="button-group">
                 <button *ngIf="verRetorno" name="retorno" (click)="retornar()" class="btn btn-danger">Retornar</button>
             </div>

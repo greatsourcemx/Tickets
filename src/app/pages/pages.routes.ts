@@ -69,7 +69,7 @@ const pagesRoutes: Routes = [
             { path: 'recurrentes', component: RecurrentesComponent, data: { titulo: 'Recurrentes' }  },
             { path: 'recurrente/nuevo', component: NuevoComponent, data: { titulo: 'Recurrente' }  },
             { path: 'recurrente/:id', component: EditRecurrenteComponent, data: { titulo: 'Recurrente' }  },
-            { path: '', redirectTo: '/dashboard', pathMatch: 'full'  },
+            { path: '', redirectTo: '/principal', pathMatch: 'full'  },
         ]
     }
 ];

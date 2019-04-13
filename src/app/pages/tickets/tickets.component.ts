@@ -80,6 +80,7 @@ export class TicketsComponent implements OnInit {
       if ( this.ticket.Estado === this.estados.Estatus[0].value && this.ticket.AsignadoA.id === 0 ) {
         this.ticket.AsignadoA = this._adminService.usuario;
       }
+      this.ticket.Estado = this.estados.Estatus[2].value;
     });
   }
 

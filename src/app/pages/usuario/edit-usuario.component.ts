@@ -5,6 +5,7 @@ import { Empresa } from '../../models/empresa.model';
 import { UsuarioService } from '../../services/usuario/usuario.service';
 import { EmpresasService } from '../../services/empresas/empresas.service';
 import { NgForm } from '@angular/forms';
+import swal from 'sweetalert';
 
 @Component({
   selector: 'app-edit-usuario',

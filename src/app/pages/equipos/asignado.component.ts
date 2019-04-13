@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { GlpiService } from '../../services/GLPI/glpi.service';
+import { GlpiService, ExcelService } from '../../services/service.index';
 import { GLPIEmpleado } from '../../models/GLPIEmpleado.model';
 import { RetornoEquipo } from '../../models/retorno.model';
 
@@ -17,7 +17,8 @@ export class AsignadoComponent implements OnInit {
   column: string = 'CategoryName';
   direction: number;
 
-  constructor(public glpiServicio: GlpiService) { }
+  constructor(public glpiServicio: GlpiService,
+              public excelService: ExcelService) { }
 
   ngOnInit() {
     this.cargarEmpleado();
@@ -49,6 +50,11 @@ export class AsignadoComponent implements OnInit {
     this.isDesc = !this.isDesc;
     this.column = property;
     this.direction = this.isDesc ? 1 : -1;
+  }
+
+  exportAsXLSX(): void {
+    const tabla = document.getElementById('myTable');
+    this.excelService.exportTabletoExcel(tabla, 'equipo_Asignado');
   }
 
 }

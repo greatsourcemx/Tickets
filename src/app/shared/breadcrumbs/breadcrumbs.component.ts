@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivationEnd } from '@angular/router';
 import { Meta, Title, MetaDefinition } from '@angular/platform-browser';
 import { NgForm } from '@angular/forms';
-import { SolicitanteService, TiempoService, ServiciosService } from '../../services/service.index';
+import { SolicitanteService, TiempoService, ServiciosService, UsuarioService } from '../../services/service.index';
 import { Usuario, Tiempo, Servicio } from '../../models/models.index';
 import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/map';
@@ -15,17 +15,20 @@ import 'rxjs/add/operator/map';
 })
 export class BreadcrumbsComponent implements OnInit {
 
-  label: string = '';
+  usuario: Usuario = new Usuario();
   ticket: Servicio = new Servicio('', '');
   users: Usuario[];
   duracion: Tiempo[];
+  label: string = '';
 
   constructor(private router: Router,
               public title: Title,
+              public usuarioService: UsuarioService,
               public _tiempoService: TiempoService,
               public _soliService: SolicitanteService,
               public _servicioService: ServiciosService,
               public meta: Meta) {
+                this.cargarUsuario();
                 this.getDataRoute()
                 .subscribe( data => {
                   this.label = data.titulo;
@@ -38,6 +41,13 @@ export class BreadcrumbsComponent implements OnInit {
                 });
   }
 
+  cargarUsuario() {
+    this.usuarioService.cargarLoagueado()
+    .subscribe((data: Usuario) => {
+      this.usuario = data;
+    });
+  }
+
   getDataRoute() {
     return this.router.events
         .filter( evento => evento instanceof ActivationEnd  )
@@ -46,8 +56,10 @@ export class BreadcrumbsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.cargarSolicitante();
-    this.cargarTiempos();
+    if (this.usuario.rolId === 1) {
+      this.cargarSolicitante();
+      this.cargarTiempos();
+    }
   }
 
   cargarSolicitante( ) {
