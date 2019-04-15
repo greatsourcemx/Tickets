@@ -17,8 +17,8 @@
 
                         <div class="form-group-sm">
                             <label>Tipo de Servicio</label>
-                            <select [(ngModel)]="recurrente.tipoServicio" name="tipo" class="form-control" required>
-                              <option *ngFor="let tip of tipos" [ngValue]="tip">{{ tip.descripcion }}</option>
+                            <select [(ngModel)]="recurrente.tipoServicio.id" name="tipo" class="form-control" required>
+                              <option *ngFor="let tip of tipos" [ngValue]="tip.id">{{ tip.descripcion }}</option>
                             </select>
                         </div>
 

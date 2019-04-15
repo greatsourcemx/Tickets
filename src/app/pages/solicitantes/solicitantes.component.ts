@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Usuario } from '../../models/usuario.model';
 import { SolicitanteService, EmpresasService } from '../../services/service.index';
-import * as data from '../../config/estados.json';
 import { Empresa } from '../../models/empresa.model';
 import { GlpiService } from '../../services/GLPI/glpi.service';
-import { GLPIEmpleado } from '../../models/GLPIEmpleado.model';
+import swal from 'sweetalert';
 
 
 @Component({

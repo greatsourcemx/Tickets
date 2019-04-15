@@ -30,13 +30,6 @@ export class RecurrentesComponent implements OnInit {
     });
   }
 
-  mostrarFecFinal( recurrente: Recurrentes ): boolean {
-    if ( recurrente.fecFinal.toString().indexOf('1800') > -1 ) {
-      return false;
-    }
-    return true;
-  }
-
   modificar( recurrente: Recurrentes ) {
     this.recuService.modificarRecurrente( recurrente )
     .subscribe((data: any) => { swal('Actualizado', 'Se actualizó correctamente', 'success'); });

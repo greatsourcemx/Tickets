@@ -5,6 +5,7 @@ import { GroupByPipe } from './group-by.pipe';
 import { HorasPipe } from './horas.pipe';
 import { FilterPipe } from './filter.pipe';
 import { OrderbyPipe } from './orderby.pipe';
+import { TruncatePipe } from './truncate.pipe';
 
 @NgModule({
   imports: [],
@@ -14,7 +15,8 @@ import { OrderbyPipe } from './orderby.pipe';
     GroupByPipe,
     HorasPipe,
     FilterPipe,
-    OrderbyPipe
+    OrderbyPipe,
+    TruncatePipe
   ],
   exports: [
     ImagenPipe,
@@ -22,7 +24,8 @@ import { OrderbyPipe } from './orderby.pipe';
     GroupByPipe,
     HorasPipe,
     FilterPipe,
-    OrderbyPipe
+    OrderbyPipe,
+    TruncatePipe
   ]
 })
 export class PipesModule { }

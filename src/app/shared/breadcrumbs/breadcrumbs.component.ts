@@ -6,6 +6,7 @@ import { SolicitanteService, TiempoService, ServiciosService, UsuarioService } f
 import { Usuario, Tiempo, Servicio } from '../../models/models.index';
 import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/map';
+import swal from 'sweetalert';
 
 
 @Component({
@@ -45,6 +46,10 @@ export class BreadcrumbsComponent implements OnInit {
     this.usuarioService.cargarLoagueado()
     .subscribe((data: Usuario) => {
       this.usuario = data;
+      if (this.usuario.rolId === 1) {
+        this.cargarSolicitante();
+        this.cargarTiempos();
+      }
     });
   }
 
@@ -56,10 +61,6 @@ export class BreadcrumbsComponent implements OnInit {
   }
 
   ngOnInit() {
-    if (this.usuario.rolId === 1) {
-      this.cargarSolicitante();
-      this.cargarTiempos();
-    }
   }
 
   cargarSolicitante( ) {

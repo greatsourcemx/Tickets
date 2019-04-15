@@ -36,9 +36,9 @@ export class EditRecurrenteComponent implements OnInit {
               }
 
   ngOnInit() {
+    this.cargarTipos();
     this.cargarSolicitante();
     this.cargarResponsables();
-    this.cargarTipos();
   }
 
   cargarDetalles( id: number ) {
@@ -47,6 +47,10 @@ export class EditRecurrenteComponent implements OnInit {
     .subscribe((data: Recurrentes) => {
       this.cargando = true;
       this.recurrente = data;
+      let _fec: Date = new Date(this.recurrente.fecInicio);
+      this.fecha = { year: _fec.getFullYear(),
+        month: _fec.getMonth() + 1,
+        day: _fec.getDate() };
       this.cargarDiaSemana();
     });
   }
