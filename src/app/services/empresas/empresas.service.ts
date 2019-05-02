@@ -1,8 +1,10 @@
+import swal from 'sweetalert';
+import {map} from 'rxjs/operators';
 import { Injectable } from '@angular/core';
-import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Empresa } from '../../models/empresa.model';
 import { URL_SERVICIOS } from '../../config/config';
-import 'rxjs/add/operator/map';
+
 
 @Injectable()
 export class EmpresasService {
@@ -28,21 +30,21 @@ export class EmpresasService {
   guardarEmpresa ( empresa: Empresa ) {
     let url = URL_SERVICIOS + '/empresa';
 
-    return this.http.post( url, empresa )
-                .map( (resp: any) => {
+    return this.http.post( url, empresa ).pipe(
+                map( (resp: any) => {
                   swal('Empresa Creada', empresa.nombre, 'success');
                   return resp;
-                });
+                }));
   }
 
   modificarEmpresa ( empresa: Empresa ) {
     let url = URL_SERVICIOS + '/empresa';
 
-    return this.http.put( url, empresa )
-                  .map( (resp: any) => {
+    return this.http.put( url, empresa ).pipe(
+                  map( (resp: any) => {
                     swal('Empresa Actualizada', empresa.nombre, 'success');
                     return resp;
-                  });
+                  }));
   }
 
 }

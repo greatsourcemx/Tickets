@@ -1,9 +1,9 @@
+import swal from 'sweetalert';
+import { map } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
-import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Servicio } from '../../models/servicio.model';
 import { URL_SERVICIOS } from '../../config/config';
-import 'rxjs/add/operator/map';
-import { Usuario } from '../../models/usuario.model';
 
 @Injectable()
 export class ServiciosService {
@@ -19,7 +19,10 @@ export class ServiciosService {
 
   cargarTickets () {
     let url = URL_SERVICIOS + '/servicios';
-    return this.http.get( url );
+    return this.http.get( url ).pipe(
+      map( (resp: Servicio[]) => {
+        return resp;
+      }));
   }
 
   cargarServicios( id: number = 0, desde: number = 0 ) {
@@ -35,29 +38,29 @@ export class ServiciosService {
   guardarServicio ( Soliid: number = 0, servicio: Servicio ) {
     let url = URL_SERVICIOS + '/servicio';
 
-    return this.http.post( url, servicio )
-    .map( (resp: any) => {
+    return this.http.post( url, servicio ).pipe(
+    map( (resp: any) => {
       swal('Ticket Creado', servicio.Titulo, 'success');
       return resp;
-    });
+    }));
   }
 
   guardaTicketRapido( servicio: Servicio ) {
     const url = URL_SERVICIOS + '/ticket/quick';
-    return this.http.post( url, servicio )
-    .map((data: any) => {
+    return this.http.post( url, servicio ).pipe(
+    map((data: any) => {
       return data;
-    });
+    }));
   }
 
   modificarServicio (ticket: Servicio) {
     let url = URL_SERVICIOS + '/servicio';
 
-    return this.http.put( url, ticket )
-    .map( (resp: any) => {
+    return this.http.put( url, ticket ).pipe(
+    map( (resp: any) => {
       swal('Ticket Actualizado', ticket.Titulo, 'success');
       return resp;
-    });
+    }));
   }
 
   cargarDetTickets ( id: number = 0 ) {

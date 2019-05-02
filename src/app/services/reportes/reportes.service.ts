@@ -1,3 +1,5 @@
+
+import {map} from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { URL_SERVICIOS } from '../../config/config';
@@ -10,18 +12,18 @@ export class ReportesService {
 
   obtenerPorcentajes ( params: Parametros ) {
     let url = URL_SERVICIOS + '/reporte/porcentaje';
-    return this.http.post( url, params )
-    .map( (resp: any) => {
+    return this.http.post( url, params ).pipe(
+    map( (resp: any) => {
       return resp;
-    });
+    }));
   }
 
   obtenerHoras ( params: Parametros ) {
     let url = URL_SERVICIOS + '/reporte/horas';
-    return this.http.post( url, params )
-    .map( (resp: any) => {
+    return this.http.post( url, params ).pipe(
+    map( (resp: any) => {
       return resp;
-    });
+    }));
   }
 
 }

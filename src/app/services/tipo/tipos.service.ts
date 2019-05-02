@@ -1,7 +1,9 @@
+import swal from 'sweetalert';
+import { map } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
-import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { URL_SERVICIOS } from '../../config/config';
-import 'rxjs/add/operator/map';
+
 import { Tipo } from '../../models/tipo.model';
 
 @Injectable()
@@ -27,20 +29,20 @@ export class TiposService {
   guardarTipo ( descripcion ) {
     let tipo = new Tipo( descripcion );
     let url = URL_SERVICIOS + '/tipo';
-    return this.http.post( url, tipo )
-            .map( (resp: any) => {
+    return this.http.post( url, tipo ).pipe(
+            map( (resp: any) => {
               swal('Tipo de Servicio Creado', tipo.descripcion, 'success');
               return resp;
-      });
+      }));
   }
 
   modificarTipo ( tipo: Tipo ) {
     let url = URL_SERVICIOS + '/tipo';
-    return this.http.put( url, tipo )
-            .map( (resp: any) => {
+    return this.http.put( url, tipo ).pipe(
+            map( (resp: any) => {
               swal('Tipo de Servicio Actualizado', tipo.descripcion, 'success');
               return resp;
-      });
+      }));
   }
 
 }

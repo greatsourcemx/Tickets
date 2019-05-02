@@ -1,3 +1,5 @@
+
+import {map} from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { URL_SERVICIOS } from '../../config/config';
@@ -32,10 +34,10 @@ export class GlpiService {
 
   cargarTodoEquipoEmpleado( empleado: GLPIEmpleado) {
     const url = URL_SERVICIOS + '/glpi/all';
-    return this.http.post( url, empleado )
-    .map((data: any) => {
+    return this.http.post( url, empleado ).pipe(
+    map((data: any) => {
       return data;
-    });
+    }));
   }
 
   cargarSolicitantes( empr: string, desde = 0, termino = '' ) {
@@ -53,17 +55,17 @@ export class GlpiService {
 
   generarSolicitante( empresa: string, empleado: GLPIEmpleado ) {
     const url = URL_SERVICIOS + '/solicitante/crear?empr=' + empresa;
-    return this.http.post( url, empleado )
-    .map((data: any) => {
+    return this.http.post( url, empleado ).pipe(
+    map((data: any) => {
       return data;
-    });
+    }));
   }
   generarSolicitantes( empresa: string, empleados: GLPIEmpleado[] ) {
     const url = URL_SERVICIOS + '/soli/generar?empr=' + empresa;
-    return this.http.post( url, empleados )
-    .map((data: any) => {
+    return this.http.post( url, empleados ).pipe(
+    map((data: any) => {
       return data;
-    });
+    }));
   }
 
   cargarResponsiva( folio: string, empresa: string ) {
@@ -73,34 +75,34 @@ export class GlpiService {
 
   guardarResponsiva( responsiva: Responsiva ) {
     const url = URL_SERVICIOS + '/glpi/responsiva';
-    return this.http.post( url, responsiva, { responseType: 'blob' }  )
-    .map((data: any) => {
+    return this.http.post( url, responsiva, { responseType: 'blob' }  ).pipe(
+    map((data: any) => {
       return new Blob([data], { type: 'application/pdf' });
-    });
+    }));
   }
 
   retornarEquipo( equipos: RetornoEquipo[], empr: string, trasnf: boolean = false ) {
     if (trasnf) {
       const url = URL_SERVICIOS + '/glpi/responsiva?empr=' + empr;
-      return this.http.put( url, equipos, { responseType: 'blob' } )
-      .map((data: any) => {
+      return this.http.put( url, equipos, { responseType: 'blob' } ).pipe(
+      map((data: any) => {
           return new Blob([data], { type: 'application/pdf' });
-      });
+      }));
     } else {
       const url = URL_SERVICIOS + '/glpi/retorno';
-      return this.http.post( url, equipos )
-      .map((data: any) => {
+      return this.http.post( url, equipos ).pipe(
+      map((data: any) => {
         return data;
-      });
+      }));
     }
   }
 
   verPDF( responsiva: Responsiva ) {
     const url = URL_SERVICIOS + '/glpi/view';
-    return this.http.post( url, responsiva, { responseType: 'blob' } )
-    .map((resp: any) => {
+    return this.http.post( url, responsiva, { responseType: 'blob' } ).pipe(
+    map((resp: any) => {
       return new Blob([resp], { type: 'application/pdf' });
-    });
+    }));
   }
 
   verPDFFolio( folio: number, empr: string ) {
@@ -117,10 +119,10 @@ export class GlpiService {
 
   guardarFirmas( responsivas: Responsiva[] ) {
     const url = URL_SERVICIOS + '/sinfirma';
-    return this.http.post( url, responsivas )
-    .map((data: any) => {
+    return this.http.post( url, responsivas ).pipe(
+    map((data: any) => {
       return data;
-    });
+    }));
   }
 
 }

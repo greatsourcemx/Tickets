@@ -1,5 +1,7 @@
+import swal from 'sweetalert';
+import {map} from 'rxjs/operators';
 import { Injectable } from '@angular/core';
-import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { URL_SERVICIOS } from '../../config/config';
 import { Avances } from '../../models/avances.model';
 
@@ -17,11 +19,11 @@ export class AvancesService {
   guardarAvance( avance: Avances ) {
     let url = URL_SERVICIOS + '/Avances';
 
-    return this.http.post( url, avance )
-    .map( (resp: any) => {
+    return this.http.post( url, avance ).pipe(
+    map( (resp: any) => {
       swal('Info', 'Se agregó el avance', 'success');
       return resp;
-    });
+    }));
   }
 
 }

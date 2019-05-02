@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
-import 'rxjs/add/operator/pairwise';
+
 
 @Component({
   selector: 'app-root',

@@ -1,13 +1,16 @@
+import {map, filter} from 'rxjs/operators';
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivationEnd } from '@angular/router';
 import { Meta, Title, MetaDefinition } from '@angular/platform-browser';
 import { NgForm } from '@angular/forms';
 import { SolicitanteService, TiempoService, ServiciosService, UsuarioService } from '../../services/service.index';
 import { Usuario, Tiempo, Servicio } from '../../models/models.index';
-import 'rxjs/add/operator/filter';
-import 'rxjs/add/operator/map';
 import swal from 'sweetalert';
 
+// store
+import { Store } from '@ngrx/store';
+import { AppState } from '../../store/app.reducers';
+import * as servActions from '../../store/actions';
 
 @Component({
   selector: 'app-breadcrumbs',
@@ -24,6 +27,7 @@ export class BreadcrumbsComponent implements OnInit {
 
   constructor(private router: Router,
               public title: Title,
+              public store: Store<AppState>,
               public usuarioService: UsuarioService,
               public _tiempoService: TiempoService,
               public _soliService: SolicitanteService,
@@ -54,10 +58,10 @@ export class BreadcrumbsComponent implements OnInit {
   }
 
   getDataRoute() {
-    return this.router.events
-        .filter( evento => evento instanceof ActivationEnd  )
-        .filter( (evento: ActivationEnd) => evento.snapshot.firstChild === null )
-        .map( (evento: ActivationEnd) => evento.snapshot.data );
+    return this.router.events.pipe(
+        filter( evento => evento instanceof ActivationEnd  ),
+        filter( (evento: ActivationEnd) => evento.snapshot.firstChild === null ),
+        map( (evento: ActivationEnd) => evento.snapshot.data ));
   }
 
   ngOnInit() {
@@ -88,6 +92,7 @@ export class BreadcrumbsComponent implements OnInit {
     }
     this._servicioService.guardaTicketRapido( this.ticket )
     .subscribe((resp: any) => {
+      this.store.dispatch( new servActions.LoadServAction() );
       this.ticket = new Servicio('', '');
       this.ticket.Duracion = this.duracion[0];
       swal('Correcto!', 'Se registró el servicio', 'success');

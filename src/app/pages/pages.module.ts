@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 
 // Ng- Bootstrap (DatePicker)
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -16,6 +17,10 @@ import { SharedModule } from '../shared/shared.module';
 
 // Pipe Module
 import { PipesModule } from '../pipes/pipes.module';
+
+// NGRX (Store, Reducer)
+import { StoreModule } from '@ngrx/store';
+import { ticketReducer } from '../store/reducers/tickets.reducer';
 
 // Rutas
 import { PAGES_ROUTES } from './pages.routes';
@@ -104,6 +109,7 @@ import { EditRecurrenteComponent } from './recurrentes/edit-recurrente.component
         Graficas1Component
     ],
     imports: [
+        RouterModule,
         SharedModule,
         PAGES_ROUTES,
         CommonModule,
@@ -111,7 +117,8 @@ import { EditRecurrenteComponent } from './recurrentes/edit-recurrente.component
         PipesModule,
         NgbModule.forRoot(),
         NgSelectModule,
-        ChartsModule
+        ChartsModule,
+        StoreModule.forFeature( 'servicios', ticketReducer )
     ]
 })
 

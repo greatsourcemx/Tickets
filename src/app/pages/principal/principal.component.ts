@@ -2,6 +2,10 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ServiciosService, UsuarioService } from '../../services/service.index';
 import { Principal, Usuario } from '../../models/models.index';
 
+import { Store } from '@ngrx/store';
+import { AppState } from '../../store/app.reducers';
+import * as servActions from '../../store/actions';
+
 @Component({
   selector: 'app-principal',
   templateUrl: './principal.component.html',
@@ -16,15 +20,19 @@ export class PrincipalComponent implements OnInit, OnDestroy {
   principal: Principal = new Principal(0, 0, 0, '');
   query = '';
   intervalo;
+  loadingTickets = false;
+  error: any;
 
-  constructor(
-    public _servicioService: ServiciosService,
-    public _usuarioService: UsuarioService ) { }
+  constructor(public _servicioService: ServiciosService,
+              public store: Store<AppState>,
+              public _usuarioService: UsuarioService ) { }
 
   ngOnInit() {
+    this.cargarTickets();
+    this.store.dispatch( new servActions.LoadServAction() );
+
     this.cargarInfoPrincipal();
     this.cargarNuevos();
-    this.cargarTickets();
     this.intervalo = setInterval( () => {
       this.cargarNuevos();
     }, 60000 );
@@ -44,11 +52,13 @@ export class PrincipalComponent implements OnInit, OnDestroy {
       });
   }
 
-  cargarTickets ( ) {
-    this._servicioService.cargarTickets()
-    .subscribe( (resp) => {
-      this.myTickets = resp;
-    });
+  cargarTickets( ) {
+    this.store.select('servicios')
+      .subscribe( tickets => {
+        this.myTickets = tickets.tickets;
+        this.loadingTickets = tickets.loading;
+        this.error = tickets.error;
+      });
   }
 
   ngOnDestroy() {
