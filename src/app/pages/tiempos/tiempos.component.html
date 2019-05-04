@@ -2,18 +2,14 @@
     <div class="col-12">
         <div class="card">
             <div class="card-body">
-
                 <input #input (keyup)="buscarTiempo( input.value )" type="text" class="form-control" placeholder="Buscar Duración..." />
-
             </div>
         </div>
     </div>
 </div>
 
 <div class="row animated fadeIn" *ngIf="cargando">
-
     <div class="col-sm-12">
-
         <div class="alert alert-warning text-center">
             <strong>Cargando</strong>
             <br />
@@ -30,7 +26,7 @@
             <div class="card-body">
 
                 <div class="text-right">
-                    <button (click)="crearHospital()" type="button" class="btn waves-effect waves-light btn-rounded btn-primary">
+                    <button (click)="crear()" type="button" class="btn waves-effect waves-light btn-rounded btn-primary">
                         <i class="fa fa-plus"></i> 
                         Crear Duración
                     </button>

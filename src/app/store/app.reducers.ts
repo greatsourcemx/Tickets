@@ -7,10 +7,16 @@ export interface AppState {
     ui: fromUI.State;
     auth: fromAuth.AuthState;
     servicios: reducers.TicketState;
+    marcadores: reducers.MarkerState;
+    solicitantes: reducers.SoliState;
+    tiempos: reducers.TiempoState;
 }
 
 export const appReducers: ActionReducerMap<AppState> = {
     ui: fromUI.uiReducers,
     auth: fromAuth.authReducer,
-    servicios: reducers.ticketReducer
+    servicios: reducers.ticketReducer,
+    marcadores: reducers.marcadorReducer,
+    solicitantes: reducers.solicitantesReducer,
+    tiempos: reducers.tiempoReducer
 };

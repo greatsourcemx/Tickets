@@ -68,7 +68,7 @@ export class ServiciosService {
     return this.http.get( url );
   }
 
-  cargarDashboard () {
+  cargarDashboard() {
     let url = URL_SERVICIOS + '/principal';
     return this.http.get( url );
   }

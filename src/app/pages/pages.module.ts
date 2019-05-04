@@ -62,6 +62,7 @@ import { PerfilComponent } from './perfil/perfil.component';
 import { RecurrentesComponent } from './recurrentes/recurrentes.component';
 import { NuevoComponent } from './recurrentes/nuevo.component';
 import { EditRecurrenteComponent } from './recurrentes/edit-recurrente.component';
+import { MarcadoresComponent } from './principal/marcadores.component';
 
 @NgModule({
     declarations: [
@@ -101,7 +102,8 @@ import { EditRecurrenteComponent } from './recurrentes/edit-recurrente.component
         PerfilComponent,
         RecurrentesComponent,
         NuevoComponent,
-        EditRecurrenteComponent
+        EditRecurrenteComponent,
+        MarcadoresComponent
     ],
     exports: [
         DashboardComponent,

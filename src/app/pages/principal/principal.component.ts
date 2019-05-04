@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ServiciosService, UsuarioService } from '../../services/service.index';
-import { Principal, Usuario } from '../../models/models.index';
+import { Usuario } from '../../models/models.index';
 
 import { Store } from '@ngrx/store';
 import { AppState } from '../../store/app.reducers';
@@ -17,7 +17,6 @@ export class PrincipalComponent implements OnInit, OnDestroy {
   myTickets: any = [];
   admins: Usuario[];
   users: Usuario[];
-  principal: Principal = new Principal(0, 0, 0, '');
   query = '';
   intervalo;
   loadingTickets = false;
@@ -30,19 +29,10 @@ export class PrincipalComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.cargarTickets();
     this.store.dispatch( new servActions.LoadServAction() );
-
-    this.cargarInfoPrincipal();
     this.cargarNuevos();
     this.intervalo = setInterval( () => {
       this.cargarNuevos();
     }, 60000 );
-  }
-
-  cargarInfoPrincipal () {
-    this._servicioService.cargarDashboard()
-    .subscribe( (resp: any) => {
-      this.principal = resp;
-    });
   }
 
   cargarNuevos () {

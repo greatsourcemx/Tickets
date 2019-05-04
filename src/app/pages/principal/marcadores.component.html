@@ -1,0 +1,59 @@
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <div *ngIf="loading" class="alert alert-info text-center">
+                    <i class="fa fa-refresh fa-spin fa-2x"></i>
+                    <h1>Espere...</h1>
+                </div>
+                <div *ngIf="error" class="alert alert-danger text-center">
+                    <i class="fa fa-times fa-2x"></i>
+                    <h2>Error: {{ error.status }} </h2>
+                    <p> {{ error.message }} </p>
+                </div>
+                <button class="btn btn-info pull-right" [routerLink]="['/ticket']" name="new"> <i class="fa fa-plus"></i> Nuevo</button>
+                <h4 class="card-title pull-left">Hoy</h4>
+                <div *ngIf="!loading" class="row m-t-40">
+                    <!-- Column -->
+                    <div class="col-md-6 col-lg-3 col-xlg-3">
+                        <div class="card">
+                            <div class="box bg-dark text-center">
+                                <h1 class="font-light text-white"> {{ principal.tiempoInvertido | tiempo }} </h1>
+                                <h6 class="text-white">{{ principal.tiempoInvertido | tiempo: 'min' }}</h6>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Column -->
+                    <div class="col-md-6 col-lg-3 col-xlg-3">
+                        <div class="card">
+                            <div class="box bg-success text-center">
+                                <h1 class="font-light text-white"> {{ principal.cerrados }} </h1>
+                                <h6 class="text-white">Cerrados</h6>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Column -->
+                    <div class="col-md-6 col-lg-3 col-xlg-3">
+                        <div class="card">
+                            <div class="box bg-info text-center">
+                                <h1 class="font-light text-white"> {{ principal.proceso }} </h1>
+                                <h6 class="text-white">En Proceso</h6>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Column -->
+                    <div class="col-md-6 col-lg-3 col-xlg-3">
+                        <div class="card">
+                            <div class="box bg-warning text-center">
+                                <h1 class="font-light text-white"> {{ principal.abiertos }} </h1>
+                                <h6 class="text-white">Abiertas</h6>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Column -->
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

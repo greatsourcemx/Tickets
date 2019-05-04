@@ -2,6 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { GlpiService } from '../../services/GLPI/glpi.service';
 import { GLPIEmpleado } from '../../models/GLPIEmpleado.model';
 
+// store
+import { Store } from '@ngrx/store';
+import { AppState } from '../../store/app.reducers';
+import * as soliActions from '../../store/actions';
+
 @Component({
   selector: 'app-generar',
   templateUrl: './generar.component.html',
@@ -14,7 +19,8 @@ export class GenerarComponent implements OnInit {
   empresa = 'EBR';
   cargando = false;
 
-  constructor(public glpiServicio: GlpiService) { }
+  constructor(public glpiServicio: GlpiService,
+              public store: Store<AppState>) { }
 
   ngOnInit() {
     this.cargarSolicitantesNuevos();
@@ -37,7 +43,10 @@ export class GenerarComponent implements OnInit {
   crearSolicitante( empleado: GLPIEmpleado ) {
     this.cargando = true;
     this.glpiServicio.generarSolicitante( this.empresa, empleado )
-    .subscribe(() => { this.cargarSolicitantesNuevos(); });
+    .subscribe(() => {
+      this.store.dispatch( new soliActions.LoadUsersAction() );
+      this.cargarSolicitantesNuevos();
+    });
   }
 
 }

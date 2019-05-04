@@ -1,36 +1,36 @@
-import * as fromServ from '../actions/index';
-import { Servicio } from '../../models/servicio.model';
+import * as fromSoli from '../actions/index';
+import { Usuario } from '../../models/usuario.model';
 
-export interface TicketState {
-    tickets: Servicio[];
+export interface SoliState {
+    users: Usuario[];
     loaded: boolean;
     loading: boolean;
     error: any;
 }
 
-const initState: TicketState = {
-    tickets: null,
+const initState: SoliState = {
+    users: null,
     loaded: false,
     loading: false,
     error: null
 };
 
-export function ticketReducer( state = initState, action: fromServ.acciones ): TicketState {
+export function solicitantesReducer( state = initState, action: fromSoli.soliAcciones ): SoliState {
     switch ( action.type ) {
-        case fromServ.LOAD_SERV:
+        case fromSoli.LOAD_USERS:
             return {
                 ...state,
                 loading: true,
                 error: null
             };
-        case fromServ.LOAD_SERV_SUCCESS:
+        case fromSoli.LOAD_USERS_SUCCESS:
             return {
                 ...state,
                 loading: false,
                 loaded: true,
-                tickets: [ ...action.servicios ]
+                users: [ ... action.users ]
             };
-        case fromServ.LOAD_SERV_FAIL:
+        case fromSoli.LOAD_USERS_FAIL:
             return {
                 ...state,
                 loaded: false,

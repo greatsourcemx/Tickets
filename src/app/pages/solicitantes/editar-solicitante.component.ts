@@ -5,6 +5,12 @@ import { SolicitanteService } from '../../services/solicitante/solicitante.servi
 import { NgForm } from '@angular/forms';
 import { Empresa } from '../../models/empresa.model';
 import { EmpresasService } from '../../services/service.index';
+import swal from 'sweetalert';
+
+// store
+import { Store } from '@ngrx/store';
+import { AppState } from '../../store/app.reducers';
+import * as soliActions from '../../store/actions';
 
 @Component({
   selector: 'app-editar-solicitante',
@@ -18,6 +24,7 @@ export class EditarSolicitanteComponent implements OnInit {
 
   constructor(public activatedRoute: ActivatedRoute,
     public _solicitanteService: SolicitanteService,
+    public store: Store<AppState>,
     public _empresaService: EmpresasService,
     public router: Router ) { }
 
@@ -53,6 +60,7 @@ export class EditarSolicitanteComponent implements OnInit {
 
     this._solicitanteService.modificarSolicitante( this.solicitante )
         .subscribe( usuario => {
+          this.store.dispatch( new soliActions.LoadUsersAction() );
           this.router.navigate(['/solicitantes']);
         },
         error => {

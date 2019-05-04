@@ -1,36 +1,37 @@
-import * as fromServ from '../actions/index';
-import { Servicio } from '../../models/servicio.model';
+import { Tiempo } from '../../models/tiempo.model';
+import * as fromTiempo from '../actions/index';
 
-export interface TicketState {
-    tickets: Servicio[];
+export interface TiempoState {
+    tiempos: Tiempo[];
     loaded: boolean;
     loading: boolean;
     error: any;
 }
 
-const initState: TicketState = {
-    tickets: null,
+const initState: TiempoState = {
+    tiempos: null,
     loaded: false,
     loading: false,
     error: null
 };
 
-export function ticketReducer( state = initState, action: fromServ.acciones ): TicketState {
+export function tiempoReducer( state = initState, action: fromTiempo.timerAcciones ): TiempoState {
     switch ( action.type ) {
-        case fromServ.LOAD_SERV:
+        case fromTiempo.LOAD_TIMERS:
             return {
                 ...state,
                 loading: true,
                 error: null
             };
-        case fromServ.LOAD_SERV_SUCCESS:
+        case fromTiempo.LOAD_TIMERS_SUCCESS:
             return {
                 ...state,
                 loading: false,
                 loaded: true,
-                tickets: [ ...action.servicios ]
+                error: null,
+                tiempos: [ ...action.duracion ]
             };
-        case fromServ.LOAD_SERV_FAIL:
+        case fromTiempo.LOAD_TIMERS_FAIL:
             return {
                 ...state,
                 loaded: false,

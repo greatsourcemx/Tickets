@@ -53,6 +53,8 @@ export class BreadcrumbsComponent implements OnInit {
       if (this.usuario.rolId === 1) {
         this.cargarSolicitante();
         this.cargarTiempos();
+        this.store.dispatch( new servActions.LoadUsersAction() );
+        this.store.dispatch( new servActions.LoadTimerAction() );
       }
     });
   }
@@ -68,17 +70,16 @@ export class BreadcrumbsComponent implements OnInit {
   }
 
   cargarSolicitante( ) {
-    this._soliService.cargarSoliActivos( )
-    .subscribe( (resp: any) => {
-      this.users = resp;
+    this.store.select('solicitantes')
+    .subscribe( solic => {
+      this.users = solic.users;
     });
   }
 
   cargarTiempos() {
-    this._tiempoService.cargarTiemposActivos()
-    .subscribe( (resp: any) => {
-      this.duracion = resp;
-      this.ticket.Duracion = this.duracion[0];
+    this.store.select('tiempos')
+    .subscribe( solic => {
+      this.duracion = solic.tiempos;
     });
   }
 
@@ -93,6 +94,7 @@ export class BreadcrumbsComponent implements OnInit {
     this._servicioService.guardaTicketRapido( this.ticket )
     .subscribe((resp: any) => {
       this.store.dispatch( new servActions.LoadServAction() );
+      this.store.dispatch( new servActions.LoadMarkAction() );
       this.ticket = new Servicio('', '');
       this.ticket.Duracion = this.duracion[0];
       swal('Correcto!', 'Se registró el servicio', 'success');

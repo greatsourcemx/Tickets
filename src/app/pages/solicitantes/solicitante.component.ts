@@ -4,6 +4,12 @@ import { NgForm } from '@angular/forms';
 import { SolicitanteService, EmpresasService } from '../../services/service.index';
 import { Router } from '@angular/router';
 import { Empresa } from '../../models/empresa.model';
+import swal from 'sweetalert';
+
+// store
+import { Store } from '@ngrx/store';
+import { AppState } from '../../store/app.reducers';
+import * as soliActions from '../../store/actions';
 
 @Component({
   selector: 'app-solicitante',
@@ -18,6 +24,7 @@ export class SolicitanteComponent implements OnInit {
   constructor(
     public _solicitanteService: SolicitanteService,
     public _empresaService: EmpresasService,
+    public store: Store<AppState>,
     public router: Router) { }
 
   ngOnInit() {
@@ -50,6 +57,7 @@ export class SolicitanteComponent implements OnInit {
 
     this._solicitanteService.guardarSolicitante( this.solicitante )
             .subscribe( soli => {
+              this.store.dispatch( new soliActions.LoadUsersAction() );
               this.solicitante.id = soli.id;
               this.router.navigate(['/solicitantes']);
             },

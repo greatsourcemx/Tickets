@@ -1,36 +1,36 @@
-import * as fromServ from '../actions/index';
-import { Servicio } from '../../models/servicio.model';
+import * as fromMark from '../actions/index';
+import { Principal } from '../../models/principal.model';
 
-export interface TicketState {
-    tickets: Servicio[];
+export interface MarkerState {
+    principal: Principal;
     loaded: boolean;
     loading: boolean;
     error: any;
 }
 
-const initState: TicketState = {
-    tickets: null,
+const initState: MarkerState = {
+    principal: null,
     loaded: false,
     loading: false,
     error: null
 };
 
-export function ticketReducer( state = initState, action: fromServ.acciones ): TicketState {
+export function marcadorReducer( state = initState, action: fromMark.markAcciones ): MarkerState {
     switch ( action.type ) {
-        case fromServ.LOAD_SERV:
+        case fromMark.LOAD_MARK:
             return {
                 ...state,
                 loading: true,
                 error: null
             };
-        case fromServ.LOAD_SERV_SUCCESS:
+        case fromMark.LOAD_MARK_SUCCESS:
             return {
                 ...state,
                 loading: false,
                 loaded: true,
-                tickets: [ ...action.servicios ]
+                principal: action.principal
             };
-        case fromServ.LOAD_SERV_FAIL:
+        case fromMark.LOAD_MARK_FAIL:
             return {
                 ...state,
                 loaded: false,

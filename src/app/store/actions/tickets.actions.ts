@@ -19,4 +19,6 @@ export class LoadServSuccessAction implements Action {
     constructor ( public servicios: Servicio[] ) {  }
 }
 
-export type acciones = LoadServAction | LoadServFailAction | LoadServSuccessAction;
+export type acciones = LoadServAction |
+                        LoadServFailAction |
+                        LoadServSuccessAction;

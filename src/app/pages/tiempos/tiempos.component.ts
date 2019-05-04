@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Tiempo } from '../../models/tiempo.model';
 import { TiempoService } from '../../services/service.index';
-
 declare var swal: any;
+// store
+import { Store } from '@ngrx/store';
+import { AppState } from '../../store/app.reducers';
+import * as timeActions from '../../store/actions';
 
 @Component({
   selector: 'app-tiempos',
@@ -17,10 +20,12 @@ export class TiemposComponent implements OnInit {
   cargando = false;
   showNavegacion = false;
 
-  constructor( public _tiemposService: TiempoService) { }
+  constructor(public _tiemposService: TiempoService,
+              public store: Store<AppState>) { }
 
   ngOnInit() {
     this.cargarTiempos();
+    this.store.dispatch( new timeActions.LoadTimerAction() );
   }
 
   cargarTiempos () {
@@ -39,6 +44,7 @@ export class TiemposComponent implements OnInit {
   actualizarTiempo (tiempo: any) {
     this._tiemposService.modificarTiempo( tiempo )
         .subscribe( usr => {
+          this.store.dispatch( new timeActions.LoadTimerAction() );
           swal('Aviso!', 'Se registrarón los cambios', 'success');
         },
         error => {
@@ -46,7 +52,7 @@ export class TiemposComponent implements OnInit {
         });
   }
 
-  crearHospital() {
+  crear() {
 
     swal({
       title: 'Crear Duración',
@@ -63,6 +69,7 @@ export class TiemposComponent implements OnInit {
 
       this._tiemposService.guardarTiempo( valor )
               .subscribe( () => {
+                this.store.dispatch( new timeActions.LoadTimerAction() );
                 this.cargarTiempos();
                 swal('Aviso!', 'Se registrarón los cambios', 'success');
               },
