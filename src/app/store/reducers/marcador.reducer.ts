@@ -6,13 +6,15 @@ export interface MarkerState {
     loaded: boolean;
     loading: boolean;
     error: any;
+    filtro: string;
 }
 
 const initState: MarkerState = {
     principal: null,
     loaded: false,
     loading: false,
-    error: null
+    error: null,
+    filtro: 'HOY'
 };
 
 export function marcadorReducer( state = initState, action: fromMark.markAcciones ): MarkerState {
@@ -21,7 +23,8 @@ export function marcadorReducer( state = initState, action: fromMark.markAccione
             return {
                 ...state,
                 loading: true,
-                error: null
+                error: null,
+                filtro: action.payload
             };
         case fromMark.LOAD_MARK_SUCCESS:
             return {

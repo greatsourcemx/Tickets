@@ -68,8 +68,8 @@ export class ServiciosService {
     return this.http.get( url );
   }
 
-  cargarDashboard() {
-    let url = URL_SERVICIOS + '/principal';
+  cargarDashboard( rango: string ) {
+    let url = URL_SERVICIOS + '/principal?param=' + rango;
     return this.http.get( url );
   }
 

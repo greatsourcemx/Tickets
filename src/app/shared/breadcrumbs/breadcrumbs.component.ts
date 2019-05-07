@@ -24,6 +24,7 @@ export class BreadcrumbsComponent implements OnInit {
   users: Usuario[];
   duracion: Tiempo[];
   label: string = '';
+  range: string = '';
 
   constructor(private router: Router,
               public title: Title,
@@ -67,7 +68,12 @@ export class BreadcrumbsComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.store.select('marcadores')
+    .subscribe( principal => {
+      this.range = principal.filtro;
+    });
   }
+
 
   cargarSolicitante( ) {
     this.store.select('solicitantes')
@@ -94,7 +100,7 @@ export class BreadcrumbsComponent implements OnInit {
     this._servicioService.guardaTicketRapido( this.ticket )
     .subscribe((resp: any) => {
       this.store.dispatch( new servActions.LoadServAction() );
-      this.store.dispatch( new servActions.LoadMarkAction() );
+      this.store.dispatch( new servActions.LoadMarkAction( this.range ) );
       this.ticket = new Servicio('', '');
       this.ticket.Duracion = this.duracion[0];
       swal('Correcto!', 'Se registró el servicio', 'success');

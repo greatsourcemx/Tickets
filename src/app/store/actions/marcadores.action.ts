@@ -7,6 +7,7 @@ export const LOAD_MARK_SUCCESS = '[MARK] Correcto marcadores...';
 
 export class LoadMarkAction implements Action {
     readonly type = LOAD_MARK;
+    constructor ( public payload: string ) {  }
 }
 
 export class LoadMarkFailAction implements Action {

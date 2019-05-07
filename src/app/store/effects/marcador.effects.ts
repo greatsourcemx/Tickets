@@ -16,8 +16,9 @@ export class MarcadoresEffects {
     cargarMarcador$ = this.actions$.pipe(
             ofType( markActions.LOAD_MARK )
         ).pipe(
-            switchMap( () => {
-                return this.servService.cargarDashboard()
+            switchMap( (action: any) => {
+                // console.log(action.payload);
+                return this.servService.cargarDashboard( action.payload )
                 .pipe(
                     map( (principal: Principal) => new markActions.LoadMarkSuccessAction( principal ) ),
                     catchError( error => of(new markActions.LoadMarkFailAction( error )) )

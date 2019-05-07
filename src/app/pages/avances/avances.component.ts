@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { NgForm } from '@angular/forms';
-import { NgbDateStruct, NgbCalendar } from '@ng-bootstrap/ng-bootstrap';
+// import { NgbDateStruct, NgbCalendar } from '@ng-bootstrap/ng-bootstrap';
 import { AvancesService, UsuarioService, TiempoService } from '../../services/service.index';
 import { Servicio, Usuario, Tiempo, Avances } from '../../models/models.index';
 
@@ -60,13 +59,8 @@ export class AvancesComponent implements OnInit {
     });
   }
 
-  guardarAvance( f: NgForm ) {
-
-    if (! f.valid ) {
-      return;
-    }
-
-    // Binding fecha
+  guardarAvance() {
+    // Binding Date
     this.avance.Fecha = new Date(this._fecha.year, this._fecha.month - 1, this._fecha.day);
     this.avance.Responsable = this._usuarioService.usuario;
     this.avance.servId = this.servicio.Id;

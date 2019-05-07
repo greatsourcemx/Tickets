@@ -69,7 +69,6 @@
                 <ngb-accordion #acc="ngbAccordion">
                     <ngb-panel *ngFor="let unidad of horas | groupBy:'Unidad'" [id]="unidad.key">
                         <ng-template ngbPanelTitle>
-                            <!-- <span class="text-white">{{ unidad.key }}</span> -->
                             <div class="pull-left">
                                 <h4 class="m-b-0 text-white">{{ unidad.key }}</h4>
                             </div>
@@ -96,7 +95,7 @@
                                         <tr *ngFor="let ticket of unidad.value">
                                             <td> {{ ticket.Id }} </td>
                                             <td> {{ ticket.Eventos }} </td>
-                                            <td> {{ ticket.Solicitante }} </td>
+                                            <td> {{ ticket.Solicitante | titlecase | capitalizar }} </td>
                                             <td> {{ ticket.Responsable }} </td>
                                             <td> {{ ticket.Horas | horas }} </td>
                                         </tr>

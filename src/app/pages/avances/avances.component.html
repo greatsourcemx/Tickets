@@ -3,8 +3,7 @@
         <div class="card card-body">
             <h4 class="card-title"> # {{ servicio.Id }} {{ servicio.Titulo }} </h4>
             <h6 class="card-subtitle"> {{ servicio.Descripcion }} </h6>
-            <form class="form-horizontal m-t-40" #f="ngForm" ngNativeValidate (ngSubmit)="guardarAvance(f)">
-
+            <form class="form-horizontal m-t-40" #f="ngForm" (ngSubmit)="guardarAvance( )">
                 <div class="row">
                     <div class="col-md-3">
                         <div class="form-group">
@@ -23,12 +22,11 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <label>Duración</label>
-                            <select [(ngModel)]="avance.Duracion" name="Duracion" name="duracion" class="form-control" required>
+                            <select [(ngModel)]="avance.Duracion" name="Duracion" name="duracion" class="form-control">
                                 <option disabled="disabled" value="undefined" >Seleccionar Duracion</option>
                                 <option *ngFor="let dura of duracion" [ngValue]="dura">{{ dura.Descripcion }}</option>
                             </select>
                         </div>
-
                     </div>
                 </div>
 
@@ -40,7 +38,6 @@
                 <button type="submit" class="btn btn-success waves-effect waves-light m-r-10">
                   <i class="fa fa-save"></i> Guardar
                 </button>
-
                 <button type="button" name="volver" (click)="regresar()" class="btn btn-info waves-effect waves-light">Cancelar</button>
 
             </form>

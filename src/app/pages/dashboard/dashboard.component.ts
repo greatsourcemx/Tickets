@@ -49,7 +49,7 @@ export class DashboardComponent implements OnInit {
   }
 
   cargarDashboard () {
-    this._serviciosService.cargarDashboard( )
+    this._serviciosService.cargarDashboard( 'HOY' )
     .subscribe( (resp: any) => {
       this.principal = resp;
     });

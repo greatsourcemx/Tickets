@@ -66,7 +66,7 @@
                     <tbody>
                         <tr *ngFor="let solicitante of solicitantes">
                             <td class="w70">
-                                {{ solicitante.nombre }} ({{ solicitante.noEmpleado }})
+                                {{ solicitante.nombre | titlecase | capitalizar }} ({{ solicitante.noEmpleado }})
                             </td>
                             <td>
                                 {{ solicitante.correo }}

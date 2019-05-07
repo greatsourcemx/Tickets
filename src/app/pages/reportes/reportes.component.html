@@ -104,7 +104,7 @@
                                         <tr *ngFor="let ticket of unidad.value">
                                             <td> {{ ticket.Id }} </td>
                                             <td> {{ ticket.Eventos }} </td>
-                                            <td> {{ ticket.Solicitante }} </td>
+                                            <td> {{ ticket.Solicitante | titlecase | capitalizar }} </td>
                                             <td> {{ ticket.Responsable }} </td>
                                             <td> {{ ticket.Tiempo }} </td>
                                         </tr>

@@ -15,7 +15,7 @@
                     <div class="p-2"><span class="round"><img [src]="serv.Solicitor.id | imagen" alt="user" width="50" height="50px"></span></div>
                     <div class="comment-text w-100">
                         <h5 data-toggle="tooltip" data-placement="top" [title]="serv.Descripcion"># {{ serv.Id }} {{ serv.Titulo }} </h5>
-                        <h6> {{ serv.Solicitor.nombre }}
+                        <h6> {{ serv.Solicitor.nombre | titlecase | capitalizar }}
                             <span class="label label-rounded" [ngClass]="( serv.Urgencia.Nombre == 'Inmediatamente' || serv.Urgencia.Nombre == 'Urgente' ) ? 'label-warning' : 'label-info'">
                                 {{ serv.Urgencia.Nombre }}
                             </span>
@@ -68,7 +68,7 @@
                             <tr *ngFor="let tick of myTickets  | filter: 'Id,termino,Titulo': query">
                                 <td data-toggle="tooltip" data-placement="top" [title]="tick.Descripcion" style="width:20px;">{{ tick.Id }}</td>
                                 <td>
-                                    <h6> {{ tick.Solicitor.nombre }} </h6>
+                                    <h6> {{ tick.Solicitor.nombre | titlecase | capitalizar }} </h6>
                                 </td>
                                 <td> {{ tick.Titulo }} </td>
                                 <td><span class="label label-rounded" [ngClass]="( tick.Estado === 'Abierta' ) ? 'label-warning' :

@@ -125,7 +125,7 @@
                                 <td style="width:20px;">{{ tick.Id }}</td>
                                 <td style="width:50px;"><span class="round"><img [src]="tick.Solicitor.id | imagen" alt="user" width="50" height="50px"></span></td>
                                 <td>
-                                    <h6> {{ tick.Solicitor.nombre }} </h6>
+                                    <h6> {{ tick.Solicitor.nombre | titlecase | capitalizar }} </h6>
                                 </td>
                                 <td> {{ tick.Titulo }} </td>
                                 <td> {{ tick.FecRegistro | date: 'yyyy-MM-dd' }} </td>

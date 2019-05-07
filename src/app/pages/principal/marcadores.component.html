@@ -12,7 +12,13 @@
                     <p> {{ error.message }} </p>
                 </div>
                 <button class="btn btn-info pull-right" [routerLink]="['/ticket']" name="new"> <i class="fa fa-plus"></i> Nuevo</button>
-                <h4 class="card-title pull-left">Hoy</h4>
+                <select [(ngModel)]="range" (change)="changeSelect()" name="range" id="range" class="form-control col-md-2 pull-left">
+                    <option value="HOY">Hoy</option>
+                    <option value="AYER">Ayer</option>
+                    <option value="SEMANA_ACTUAL">Semana Actual</option>
+                    <option value="SEMANA_ANTERIOR">Semana Anterior</option>
+                </select>
+                <!-- <h4 class="card-title pull-left">Hoy</h4> -->
                 <div *ngIf="!loading" class="row m-t-40">
                     <!-- Column -->
                     <div class="col-md-6 col-lg-3 col-xlg-3">
