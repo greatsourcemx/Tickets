@@ -52,11 +52,11 @@ import { RecoverComponent } from './login/recover.component';
     ServiceModule,
     NgbModule,
     StoreModule.forRoot( appReducers ),
-    EffectsModule.forRoot( effectsArr )
-    // StoreDevtoolsModule.instrument({
-    //   maxAge: 25, // Retains last 25 states
-    //   logOnly: environment.production, // Restrict extension to log-only mode
-    // })
+    EffectsModule.forRoot( effectsArr ),
+    StoreDevtoolsModule.instrument({
+      maxAge: 25, // Retains last 25 states
+      logOnly: environment.production, // Restrict extension to log-only mode
+    })
   ],
   providers: [GroupByPipe],
   bootstrap: [AppComponent]

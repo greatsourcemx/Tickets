@@ -25,9 +25,12 @@ export class ServiciosService {
       }));
   }
 
-  cargarServicios( id: number = 0, desde: number = 0 ) {
+  cargarServicios( desde: number = 0 ) {
     let url = URL_SERVICIOS + '/soli/servicios?desde=' + desde;
-    return this.http.get( url );
+    return this.http.get( url ).pipe(
+      map( (resp: Servicio[]) => {
+        return resp;
+      }));
   }
 
   cargarDetalles ( ServId: number ) {

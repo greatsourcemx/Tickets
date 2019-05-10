@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { NgForm } from '@angular/forms';
 import { Usuario } from '../../models/usuario.model';
-import { Servicio } from '../../models/servicio.model';
 import { ServiciosService, UsuarioService, TiposService } from '../../services/service.index';
 import * as data from '../../config/estatus.json';
 import { Principal } from '../../models/models.index';
+// Store
+import { Store } from '@ngrx/store';
+import { AppState } from '../../store/app.reducers';
+import * as markActions from '../../store/actions';
 
 @Component({
   selector: 'app-dashboard',
@@ -27,31 +29,35 @@ export class DashboardComponent implements OnInit {
 
   constructor(public _serviciosService: ServiciosService,
               public _usuarioService: UsuarioService,
+              public store: Store<AppState>,
               public _tiposService: TiposService ) { }
 
   ngOnInit() {
     this.usuario = this._usuarioService.usuario;
     this.cargarDashboard();
     this.cargarServicios();
+    this.store.dispatch( new markActions.LoadServSoliAction( this.desde ) );
+    this.store.dispatch( new markActions.LoadMarkAction( 'HOY' ) );
   }
 
-  cargarServicios(  ) {
-
+  cargarServicios() {
     this.cargando = true;
-    this._serviciosService.cargarServicios(this.usuario.id, this.desde)
-    .subscribe( (resp: any) => {
-      if (resp.length !== 0) {
-        this.totalRegistros = resp[0].Total;
-        this.servicios = resp;
+    this.store.select('servicios')
+    .subscribe( resp => {
+      if (resp.tickets !== null) {
+        if (resp.tickets.length > 0) {
+          this.servicios = resp.tickets;
+          this.totalRegistros = this.servicios[0].Total;
+        }
+        this.cargando = false;
       }
-      this.cargando = false;
     });
   }
 
   cargarDashboard () {
-    this._serviciosService.cargarDashboard( 'HOY' )
-    .subscribe( (resp: any) => {
-      this.principal = resp;
+    this.store.select('marcadores')
+    .subscribe( principal => {
+      this.principal = principal.principal;
     });
   }
 

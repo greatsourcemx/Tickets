@@ -13,15 +13,14 @@ import * as markActions from '../../store/actions';
 export class MarcadoresComponent implements OnInit {
 
   principal: Principal = new Principal();
-  loading = false;
   error: any;
   range = 'HOY';
+  loaded = false;
 
   constructor(public store: Store<AppState>) {
     this.store.select('marcadores')
     .subscribe( principal => {
       this.range = principal.filtro;
-      console.log(this.range);
     });
   }
 
@@ -35,7 +34,7 @@ export class MarcadoresComponent implements OnInit {
     this.store.select('marcadores')
     .subscribe( principal => {
       this.principal = principal.principal;
-      this.loading = principal.loading;
+      this.loaded = principal.loaded;
       this.error = principal.error;
     });
   }

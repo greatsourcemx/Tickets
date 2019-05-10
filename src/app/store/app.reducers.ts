@@ -10,6 +10,7 @@ export interface AppState {
     marcadores: reducers.MarkerState;
     solicitantes: reducers.SoliState;
     tiempos: reducers.TiempoState;
+    notificacion: reducers.NotifiState;
 }
 
 export const appReducers: ActionReducerMap<AppState> = {
@@ -18,5 +19,6 @@ export const appReducers: ActionReducerMap<AppState> = {
     servicios: reducers.ticketReducer,
     marcadores: reducers.marcadorReducer,
     solicitantes: reducers.solicitantesReducer,
-    tiempos: reducers.tiempoReducer
+    tiempos: reducers.tiempoReducer,
+    notificacion: reducers.notificacionReducer
 };

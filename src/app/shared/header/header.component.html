@@ -53,8 +53,8 @@
                 <!-- ============================================================== -->
                 <!-- Messages -->
                 <!-- ============================================================== -->
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle waves-effect waves-dark" (click)="cargarNotificaciones()" href="" id="2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="fa fa-bell"></i>
+                <li *ngIf="loaded" class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle waves-effect waves-dark" (click)="fire()" href="" id="2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="fa fa-bell"></i>
                         <div class="notify" *ngIf="notifica"> <span class="heartbit"></span> <span class="point"></span> </div>
                     </a>
                     <div class="dropdown-menu mailbox dropdown-menu-right animated fadeIn" aria-labelledby="2">
@@ -92,7 +92,7 @@
                                 <div class="dw-user-box">
                                     <div class="u-img"><img [src]="usuario.id | imagen" alt="user"></div>
                                     <div class="u-text">
-                                        <h4> {{ usuario.nombre }} </h4>
+                                        <h4> {{ usuario.nombre | titlecase | capitalizar }} </h4>
                                         <p class="text-muted"> {{ usuario.correo }} </p>
                                     </div>
                                 </div>

@@ -13,12 +13,12 @@
                 </div>
 
                 <div class="row">
-                    <div class="col-lg-6">
+                    <div *ngIf="esSoporte" class="col-lg-6">
                         <label for="solicitante">Solicitante</label>
                         <ng-select [(ngModel)]="ticket.Solicitor" name="solicitante" [items]="users" bindLabel="nombre">
                         </ng-select>
                     </div>
-                    <div class="col-lg-6">
+                    <div [ngClass]="esSoporte ? 'col-lg-6' : 'col-lg-12'">
                         <label for="responsable">Responsable</label>
                         <ng-select [(ngModel)]="ticket.AsignadoA" name="responsable" [items]="admins" bindLabel="nombre">
                             <ng-template ng-option-tmp let-item="item">
@@ -31,7 +31,7 @@
                 <label class="control-label m-t-20"></label>
 
                 <div class="row">
-                    <div class="col-lg-4">
+                    <div [ngClass]="esSoporte ? 'col-lg-4' : 'col-lg-6'">
                         <label for="estatus">Estatus</label>
                         <div class="input-group">
                             <select [(ngModel)]="ticket.Estado" id="estatus" name="estatus" class="form-control" required>
@@ -39,7 +39,7 @@
                             </select>
                         </div>
                     </div>
-                    <div class="col-lg-4">
+                    <div [ngClass]="esSoporte ? 'col-lg-4' : 'col-lg-6'">
                         <label for="fecha">Fecha Cierre</label>
                         <div class="input-group">
                             <input class="form-control" placeholder="yyyy-mm-dd" name="dp" [(ngModel)]="fecCerrado" ngbDatepicker #d="ngbDatepicker" />
@@ -50,10 +50,10 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-4">
+                    <div *ngIf="esSoporte" class="col-lg-4">
                         <label for="tipo">Tipo</label>
                         <div class="input-group">
-                            <select [(ngModel)]="ticket.TipoServicio.id" name="tipo" class="form-control" required>
+                            <select [(ngModel)]="ticket.TipoServicio.id" name="tipo" class="form-control">
                                 <option *ngFor="let tipo of tipos" [ngValue]="tipo.id">{{ tipo.descripcion }}</option>
                             </select>
                         </div>

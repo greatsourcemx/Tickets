@@ -1,11 +1,10 @@
 <app-nuevo-servicio *ngIf="nuevo"></app-nuevo-servicio>
 
-<div class="row" *ngIf="!nuevo">
+<div *ngIf="!nuevo" class="row">
     <div class="col-12">
         <div class="card">
             <div class="card-body">
-
-                <div class="row m-t-40">
+                <div *ngIf="principal" class="row m-t-40">
                     <!-- Column -->
                     <div class="col-md-6 col-lg-3 col-xlg-3">
                         <button (click)="nuevo = true" name="new" class="btn btn-info"> <i class="fa fa-plus"></i> Nuevo</button>
@@ -40,8 +39,19 @@
                     <!-- Column -->
                 </div>
 
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row" *ngIf="!nuevo">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title"><span class="lstick"></span>Mis Solicitudes</h4>
+
                 <div class="table-responsive animated fadeIn" *ngIf="!cargando">
-                    <table id="demo-foo-addrow" class="table m-t-30 table-sm table-hover no-wrap contact-list footable-loaded footable" data-page-size="10">
+                    <table class="table vm no-th-brd no-wrap pro-of-month table-sm table-hover">
                         <thead>
                             <tr>
                                 <th class="pointer" (click)="sort('Id')">
@@ -87,13 +97,8 @@
                     </table>
                 </div>
 
-                <button (click)="cambiarDesde(-1)" class="btn btn-secondary">
-                    Anteriores
-                </button>
-
-                <button (click)="cambiarDesde(1)" class="btn btn-secondary">
-                    Siguientes
-                </button>
+                <button *ngIf="(totalRegistros >= 15)" (click)="cambiarDesde(-1)" class="btn btn-secondary">Anteriores</button>
+                <button *ngIf="(totalRegistros >= 15)" (click)="cambiarDesde(1)" class="btn btn-secondary">Siguientes</button>
             </div>
         </div>
     </div>

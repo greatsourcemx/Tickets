@@ -2,6 +2,10 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { UsuarioService, ServiciosService } from '../../services/service.index';
 import { Usuario, Servicio } from '../../models/models.index';
+// store
+import { Store } from '@ngrx/store';
+import { AppState } from '../../store/app.reducers';
+import * as notiActions from '../../store/actions';
 
 @Component({
   selector: 'app-header',
@@ -10,31 +14,62 @@ import { Usuario, Servicio } from '../../models/models.index';
 })
 export class HeaderComponent implements OnInit, OnDestroy {
 
-  usuario: Usuario;
+  usuario: Usuario = new Usuario();
   servicios: Servicio[] = [];
-  notifica = false;
   intervalo;
+  range = '';
+  desde = 0;
+  notifica = false;
+  loaded = false;
+  loading = false;
 
-  constructor(
-    public _usuarioService: UsuarioService,
-    public router: Router,
-    public _servicioService: ServiciosService ) {
-    this.usuario = JSON.parse( localStorage.getItem('usuario') );
-    this.cargarNotificaciones();
+  constructor(public _usuarioService: UsuarioService,
+              public router: Router,
+              public store: Store<AppState>,
+              public _servicioService: ServiciosService ) {
+                this.usuario = JSON.parse( localStorage.getItem('usuario') );
+                if ( this.usuario.rolId !== 1 ) {
+                  this.store.select('servicios')
+                  .subscribe( resp => {
+                    this.desde = resp.filtro;
+                  });
+                }
+                this.cargarInfo();
+                this.store.select('marcadores')
+                .subscribe( principal => {
+                  this.range = principal.filtro;
+                });
   }
 
   ngOnInit() {
+    this.fire();
+    this.cargarNotificaciones();
     this.intervalo = setInterval( () => {
-      this.cargarNotificaciones();
+      this.fire();
     }, 60000 );
-    this.cargarInfo();
+  }
+
+  fire() {
+    this.store.dispatch( new notiActions.LoadNotificationAction(this.servicios) );
+    this.store.dispatch( new notiActions.LoadMarkAction( this.range ) );
+    if ( this.usuario.rolId === 1 ) {
+      this.store.dispatch( new notiActions.LoadServAction() );
+      this.store.dispatch( new notiActions.LoadUsersAction() );
+      this.store.dispatch( new notiActions.LoadTimerAction() );
+    } else {
+      this.store.dispatch( new notiActions.LoadServSoliAction( this.desde ) );
+    }
   }
 
   cargarNotificaciones() {
-    this._usuarioService.notificaciones( this.servicios )
-    .subscribe((data: Servicio[]) => {
-      this.servicios = data;
-      this.notifica = this.sinLeer();
+    this.store.select('notificacion')
+    .subscribe( resp => {
+      this.servicios = resp.notificaciones;
+      this.loaded = resp.loaded;
+      this.loading = resp.loading;
+      if (this.servicios != null && this.usuario != null) {
+        this.notifica = this.sinLeer();
+      }
     });
   }
 
@@ -51,12 +86,21 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   sinLeer(): boolean {
-    for ( const srv of this.servicios ) {
-      if ( srv.leido ) {
-        return false;
+    if (this.usuario.rolId === 1) {
+      for ( const srv of this.servicios ) {
+        if ( srv.TipoServicio.id === 1 && srv.Estado === 'Abierta' ) {
+          return true;
+        }
       }
+    } else {
+      let todos = false;
+      for ( const srv of this.servicios ) {
+        if ( !srv.leido ) {
+          todos = true;
+        }
+      }
+      return todos;
     }
-    return this.servicios.length === 0 ? false : true;
   }
 
   detalle( folio ) {

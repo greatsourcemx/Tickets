@@ -19,8 +19,8 @@ export class PrincipalComponent implements OnInit, OnDestroy {
   users: Usuario[];
   query = '';
   intervalo;
-  loadingTickets = false;
   error: any;
+  loaded = false;
 
   constructor(public _servicioService: ServiciosService,
               public store: Store<AppState>,
@@ -46,7 +46,7 @@ export class PrincipalComponent implements OnInit, OnDestroy {
     this.store.select('servicios')
       .subscribe( tickets => {
         this.myTickets = tickets.tickets;
-        this.loadingTickets = tickets.loading;
+        this.loaded = tickets.loaded;
         this.error = tickets.error;
       });
   }

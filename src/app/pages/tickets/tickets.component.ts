@@ -15,11 +15,11 @@ export class TicketsComponent implements OnInit {
   duracion: Tiempo;
   ticket: Servicio = new Servicio('');
   fecCerrado: any = { year: 1800, month: 1, day: 1 };
-
   admins: Usuario[];
   users: Usuario[];
   estados: any = data.default;
   tipos: Tipo[];
+  esSoporte = false;
 
   constructor(
     public _ticketService: ServiciosService,
@@ -81,6 +81,7 @@ export class TicketsComponent implements OnInit {
         this.ticket.AsignadoA = this._adminService.usuario;
       }
       this.ticket.Estado = this.estados.Estatus[2].value;
+      this.esSoporte = !(this.ticket.TipoServicio.id === 1);
     });
   }
 

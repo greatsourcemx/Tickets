@@ -64,6 +64,7 @@ import { NuevoComponent } from './recurrentes/nuevo.component';
 import { EditRecurrenteComponent } from './recurrentes/edit-recurrente.component';
 import { MarcadoresComponent } from './principal/marcadores.component';
 
+
 @NgModule({
     declarations: [
         PagesComponent,
@@ -93,13 +94,13 @@ import { MarcadoresComponent } from './principal/marcadores.component';
         ReportesComponent,
         HorasComponent,
         ProyectosComponent,
+        GenerarComponent,
+        AsignadoComponent,
+        PerfilComponent,
         EntregaComponent,
         SalidaComponent,
         SinFirmaComponent,
         TransferenciaComponent,
-        GenerarComponent,
-        AsignadoComponent,
-        PerfilComponent,
         RecurrentesComponent,
         NuevoComponent,
         EditRecurrenteComponent,
@@ -108,7 +109,7 @@ import { MarcadoresComponent } from './principal/marcadores.component';
     exports: [
         DashboardComponent,
         ProgressComponent,
-        Graficas1Component
+        Graficas1Component,
     ],
     imports: [
         RouterModule,

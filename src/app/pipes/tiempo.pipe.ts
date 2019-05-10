@@ -6,6 +6,9 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class TiempoPipe implements PipeTransform {
 
   transform(tiempo: string, minuto?: string): string {
+    if (tiempo === null) {
+      return '';
+    }
 
     let split = tiempo.split('|');
 
