@@ -3,6 +3,7 @@ import { Usuario } from '../../models/usuario.model';
 import { ServiciosService, UsuarioService, TiposService } from '../../services/service.index';
 import * as data from '../../config/estatus.json';
 import { Principal } from '../../models/models.index';
+import { NgbRatingConfig } from '@ng-bootstrap/ng-bootstrap';
 // Store
 import { Store } from '@ngrx/store';
 import { AppState } from '../../store/app.reducers';
@@ -30,9 +31,11 @@ export class DashboardComponent implements OnInit {
   constructor(public _serviciosService: ServiciosService,
               public _usuarioService: UsuarioService,
               public store: Store<AppState>,
+              public config: NgbRatingConfig,
               public _tiposService: TiposService ) { }
 
   ngOnInit() {
+    this.config.max = 5;
     this.usuario = this._usuarioService.usuario;
     this.cargarDashboard();
     this.cargarServicios();

@@ -63,6 +63,7 @@ import { RecurrentesComponent } from './recurrentes/recurrentes.component';
 import { NuevoComponent } from './recurrentes/nuevo.component';
 import { EditRecurrenteComponent } from './recurrentes/edit-recurrente.component';
 import { MarcadoresComponent } from './principal/marcadores.component';
+import { RatingComponent } from './dashboard/rating.component';
 
 
 @NgModule({
@@ -104,7 +105,8 @@ import { MarcadoresComponent } from './principal/marcadores.component';
         RecurrentesComponent,
         NuevoComponent,
         EditRecurrenteComponent,
-        MarcadoresComponent
+        MarcadoresComponent,
+        RatingComponent
     ],
     exports: [
         DashboardComponent,

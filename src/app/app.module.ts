@@ -22,8 +22,8 @@ import { appReducers } from './store/app.reducers';
 import { EffectsModule } from '@ngrx/effects';
 import { effectsArr } from './store/effects/index';
 // DevTools (Quitar en produccion)
-import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { environment } from '../environments/environment';
+// import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+// import { environment } from '../environments/environment';
 
 // Servicios
 import { ServiceModule } from './services/service.module';

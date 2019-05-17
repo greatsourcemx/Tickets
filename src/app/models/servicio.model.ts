@@ -7,7 +7,7 @@ import { Tipo } from './tipo.model';
 
 export class Servicio {
     constructor (
-        public Titulo: string,
+        public Titulo: string = '',
         public Descripcion: string = '',
         public leido: boolean = false,
         public Estado?: string,

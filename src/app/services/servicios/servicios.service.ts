@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Servicio } from '../../models/servicio.model';
 import { URL_SERVICIOS } from '../../config/config';
+import { Rating } from '../../models/rating.model';
 
 @Injectable()
 export class ServiciosService {
@@ -84,6 +85,20 @@ export class ServiciosService {
   cargarTicketsCerrados (servicio: Servicio) {
     let url = URL_SERVICIOS + '/tickets/cerrados';
     return this.http.post( url, servicio );
+  }
+
+  cargarSinEvaluaciones() {
+    let url = URL_SERVICIOS + '/soli/evaluaciones';
+    return this.http.get( url );
+  }
+
+  guardarEvaluacion( rating: Rating ) {
+    const url = URL_SERVICIOS + '/rating';
+    return this.http.post( url, rating ).pipe(
+      map((data: any) => {
+        return data;
+      })
+    );
   }
 
 }
