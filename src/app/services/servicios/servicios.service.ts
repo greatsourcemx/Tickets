@@ -92,7 +92,7 @@ export class ServiciosService {
     return this.http.get( url );
   }
 
-  guardarEvaluacion( rating: Rating ) {
+  guardarEvaluacion( rating: Rating[] ) {
     const url = URL_SERVICIOS + '/rating';
     return this.http.post( url, rating ).pipe(
       map((data: any) => {

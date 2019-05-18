@@ -13,9 +13,8 @@ import swal from 'sweetalert';
 export class RatingComponent implements OnInit {
 
   @ViewChild('content') content: any;
-  currentRate: any;
+  ratings: Rating[] = [];
   evaluaciones: Servicio[] = null;
-  rating: Rating = new Rating();
 
   constructor(public _serviciosService: ServiciosService,
               public config: NgbModalConfig,
@@ -33,6 +32,9 @@ export class RatingComponent implements OnInit {
     .subscribe((resp: Servicio[]) => {
       this.evaluaciones = resp;
       if (this.evaluaciones.length > 0) {
+        for ( let serv of this.evaluaciones) {
+          this.ratings.push( new Rating(0, null, new Date(), null, serv));
+        }
         this.modalService.open(this.content);
       }
     });
@@ -42,14 +44,17 @@ export class RatingComponent implements OnInit {
     this.modalService.open(content);
   }
 
-  save( evaluacion: Servicio ) {
-    this.rating.rating = this.currentRate;
-    this.rating.servicio = evaluacion;
-    this._serviciosService.guardarEvaluacion( this.rating )
-    .subscribe(() => {
-      swal('Evaluación enviada', '', 'success');
-      this.modalService.dismissAll('close');
-    });
+  save() {
+    if ( this.ratings.filter( r => r.rating > 0).length > 0 ) {
+      this._serviciosService.guardarEvaluacion( this.ratings )
+      .subscribe(() => {
+        swal('Evaluación enviada', '', 'success');
+        this.modalService.dismissAll('close');
+      });
+    } else {
+      const leyenda = this.ratings.length > 1 ? 'Debe calificar al menos una evaluación' : 'Debe calificar la evaluación';
+      swal(leyenda, '', 'warning');
+    }
   }
 
 }

@@ -557,3 +557,13 @@ body {
 .filled.bad {
     color: #ff1e1e;
 }
+
+.rating-imagen {
+    margin: 15px 0 0 6px;
+}
+
+.rating-titulo {
+    margin: 0 0 -8px 0;
+}
+
+.rating-responsable {}

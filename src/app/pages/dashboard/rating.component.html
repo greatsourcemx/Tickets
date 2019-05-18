@@ -9,19 +9,30 @@
         <div *ngIf="evaluaciones" class="row">
             <div class="col-12">
                 <div class="card">
-                    <div class="card-body text-center">
-                        <h4 class="card-title m-t-10">{{ evaluaciones[0].Titulo }}</h4>
-                        <img [src]="evaluaciones[0].AsignadoA.id | imagen" alt="Atendido por" style="margin-bottom: 10px;" class="img-circle" width="100" height="100" />
-                        <br />
-                        <small>Atendió: {{ evaluaciones[0].AsignadoA.nombre }}</small>
-                        <br />
-                        <ngb-rating [(rate)]="currentRate">
-                            <ng-template let-fill="fill" let-index="index">
-                                <span class="star" [style.width.%]="fill" [class.filled]="fill === 100" [class.bad]="index < 2">&#9733;</span>
-                            </ng-template>
-                        </ngb-rating>
-                        <br />
-                        <button name="save" (click)="save(evaluaciones[0])" class="btn btn-primary">Calificar</button>
+                    <div class="card-body">
+
+                        <li class="media" *ngFor="let rati of ratings">
+                            <div class="rating-imagen">
+                                <img class="d-flex mr-3 img-circle" [src]="rati.servicio.AsignadoA.id | imagen" alt="Atendido por" width="80" height="80">
+                            </div>
+                            <div class="media-body text-center">
+                                <div class="rating-titulo">
+                                    <h5 class="card-title m-t-10"><b>{{ rati.servicio.Titulo }}</b></h5>
+                                </div>
+                                <div class="rating-responsable">
+                                    <small>Atendió: {{ rati.servicio.AsignadoA.nombre }}</small>
+                                </div>
+                                <ngb-rating [(rate)]="rati.rating">
+                                    <ng-template let-fill="fill" let-index="index">
+                                        <span class="star" [style.width.%]="fill" [class.filled]="fill === 100">&#9733;</span>
+                                    </ng-template>
+                                </ngb-rating>
+                                <hr />
+                            </div>
+                        </li>
+                        <div class="text-center">
+                            <button name="save" (click)="save()" class="btn btn-primary">Calificar</button>
+                        </div>
 
                     </div>
                 </div>
