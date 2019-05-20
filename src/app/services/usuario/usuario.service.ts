@@ -70,6 +70,11 @@ export class UsuarioService {
     }));
   }
 
+  cargarPromedio() {
+    const url = URL_SERVICIOS + '/rating';
+    return this.http.get( url );
+  }
+
   cargarUsuarios( desde: number = 0 ) {
     let url = URL_SERVICIOS + '/usuarios?desde=' + desde;
     return this.http.get( url );

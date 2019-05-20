@@ -5,16 +5,20 @@
             <div class="card-body">
                 <div class="m-t-30 text-center center"> <img [src]="perfil.userId | imagen" alt="user" class="img-circle" width="150" height="150" />
                     <h4 class="card-title m-t-10"> {{ perfil.nombre | titlecase | capitalizar }} </h4>
-                    <!-- <div class="row text-center justify-content-md-center">
-                        <div class="col-4"><a href="javascript:void(0)" class="link"><i class="icon-people"></i> <font class="font-medium">254</font></a></div>
-                        <div class="col-4"><a href="javascript:void(0)" class="link"><i class="icon-picture"></i> <font class="font-medium">54</font></a></div>
-                    </div> -->
+                    <div class="row text-center justify-content-md-center">
+                        <ng-template #t let-fill="fill">
+                            <span class="star-usr" [class.full]="fill === 100">
+                                <span class="half-usr" [style.width.%]="fill"><i class="fa fa-star"></i></span><i class="fa fa-star"></i>
+                            </span>
+                        </ng-template>
+                        <ngb-rating *ngIf="usuario.rolId === 1" [(rate)]="rating" [starTemplate]="t" [readonly]="true" max="5"></ngb-rating>
+                    </div>
                 </div>
             </div>
             <div>
                 <hr />
             </div>
-            <div class="card-body"> <small class="text-muted">Email address </small>
+            <div class="card-body"> <small class="text-muted">Correo Electrónico </small>
                 <h6> {{ perfil.correo }} </h6>
                 <small class="text-muted p-t-30 db">Puesto</small>
                 <h6>{{ perfil.puesto }}</h6>
@@ -26,8 +30,6 @@
         <div class="card">
             <!-- Nav tabs -->
             <ul class="nav nav-tabs profile-tab" role="tablist">
-                <!-- <li class="nav-item"> <a class="nav-link active" data-toggle="tab" href="#home" role="tab">Timeline</a> </li> -->
-                <!-- <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#profile" role="tab">Perfil</a> </li> -->
                 <li class="nav-item"> <a class="nav-link active" data-toggle="tab" href="#settings" role="tab">Contraseña</a> </li>
             </ul>
             <!-- Tab panes -->

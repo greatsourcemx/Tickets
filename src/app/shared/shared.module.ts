@@ -6,6 +6,9 @@ import { FormsModule } from '@angular/forms';
 // Pipes Modulo
 import { PipesModule } from '../pipes/pipes.module';
 
+// ng- bootstrap (rating)
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
 // ng- Select
 import { NgSelectModule } from '@ng-select/ng-select';
 
@@ -20,7 +23,8 @@ import { BreadcrumbsComponent } from './breadcrumbs/breadcrumbs.component';
         CommonModule,
         PipesModule,
         NgSelectModule,
-        FormsModule
+        FormsModule,
+        NgbModule
     ],
     declarations: [
         NopagefoundComponent,

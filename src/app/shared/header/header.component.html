@@ -85,15 +85,21 @@
                 <!-- Profile -->
                 <!-- ============================================================== -->
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img [src]="usuario.id | imagen" alt="user" class="profile-pic" /></a>
+                    <a class="nav-link dropdown-toggle waves-effect waves-dark" href="" (click)="cargarPromedio()" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img [src]="usuario.id | imagen" alt="user" class="profile-pic" /></a>
                     <div class="dropdown-menu dropdown-menu-right animated fadeIn">
                         <ul class="dropdown-user">
                             <li>
                                 <div class="dw-user-box">
                                     <div class="u-img"><img [src]="usuario.id | imagen" alt="user"></div>
-                                    <div class="u-text">
+                                    <div class="u-text text-center">
                                         <h4> {{ usuario.nombre | titlecase | capitalizar }} </h4>
-                                        <p class="text-muted"> {{ usuario.correo }} </p>
+                                        <ng-template #t let-fill="fill">
+                                            <span class="star-usr" [class.full]="fill === 100">
+                                                <span class="half-usr" [style.width.%]="fill"><i class="fa fa-star"></i></span><i class="fa fa-star"></i>
+                                            </span>
+                                        </ng-template>
+                                        <ngb-rating *ngIf="usuario.rolId === 1" [(rate)]="rating" [starTemplate]="t" [readonly]="true" max="5"></ngb-rating>
+                                        <p *ngIf="!(usuario.rolId === 1)" class="text-muted"> {{ usuario.correo }} </p>
                                     </div>
                                 </div>
                             </li>

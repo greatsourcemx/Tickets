@@ -542,7 +542,7 @@ body {
 /* Rating Star Widgets Style */
 
 .star {
-    font-size: 2.5rem;
+    font-size: 2rem;
     color: #b0c4de;
 }
 
@@ -566,4 +566,20 @@ body {
     margin: 0 0 -8px 0;
 }
 
-.rating-responsable {}
+.star-usr {
+    position: relative;
+    display: inline-block;
+    font-size: 1.3rem;
+    color: #d3d3d3;
+}
+
+.full-usr {
+    color: #1e90ff;
+}
+
+.half-usr {
+    position: absolute;
+    display: inline-block;
+    overflow: hidden;
+    color: #1e90ff;
+}

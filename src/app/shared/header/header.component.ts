@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { UsuarioService, ServiciosService } from '../../services/service.index';
 import { Usuario, Servicio } from '../../models/models.index';
+import { NgbRatingConfig } from '@ng-bootstrap/ng-bootstrap';
 // store
 import { Store } from '@ngrx/store';
 import { AppState } from '../../store/app.reducers';
@@ -22,11 +23,15 @@ export class HeaderComponent implements OnInit, OnDestroy {
   notifica = false;
   loaded = false;
   loading = false;
+  rating = 0;
 
   constructor(public _usuarioService: UsuarioService,
               public router: Router,
+              config: NgbRatingConfig,
               public store: Store<AppState>,
               public _servicioService: ServiciosService ) {
+                config.max = 5;
+                config.readonly = true;
                 this.usuario = JSON.parse( localStorage.getItem('usuario') );
                 if ( this.usuario.rolId !== 1 ) {
                   this.store.select('servicios')
@@ -42,11 +47,19 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.cargarPromedio();
     this.fire();
     this.cargarNotificaciones();
     this.intervalo = setInterval( () => {
       this.fire();
     }, 60000 );
+  }
+
+  cargarPromedio() {
+    this._usuarioService.cargarPromedio()
+    .subscribe((rsp: any) => {
+      this.rating = rsp;
+    });
   }
 
   fire() {

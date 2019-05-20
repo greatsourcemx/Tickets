@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Servicio } from '../../models/servicio.model';
 import { ServiciosService } from '../../services/service.index';
-import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModalConfig, NgbModal, NgbRatingConfig } from '@ng-bootstrap/ng-bootstrap';
 import { Rating } from '../../models/rating.model';
 import swal from 'sweetalert';
 
@@ -18,9 +18,12 @@ export class RatingComponent implements OnInit {
 
   constructor(public _serviciosService: ServiciosService,
               public config: NgbModalConfig,
+              public configRating: NgbRatingConfig,
               private modalService: NgbModal) {
                 this.config.backdrop = 'static';
                 this.config.keyboard = false;
+                configRating.readonly = false;
+                configRating.max = 5;
               }
 
   ngOnInit() {
