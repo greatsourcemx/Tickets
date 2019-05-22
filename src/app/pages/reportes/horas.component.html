@@ -70,7 +70,7 @@
                     <ngb-panel *ngFor="let unidad of horas | groupBy:'Unidad'" [id]="unidad.key">
                         <ng-template ngbPanelTitle>
                             <div class="pull-left">
-                                <h4 class="m-b-0 text-white">{{ unidad.key }}</h4>
+                                <h4 class="m-b-0 text-white">{{ unidad.key }}&nbsp;</h4>
                             </div>
                             <div class="pull-right">
                                 <h4 class="m-b-0 text-white">{{ TotalUnidad(unidad.value) | horas }}</h4>
