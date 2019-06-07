@@ -30,9 +30,7 @@ export class TicketComponent implements OnInit {
     public _usuarioService: UsuarioService,
     public _servicioService: ServiciosService,
     public router: Router,
-    public _tiposService: TiposService) {
-      this.ticket.AsignadoA = this._usuarioService.usuario;
-    }
+    public _tiposService: TiposService) { }
 
   ngOnInit() {
     this.cargarTiempos();
@@ -56,8 +54,10 @@ export class TicketComponent implements OnInit {
 
   cargarAdmins ( ) {
     this._adminService.cargarUsuaActivos( )
-    .subscribe( (resp: any) => {
+    .subscribe( (resp: Usuario[]) => {
       this.admins = resp;
+      const usr = this.admins.filter( u => u.usuario === this._usuarioService.usuario.usuario);
+      this.ticket.AsignadoA = usr[0];
     });
   }
 
@@ -95,7 +95,6 @@ export class TicketComponent implements OnInit {
       swal('Advertencia', 'Debe seleccionar el solicitor', 'warning');
       return;
     }
-
     this.ticket.FecCerrado = new Date(this.fecCerrado.year, this.fecCerrado.month - 1, this.fecCerrado.day);
     this._servicioService.guardarServicio( this.ticket.Solicitor.id, this.ticket )
     .subscribe(

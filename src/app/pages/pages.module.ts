@@ -64,6 +64,10 @@ import { NuevoComponent } from './recurrentes/nuevo.component';
 import { EditRecurrenteComponent } from './recurrentes/edit-recurrente.component';
 import { MarcadoresComponent } from './principal/marcadores.component';
 import { RatingComponent } from './dashboard/rating.component';
+import { ContadoresComponent } from './graficas1/contadores/contadores.component';
+import { AvgRatingsComponent } from './graficas1/avg-ratings/avg-ratings.component';
+import { AvgEmpresasComponent } from './graficas1/avg-empresas/avg-empresas.component';
+import { TopSolicitantesComponent } from './graficas1/top-solicitantes/top-solicitantes.component';
 
 
 @NgModule({
@@ -106,7 +110,11 @@ import { RatingComponent } from './dashboard/rating.component';
         NuevoComponent,
         EditRecurrenteComponent,
         MarcadoresComponent,
-        RatingComponent
+        RatingComponent,
+        ContadoresComponent,
+        AvgRatingsComponent,
+        AvgEmpresasComponent,
+        TopSolicitantesComponent
     ],
     exports: [
         DashboardComponent,

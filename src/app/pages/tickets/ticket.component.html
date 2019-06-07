@@ -20,7 +20,7 @@
                     </div>
                     <div class="col-lg-6">
                         <label for="responsable">Responsable</label>
-                        <ng-select [(ngModel)]="ticket.AsignadoA" name="responsable" [items]="admins" bindLabel="nombre" required>
+                        <ng-select [(ngModel)]="ticket.AsignadoA" name="responsable" [items]="admins" bindLabel="nombre">
                             <ng-template ng-option-tmp let-item="item">
                                 {{item.nombre}} <small>{{item.noEmpleado}}</small>
                             </ng-template>

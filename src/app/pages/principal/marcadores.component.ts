@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Principal } from '../../models/models.index';
+import { Principal, Listados } from '../../models/models.index';
+import Json from '../../../assets/json/range.json';
 
 import { Store } from '@ngrx/store';
 import { AppState } from '../../store/app.reducers';
@@ -13,11 +14,13 @@ import * as markActions from '../../store/actions';
 export class MarcadoresComponent implements OnInit {
 
   principal: Principal = new Principal();
+  rangos: Listados[] = [];
   error: any;
   range = 'HOY';
   loaded = false;
 
   constructor(public store: Store<AppState>) {
+    this.rangos = Json.Rangos;
     this.store.select('marcadores')
     .subscribe( principal => {
       this.range = principal.filtro;

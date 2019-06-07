@@ -19,7 +19,8 @@ import {
   GlpiService,
   ReportesService,
   RecurrentesService,
-  ExcelService } from './service.index';
+  ExcelService,
+  GraficasService } from './service.index';
 
 @NgModule({
   imports: [
@@ -47,7 +48,8 @@ import {
     GlpiService,
     ReportesService,
     RecurrentesService,
-    ExcelService
+    ExcelService,
+    GraficasService
   ],
   declarations: []
 })

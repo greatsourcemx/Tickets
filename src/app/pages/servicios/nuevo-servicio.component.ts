@@ -3,7 +3,7 @@ import { NgForm } from '@angular/forms';
 import { ServiciosService, UsuarioService, PrioridadService } from '../../services/service.index';
 import { Servicio } from '../../models/servicio.model';
 import { Usuario } from '../../models/usuario.model';
-import { Router } from '@angular/router';
+import swal from 'sweetalert';
 
 @Component({
   selector: 'app-nuevo-servicio',

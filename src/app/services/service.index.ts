@@ -16,3 +16,4 @@ export { MantenimientoService } from './mantenimientos/mantenimiento.service';
 export { GlpiService } from './GLPI/glpi.service';
 export { RecurrentesService } from './servicios/recurrentes.service';
 export { ExcelService } from './excel/excel.service';
+export { GraficasService } from './graficas/graficas.service';

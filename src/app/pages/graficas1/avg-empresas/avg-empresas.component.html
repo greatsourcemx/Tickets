@@ -1,0 +1,25 @@
+<div class="col-lg-12">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title"><span class="lstick"></span>Porcentajes</h4>
+            <div *ngIf="cargando">
+                <br /><br />
+                <div class="alert alert-warning text-center">
+                    <strong>Cargando</strong>
+                    <br />
+                    <i class="fa fa-refresh fa-spin fa-2x"></i>
+                    <br />
+                    <span>Espere por favor</span>
+                </div>
+            </div>
+            <table *ngIf="!cargando" class="table vm font-14">
+                <tbody>
+                    <tr *ngFor="let unidad of reporte | groupBy:'Empresa'">
+                        <td class="b-0">{{ unidad.key }}&nbsp;</td>
+                        <td class="text-right font-medium b-0">{{ porcenUnidad(unidad.value) | percent:'2.2-2' }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

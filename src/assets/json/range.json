@@ -1,0 +1,27 @@
+{
+    "Rangos": [{
+        "id": 1,
+        "displayName": "Hoy",
+        "value": "HOY"
+    }, {
+        "id": 2,
+        "displayName": "Ayer",
+        "value": "AYER"
+    }, {
+        "id": 3,
+        "displayName": "Semana Actual",
+        "value": "SEMANA_ACTUAL"
+    }, {
+        "id": 4,
+        "displayName": "Semana Anterior",
+        "value": "SEMANA_ANTERIOR"
+    }, {
+        "id": 5,
+        "displayName": "Mes Actual",
+        "value": "MES_ACTUAL"
+    }, {
+        "id": 6,
+        "displayName": "Mes Anterior",
+        "value": "MES_ANTERIOR"
+    }]
+}

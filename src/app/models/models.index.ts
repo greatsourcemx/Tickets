@@ -17,3 +17,5 @@ export { RetornoEquipo } from './retorno.model';
 export { Perfil } from './perfil.model';
 export { Recurrentes } from './recurrentes.model';
 export { Rating } from './rating.model';
+export * from './graficas/grafica.index';
+export { Listados } from './listados.model';
