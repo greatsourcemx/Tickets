@@ -7,6 +7,7 @@ import SampleJson from '../../../../assets/json/range.json';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../../store/app.reducers';
 import * as markActions from '../../../store/actions';
+import { Parametros } from '../../../models/parametros.model';
 
 @Component({
   selector: 'app-contadores',
@@ -18,14 +19,14 @@ export class ContadoresComponent implements OnInit {
   grafica: Graficas = null;
   rangos: Listados[] = [];
   loading = false;
-  rango = 'HOY';
+  param: Parametros = new Parametros();
 
   constructor(public grafServicios: GraficasService,
               public store: Store<AppState>) {
                 this.rangos = SampleJson.Rangos;
                 this.store.select('marcadores')
                 .subscribe( principal => {
-                  this.rango = principal.filtro;
+                  this.param = principal.param;
                 });
               }
 
@@ -35,10 +36,10 @@ export class ContadoresComponent implements OnInit {
 
   cargarContadores() {
     this.loading = true;
-    this.grafServicios.cargarContadores( this.rango )
+    this.grafServicios.cargarContadores( this.param )
     .subscribe((resp: Graficas) => {
       this.loading = false;
-      this.store.dispatch( new markActions.LoadMarkAction( this.rango ) );
+      this.store.dispatch( new markActions.LoadMarkAction( this.param ) );
       this.grafica = resp;
     });
   }

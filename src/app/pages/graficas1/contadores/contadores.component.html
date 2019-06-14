@@ -2,7 +2,7 @@
     <div class="col-12">
         <div class="card">
             <div class="card-body">
-                <select [(ngModel)]="rango" (change)="cargarContadores()" name="range" id="range" class="form-control col-md-2 pull-left">
+                <select [(ngModel)]="param.rango" (change)="cargarContadores()" name="range" id="range" class="form-control col-md-2 pull-left">
                   <option *ngFor="let rang of rangos" [value]="rang.value">{{ rang.displayName }}</option>
                 </select>
                 <div *ngIf="loading">

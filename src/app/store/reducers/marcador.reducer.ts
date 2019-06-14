@@ -1,12 +1,13 @@
 import * as fromMark from '../actions/index';
 import { Principal } from '../../models/principal.model';
+import { Parametros } from '../../models/parametros.model';
 
 export interface MarkerState {
     principal: Principal;
     loaded: boolean;
     loading: boolean;
     error: any;
-    filtro: string;
+    param: Parametros;
 }
 
 const initState: MarkerState = {
@@ -14,7 +15,7 @@ const initState: MarkerState = {
     loaded: false,
     loading: false,
     error: null,
-    filtro: 'HOY'
+    param: new Parametros()
 };
 
 export function marcadorReducer( state = initState, action: fromMark.markAcciones ): MarkerState {
@@ -24,7 +25,7 @@ export function marcadorReducer( state = initState, action: fromMark.markAccione
                 ...state,
                 loading: true,
                 error: null,
-                filtro: action.payload
+                param: action.payload
             };
         case fromMark.LOAD_MARK_SUCCESS:
             return {

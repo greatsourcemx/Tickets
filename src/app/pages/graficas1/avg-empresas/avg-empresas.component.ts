@@ -22,14 +22,15 @@ export class AvgEmpresasComponent implements OnInit {
               public store: Store<AppState>) {
                 this.store.select('marcadores')
                 .subscribe( principal => {
-                  if (this.param.rango !== principal.filtro) {
-                    this.param.rango = principal.filtro;
+                  if (this.param.rango !== principal.param.rango) {
+                    this.param.rango = principal.param.rango;
                     this.cargarPorcentaje();
                   }
                 });
   }
 
   ngOnInit() {
+    this.cargarPorcentaje();
   }
 
   cargarPorcentaje() {

@@ -5,6 +5,6 @@ export class Parametros {
         public fechaInicial: Date = new Date(),
         public fechaFinal: Date = new Date(),
         public responsable: Usuario = new Usuario('', ''),
-        public rango: string = ''
+        public rango: string = 'HOY'
     ) { }
 }

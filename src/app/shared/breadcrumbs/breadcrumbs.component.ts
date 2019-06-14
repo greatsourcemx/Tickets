@@ -11,6 +11,7 @@ import swal from 'sweetalert';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../store/app.reducers';
 import * as servActions from '../../store/actions';
+import { Parametros } from '../../models/parametros.model';
 
 @Component({
   selector: 'app-breadcrumbs',
@@ -24,7 +25,7 @@ export class BreadcrumbsComponent implements OnInit {
   users: Usuario[];
   duracion: Tiempo[];
   label: string = '';
-  range: string = '';
+  range: Parametros = new Parametros();
 
   constructor(private router: Router,
               public title: Title,
@@ -70,7 +71,7 @@ export class BreadcrumbsComponent implements OnInit {
   ngOnInit() {
     this.store.select('marcadores')
     .subscribe( principal => {
-      this.range = principal.filtro;
+      this.range = principal.param;
     });
   }
 

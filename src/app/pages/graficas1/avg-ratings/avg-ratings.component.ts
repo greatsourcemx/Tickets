@@ -7,6 +7,7 @@ import SampleJson from '../../../../assets/json/range.json';
 // Store
 import { Store } from '@ngrx/store';
 import { AppState } from '../../../store/app.reducers';
+import { Parametros } from '../../../models/parametros.model';
 
 @Component({
   selector: 'app-avg-ratings',
@@ -18,7 +19,7 @@ export class AvgRatingsComponent implements OnInit {
   grafica: Graficas = new Graficas();
   top: Graficas = new Graficas();
   rangos: Listados[] = [];
-  rango = '';
+  param: Parametros = new Parametros();
   cargando = false;
 
   constructor(public grafServicios: GraficasService,
@@ -29,19 +30,20 @@ export class AvgRatingsComponent implements OnInit {
       config.readonly = true;
       this.store.select('marcadores')
         .subscribe( principal => {
-          if (this.rango !== principal.filtro) {
-            this.rango = principal.filtro;
+          if (this.param.rango !== principal.param.rango) {
+            this.param.rango = principal.param.rango;
             this.cargarRatings();
           }
       });
   }
 
   ngOnInit() {
+    this.cargarRatings();
   }
 
   cargarRatings() {
     this.cargando = true;
-    this.grafServicios.cargarTopRating( this.rango )
+    this.grafServicios.cargarTopRating( this.param )
     .subscribe((data: Graficas) => {
       this.cargando = false;
       this.grafica = data;

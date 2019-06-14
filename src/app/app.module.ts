@@ -41,7 +41,7 @@ import { RecoverComponent } from './login/recover.component';
     AppComponent,
     LoginComponent,
     RegisterComponent,
-    RecoverComponent
+    RecoverComponent,
   ],
   imports: [
     BrowserModule,

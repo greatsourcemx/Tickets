@@ -1,0 +1,29 @@
+<div class="col-lg-12">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title"><span class="lstick"></span>Top Horas</h4>
+            <div *ngIf="cargando">
+                <br /><br />
+                <div class="alert alert-warning text-center">
+                    <strong>Cargando</strong>
+                    <br />
+                    <i class="fa fa-refresh fa-spin fa-2x"></i>
+                    <br />
+                    <span>Espere por favor</span>
+                </div>
+            </div>
+            <table class="table vm font-14">
+                <tbody>
+                    <tr *ngFor="let hora of top.horas">
+                        <td style="width:50px;"><span class="round"><img [src]="hora.solicitante.id | imagen" alt="user" width="50" height="50px"></span></td>
+                        <td>
+                            <h6> {{ hora.solicitante.nombre | titlecase | capitalizar }} </h6>
+                        </td>
+                        <td> {{ hora.total }} </td>
+                        <td> {{ hora.tiempo }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

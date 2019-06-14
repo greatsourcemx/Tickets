@@ -7,6 +7,7 @@ import { NgbRatingConfig } from '@ng-bootstrap/ng-bootstrap';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../store/app.reducers';
 import * as notiActions from '../../store/actions';
+import { Parametros } from '../../models/parametros.model';
 
 @Component({
   selector: 'app-header',
@@ -18,7 +19,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   usuario: Usuario = new Usuario();
   servicios: Servicio[] = [];
   intervalo;
-  range = '';
+  param: Parametros = new Parametros();
   desde = 0;
   notifica = false;
   loaded = false;
@@ -42,7 +43,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
                 this.cargarInfo();
                 this.store.select('marcadores')
                 .subscribe( principal => {
-                  this.range = principal.filtro;
+                  this.param = principal.param;
                 });
   }
 
@@ -64,7 +65,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   fire() {
     this.store.dispatch( new notiActions.LoadNotificationAction(this.servicios) );
-    this.store.dispatch( new notiActions.LoadMarkAction( this.range ) );
+    this.store.dispatch( new notiActions.LoadMarkAction( this.param ) );
     if ( this.usuario.rolId === 1 ) {
       this.store.dispatch( new notiActions.LoadServAction() );
       this.store.dispatch( new notiActions.LoadUsersAction() );

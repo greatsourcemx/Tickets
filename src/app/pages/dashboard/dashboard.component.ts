@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Usuario } from '../../models/usuario.model';
 import { ServiciosService, UsuarioService, TiposService } from '../../services/service.index';
 import * as data from '../../config/estatus.json';
-import { Principal } from '../../models/models.index';
+import { Principal, Parametros } from '../../models/models.index';
 import { NgbRatingConfig } from '@ng-bootstrap/ng-bootstrap';
 // Store
 import { Store } from '@ngrx/store';
@@ -40,7 +40,7 @@ export class DashboardComponent implements OnInit {
     this.cargarDashboard();
     this.cargarServicios();
     this.store.dispatch( new markActions.LoadServSoliAction( this.desde ) );
-    this.store.dispatch( new markActions.LoadMarkAction( 'HOY' ) );
+    this.store.dispatch( new markActions.LoadMarkAction( new Parametros() ) );
   }
 
   cargarServicios() {
