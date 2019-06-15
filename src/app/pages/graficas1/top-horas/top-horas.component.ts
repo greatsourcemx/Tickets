@@ -14,15 +14,14 @@ import { AppState } from '../../../store/app.reducers';
 export class TopHorasComponent implements OnInit {
 
   grafica: Graficas = new Graficas();
-  top: Graficas = new Graficas();
   param: Parametros = new Parametros();
   cargando = false;
 
   constructor(public grafServicios: GraficasService,
     public store: Store<AppState>) {
-      this.store.select('marcadores')
+            this.store.select('marcadores')
                   .subscribe( principal => {
-                    if (this.param.rango !== principal.param.rango) {
+                    if ( this.param.rango !== principal.param.rango ) {
                       this.param.rango = principal.param.rango;
                       this.cargarTopHoras();
                     }
@@ -35,27 +34,11 @@ export class TopHorasComponent implements OnInit {
 
   cargarTopHoras() {
     this.cargando = true;
-    this.top = new Graficas();
+    this.grafica = new Graficas();
     this.grafServicios.cargarTopHoras( this.param )
     .subscribe((resp: Graficas) => {
       this.cargando = false;
       this.grafica = resp;
-      let i: number = 0;
-      let OPct: number = 0;
-      let OTotal: number = 0;
-      for ( let item of this.grafica.horas ) {
-        if ( i < 5 ) {
-          this.top.horas.push( item );
-        } else {
-          OPct = OPct + item.minutos;
-          OTotal = OTotal + item.total;
-        }
-        i++;
-      }
-      // agregar el otros
-      if (OTotal > 0) {
-        this.top.horas.push( new TopHoras(0, 0, 0, ' Mucho', new Usuario('', '', 'Otros')) );
-      }
     });
   }
 
