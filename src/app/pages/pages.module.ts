@@ -69,6 +69,7 @@ import { AvgRatingsComponent } from './graficas1/avg-ratings/avg-ratings.compone
 import { AvgEmpresasComponent } from './graficas1/avg-empresas/avg-empresas.component';
 import { TopSolicitantesComponent } from './graficas1/top-solicitantes/top-solicitantes.component';
 import { TopHorasComponent } from './graficas1/top-horas/top-horas.component';
+import { CalendarioComponent } from './calendario/calendario.component';
 
 
 @NgModule({
@@ -116,7 +117,8 @@ import { TopHorasComponent } from './graficas1/top-horas/top-horas.component';
         AvgRatingsComponent,
         AvgEmpresasComponent,
         TopSolicitantesComponent,
-        TopHorasComponent
+        TopHorasComponent,
+        CalendarioComponent
     ],
     exports: [
         DashboardComponent,

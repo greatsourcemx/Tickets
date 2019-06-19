@@ -33,6 +33,12 @@
             { "titulo": "Trasnferencias", "url": "/transferencias" }
         ]
     }, {
+        "titulo": "Calendarios",
+        "icono": "fa fa-calendar",
+        "submenu": [
+            { "titulo": "Visitas", "url": "/calendario" }
+        ]
+    }, {
         "titulo": "Reportes",
         "icono": "ti ti-pie-chart",
         "submenu": [

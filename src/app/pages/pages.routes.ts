@@ -30,6 +30,7 @@ import { PerfilComponent } from './perfil/perfil.component';
 import { RecurrentesComponent } from './recurrentes/recurrentes.component';
 import { NuevoComponent } from './recurrentes/nuevo.component';
 import { EditRecurrenteComponent } from './recurrentes/edit-recurrente.component';
+import { CalendarioComponent } from './calendario/calendario.component';
 
 const pagesRoutes: Routes = [
     {
@@ -69,6 +70,7 @@ const pagesRoutes: Routes = [
             { path: 'recurrentes', component: RecurrentesComponent, data: { titulo: 'Recurrentes' }  },
             { path: 'recurrente/nuevo', component: NuevoComponent, data: { titulo: 'Recurrente' }  },
             { path: 'recurrente/:id', component: EditRecurrenteComponent, data: { titulo: 'Recurrente' }  },
+            { path: 'calendario', component: CalendarioComponent, data: { titulo: 'Calendario' }  },
             { path: '', redirectTo: '/principal', pathMatch: 'full'  },
         ]
     }
