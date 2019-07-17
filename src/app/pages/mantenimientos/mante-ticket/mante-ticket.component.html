@@ -1,0 +1,84 @@
+<div class="row">
+    <div class="col-6">
+        <div class="card">
+            <div class="card-body">
+                <h3 class="title">Crear Mantenimiento</h3>
+                <form #f="ngForm" ngNativeValidate (ngSubmit)="guardar()">
+
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <label for="equipo">Zona</label>
+                            <input type="text" readonly="readonly" [value]="ticketMante.mante.zona.nombre" name="equipo" class="form-control">
+                        </div>
+                        <div class="col-lg-6">
+                            <label for="zona">Equipo</label>
+                            <input type="text" readonly="readonly" name="zona" [value]="ticketMante.mante.equipo.Nombre" class="form-control">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <label for="solicitante">Solicitante</label>
+                            <ng-select [(ngModel)]="ticketMante.ticket.Solicitor" name="solicitante" [items]="users" bindLabel="nombre" required>
+                            </ng-select>
+                        </div>
+                        <div class="col-lg-6">
+                            <label for="fecha">Fecha Mantenimiento</label>
+                            <div class="input-group">
+                                <input class="form-control" placeholder="yyyy-mm-dd" name="dp" [(ngModel)]="fecCerrado" ngbDatepicker #d="ngbDatepicker" required />
+                                <div class="input-group-append">
+                                    <button class="btn btn-outline-secondary" (click)="d.toggle()" type="button">
+                            <i class="fa fa-calendar"></i>
+                            </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <label for="duracion">Duración</label>
+                            <ng-select [(ngModel)]="ticketMante.ticket.Duracion" name="Duracion" [items]="duracion" bindLabel="Descripcion">
+                            </ng-select>
+                        </div>
+                    </div>
+
+                    <label class="control-label" for="solucion">Comentarios</label>
+                    <textarea [(ngModel)]="ticketMante.ticket.Solucion" id="solucion" name="solucion" class="form-control" rows="4"></textarea>
+
+                    <button type="submit" class="btn btn-success waves-effect waves-light m-r-10">Guardar</button>
+                    <a [routerLink]="['/mantenimientos']" class="btn btn-info waves-effect waves-light"><b>Cancelar</b></a>
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+    <div *ngIf="mantes" class="col-md-6">
+        <div class="card">
+            <div class="card-body">
+                <h3 class="title">Historial</h3>
+                <table class="table table-sm">
+                    <thead>
+                        <tr>
+                            <th>Zona</th>
+                            <th>Equipo</th>
+                            <th>Fecha Mantenimiento</th>
+                            <th>Duracion</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let histo of mantes">
+                            <td>{{ histo.mante.zona.nombre }}</td>
+                            <td>{{ histo.mante.equipo.Nombre }}</td>
+                            <td>{{ histo.fecMante | date: 'yyyy-MM-dd' }}</td>
+                            <td>{{ histo.ticket.Duracion.Descripcion }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+
+    </div>
+</div>

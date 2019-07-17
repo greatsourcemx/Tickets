@@ -9,6 +9,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 // ng- Select
 import { NgSelectModule } from '@ng-select/ng-select';
 
+// DataTables
+import { DataTablesModule } from 'angular-datatables';
+
 // Graficas
 import { ChartsModule } from 'ng2-charts';
 
@@ -70,6 +73,12 @@ import { AvgEmpresasComponent } from './graficas1/avg-empresas/avg-empresas.comp
 import { TopSolicitantesComponent } from './graficas1/top-solicitantes/top-solicitantes.component';
 import { TopHorasComponent } from './graficas1/top-horas/top-horas.component';
 import { CalendarioComponent } from './calendario/calendario.component';
+import { ZonasComponent } from './mantenimientos/zonas/zonas.component';
+import { TableroComponent } from './mantenimientos/tablero/tablero.component';
+import { ManteTicketComponent } from './mantenimientos/mante-ticket/mante-ticket.component';
+import { UltimosManteComponent } from './mantenimientos/tablero/ultimos-mante/ultimos-mante.component';
+import { ManteVencidosComponent } from './mantenimientos/tablero/mante-vencidos/mante-vencidos.component';
+import { ManteMasivosComponent } from './mantenimientos/tablero/mante-masivos/mante-masivos.component';
 
 
 @NgModule({
@@ -118,7 +127,13 @@ import { CalendarioComponent } from './calendario/calendario.component';
         AvgEmpresasComponent,
         TopSolicitantesComponent,
         TopHorasComponent,
-        CalendarioComponent
+        CalendarioComponent,
+        ZonasComponent,
+        TableroComponent,
+        ManteTicketComponent,
+        UltimosManteComponent,
+        ManteVencidosComponent,
+        ManteMasivosComponent
     ],
     exports: [
         DashboardComponent,
@@ -135,6 +150,7 @@ import { CalendarioComponent } from './calendario/calendario.component';
         NgbModule.forRoot(),
         NgSelectModule,
         ChartsModule,
+        DataTablesModule,
         StoreModule.forFeature( 'servicios', ticketReducer )
     ]
 })

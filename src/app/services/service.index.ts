@@ -17,3 +17,4 @@ export { GlpiService } from './GLPI/glpi.service';
 export { RecurrentesService } from './servicios/recurrentes.service';
 export { ExcelService } from './excel/excel.service';
 export { GraficasService } from './graficas/graficas.service';
+export { ZonasService } from './zonas/zonas.service';

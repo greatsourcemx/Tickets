@@ -99,6 +99,7 @@ export class ReportesComponent implements OnInit {
     this.cargando = true;
     this.filtros.fechaInicial = new Date(this.fromDate.year, this.fromDate.month - 1, this.fromDate.day);
     this.filtros.fechaFinal = new Date(this.toDate.year, this.toDate.month - 1, this.toDate.day);
+    this.filtros.rango = '';
     this._reporteService.obtenerPorcentajes( this.filtros )
     .subscribe((resp: Reporte[]) => {
       this.porcentaje = resp;

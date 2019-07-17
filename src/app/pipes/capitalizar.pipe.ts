@@ -6,6 +6,9 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class CapitalizarPipe implements PipeTransform {
 
   transform(value: string, args?: any): string {
+    if ( value === null ) {
+      return '';
+    }
     let nombres: string[] = value.split(' ');
 
     switch (nombres.length) {

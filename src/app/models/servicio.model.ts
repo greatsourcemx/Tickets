@@ -20,7 +20,7 @@ export class Servicio {
         public Urgencia: Prioridad = new Prioridad(''),
         public TiempoTranscurrido?: string,
         public avances?: Avances,
-        public Duracion?: Tiempo,
+        public Duracion: Tiempo = new Tiempo(),
         public Solucion: string = '',
         public TipoServicio: Tipo = new Tipo(''),
         public tiempoTotal: string = 'Sin Avances',

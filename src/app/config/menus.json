@@ -49,7 +49,9 @@
         "titulo": "Mantenimientos",
         "icono": "fa fa-laptop",
         "submenu": [
-            { "titulo": "Listado", "url": "/mantenimientos" }
+            { "titulo": "Tablero", "url": "/tablero" },
+            { "titulo": "Listado", "url": "/mantenimientos" },
+            { "titulo": "Zonas", "url": "/zonas" }
         ]
     }, {
         "titulo": "Catálogos",

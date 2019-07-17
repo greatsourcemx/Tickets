@@ -15,7 +15,7 @@
             <table class="table vm font-14">
                 <tbody>
                     <tr *ngFor="let soli of grafica.topSolicitantes">
-                        <td style="width:50px;"><span class="round"><img [src]="soli.solicitante.id | imagen" alt="user" width="50" height="50px"></span></td>
+                        <td style="width:50px;"><span class="round"><img [src]="soli.solicitante.id | imagen" alt="user" width="50px" height="50px"></span></td>
                         <td>
                             <h6> {{ soli.solicitante.nombre | titlecase | capitalizar }} </h6>
                         </td>

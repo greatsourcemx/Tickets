@@ -1,0 +1,35 @@
+<div class="card">
+    <div class="card-body">
+
+        <h4 class="title">Vencidos</h4>
+
+        <div *ngIf="!mantes" class="card text-center">
+            <div class="el-card-item">
+                <div class="el-card-avatar el-overlay-1"> <img class="img-circle" src='../../../../../assets/images/man_super.png' alt="user"></div>
+                <div class="el-card-content">
+                    <h3 class="box-title">Sin Mantenimientos Pendientes</h3> <small>Excelente!</small>
+                    <br> </div>
+            </div>
+        </div>
+
+        <table *ngIf="mantes" class="table table-sm">
+            <thead>
+                <tr>
+                    <th>Equipo</th>
+                    <th>Periodicidad</th>
+                    <th>Fec Mantenimiento</th>
+                    <th>Fec Siguiente</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let mant of mantes">
+                    <td>{{ mant.equipo.Nombre }}</td>
+                    <td>{{ mant.perdiodicidad }} Meses</td>
+                    <td>{{ mant.fechaUltMante | date: 'yyyy-MM-dd' }}</td>
+                    <td>{{ mant.fechaSiguiente | date: 'yyyy-MM-dd' }}</td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+</div>

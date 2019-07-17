@@ -31,6 +31,9 @@ import { RecurrentesComponent } from './recurrentes/recurrentes.component';
 import { NuevoComponent } from './recurrentes/nuevo.component';
 import { EditRecurrenteComponent } from './recurrentes/edit-recurrente.component';
 import { CalendarioComponent } from './calendario/calendario.component';
+import { ZonasComponent } from './mantenimientos/zonas/zonas.component';
+import { TableroComponent } from './mantenimientos/tablero/tablero.component';
+import { ManteTicketComponent } from './mantenimientos/mante-ticket/mante-ticket.component';
 
 const pagesRoutes: Routes = [
     {
@@ -52,6 +55,9 @@ const pagesRoutes: Routes = [
             { path: 'tiempos', component: TiemposComponent, data: { titulo: 'Tiempos' }  },
             { path: 'tipos', component: TiposComponent, data: { titulo: 'Tipo de Servicios' }  },
             { path: 'mantenimientos', component: MantenimientosComponent, data: { titulo: 'Mantenimientos' }  },
+            { path: 'mantenimientos/:id', component: ManteTicketComponent, data: { titulo: 'Mantenimiento' }  },
+            { path: 'tablero', component: TableroComponent, data: { titulo: 'Tablero' }  },
+            { path: 'zonas', component: ZonasComponent, data: { titulo: 'Zonas' }  },
             { path: 'prioridades', component: PrioridadComponent, data: { titulo: 'Prioridades' }  },
             { path: 'servicio/:id', component: DetallesServicioComponent, data: { titulo: 'Detalle del Servicio' }  },
             { path: 'ticket', component: TicketComponent, data: { titulo: 'Nuevo Ticket' }  },

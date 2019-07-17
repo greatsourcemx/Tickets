@@ -1,0 +1,46 @@
+<div class="card">
+    <div class="card-body">
+        <h4 class="title pull-left">Últimos</h4>
+
+        <div class="row animated fadeIn" *ngIf="cargando">
+            <div class="col-sm-12">
+                <div class="alert alert-warning text-center">
+                    <strong>Cargando</strong>
+                    <br />
+                    <i class="fa fa-refresh fa-spin fa-2x"></i>
+                    <br />
+                    <span>Espere por favor</span>
+                </div>
+            </div>
+        </div>
+
+        <div *ngIf="!cargando" class="text-right">
+            <label for="cuantos" class="form-control-sm col-md-2">Mostrar: </label>
+            <select class="form-control-sm col-md-2" (change)="cargarMante()" [(ngModel)]="cuantos" name="cuantos">
+                <option>10</option>
+                <option>15</option>
+                <option>20</option>
+            </select>
+        </div>
+
+        <table *ngIf="!cargando" class="table table-sm">
+            <thead>
+                <tr>
+                    <th>Equipo</th>
+                    <th>Periodicidad</th>
+                    <th>Fec Mantenimiento</th>
+                    <th>Fec Siguiente</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let mant of mantes">
+                    <td>{{ mant.equipo.Nombre }}</td>
+                    <td>{{ mant.perdiodicidad }} Meses</td>
+                    <td>{{ mant.fechaUltMante | date: 'yyyy-MM-dd' }}</td>
+                    <td>{{ mant.fechaSiguiente | date: 'yyyy-MM-dd' }}</td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+</div>

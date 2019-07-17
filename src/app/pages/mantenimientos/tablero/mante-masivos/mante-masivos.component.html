@@ -1,0 +1,63 @@
+<div class="card">
+    <div class="card-body">
+
+        <h3 class="title">Captura Masiva</h3>
+
+        <form class="form-inline">
+            <div class="form-group mb-2">
+                <label for="staticEmail2" class="sr-only">Email</label>
+                <input type="text" readonly class="form-control-plaintext" id="staticEmail2" value="Equipo">
+            </div>
+            <div class="form-group mx-sm-3 mb-2 col-md-5">
+                <ng-select class="col-md-12" [(ngModel)]="manteSel" name="equipo" [items]="mantes" bindLabel="equipo.Nombre">
+                </ng-select>
+            </div>
+            <button (click)="cargarMante()" type="submit" class="btn btn-primary mb-2">Agregar</button>
+        </form>
+
+        <table *ngIf="tickets.length > 0" class="table table-sm">
+            <thead>
+                <tr>
+                    <th>Equipo</th>
+                    <th>Solicitante</th>
+                    <th>Fecha</th>
+                    <th>Duración</th>
+                    <th>Comentarios</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let _mante of tickets; index as i">
+                    <td>{{ _mante.mante.equipo.Nombre }}</td>
+                    <td>
+                        <ng-select [(ngModel)]="_mante.ticket.Solicitor" name="solicitante" [items]="users" bindLabel="nombre" required>
+                        </ng-select>
+                    </td>
+                    <td>
+                        <div class="input-group mb-3">
+                            <input placeholder="yyyy-mm-dd" name="dp" [(ngModel)]="_mante.fecCerrado" ngbDatepicker #d="ngbDatepicker" class="form-control dateLimit">
+                            <div class="btn btn-outline-secondary input-group-append" (click)="d.toggle()">
+                                <span class="input-group-text">
+                                    <span class="fa fa-calendar"></span>
+                                </span>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <ng-select [(ngModel)]="_mante.ticket.Duracion" name="Duracion" [items]="duracion" bindLabel="Descripcion">
+                        </ng-select>
+                    </td>
+                    <td>
+                        <input type="text" [(ngModel)]="_mante.ticket.Solucion" name="solucion" class="form-control" />
+                    </td>
+                    <td>
+                        <button name="borrar" (click)="borrar( i )" class="btn btn-sm btn-danger">Quitar</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <button *ngIf="tickets.length > 0" class="btn btn-info btn-sm" (click)="guardarTodo()" name="save">Guardar</button>
+
+    </div>
+</div>
