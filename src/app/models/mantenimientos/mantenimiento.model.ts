@@ -10,6 +10,9 @@ export class Mantenimiento {
         public fechaUltMante: Date = new Date(),
         public activo: boolean = false,
         public equipo: GLPIEquipos = new GLPIEquipos(),
-        public zona: Zonas = new Zonas()
+        public zona: Zonas = new Zonas(),
+        public tipo: string = '',
+        public locacion: string = '',
+        public usuario: string = ''
     ) { }
 }

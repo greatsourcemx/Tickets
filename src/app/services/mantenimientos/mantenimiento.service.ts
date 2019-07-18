@@ -23,7 +23,7 @@ export class MantenimientoService {
   }
 
   cargarUltimos( cuantos: number ) {
-    return this.http.get( this.url + '/last?cuantos=' + cuantos ).pipe(
+    return this.http.get( this.url + '/next?cuantos=' + cuantos ).pipe(
       map((resp: any) => resp ));
   }
 

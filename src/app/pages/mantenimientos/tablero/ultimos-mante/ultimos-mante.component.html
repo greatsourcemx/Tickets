@@ -1,6 +1,6 @@
 <div class="card">
     <div class="card-body">
-        <h4 class="title pull-left">Últimos</h4>
+        <h4 class="title pull-left">Siguientes</h4>
 
         <div class="row animated fadeIn" *ngIf="cargando">
             <div class="col-sm-12">
@@ -27,16 +27,18 @@
             <thead>
                 <tr>
                     <th>Equipo</th>
-                    <th>Periodicidad</th>
-                    <th>Fec Mantenimiento</th>
+                    <th>Tipo</th>
+                    <th>Locacion</th>
+                    <th>Usuario</th>
                     <th>Fec Siguiente</th>
                 </tr>
             </thead>
             <tbody>
                 <tr *ngFor="let mant of mantes">
                     <td>{{ mant.equipo.Nombre }}</td>
-                    <td>{{ mant.perdiodicidad }} Meses</td>
-                    <td>{{ mant.fechaUltMante | date: 'yyyy-MM-dd' }}</td>
+                    <td>{{ mant.tipo }}</td>
+                    <td>{{ mant.locacion }}</td>
+                    <td>{{ mant.usuario | titlecase | capitalizar }}</td>
                     <td>{{ mant.fechaSiguiente | date: 'yyyy-MM-dd' }}</td>
                 </tr>
             </tbody>
