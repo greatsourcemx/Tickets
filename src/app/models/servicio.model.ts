@@ -26,6 +26,8 @@ export class Servicio {
         public tiempoTotal: string = 'Sin Avances',
         public desde: number = 0,
         public Total: number = 0,
-        public termino: string = ''
+        public termino: string = '',
+        public archivoOriginal: string = '',
+        public archivo: string = ''
     ) { }
 }

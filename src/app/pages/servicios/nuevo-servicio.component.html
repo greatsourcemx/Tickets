@@ -5,24 +5,22 @@
 
                 <div class="col-md-12">
                     <div class="card card-body">
-                        <h3 class="box-title m-b-0">Ticket</h3>
-                        <p class="text-muted m-b-30 font-13"> Crear servicio </p>
-                        <div class="row">
-                            <div class="col-sm-12 col-xs-12">
+                        <h3 class="box-title m-b-0">Crear Ticket</h3>
+                        <form role="form" class="form-horizontal row" #f="ngForm" ngNativeValidate (ngSubmit)="guardarServicio(f)">
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label for="titulo" class="form-control-label">Título</label>
+                                    <input [(ngModel)]="servicio.Titulo" name="Titulo" type="text" maxlength="50" class="form-control form-control-sm" placeholder="Título" required />
+                                </div>
 
-                                <form #f="ngForm" ngNativeValidate (ngSubmit)="guardarServicio(f)">
-                                    <div class="form-group">
-                                        <label for="titulo">Título</label>
-                                        <input [(ngModel)]="servicio.Titulo" name="Titulo" type="text" maxlength="50" class="form-control" placeholder="Título" required />
-                                    </div>
+                                <div class="form-group">
+                                    <label for="descripcion" class="form-control-label">Descripción</label>
+                                    <textarea name="descripcion" id="descripcion" class="form-control form-control-sm" [(ngModel)]="servicio.Descripcion" rows="2"></textarea>
+                                </div>
 
-                                    <div class="form-group">
-                                        <label for="descripcion">Descripción</label>
-                                        <textarea name="descripcion" id="descripcion" class="form-control" [(ngModel)]="servicio.Descripcion" rows="4"></textarea>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label for="fecha">Fecha Compromiso</label>
+                                <div class="form-group">
+                                    <label for="fecha">Fecha Compromiso</label>
+                                    <div class="form-control-label">
                                         <div class="input-group">
                                             <input class="form-control" [minDate]="{year: fecha.year, month: fecha.month, day: fecha.day}" placeholder="yyyy-mm-dd" name="dp" [(ngModel)]="fecCompr" ngbDatepicker #d="ngbDatepicker" required />
                                             <div class="input-group-append">
@@ -32,22 +30,51 @@
                                             </div>
                                         </div>
                                     </div>
+                                </div>
 
-                                    <div class="form-group">
-                                        <label for="prioridad">Prioridad</label>
-                                        <select [(ngModel)]="servicio.Urgencia" name="urgencia" class="form-control" required>
-                                            <option disabled="disabled" value="undefined" >Seleccionar Prioridad</option>
-                                            <option *ngFor="let prio of prioridades" [ngValue]="prio">{{ prio.Nombre }}</option>
-                                        </select>
+                                <div class="form-group">
+                                    <label class="form-control-label" for="prioridad">Prioridad</label>
+                                    <select [(ngModel)]="servicio.Urgencia.Id" name="urgencia" class="form-control form-control-sm" required>
+                                        <option disabled="disabled" value="0" >Seleccionar Prioridad</option>
+                                        <option *ngFor="let prio of prioridades" [ngValue]="prio.Id">{{ prio.Nombre }}</option>
+                                    </select>
+                                </div>
 
-                                    </div>
+                                <div class="form-group">
+                                    <label for="prioridad">Archivo</label>
+                                    <ngx-file-drop dropZoneLabel="Drop files here" (onFileDrop)="dropped($event)" (onFileOver)="fileOver($event)" (onFileLeave)="fileLeave($event)">
+                                        <ng-template ngx-file-drop-content-tmp let-openFileSelector="openFileSelector">
+                                            Arrastra el archivo en esta área o
+                                            <button type="button" (click)="openFileSelector()">Seleccionar Archivo.</button>
+                                        </ng-template>
+                                    </ngx-file-drop>
+                                </div>
+                                <div *ngIf="files" class="upload-table">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th>Name</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="upload-name-style">
+                                            <tr *ngFor="let item of files; let i=index">
+                                                <td><strong>{{ item.relativePath }}</strong></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <p class="images">
+                                    <ng-template ngFor let-imageUrl [ngForOf]="imageUrls">
+                                        <img [src]="imageUrl" class="image" />
+                                    </ng-template>
+                                </p>
 
-                                    <button type="submit" class="btn btn-success waves-effect waves-light m-r-10">Guardar</button>
-                                    <button type="button" (click)="nuevo = false" class="btn btn-info waves-effect waves-light m-r-10">Cancelar</button>
+                                <button type="submit" class="btn btn-success waves-effect waves-light m-r-10">Guardar</button>
+                                <button type="button" (click)="nuevo = false" class="btn btn-info waves-effect waves-light m-r-10">Cancelar</button>
 
-                                </form>
                             </div>
-                        </div>
+                        </form>
+
                     </div>
                 </div>
 

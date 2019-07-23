@@ -12,6 +12,9 @@ import { NgSelectModule } from '@ng-select/ng-select';
 // DataTables
 import { DataTablesModule } from 'angular-datatables';
 
+// file-drop
+import { NgxFileDropModule } from 'ngx-file-drop';
+
 // Graficas
 import { ChartsModule } from 'ng2-charts';
 
@@ -151,6 +154,7 @@ import { ManteMasivosComponent } from './mantenimientos/tablero/mante-masivos/ma
         NgSelectModule,
         ChartsModule,
         DataTablesModule,
+        NgxFileDropModule,
         StoreModule.forFeature( 'servicios', ticketReducer )
     ]
 })

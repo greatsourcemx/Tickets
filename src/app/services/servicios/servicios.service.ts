@@ -1,7 +1,7 @@
 import swal from 'sweetalert';
 import { map } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Servicio } from '../../models/servicio.model';
 import { URL_SERVICIOS } from '../../config/config';
 import { Rating } from '../../models/rating.model';
@@ -12,6 +12,14 @@ export class ServiciosService {
   servicio: Servicio;
 
   constructor(public http: HttpClient) { }
+
+  uploadFile( formData: FormData ) {
+    const url = URL_SERVICIOS + '/upload';
+    return this.http.post( url, formData ).pipe(
+      map((data: string) => {
+        return data;
+      }));
+  }
 
   cargarServiciosNuevos() {
     let url = URL_SERVICIOS + '/nuevos';
@@ -41,12 +49,11 @@ export class ServiciosService {
 
   guardarServicio ( Soliid: number = 0, servicio: Servicio ) {
     let url = URL_SERVICIOS + '/servicio';
-
     return this.http.post( url, servicio ).pipe(
-    map( (resp: any) => {
-      swal('Ticket Creado', servicio.Titulo, 'success');
-      return resp;
-    }));
+      map( (resp: any) => {
+        swal('Ticket Creado', servicio.Titulo, 'success');
+        return resp;
+      }));
   }
 
   guardaTicketRapido( servicio: Servicio ) {
