@@ -1,7 +1,55 @@
-<div class="row">
-    <div class="col-12">
+<div class="card">
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-3 col-xs-6 b-r"> <strong class="text-muted">Título</strong>
+                <br />
+                <strong># {{ servicio.Id }} {{ servicio.Titulo }}</strong>
+            </div>
+            <div class="col-md-3 col-xs-6 b-r"> <strong>Responsable</strong>
+                <br />
+                <p class="text-muted">
+                    <i class="fa fa-user"></i>
+                    <span *ngIf="servicio.AsignadoA.id !== 0" class="label label-success"> {{ servicio.AsignadoA?.nombre }}</span>
+                    <span *ngIf="servicio.AsignadoA.id === 0" class="label label-warning"> Sin Responsable</span>
+                </p>
+            </div>
+            <div class="col-md-3 col-xs-6 b-r"> <span class="label" [ngClass]="( servicio.Estado == 'Abierta' ) ? 'label-warning' :
+                ( servicio.Estado == 'Cerrada' ) ? 'label-success' : 'label-info'"> {{ servicio.Estado }}</span>
+                <br />
+                <span class="label" [ngClass]="( servicio.Urgencia.Nombre == 'Urgente' || servicio.Urgencia.Nombre == 'Alto' ) ? 'label-warning' : 'label-info'">{{ servicio.Urgencia?.Nombre }}</span>
+            </div>
+            <div class="col-md-3 col-xs-6"> <strong>{{ servicio.tiempoTotal | tiempo: 'comp' }}</strong>
+                <br />
+                <strong>{{ servicio.TiempoTranscurrido }}</strong>
+            </div>
+        </div>
+        <hr>
+        <p class="m-t-30">{{ servicio.Descripcion }}</p>
+        <h4 class="font-medium m-t-30">Archivos</h4>
+        <hr />
+        <h5 class="m-t-30">Wordpress <span class="pull-right">80%</span></h5>
+        <div class="progress">
+            <div class="progress-bar bg-success" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width:80%; height:6px;"> <span class="sr-only">50% Complete</span> </div>
+        </div>
+        <h5 class="m-t-30">HTML 5 <span class="pull-right">90%</span></h5>
+        <div class="progress">
+            <div class="progress-bar bg-info" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100" style="width:90%; height:6px;"> <span class="sr-only">50% Complete</span> </div>
+        </div>
+        <h5 class="m-t-30">jQuery <span class="pull-right">50%</span></h5>
+        <div class="progress">
+            <div class="progress-bar bg-danger" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width:50%; height:6px;"> <span class="sr-only">50% Complete</span> </div>
+        </div>
+        <h5 class="m-t-30">Photoshop <span class="pull-right">70%</span></h5>
+        <div class="progress">
+            <div class="progress-bar bg-warning" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width:70%; height:6px;"> <span class="sr-only">50% Complete</span> </div>
+        </div>
+        <hr />
+        <button class="btn btn-info waves-effect waves-light" name="regresar" (click)="regresar()">Regresar</button>
+    </div>
+</div>
 
-        <!-- General del Ticket -->
+<!-- <div class="row">
+    <div class="col-12">
         <div class="card">
             <div class="card-body">
                 <h6 class="card-subtitle mb-2 text-muted">Título</h6>
@@ -36,7 +84,8 @@
         </div>
 
     </div>
-</div>
+</div> -->
+
 <!-- Avances -->
 <div class="row">
     <div class="col-sm-12">

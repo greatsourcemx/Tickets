@@ -16,7 +16,7 @@ export class ServiciosService {
   uploadFile( formData: FormData ) {
     const url = URL_SERVICIOS + '/upload';
     return this.http.post( url, formData ).pipe(
-      map((data: string) => {
+      map((data: string[]) => {
         return data;
       }));
   }

@@ -3,6 +3,7 @@ import { Prioridad } from './Prioridad.model';
 import { Avances } from './avances.model';
 import { Tiempo } from './tiempo.model';
 import { Tipo } from './tipo.model';
+import { Archivos } from './archivos.model';
 
 
 export class Servicio {
@@ -27,7 +28,6 @@ export class Servicio {
         public desde: number = 0,
         public Total: number = 0,
         public termino: string = '',
-        public archivoOriginal: string = '',
-        public archivo: string = ''
+        public archivos: Archivos[] = []
     ) { }
 }

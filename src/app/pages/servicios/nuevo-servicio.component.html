@@ -42,7 +42,7 @@
 
                                 <div class="form-group">
                                     <label for="prioridad">Archivo</label>
-                                    <ngx-file-drop dropZoneLabel="Drop files here" (onFileDrop)="dropped($event)" (onFileOver)="fileOver($event)" (onFileLeave)="fileLeave($event)">
+                                    <ngx-file-drop dropZoneLabel="Drop files here" multiple="true" (onFileDrop)="dropped($event)">
                                         <ng-template ngx-file-drop-content-tmp let-openFileSelector="openFileSelector">
                                             Arrastra el archivo en esta área o
                                             <button type="button" (click)="openFileSelector()">Seleccionar Archivo.</button>
@@ -50,10 +50,10 @@
                                     </ngx-file-drop>
                                 </div>
                                 <div *ngIf="files" class="upload-table">
-                                    <table class="table">
+                                    <table class="table table-sm table-bordered">
                                         <thead>
                                             <tr>
-                                                <th>Name</th>
+                                                <th>Archivos Seleccionados</th>
                                             </tr>
                                         </thead>
                                         <tbody class="upload-name-style">
@@ -63,11 +63,11 @@
                                         </tbody>
                                     </table>
                                 </div>
-                                <p class="images">
+                                <!-- <p class="images">
                                     <ng-template ngFor let-imageUrl [ngForOf]="imageUrls">
                                         <img [src]="imageUrl" class="image" />
                                     </ng-template>
-                                </p>
+                                </p> -->
 
                                 <button type="submit" class="btn btn-success waves-effect waves-light m-r-10">Guardar</button>
                                 <button type="button" (click)="nuevo = false" class="btn btn-info waves-effect waves-light m-r-10">Cancelar</button>
