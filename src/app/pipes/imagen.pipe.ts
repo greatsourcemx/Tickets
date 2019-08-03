@@ -6,9 +6,14 @@ import { URL_SERVICIOS } from '../config/config';
 })
 export class ImagenPipe implements PipeTransform {
 
-  transform(id: number): any {
+  transform(id: number, adjunto?: boolean): any {
 
-    let url = URL_SERVICIOS + '/Login/image?id=' + id;
+    let url = URL_SERVICIOS;
+    if ( !adjunto ) {
+      url += '/Login/image?id=' + id;
+    } else {
+      url += '/view?id=' + id;
+    }
 
     return url;
   }

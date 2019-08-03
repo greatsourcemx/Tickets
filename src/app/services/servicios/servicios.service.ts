@@ -1,7 +1,7 @@
 import swal from 'sweetalert';
 import { map } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Servicio } from '../../models/servicio.model';
 import { URL_SERVICIOS } from '../../config/config';
 import { Rating } from '../../models/rating.model';
@@ -19,6 +19,15 @@ export class ServiciosService {
       map((data: string[]) => {
         return data;
       }));
+  }
+
+  downloadFile( id: number ) {
+    const url = URL_SERVICIOS + '/download';
+    return this.http.post( url, id, { responseType: 'blob' }  ).pipe(
+      map((data: any) => {
+        return new Blob([data], { type: 'application/octet-stream' });
+      }));
+    // return this.http.get( url, { responseType: 'blob' } );
   }
 
   cargarServiciosNuevos() {
