@@ -28,10 +28,17 @@
         <div *ngIf="servicio.archivos.length > 0" class="archivos">
             <h4 class="font-medium m-t-30">Archivos</h4>
             <hr />
-            <h5 *ngFor="let arc of servicio.archivos" class="m-t-30">{{ arc.nombre }}
+            <ul class="tags">
+                <li *ngFor="let arc of servicio.archivos">
+                    <span (click)="open(content, arc)" class="tag pointer"> {{ arc.nombre }} </span>
+                    <!-- <i *ngIf="arc.esImagen" class="fa fa-search-plus pointer espacito"></i>
+                    <i (click)="download( arc )" class="fa fa-download pointer"></i> -->
+                </li>
+            </ul>
+            <!-- <h5 *ngFor="let arc of servicio.archivos" class="m-t-30">{{ arc.nombre }}
                 <i *ngIf="arc.esImagen" (click)="open(content, arc.id)" class="fa fa-search-plus pointer espacito"></i>
                 <i (click)="download( arc )" class="fa fa-download pointer"></i>
-            </h5>
+            </h5> -->
         </div>
 
         <ng-template #content let-modal>

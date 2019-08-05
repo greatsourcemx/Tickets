@@ -17,6 +17,9 @@ export class NuevoServicioComponent implements OnInit {
 
   public files: NgxFileDropEntry[] = null;
   formData = new FormData();
+  adjuntos: any = [];
+  cargando = false;
+  info = '';
 
   servicio: Servicio = new Servicio('', '');
   usuario: Usuario;
@@ -49,11 +52,17 @@ export class NuevoServicioComponent implements OnInit {
       });
   }
 
+  cambio() {
+    this.info = '';
+    const sel = this.prioridades.filter( p => p.Id === this.servicio.Urgencia.Id );
+    this.info = sel[0].Descripcion;
+  }
+
   guardarServicio( f: NgForm ) {
     if ( f.invalid ) {
       return;
     }
-    if ( this.files !== null ) {
+    if ( this.servicio.archivos.length > 0 ) {
       this._servicioService.uploadFile( this.formData )
       .subscribe((data: string[]) => {
         // this.servicio.archivos = data;
@@ -80,9 +89,22 @@ export class NuevoServicioComponent implements OnInit {
     });
   }
 
+  borrar( index: number ) {
+    this.cargando = true;
+    let values = this.formData.getAll('archivos[]');
+    values.splice(index, 1);
+    this.servicio.archivos.splice(index, 1);
+    this.formData.delete('archivos[]');
+    values.filter(name => name !== 'Bob')
+    .forEach(name => this.formData.append('archivos[]', name));
+    this.cargando = false;
+  }
+
   // Drag and Drop
   public dropped(files: NgxFileDropEntry[]) {
+    this.cargando = true;
     this.files = files;
+    let i = 0;
     for (const droppedFile of files) {
       // Is it a file?
       if (droppedFile.fileEntry.isFile) {
@@ -90,7 +112,7 @@ export class NuevoServicioComponent implements OnInit {
         fileEntry.file((file: File) => {
           // Here you can access the real file
           this.servicio.archivos.push( new Archivos( 0, 0, droppedFile.relativePath, '' ) );
-          this.formData.append('', file, droppedFile.relativePath);
+          this.formData.append('archivos[]', file, droppedFile.relativePath);
           // this.servicio.archivoOriginal = droppedFile.relativePath;
         });
       } else {
@@ -98,6 +120,9 @@ export class NuevoServicioComponent implements OnInit {
         const fileEntry = droppedFile.fileEntry as FileSystemDirectoryEntry;
       }
     }
+    setTimeout(() => {
+      this.cargando = false;
+    }, 1000 );
   }
   public fileOver(event) {
     // console.log(event);

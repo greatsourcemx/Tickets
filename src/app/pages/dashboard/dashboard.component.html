@@ -48,7 +48,8 @@
     <div class="col-12">
         <div class="card">
             <div class="card-body">
-                <h4 class="card-title"><span class="lstick"></span>Mis Solicitudes</h4>
+                <h4 class="card-title"><span class="lstick"></span>Mis Solicitudes ( {{ totalRegistros }} ) </h4>
+                <input [(ngModel)]="query" type="text" class="form-control" placeholder="Término de busqueda...">
 
                 <div class="table-responsive animated fadeIn" *ngIf="!cargando">
                     <table class="table vm no-th-brd no-wrap pro-of-month table-sm table-hover">
@@ -75,7 +76,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let serv of servicios | orderby: {property: column, direction: direction}">
+                            <tr *ngFor="let serv of servicios | orderby: {property: column, direction: direction} | filter: 'Id,Titulo,Estado': query">
                                 <td>{{ serv.Id }}</td>
                                 <td>{{ serv.Titulo }}</td>
                                 <td>{{ serv.TiempoTranscurrido }}</td>
@@ -98,8 +99,8 @@
                     </table>
                 </div>
 
-                <button *ngIf="(totalRegistros >= 15)" (click)="cambiarDesde(-1)" class="btn btn-secondary">Anteriores</button>
-                <button *ngIf="(totalRegistros >= 15)" (click)="cambiarDesde(1)" class="btn btn-secondary">Siguientes</button>
+                <button *ngIf="(totalRegistros > 15)" (click)="cambiarDesde(-1)" class="btn btn-secondary">Anteriores</button>
+                <button *ngIf="(totalRegistros > 15)" (click)="cambiarDesde(1)" class="btn btn-secondary">Siguientes</button>
             </div>
         </div>
     </div>

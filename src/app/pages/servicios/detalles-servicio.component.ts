@@ -40,9 +40,13 @@ export class DetallesServicioComponent implements OnInit {
     });
   }
 
-  open( content, id: number) {
-    this.selId = id;
-    this.modalService.open(content, { size: 'lg', ariaLabelledBy: 'modal-basic-title'});
+  open( content, arc: Archivos) {
+    this.selId = arc.id;
+    if ( arc.esImagen ) {
+      this.modalService.open(content, { size: 'lg', ariaLabelledBy: 'modal-basic-title'});
+    } else {
+      this.download( arc );
+    }
   }
 
   download( archi: Archivos ) {

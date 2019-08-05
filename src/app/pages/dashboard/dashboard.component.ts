@@ -16,6 +16,7 @@ import * as markActions from '../../store/actions';
 })
 export class DashboardComponent implements OnInit {
 
+  query: string = '';
   desde: number = 0;
   totalRegistros: number = 0;
   cargando: boolean = false;
@@ -84,6 +85,7 @@ export class DashboardComponent implements OnInit {
     }
 
     this.desde += valor;
+    this.store.dispatch( new markActions.LoadServSoliAction( this.desde ) );
     this.cargarServicios();
 
   }

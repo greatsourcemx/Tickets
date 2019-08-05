@@ -19,7 +19,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="fecha">Fecha Compromiso</label>
+                                    <label for="fecha">Para Cuando</label>
                                     <div class="form-control-label">
                                         <div class="input-group">
                                             <input class="form-control" [minDate]="{year: fecha.year, month: fecha.month, day: fecha.day}" placeholder="yyyy-mm-dd" name="dp" [(ngModel)]="fecCompr" ngbDatepicker #d="ngbDatepicker" required />
@@ -34,10 +34,11 @@
 
                                 <div class="form-group">
                                     <label class="form-control-label" for="prioridad">Prioridad</label>
-                                    <select [(ngModel)]="servicio.Urgencia.Id" name="urgencia" class="form-control form-control-sm" required>
+                                    <select [(ngModel)]="servicio.Urgencia.Id" (change)="cambio()" name="urgencia" class="form-control form-control-sm" required>
                                         <option disabled="disabled" value="0" >Seleccionar Prioridad</option>
                                         <option *ngFor="let prio of prioridades" [ngValue]="prio.Id">{{ prio.Nombre }}</option>
                                     </select>
+                                    <span class="animated fadeIn text-info" *ngIf="info.length > 0"> <i class="fa fa-info-circle"></i> &nbsp; <strong>{{ info }}</strong></span>
                                 </div>
 
                                 <div class="form-group">
@@ -49,25 +50,37 @@
                                         </ng-template>
                                     </ngx-file-drop>
                                 </div>
-                                <div *ngIf="files" class="upload-table">
-                                    <table class="table table-sm table-bordered">
+                                <div class="row animated fadeIn" *ngIf="cargando">
+                                    <div class="col-sm-12">
+                                        <div class="alert alert-warning text-center">
+                                            <strong>Cargando</strong>
+                                            <br />
+                                            <i class="fa fa-refresh fa-spin fa-2x"></i>
+                                            <br />
+                                            <span>Espere por favor</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div *ngIf="servicio.archivos?.length > 0" class="upload-table">
+                                    <table *ngIf="!cargando" class="table table-sm table-bordered">
                                         <thead>
                                             <tr>
                                                 <th>Archivos Seleccionados</th>
+                                                <th></th>
                                             </tr>
                                         </thead>
                                         <tbody class="upload-name-style">
-                                            <tr *ngFor="let item of files; let i=index">
-                                                <td><strong>{{ item.relativePath }}</strong></td>
+                                            <tr *ngFor="let item of servicio.archivos; let i=index">
+                                                <td><strong>{{ item.nombre }}</strong></td>
+                                                <td>
+                                                    <button class="btn btn-sm btn-danger" (click)="borrar( i )">
+                                                        <i class="fa fa-eraser"></i> Borrar
+                                                    </button>
+                                                </td>
                                             </tr>
                                         </tbody>
                                     </table>
                                 </div>
-                                <!-- <p class="images">
-                                    <ng-template ngFor let-imageUrl [ngForOf]="imageUrls">
-                                        <img [src]="imageUrl" class="image" />
-                                    </ng-template>
-                                </p> -->
 
                                 <button type="submit" class="btn btn-success waves-effect waves-light m-r-10">Guardar</button>
                                 <button type="button" (click)="nuevo = false" class="btn btn-info waves-effect waves-light m-r-10">Cancelar</button>

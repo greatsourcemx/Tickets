@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { PrioridadService } from '../../services/service.index';
 import { Prioridad } from '../../models/Prioridad.model';
 
@@ -15,10 +15,13 @@ export class PrioridadComponent implements OnInit {
   totalRegistros: number = 0;
   cargando: boolean = false;
   prioridades: any= [];
+  edited: Prioridad = new Prioridad();
+  @ViewChild('input') find: ElementRef;
 
   constructor( public _prioridadService: PrioridadService ) { }
 
   ngOnInit() {
+    this.find.nativeElement.focus();
     this.cargarPrioridades();
   }
 
@@ -91,7 +94,7 @@ export class PrioridadComponent implements OnInit {
 
   }
 
-  buscarTiempo( termino: string ) {
+  buscar( termino: string ) {
 
     if ( termino.length <= 0 ) {
       this.cargarPrioridades();
@@ -103,6 +106,17 @@ export class PrioridadComponent implements OnInit {
                 this.prioridades = soli;
                 this.cargando = false;
               });
+    }
+  }
+
+  // autoguardado
+  inicial( prio: Prioridad ) {
+    this.edited.Descripcion = prio.Descripcion;
+    this.edited.Nombre = prio.Nombre;
+  }
+  final( prio: Prioridad ) {
+    if ( prio.Descripcion !== this.edited.Descripcion || prio.Nombre !== this.edited.Nombre ) {
+      this.modificarPrioridad( prio );
     }
   }
 

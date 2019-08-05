@@ -1,9 +1,9 @@
-
-import {map} from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { URL_SERVICIOS } from '../../config/config';
 import { Prioridad } from '../../models/Prioridad.model';
+import swal from 'sweetalert';
 
 
 @Injectable()
@@ -41,7 +41,7 @@ export class PrioridadService {
     let url = URL_SERVICIOS + '/prioridad';
     return this.http.put( url, prioridad ).pipe(
               map( (resp) => {
-                swal('Prioridad Actualizada', prioridad.Nombre, 'success');
+                // swal('Prioridad Actualizada', prioridad.Nombre, 'success');
                 return resp;
               }));
   }
