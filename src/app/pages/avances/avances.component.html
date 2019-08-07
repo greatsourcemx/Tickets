@@ -35,6 +35,47 @@
                     <textarea [(ngModel)]="avance.Comentario" name="Comentario" class="form-control" rows="5"></textarea>
                 </div>
 
+                <div class="form-group">
+                    <label for="prioridad">Archivos</label>
+                    <ngx-file-drop dropZoneLabel="Drop files here" multiple="true" (onFileDrop)="dropped($event)">
+                        <ng-template ngx-file-drop-content-tmp let-openFileSelector="openFileSelector">
+                            Arrastra el archivo en esta área o
+                            <button type="button" (click)="openFileSelector()">Seleccionar Archivo.</button>
+                        </ng-template>
+                    </ngx-file-drop>
+                </div>
+                <div class="row animated fadeIn" *ngIf="cargando">
+                    <div class="col-sm-12">
+                        <div class="alert alert-warning text-center">
+                            <strong>Cargando</strong>
+                            <br />
+                            <i class="fa fa-refresh fa-spin fa-2x"></i>
+                            <br />
+                            <span>Espere por favor</span>
+                        </div>
+                    </div>
+                </div>
+                <div *ngIf="avance.archivos?.length > 0" class="upload-table">
+                    <table *ngIf="!cargando" class="table table-sm table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Archivos Seleccionados</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody class="upload-name-style">
+                            <tr *ngFor="let item of avance.archivos; let i=index">
+                                <td><strong>{{ item.nombre }}</strong></td>
+                                <td>
+                                    <button class="btn btn-sm btn-danger" (click)="borrar( i )">
+                                        <i class="fa fa-eraser"></i> Borrar
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
                 <button type="submit" class="btn btn-success waves-effect waves-light m-r-10">
                   <i class="fa fa-save"></i> Guardar
                 </button>

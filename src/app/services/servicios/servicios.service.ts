@@ -27,7 +27,13 @@ export class ServiciosService {
       map((data: any) => {
         return new Blob([data], { type: 'application/octet-stream' });
       }));
-    // return this.http.get( url, { responseType: 'blob' } );
+  }
+
+  take( id: number ) {
+    const url = URL_SERVICIOS + '/take?id=' + id;
+    return this.http.post( url, { } ).pipe(
+      map(() => { })
+    );
   }
 
   cargarServiciosNuevos() {

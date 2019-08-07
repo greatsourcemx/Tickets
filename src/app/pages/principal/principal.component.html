@@ -24,7 +24,8 @@
                         <div class="comment-footer">
                             <span class="text-muted"> {{ serv.TiempoTranscurrido }} </span>
                             <span class="action-icons">
-                                <a href="javascript:void(0)" [routerLink]="['/avances', serv.Id ]"  class="btn btn-info btn-sm text-white" title="Avances"><i class="icon icon-layers"></i></a>
+                                <a href="javascript:void(0)" (click)="take( serv.Id )" class="btn btn-info btn-sm text-white icon-buttons" title="Avances"><i class="fa fa-hand-o-up"></i></a>
+                                <a href="javascript:void(0)" [routerLink]="['/servicio', serv.Id ]"  class="btn btn-info btn-sm text-white icon-buttons" title="Avances"><i class="icon icon-layers"></i></a>
                                 <a href="javascript:void(0)" [routerLink]="['/tickets', serv.Id ]" class="btn btn-danger btn-sm text-white" title="Cerrar"><i class="icon icon-check"></i></a>
                             </span>
                         </div>
@@ -72,7 +73,8 @@
                                 <td> {{ tick.TiempoTranscurrido }} </td>
                                 <td>
                                     <span class="action-icons">
-                                        <a href="javascript:void(0)" [routerLink]="['/avances', tick.Id ]" class="btn btn-info btn-sm text-white" title="Avances"><i class="icon icon-layers"></i></a>
+                                        <!-- <a href="javascript:void(0)" [routerLink]="['/avances', tick.Id ]" class="btn btn-info btn-sm text-white icon-buttons" title="Avances"><i class="icon icon-layers"></i></a> -->
+                                        <a href="javascript:void(0)" [routerLink]="['/servicio', tick.Id ]"  class="btn btn-info btn-sm text-white icon-buttons" title="Avances"><i class="icon icon-layers"></i></a>
                                         <a href="javascript:void(0)" [routerLink]="['/tickets', tick.Id ]" class="btn btn-danger btn-sm text-white" title="Cerrar"><i class="icon icon-check"></i></a>
                                     </span>
                                 </td>

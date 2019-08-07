@@ -17,6 +17,7 @@ export class DetallesServicioComponent implements OnInit {
   servicio: Servicio = new Servicio('');
   usuario: Usuario;
   selId: number;
+  isAdmin = false;
 
   constructor( public activatedRoute: ActivatedRoute,
     public _servicioService: ServiciosService,
@@ -31,6 +32,10 @@ export class DetallesServicioComponent implements OnInit {
     }
 
   ngOnInit() {
+    this._usuarioService.esAdmin()
+    .subscribe((data: boolean) => {
+      this.isAdmin = data;
+    });
   }
 
   cargarDetalles ( id: number ) {

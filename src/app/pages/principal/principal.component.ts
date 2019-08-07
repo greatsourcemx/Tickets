@@ -55,4 +55,13 @@ export class PrincipalComponent implements OnInit, OnDestroy {
     clearInterval(this.intervalo);
   }
 
+  take( id: number ) {
+    this._servicioService.take( id ).
+    subscribe(() => {
+      this.cargarTickets();
+      this.store.dispatch( new servActions.LoadServAction() );
+      this.cargarNuevos();
+    });
+  }
+
 }

@@ -30,6 +30,15 @@ export class UsuarioService {
     return ( this.usuario ) ? true : false;
   }
 
+  esAdmin() {
+    const url = URL_SERVICIOS + '/isadmin';
+    return this.http.post( url , { } ).pipe(
+      map((data: boolean) => {
+        return data;
+      })
+    );
+  }
+
   cargarStorage() {
     if ( localStorage.getItem('usuario') ) {
       this.usuario = JSON.parse( localStorage.getItem('usuario') );

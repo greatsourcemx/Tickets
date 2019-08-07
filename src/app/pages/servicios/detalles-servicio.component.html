@@ -31,14 +31,8 @@
             <ul class="tags">
                 <li *ngFor="let arc of servicio.archivos">
                     <span (click)="open(content, arc)" class="tag pointer"> {{ arc.nombre }} </span>
-                    <!-- <i *ngIf="arc.esImagen" class="fa fa-search-plus pointer espacito"></i>
-                    <i (click)="download( arc )" class="fa fa-download pointer"></i> -->
                 </li>
             </ul>
-            <!-- <h5 *ngFor="let arc of servicio.archivos" class="m-t-30">{{ arc.nombre }}
-                <i *ngIf="arc.esImagen" (click)="open(content, arc.id)" class="fa fa-search-plus pointer espacito"></i>
-                <i (click)="download( arc )" class="fa fa-download pointer"></i>
-            </h5> -->
         </div>
 
         <ng-template #content let-modal>
@@ -62,30 +56,46 @@
 
 <!-- Avances -->
 <div class="row">
-    <div class="col-sm-12">
-        <div class="card card-body">
-            <h6 class="card-subtitle"> Historial de Avances </h6>
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
 
-            <table class="table table-sm">
-                <thead>
-                    <tr>
-                        <th scope="col">Duración</th>
-                        <th scope="col">Fecha</th>
-                        <th scope="col">Comentario</th>
-                        <th scope="col" colspan="2">Responsable</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let avance of servicio.avances">
-                        <td> {{ avance.Duracion?.Descripcion }} </td>
-                        <td> {{ avance.Fecha | date: 'yyyy-MM-dd' }} </td>
-                        <td> {{ avance.Comentario }} </td>
-                        <td style="width:50px;"><span class="round"><img [src]="avance.Responsable.id | imagen" alt="user" width="50" height="50px"></span></td>
-                        <td> {{ avance.Responsable?.nombre }} </td>
-                    </tr>
-                </tbody>
-            </table>
+                <h4 class="card-title pull-left"> Historial de Avances </h4>
+                <div *ngIf="isAdmin" class="text-right">
+                    <button [routerLink]="['/avances', servicio.Id]" type="button" title="Agregar" class="btn btn-circle btn-primary">
+                        <i class="fa fa-plus"></i>
+                    </button>
+                </div>
 
+                <table class="table table-sm">
+                    <thead>
+                        <tr>
+                            <th scope="col">Duración</th>
+                            <th scope="col">Fecha</th>
+                            <th scope="col">Comentario</th>
+                            <th scope="col">Adjuntos</th>
+                            <th scope="col" colspan="2">Responsable</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let avance of servicio.avances">
+                            <td> {{ avance.Duracion?.Descripcion }} </td>
+                            <td> {{ avance.Fecha | date: 'yyyy-MM-dd' }} </td>
+                            <td> {{ avance.Comentario }} </td>
+                            <td>
+                                <ul class="tags">
+                                    <li *ngFor="let arc of avance.archivos">
+                                        <span (click)="open(content, arc)" class="tag pointer"> {{ arc.nombre }} </span>
+                                    </li>
+                                </ul>
+                            </td>
+                            <td style="width:50px;"><span class="round"><img [src]="avance.Responsable.id | imagen" alt="user" width="50" height="50px"></span></td>
+                            <td> {{ avance.Responsable?.nombre }} </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
         </div>
     </div>
 </div>
