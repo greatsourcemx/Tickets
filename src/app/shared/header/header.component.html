@@ -71,7 +71,7 @@
                                             <h6># {{ serv.Id }} {{ serv.Titulo }} </h6>
                                             <span class="label label-rounded" [ngClass]="( serv.Estado == 'Abierta' ) ? 'label-warning' :
                                             ( serv.Estado == 'Cerrada' ) ? 'label-success' : 'label-info'">{{ serv.Estado }}</span>
-                                            <span class="mail-desc"> {{ serv.tiempoTotal | tiempo }} </span>
+                                            <span class="mail-desc"> {{ serv.TiempoTranscurrido }} </span>
                                         </div>
                                     </a>
                                 </div>

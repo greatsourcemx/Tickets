@@ -39,7 +39,7 @@
                     <label for="prioridad">Archivos</label>
                     <ngx-file-drop dropZoneLabel="Drop files here" multiple="true" (onFileDrop)="dropped($event)">
                         <ng-template ngx-file-drop-content-tmp let-openFileSelector="openFileSelector">
-                            Arrastra el archivo en esta área o
+                            Arrastra el archivo en esta área o &nbsp;
                             <button type="button" (click)="openFileSelector()">Seleccionar Archivo.</button>
                         </ng-template>
                     </ngx-file-drop>
@@ -60,12 +60,14 @@
                         <thead>
                             <tr>
                                 <th>Archivos Seleccionados</th>
+                                <th>Peso</th>
                                 <th></th>
                             </tr>
                         </thead>
                         <tbody class="upload-name-style">
                             <tr *ngFor="let item of avance.archivos; let i=index">
                                 <td><strong>{{ item.nombre }}</strong></td>
+                                <td><strong>{{ item.peso }}</strong></td>
                                 <td>
                                     <button class="btn btn-sm btn-danger" (click)="borrar( i )">
                                         <i class="fa fa-eraser"></i> Borrar

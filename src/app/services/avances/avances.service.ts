@@ -21,7 +21,7 @@ export class AvancesService {
 
     return this.http.post( url, avance ).pipe(
     map( (resp: any) => {
-      swal('Info', 'Se agregó el avance', 'success');
+      swal('Avance Creado', '', 'success');
       return resp;
     }));
   }

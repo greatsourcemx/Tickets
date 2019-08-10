@@ -16,6 +16,7 @@ export class Servicio {
         public FecRegistro?: Date,
         public FecCerrado?: Date,
         public FecCompromiso?: Date,
+        public FecActualizado?: Date,
         public AsignadoA: Usuario = new Usuario('', ''),
         public Solicitor: Usuario = new Usuario('', ''),
         public Urgencia: Prioridad = new Prioridad(''),

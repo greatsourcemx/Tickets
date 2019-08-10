@@ -5,6 +5,7 @@ export class Archivos {
         public servId: number = 0,
         public nombre: string = '',
         public ruta: string = '',
-        public esImagen: boolean = false
+        public esImagen: boolean = false,
+        public peso: string = ''
         ) { }
 }

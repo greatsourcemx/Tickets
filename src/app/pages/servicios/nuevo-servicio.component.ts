@@ -20,8 +20,16 @@ export class NuevoServicioComponent implements OnInit {
   adjuntos: any = [];
   cargando = false;
   info = '';
+  private units = [
+    'bytes',
+    'KB',
+    'MB',
+    'GB',
+    'TB',
+    'PB'
+  ];
 
-  servicio: Servicio = new Servicio('', '');
+  servicio: Servicio = new Servicio();
   usuario: Usuario;
   prioridades: Prioridad[] = [];
   nuevo: boolean = true;
@@ -104,30 +112,85 @@ export class NuevoServicioComponent implements OnInit {
   public dropped(files: NgxFileDropEntry[]) {
     this.cargando = true;
     this.files = files;
-    let i = 0;
+    let adjuntos: Archivos[] = [];
     for (const droppedFile of files) {
       // Is it a file?
       if (droppedFile.fileEntry.isFile) {
-        const fileEntry = droppedFile.fileEntry as FileSystemFileEntry;
-        fileEntry.file((file: File) => {
-          // Here you can access the real file
-          this.servicio.archivos.push( new Archivos( 0, 0, droppedFile.relativePath, '' ) );
-          this.formData.append('archivos[]', file, droppedFile.relativePath);
-          // this.servicio.archivoOriginal = droppedFile.relativePath;
-        });
+        if ( this.isFileAllowed( droppedFile.relativePath ) ) {
+          const fileEntry = droppedFile.fileEntry as FileSystemFileEntry;
+          fileEntry.file((file: File) => {
+            const peso = this.transform(file.size);
+            if ( this.servicio.archivos.length === 5 ) {
+              this.cargando = false;
+              swal('Advertencia!', 'solo se puede adjuntar como máximo 5 archivos', 'warning');
+              return;
+            }
+            if ( this.isPesoAllowed(peso) ) {
+              this.cargando = false;
+              swal('Advertencia!', 'No se permiten archivos con un peso superor a 50 MB', 'warning');
+              return;
+            }
+            // Here you can access the real file
+            this.servicio.archivos.push( new Archivos( 0, 0, droppedFile.relativePath, '' ) );
+            this.formData.append('archivos[]', file, droppedFile.relativePath);
+          });
+        } else {
+          adjuntos.push( new Archivos( 0, 0, droppedFile.relativePath, ''));
+        }
       } else {
         // It was a directory (empty directories are added, otherwise only files)
         const fileEntry = droppedFile.fileEntry as FileSystemDirectoryEntry;
       }
     }
-    setTimeout(() => {
+    if ( adjuntos.length > 0 ) {
+      swal('Advertencia!', 'Solo es permitido adjuntar archivos de Office, pdf, imágenes, zip y correos', 'warning');
+    }
+    if ( this.servicio.archivos.length > 0 ) {
+      setTimeout(() => {
+        this.cargando = false;
+      }, 1000 );
+    } else {
       this.cargando = false;
-    }, 1000 );
+    }
   }
-  public fileOver(event) {
-    // console.log(event);
+
+  isPesoAllowed( size: string ): boolean {
+    if ( size.indexOf('MB') <= -1 ) {
+      const peso: number = Number(size.substr(0, size.indexOf(' ')));
+      if (peso > 50) {
+        return false;
+      }
+    }
+    return true;
   }
-  public fileLeave(event) {
-    // console.log(event);
+
+  transform(bytes: number = 0, precision: number = 2): string {
+    if ( isNaN(parseFloat(String(bytes))) || !isFinite(bytes)) {
+      return '?';
+    } else {
+      let unit = 0;
+      while (bytes >= 1024) {
+        bytes /= 1024;
+        unit++;
+      }
+      console.log(bytes);
+      return bytes.toFixed(+ precision) + ' ' + this.units[unit];
+    }
+  }
+
+  isFileAllowed( fileName: string ) {
+    let isFileAllowed = false;
+    const allowedFiles = ['.doc', '.docx', '.dotx', '.xls', '.xlsx', '.zip', '.7z', '.ppt', '.pptx', '.pdf', '.msg'
+                          , '.png', '.jpg', '.jpeg', '.gif', '.tiff', '.img', '.bmp', '.txt', '.xml'];
+    const regex = /(?:\.([^.]+))?$/;
+    const extension = regex.exec(fileName);
+    if (undefined !== extension && null !== extension) {
+        for (const ext of allowedFiles) {
+            if (ext === extension[0]) {
+                isFileAllowed = true;
+            }
+        }
+    }
+    return isFileAllowed;
   }
 }
