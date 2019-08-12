@@ -66,12 +66,14 @@
                                         <thead>
                                             <tr>
                                                 <th>Archivos Seleccionados</th>
+                                                <th>Peso</th>
                                                 <th></th>
                                             </tr>
                                         </thead>
                                         <tbody class="upload-name-style">
                                             <tr *ngFor="let item of servicio.archivos; let i=index">
                                                 <td><strong>{{ item.nombre }}</strong></td>
+                                                <td><strong>{{ item.peso }}</strong></td>
                                                 <td>
                                                     <button class="btn btn-sm btn-danger" (click)="borrar( i )">
                                                         <i class="fa fa-eraser"></i> Borrar

@@ -132,7 +132,7 @@ export class AvancesComponent implements OnInit {
               swal('Advertencia!', 'solo se puede adjuntar como máximo 5 archivos', 'warning');
               return;
             }
-            if ( this.isPesoAllowed(peso) ) {
+            if ( !this.isPesoAllowed(peso) ) {
               this.cargando = false;
               swal('Advertencia!', 'No se permiten archivos con un peso superor a 50 MB', 'warning');
               return;
@@ -170,13 +170,12 @@ export class AvancesComponent implements OnInit {
         bytes /= 1024;
         unit++;
       }
-      console.log(bytes);
       return bytes.toFixed(+ precision) + ' ' + this.units[unit];
     }
   }
 
   isPesoAllowed( size: string ): boolean {
-    if ( size.indexOf('MB') <= -1 ) {
+    if ( size.indexOf('MB') >= 0 ) {
       const peso: number = Number(size.substr(0, size.indexOf(' ')));
       if (peso > 50) {
         return false;

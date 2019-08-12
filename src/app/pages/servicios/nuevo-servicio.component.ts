@@ -125,13 +125,13 @@ export class NuevoServicioComponent implements OnInit {
               swal('Advertencia!', 'solo se puede adjuntar como máximo 5 archivos', 'warning');
               return;
             }
-            if ( this.isPesoAllowed(peso) ) {
+            if ( !this.isPesoAllowed(peso) ) {
               this.cargando = false;
               swal('Advertencia!', 'No se permiten archivos con un peso superor a 50 MB', 'warning');
               return;
             }
             // Here you can access the real file
-            this.servicio.archivos.push( new Archivos( 0, 0, droppedFile.relativePath, '' ) );
+            this.servicio.archivos.push( new Archivos( 0, 0, droppedFile.relativePath, '', false, peso ) );
             this.formData.append('archivos[]', file, droppedFile.relativePath);
           });
         } else {
@@ -155,7 +155,7 @@ export class NuevoServicioComponent implements OnInit {
   }
 
   isPesoAllowed( size: string ): boolean {
-    if ( size.indexOf('MB') <= -1 ) {
+    if ( size.indexOf('MB') >= 0 ) {
       const peso: number = Number(size.substr(0, size.indexOf(' ')));
       if (peso > 50) {
         return false;
@@ -173,7 +173,6 @@ export class NuevoServicioComponent implements OnInit {
         bytes /= 1024;
         unit++;
       }
-      console.log(bytes);
       return bytes.toFixed(+ precision) + ' ' + this.units[unit];
     }
   }
