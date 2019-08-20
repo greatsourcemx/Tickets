@@ -7,7 +7,7 @@ import { Servicio } from '../../models/servicio.model';
 import { URL_SERVICIOS } from '../../config/config';
 
 import { Router } from '@angular/router';
-import swal from 'sweetalert';
+import swal from 'sweetalert2';
 
 import { Store } from '@ngrx/store';
 import { AppState } from '../../store/app.reducers';
@@ -105,7 +105,7 @@ export class UsuarioService {
 
     return this.http.post( url, usuario ).pipe(
               map( (resp: any) => {
-                swal('Usuario Creado', usuario.nombre, 'success');
+                swal.fire('Usuario Creado', usuario.nombre, 'success');
                 return resp;
               }));
   }
@@ -115,7 +115,7 @@ export class UsuarioService {
 
     return this.http.put( url, usuario ).pipe(
                 map( (resp: any) => {
-                  swal('Usuario Actualizado', usuario.nombre, 'success');
+                  swal.fire('Usuario Actualizado', usuario.nombre, 'success');
                   return resp;
                 }));
   }

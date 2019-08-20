@@ -4,7 +4,7 @@ import { Empresa } from '../../models/empresa.model';
 import { NgForm } from '@angular/forms';
 import { UsuarioService, EmpresasService } from '../../services/service.index';
 import { Router } from '@angular/router';
-import swal from 'sweetalert';
+import swal from 'sweetalert2';
 
 @Component({
   selector: 'app-nuevo-usuario',
@@ -44,7 +44,7 @@ export class NuevoUsuarioComponent implements OnInit {
               this.router.navigate(['/usuarios']);
             },
             error => {
-              swal('Aviso!', error.error, 'warning');
+              swal.fire('Aviso!', error.error, 'warning');
             });
 
   }

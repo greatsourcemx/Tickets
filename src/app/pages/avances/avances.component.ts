@@ -7,7 +7,7 @@ import { FileSystemFileEntry, FileSystemDirectoryEntry } from 'ngx-file-drop/ngx
 import { NgxFileDropEntry } from 'ngx-file-drop/ngx-file-drop/ngx-file-drop-entry';
 import { Archivos } from '../../models/archivos.model';
 import { ServiciosService } from '../../services/servicios/servicios.service';
-import swal from 'sweetalert';
+import swal from 'sweetalert2';
 
 @Component({
   selector: 'app-avances',
@@ -129,12 +129,12 @@ export class AvancesComponent implements OnInit {
             const peso = this.transform(file.size);
             if ( this.avance.archivos.length === 5 ) {
               this.cargando = false;
-              swal('Advertencia!', 'solo se puede adjuntar como máximo 5 archivos', 'warning');
+              swal.fire('Advertencia!', 'solo se puede adjuntar como máximo 5 archivos', 'warning');
               return;
             }
             if ( !this.isPesoAllowed(peso) ) {
               this.cargando = false;
-              swal('Advertencia!', 'No se permiten archivos con un peso superor a 50 MB', 'warning');
+              swal.fire('Advertencia!', 'No se permiten archivos con un peso superor a 50 MB', 'warning');
               return;
             }
             // Here you can access the real file
@@ -150,7 +150,7 @@ export class AvancesComponent implements OnInit {
       }
     }
     if ( adjuntos.length > 0 ) {
-      swal('Advertencia!', 'Solo es permitido adjuntar archivos de Office, pdf, imágenes, zip y correos', 'warning');
+      swal.fire('Advertencia!', 'Solo es permitido adjuntar archivos de Office, pdf, imágenes, zip y correos', 'warning');
     }
     if ( this.avance.archivos.length > 0 ) {
       setTimeout(() => {

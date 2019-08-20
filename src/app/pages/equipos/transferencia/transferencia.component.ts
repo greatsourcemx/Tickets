@@ -3,7 +3,7 @@ import { GlpiService } from '../../../services/GLPI/glpi.service';
 import { GLPIEmpleado } from '../../../models/GLPIEmpleado.model';
 import { RetornoEquipo } from '../../../models/retorno.model';
 import { GLPILocacion } from '../../../models/models.index';
-import swal from 'sweetalert';
+import swal from 'sweetalert2';
 
 @Component({
   selector: 'app-transferencia',
@@ -97,7 +97,7 @@ export class TransferenciaComponent implements OnInit {
 
   transferir() {
     if ( this.emplTarget.Id === 0 ) {
-      swal('Advertencia', 'Debe seleccionar el empleado que recibe', 'warning' );
+      swal.fire('Advertencia', 'Debe seleccionar el empleado que recibe', 'warning' );
       return;
     }
     for ( const entr of this.equipos ) {

@@ -3,8 +3,7 @@ import { Usuario } from '../../models/usuario.model';
 import { SolicitanteService, EmpresasService } from '../../services/service.index';
 import { Empresa } from '../../models/empresa.model';
 import { GlpiService } from '../../services/GLPI/glpi.service';
-import swal from 'sweetalert';
-
+import swal from 'sweetalert2';
 
 @Component({
   selector: 'app-solicitantes',
@@ -94,17 +93,17 @@ export class SolicitantesComponent implements OnInit {
     this._solicitanteService.modificarSolicitante( solicitante )
         .subscribe( usr => {
           solicitante.password = '';
-          swal('Aviso!', 'Se registrarón los cambios', 'success');
+          swal.fire('Aviso!', 'Se registrarón los cambios', 'success');
         },
         error => {
-          swal('Aviso!', error.error, 'warning');
+          swal.fire('Aviso!', error.error, 'warning');
         });
   }
 
   enviarClave( usuario: Usuario ) {
     this._solicitanteService.enviarPassword( usuario )
     .subscribe((resp: any) => {
-      swal('Se envio la contraseña', 'a ' + usuario.nombre , 'success');
+      swal.fire('Se envio la contraseña', 'a ' + usuario.nombre , 'success');
     });
   }
 

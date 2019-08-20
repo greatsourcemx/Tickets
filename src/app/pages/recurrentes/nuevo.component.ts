@@ -4,7 +4,7 @@ import { Recurrentes } from '../../models/recurrentes.model';
 import { RecurrentesService, SolicitanteService, UsuarioService, TiposService } from '../../services/service.index';
 import { Usuario, Tipo } from '../../models/models.index';
 import * as dias from '../../config/dias.json';
-import swal from 'sweetalert';
+import swal from 'sweetalert2';
 
 @Component({
   selector: 'app-nuevo',
@@ -88,18 +88,18 @@ export class NuevoComponent implements OnInit {
     .subscribe((data: Recurrentes) => {
       this.cargando = false;
       this.recurrente = data;
-      swal('Correcto', 'Se guardó el servicio recurrente', 'success');
+      swal.fire('Correcto', 'Se guardó el servicio recurrente', 'success');
       this.router.navigate(['/recurrentes']);
     });
   }
 
   validaciones(): boolean {
     if ( this.recurrente.solicitante.id === 0 ) {
-      swal('Advertencia', 'Debe seleccionar el solicitante', 'warning');
+      swal.fire('Advertencia', 'Debe seleccionar el solicitante', 'warning');
       return false;
     }
     if ( this.recurrente.solicitante.id === 0 ) {
-      swal('Advertencia', 'Debe seleccionar el responsable', 'warning');
+      swal.fire('Advertencia', 'Debe seleccionar el responsable', 'warning');
       return false;
     }
     return true;

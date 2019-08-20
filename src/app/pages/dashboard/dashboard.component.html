@@ -38,7 +38,6 @@
                     </div>
                     <!-- Column -->
                 </div>
-
             </div>
         </div>
     </div>
@@ -90,8 +89,8 @@
                                 </td>
                                 <td>
                                     <span class="action-icons">
-                                        <a href="javascript:void(0)" [routerLink]="['/servicio', serv.Id ]" class="btn btn-primary btn-sm text-white" title="Detalles"><i class="fa fa-bars"></i> Detalles</a>
-                                        <!-- <a href="javascript:void(0)" [routerLink]="['/servicio', serv.Id ]" class="btn btn-primary btn-sm text-white" title="Detalles"><i class="fa fa-close"></i> Cerrar</a> -->
+                                        <a href="javascript:void(0)" [routerLink]="['/servicio', serv.Id ]" class="btn btn-primary btn-sm text-white icon-buttons" ngbTooltip="Detalles"><i class="fa fa-bars"></i> </a>
+                                        <a href="javascript:void(0)" (click)="cancelar( serv )" class="btn btn-danger btn-sm text-white" ngbTooltip="Cancelar"><i class="fa fa-close"></i> </a>
                                     </span>
                                 </td>
                             </tr>

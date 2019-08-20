@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MantenimientoService } from '../../services/service.index';
 import { Mantenimiento } from '../../models/mantenimientos/mantenimiento.model';
-import swal from 'sweetalert';
 
 @Component({
   selector: 'app-mantenimientos',

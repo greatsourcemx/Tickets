@@ -3,8 +3,7 @@ import { Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
 import { UsuarioService } from '../services/service.index';
 import { Usuario } from '../models/usuario.model';
-
-import swal from 'sweetalert';
+import swal from 'sweetalert2';
 
 declare function init_plugins();
 
@@ -42,7 +41,7 @@ export class LoginComponent implements OnInit {
         this.router.navigate(['/' + resp.root]);
       },
       error => {
-        swal('Aviso!', 'Usuario o contraseña incorrectos', 'warning');
+        swal.fire('Aviso!', 'Usuario o contraseña incorrectos', 'warning');
       }
     );
   }

@@ -5,7 +5,7 @@ import { TiempoService, UsuarioService, SolicitanteService, TiposService, Servic
 import { Servicio, Usuario, Tipo, Tiempo } from '../../models/models.index';
 import * as data from '../../config/estatus.json';
 
-import swal from 'sweetalert';
+import swal from 'sweetalert2';
 
 
 @Component({
@@ -92,7 +92,7 @@ export class TicketComponent implements OnInit {
     }
 
     if ( this.ticket.Solicitor.id === 0 ) {
-      swal('Advertencia', 'Debe seleccionar el solicitor', 'warning');
+      swal.fire('Advertencia', 'Debe seleccionar el solicitor', 'warning');
       return;
     }
     this.ticket.FecCerrado = new Date(this.fecCerrado.year, this.fecCerrado.month - 1, this.fecCerrado.day);
@@ -101,7 +101,7 @@ export class TicketComponent implements OnInit {
       (resp: any) => { this.router.navigate(['/principal']);
     },
     error => {
-      swal('Aviso!', error.error, 'warning');
+      swal.fire('Aviso!', error.error, 'warning');
     });
 
   }

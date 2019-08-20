@@ -1,4 +1,4 @@
-import swal from 'sweetalert';
+import swal from 'sweetalert2';
 import { map } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
@@ -45,7 +45,7 @@ export class TiempoService {
 
     return this.http.post( url, tiempo ).pipe(
             map( (resp: any) => {
-              swal('Duración Creado', tiempo.Descripcion, 'success');
+              swal.fire('Duración Creado', tiempo.Descripcion, 'success');
               return resp;
       }));
   }
@@ -56,7 +56,7 @@ export class TiempoService {
 
       return this.http.put( url, tiempo ).pipe(
             map( (resp: any) => {
-              swal('Duración Actualizado', tiempo.Descripcion, 'success');
+              swal.fire('Duración Actualizado', tiempo.Descripcion, 'success');
               return resp;
             }));
 

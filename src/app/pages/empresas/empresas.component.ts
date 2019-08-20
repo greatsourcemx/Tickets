@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { EmpresasService } from '../../services/service.index';
 import { Empresa } from '../../models/empresa.model';
-declare var swal: any;
+import swal from 'sweetalert2';
 
 @Component({
   selector: 'app-empresas',
@@ -23,10 +23,8 @@ export class EmpresasComponent implements OnInit {
 
   cargarEmpresas () {
     this.cargando = true;
-
     this._empresaService.cargarEmpresas(this.desde)
     .subscribe( (resp: any) => {
-
       if (resp.length !== 0) {
         this.totalRegistros = resp[0].totalUsuarios;
         this.Empresas = resp;
@@ -67,32 +65,23 @@ export class EmpresasComponent implements OnInit {
   }
 
   crearEmpresa() {
-
-    swal({
+    swal.fire({
       title: 'Crear Empresa',
       text: 'Ingrese el nombre',
-      content: 'input',
-      icon: 'info',
-      buttons: true,
-      dangerMode: true
-    }).then( (valor: string ) => {
-
-      if ( !valor ) {
-        return;
+      input: 'text',
+      showCancelButton: true
+    }).then((result) => {
+      if (result.value) {
+        let empre: Empresa = new Empresa(result.value);
+        this._empresaService.guardarEmpresa( empre )
+        .subscribe( () => {
+          this.cargarEmpresas();
+        },
+        error => {
+          swal.fire('Aviso!', error.error, 'warning');
+        });
       }
-
-      let empre: Empresa = new Empresa (valor);
-
-      this._empresaService.guardarEmpresa( empre )
-              .subscribe( () => {
-                this.cargarEmpresas();
-              },
-              error => {
-                swal('Aviso!', error.error, 'warning');
-              });
-
     });
-
   }
 
 }

@@ -23,6 +23,20 @@ body {
     margin-right: 5px;
 }
 
+.swal-button--cancel {
+    color: #fff;
+    background-color: #efefef;
+    background: #ef5350;
+    border-color: #ef5350;
+}
+
+.swal-button--cancel:not([disabled]):hover {
+    color: #fff;
+    background-color: #efefef;
+    background: #ef5350;
+    border-color: #ef5350;
+}
+
 
 /* TAGS */
 

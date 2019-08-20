@@ -2,8 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { Usuario } from '../../models/usuario.model';
 import { ServiciosService, UsuarioService, TiposService } from '../../services/service.index';
 import * as data from '../../config/estatus.json';
-import { Principal, Parametros } from '../../models/models.index';
+import { Principal, Servicio, Parametros } from '../../models/models.index';
 import { NgbRatingConfig } from '@ng-bootstrap/ng-bootstrap';
+import swal from 'sweetalert2';
+
 // Store
 import { Store } from '@ngrx/store';
 import { AppState } from '../../store/app.reducers';
@@ -58,6 +60,27 @@ export class DashboardComponent implements OnInit {
     });
   }
 
+  cancelar( serv: Servicio ) {
+    swal.fire({
+      title: '¿Cancelar Ticket?',
+      text: serv.Id + ' ' + serv.Titulo,
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#06d79c',
+      confirmButtonText: 'OK',
+      cancelButtonText: 'Regresar',
+      cancelButtonColor: '#398bf7',
+    }).then((result) => {
+      if (result.value) {
+        this.cancelarTicket( serv.Id );
+      }
+    });
+  }
+
+  cancelarTicket( id: number ) {
+    console.log(id);
+  }
+
   cargarDashboard () {
     this.store.select('marcadores')
     .subscribe( principal => {
@@ -72,22 +95,17 @@ export class DashboardComponent implements OnInit {
   }
 
   cambiarDesde( valor: number ) {
-
     let desde = this.desde + valor;
     let totalPages = Math.ceil(this.totalRegistros / 15);
-
     if ( desde >= totalPages ) {
       return;
     }
-
     if ( desde < 0 ) {
       return;
     }
-
     this.desde += valor;
     this.store.dispatch( new markActions.LoadServSoliAction( this.desde ) );
     this.cargarServicios();
-
   }
 
 }

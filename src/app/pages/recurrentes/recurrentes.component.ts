@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { RecurrentesService } from '../../services/servicios/recurrentes.service';
 import { Recurrentes } from '../../models/recurrentes.model';
-import swal from 'sweetalert';
+import swal from 'sweetalert2';
 
 
 
@@ -32,7 +32,7 @@ export class RecurrentesComponent implements OnInit {
 
   modificar( recurrente: Recurrentes ) {
     this.recuService.modificarRecurrente( recurrente )
-    .subscribe((data: any) => { swal('Actualizado', 'Se actualizó correctamente', 'success'); });
+    .subscribe((data: any) => { swal.fire('Actualizado', 'Se actualizó correctamente', 'success'); });
   }
 
 }

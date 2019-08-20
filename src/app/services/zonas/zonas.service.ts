@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { URL_SERVICIOS } from '../../config/config';
 import { Zonas } from '../../models/models.index';
 import { map } from 'rxjs/operators';
-import swal from 'sweetalert';
+import swal from 'sweetalert2';
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +20,7 @@ export class ZonasService {
   guardar( zona: Zonas ) {
     return this.http.post( this.url, zona ).pipe(
       map((data: any) => {
-        swal('Zona Creada', zona.nombre, 'success');
+        swal.fire('Zona Creada', zona.nombre, 'success');
         return data;
       })
     );
@@ -29,7 +29,7 @@ export class ZonasService {
   modificar( zona: Zonas ) {
     return this.http.put( this.url, zona ).pipe(
       map((data: any) => {
-        swal('Zona modificada', zona.nombre, 'success');
+        swal.fire('Zona modificada', zona.nombre, 'success');
         return data;
       })
     );

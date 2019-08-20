@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ServiciosService, UsuarioService, PrioridadService } from '../../services/service.index';
 import { Servicio, Usuario, Prioridad } from '../../models/models.index';
-import swal from 'sweetalert';
+import swal from 'sweetalert2';
 // Drag and Drop
 import { FileSystemFileEntry, FileSystemDirectoryEntry } from 'ngx-file-drop/ngx-file-drop/dom.types';
 import { NgxFileDropEntry } from 'ngx-file-drop/ngx-file-drop/ngx-file-drop-entry';
@@ -89,11 +89,11 @@ export class NuevoServicioComponent implements OnInit {
     this.servicio.FecCompromiso = new Date(this.fecCompr.year, this.fecCompr.month - 1, this.fecCompr.day);
     this._servicioService.guardarServicio(this.usuario.id, this.servicio )
     .subscribe( usuario => {
-      swal('Servicio Creado', this.servicio.Titulo, 'success' );
+      swal.fire('Servicio Creado', this.servicio.Titulo, 'success' );
       this.nuevo = false;
     },
     error => {
-      swal('Aviso!', error.error, 'warning');
+      swal.fire('Aviso!', error.error, 'warning');
     });
   }
 
@@ -122,12 +122,12 @@ export class NuevoServicioComponent implements OnInit {
             const peso = this.transform(file.size);
             if ( this.servicio.archivos.length === 5 ) {
               this.cargando = false;
-              swal('Advertencia!', 'solo se puede adjuntar como máximo 5 archivos', 'warning');
+              swal.fire('Advertencia!', 'solo se puede adjuntar como máximo 5 archivos', 'warning');
               return;
             }
             if ( !this.isPesoAllowed(peso) ) {
               this.cargando = false;
-              swal('Advertencia!', 'No se permiten archivos con un peso superor a 50 MB', 'warning');
+              swal.fire('Advertencia!', 'No se permiten archivos con un peso superor a 50 MB', 'warning');
               return;
             }
             // Here you can access the real file
@@ -143,7 +143,7 @@ export class NuevoServicioComponent implements OnInit {
       }
     }
     if ( adjuntos.length > 0 ) {
-      swal('Advertencia!', 'Solo es permitido adjuntar archivos de Office, pdf, imágenes, zip y correos', 'warning');
+      swal.fire('Advertencia!', 'Solo es permitido adjuntar archivos de Office, pdf, imágenes, zip y correos', 'warning');
     }
     if ( this.servicio.archivos.length > 0 ) {
       setTimeout(() => {

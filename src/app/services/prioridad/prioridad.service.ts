@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { URL_SERVICIOS } from '../../config/config';
 import { Prioridad } from '../../models/Prioridad.model';
-import swal from 'sweetalert';
+import swal from 'sweetalert2';
 
 
 @Injectable()
@@ -32,7 +32,7 @@ export class PrioridadService {
     let url = URL_SERVICIOS + '/prioridad';
     return this.http.post( url, prioridad ).pipe(
           map( (resp: any) => {
-            swal('Prioridad Creada', prioridad.Nombre, 'success');
+            swal.fire('Prioridad Creada', prioridad.Nombre, 'success');
             return resp;
           }));
   }

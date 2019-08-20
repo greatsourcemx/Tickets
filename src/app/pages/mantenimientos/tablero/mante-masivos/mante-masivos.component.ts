@@ -8,7 +8,7 @@ import { Tiempo } from '../../../../models/tiempo.model';
 import { Usuario } from '../../../../models/usuario.model';
 import { TiempoService } from '../../../../services/tiempo/tiempo.service';
 import { SolicitanteService } from '../../../../services/solicitante/solicitante.service';
-import swal from 'sweetalert';
+import swal from 'sweetalert2';
 
 @Component({
   selector: 'app-mante-masivos',
@@ -67,7 +67,7 @@ export class ManteMasivosComponent implements OnInit {
   guardarTodo() {
     for ( let tick of this.tickets ) {
       if ( tick.ticket.Solicitor.id === 0 ) {
-        swal('Seleccionar el Solicitante', tick.mante.equipo.Nombre, 'warning');
+        swal.fire('Seleccionar el Solicitante', tick.mante.equipo.Nombre, 'warning');
         return;
       }
       tick.fecMante = new Date(tick.fecCerrado.year, tick.fecCerrado.month - 1, tick.fecCerrado.day);

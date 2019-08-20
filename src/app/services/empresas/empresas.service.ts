@@ -1,4 +1,4 @@
-import swal from 'sweetalert';
+import swal from 'sweetalert2';
 import {map} from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
@@ -32,7 +32,7 @@ export class EmpresasService {
 
     return this.http.post( url, empresa ).pipe(
                 map( (resp: any) => {
-                  swal('Empresa Creada', empresa.nombre, 'success');
+                  swal.fire('Empresa Creada', empresa.nombre, 'success');
                   return resp;
                 }));
   }
@@ -42,7 +42,7 @@ export class EmpresasService {
 
     return this.http.put( url, empresa ).pipe(
                   map( (resp: any) => {
-                    swal('Empresa Actualizada', empresa.nombre, 'success');
+                    swal.fire('Empresa Actualizada', empresa.nombre, 'success');
                     return resp;
                   }));
   }

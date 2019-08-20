@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Usuario } from '../../models/usuario.model';
 import { UsuarioService } from '../../services/service.index';
 import * as data from '../../config/estados.json';
-import swal from 'sweetalert';
+import swal from 'sweetalert2';
 
 
 @Component({
@@ -75,10 +75,10 @@ export class UsuarioComponent implements OnInit {
     this._usuarioService.modificarUsuario( usuario )
         .subscribe( usr => {
           usuario.password = '';
-          swal('Aviso!', 'Se registrarón los cambios', 'success');
+          swal.fire('Aviso!', 'Se registrarón los cambios', 'success');
         },
         error => {
-          swal('Aviso!', error.error, 'warning');
+          swal.fire('Aviso!', error.error, 'warning');
         });
   }
 

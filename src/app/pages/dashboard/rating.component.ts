@@ -3,7 +3,7 @@ import { Servicio } from '../../models/servicio.model';
 import { ServiciosService } from '../../services/service.index';
 import { NgbModal, NgbRatingConfig } from '@ng-bootstrap/ng-bootstrap';
 import { Rating } from '../../models/rating.model';
-import swal from 'sweetalert';
+import swal from 'sweetalert2';
 
 @Component({
   selector: 'app-rating',
@@ -48,12 +48,12 @@ export class RatingComponent implements OnInit {
     if ( this.ratings.filter( r => r.rating > 0).length > 0 ) {
       this._serviciosService.guardarEvaluacion( this.ratings )
       .subscribe(() => {
-        swal('Evaluación enviada', '', 'success');
+        swal.fire('Evaluación enviada', '', 'success');
         this.modalService.dismissAll('close');
       });
     } else {
       const leyenda = this.ratings.length > 1 ? 'Debe calificar al menos una evaluación' : 'Debe calificar la evaluación';
-      swal(leyenda, '', 'warning');
+      swal.fire(leyenda, '', 'warning');
     }
   }
 

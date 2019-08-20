@@ -1,4 +1,4 @@
-import swal from 'sweetalert';
+import swal from 'sweetalert2';
 import { map } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
@@ -41,7 +41,7 @@ export class MantenimientoService {
   guardarMante( mante: TicketMante ) {
     return this.http.post( this.url, mante ).pipe(
       map((data: any) => {
-        swal('Mantenimiento Creado', mante.mante.equipo.Nombre, 'success');
+        swal.fire('Mantenimiento Creado', mante.mante.equipo.Nombre, 'success');
         return data;
       })
     );
@@ -51,7 +51,7 @@ export class MantenimientoService {
     let url = URL_SERVICIOS + '/mantes/all';
     return this.http.post( url, mantes ).pipe(
       map( () => {
-        swal('Se guardaron los Mantenimientos', '', 'success');
+        swal.fire('Se guardaron los Mantenimientos', '', 'success');
       })
     );
   }

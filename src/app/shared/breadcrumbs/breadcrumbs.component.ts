@@ -5,7 +5,7 @@ import { Meta, Title, MetaDefinition } from '@angular/platform-browser';
 import { NgForm } from '@angular/forms';
 import { SolicitanteService, TiempoService, ServiciosService, UsuarioService } from '../../services/service.index';
 import { Usuario, Tiempo, Servicio } from '../../models/models.index';
-import swal from 'sweetalert';
+import swal from 'sweetalert2';
 
 // store
 import { Store } from '@ngrx/store';
@@ -95,7 +95,7 @@ export class BreadcrumbsComponent implements OnInit {
       return;
     }
     if ( this.ticket.Solicitor.id === 0 ) {
-      swal('Advertencia', 'Debe seleccionar el solicitor', 'warning');
+      swal.fire('Advertencia', 'Debe seleccionar el solicitor', 'warning');
       return;
     }
     this._servicioService.guardaTicketRapido( this.ticket )
@@ -104,9 +104,9 @@ export class BreadcrumbsComponent implements OnInit {
       this.store.dispatch( new servActions.LoadMarkAction( this.range ) );
       this.ticket = new Servicio('', '');
       this.ticket.Duracion = this.duracion[0];
-      swal('Correcto!', 'Se registró el servicio', 'success');
+      swal.fire('Correcto!', 'Se registró el servicio', 'success');
     }, error => {
-      swal('Aviso!', error.error, 'warning');
+      swal.fire('Aviso!', error.error, 'warning');
     });
   }
 

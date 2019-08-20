@@ -5,7 +5,7 @@ import { SolicitanteService } from '../../services/solicitante/solicitante.servi
 import { NgForm } from '@angular/forms';
 import { Empresa } from '../../models/empresa.model';
 import { EmpresasService } from '../../services/service.index';
-import swal from 'sweetalert';
+import swal from 'sweetalert2';
 
 // store
 import { Store } from '@ngrx/store';
@@ -64,7 +64,7 @@ export class EditarSolicitanteComponent implements OnInit {
           this.router.navigate(['/solicitantes']);
         },
         error => {
-          swal('Aviso!', error.error, 'warning');
+          swal.fire('Aviso!', error.error, 'warning');
         });
 
   }

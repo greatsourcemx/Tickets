@@ -1,4 +1,4 @@
-import swal from 'sweetalert';
+import swal from 'sweetalert2';
 import {map} from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
@@ -21,7 +21,7 @@ export class AvancesService {
 
     return this.http.post( url, avance ).pipe(
     map( (resp: any) => {
-      swal('Avance Creado', '', 'success');
+      swal.fire('Avance Creado', '', 'success');
       return resp;
     }));
   }

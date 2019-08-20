@@ -14,7 +14,7 @@
                 <div class="d-flex flex-row comment-row" *ngFor="let serv of servNuevos">
                     <div class="p-2"><span class="round"><img [src]="serv.Solicitor.id | imagen" alt="user" width="50" height="50px"></span></div>
                     <div class="comment-text w-100">
-                        <h5 data-toggle="tooltip" data-placement="top" [title]="serv.Descripcion"># {{ serv.Id }} {{ serv.Titulo }} </h5>
+                        <h5 data-toggle="tooltip" data-placement="top" [ngbTooltip]="serv.Descripcion"># {{ serv.Id }} {{ serv.Titulo }} </h5>
                         <h6> {{ serv.Solicitor.nombre | titlecase | capitalizar }}
                             <span class="label label-rounded" [ngClass]="( serv.Urgencia.Nombre == 'Inmediatamente' || serv.Urgencia.Nombre == 'Urgente' ) ? 'label-warning' : 'label-info'">
                                 {{ serv.Urgencia.Nombre }}
@@ -24,9 +24,9 @@
                         <div class="comment-footer">
                             <span class="text-muted"> {{ serv.TiempoTranscurrido }} </span>
                             <span class="action-icons">
-                                <a href="javascript:void(0)" (click)="take( serv.Id )" class="btn btn-info btn-sm text-white icon-buttons" title="Avances"><i class="fa fa-hand-o-up"></i></a>
-                                <a href="javascript:void(0)" [routerLink]="['/servicio', serv.Id ]"  class="btn btn-info btn-sm text-white icon-buttons" title="Avances"><i class="icon icon-layers"></i></a>
-                                <a href="javascript:void(0)" [routerLink]="['/tickets', serv.Id ]" class="btn btn-danger btn-sm text-white" title="Cerrar"><i class="icon icon-check"></i></a>
+                                <a href="javascript:void(0)" (click)="take( serv.Id )" class="btn btn-info btn-sm text-white icon-buttons" ngbTooltip="Tomar"><i class="fa fa-hand-o-up"></i></a>
+                                <a href="javascript:void(0)" [routerLink]="['/servicio', serv.Id ]"  class="btn btn-info btn-sm text-white icon-buttons" ngbTooltip="Avances"><i class="icon icon-layers"></i></a>
+                                <a href="javascript:void(0)" [routerLink]="['/tickets', serv.Id ]" class="btn btn-danger btn-sm text-white" ngbTooltip="Cerrar"><i class="icon icon-check"></i></a>
                             </span>
                         </div>
                     </div>
@@ -63,7 +63,9 @@
                         </thead>
                         <tbody>
                             <tr *ngFor="let tick of myTickets  | filter: 'Id,termino,Titulo': query">
-                                <td data-toggle="tooltip" data-placement="top" [title]="tick.Descripcion" style="width:20px;">{{ tick.Id }}</td>
+                                <td>
+                                    <span [ngbTooltip]="tick.Descripcion">{{ tick.Id }}</span>
+                                </td>
                                 <td>
                                     <h6> {{ tick.Solicitor.nombre | titlecase | capitalizar }} </h6>
                                 </td>
@@ -73,9 +75,8 @@
                                 <td> {{ tick.TiempoTranscurrido }} </td>
                                 <td>
                                     <span class="action-icons">
-                                        <!-- <a href="javascript:void(0)" [routerLink]="['/avances', tick.Id ]" class="btn btn-info btn-sm text-white icon-buttons" title="Avances"><i class="icon icon-layers"></i></a> -->
-                                        <a href="javascript:void(0)" [routerLink]="['/servicio', tick.Id ]"  class="btn btn-info btn-sm text-white icon-buttons" title="Avances"><i class="icon icon-layers"></i></a>
-                                        <a href="javascript:void(0)" [routerLink]="['/tickets', tick.Id ]" class="btn btn-danger btn-sm text-white" title="Cerrar"><i class="icon icon-check"></i></a>
+                                        <a href="javascript:void(0)" [routerLink]="['/servicio', tick.Id ]"  class="btn btn-info btn-sm text-white icon-buttons" ngbTooltip="Avances"><i class="icon icon-layers"></i></a>
+                                        <a href="javascript:void(0)" [routerLink]="['/tickets', tick.Id ]" class="btn btn-danger btn-sm text-white" ngbTooltip="Cerrar"><i class="icon icon-check"></i></a>
                                     </span>
                                 </td>
                             </tr>

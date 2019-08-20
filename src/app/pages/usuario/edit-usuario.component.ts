@@ -5,7 +5,7 @@ import { Empresa } from '../../models/empresa.model';
 import { UsuarioService } from '../../services/usuario/usuario.service';
 import { EmpresasService } from '../../services/empresas/empresas.service';
 import { NgForm } from '@angular/forms';
-import swal from 'sweetalert';
+import swal from 'sweetalert2';
 
 @Component({
   selector: 'app-edit-usuario',
@@ -58,7 +58,7 @@ export class EditUsuarioComponent implements OnInit {
           this.router.navigate(['/usuarios']);
         },
         error => {
-          swal('Aviso!', error.error, 'warning');
+          swal.fire('Aviso!', error.error, 'warning');
         });
 
   }

@@ -3,7 +3,7 @@ import { NgForm } from '@angular/forms';
 import { UsuarioService } from '../../services/service.index';
 import { Perfil } from '../../models/models.index';
 import { NgbRatingConfig } from '@ng-bootstrap/ng-bootstrap';
-import swal from 'sweetalert';
+import swal from 'sweetalert2';
 import { Usuario } from '../../models/usuario.model';
 
 @Component({
@@ -52,20 +52,20 @@ export class PerfilComponent implements OnInit {
       return;
     }
     if ( this.confirm !== this.perfil.claveNueva ) {
-      swal('Advetencia', 'La contraseña de validación no coincide', 'warning' );
+      swal.fire('Advetencia', 'La contraseña de validación no coincide', 'warning' );
       return;
     }
     if ( this.perfil.claveNueva === this.perfil.clave ) {
-      swal('Advetencia', 'La nueva contraseña debe ser diferente al actual', 'warning' );
+      swal.fire('Advetencia', 'La nueva contraseña debe ser diferente al actual', 'warning' );
       return;
     }
 
     this._usuarioService.cambiarClave( this.perfil )
     .subscribe((data: string) => {
       if (data === 'OK') {
-        swal('Correcto', 'Se ha cambiado la contraseña', 'success' );
+        swal.fire('Correcto', 'Se ha cambiado la contraseña', 'success' );
       } else {
-        swal('Advetencia', data, 'warning' );
+        swal.fire('Advetencia', data, 'warning' );
       }
       this.perfil.clave = '';
       this.perfil.claveNueva = '';
