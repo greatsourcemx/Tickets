@@ -88,6 +88,10 @@ export class DetallesServicioComponent implements OnInit {
 
   regresar() {
     let url = localStorage.getItem('url');
+    if ( url === '/' && !this.isAdmin ) {
+      this.router.navigate(['dashboard']);
+      return;
+    }
     this.router.navigate([url]);
   }
 

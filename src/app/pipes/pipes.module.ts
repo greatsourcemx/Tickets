@@ -7,6 +7,7 @@ import { FilterPipe } from './filter.pipe';
 import { OrderbyPipe } from './orderby.pipe';
 import { TruncatePipe } from './truncate.pipe';
 import { CapitalizarPipe } from './capitalizar.pipe';
+import { FechaPipe } from './fecha.pipe';
 
 @NgModule({
   imports: [],
@@ -18,7 +19,8 @@ import { CapitalizarPipe } from './capitalizar.pipe';
     FilterPipe,
     OrderbyPipe,
     TruncatePipe,
-    CapitalizarPipe
+    CapitalizarPipe,
+    FechaPipe
   ],
   exports: [
     ImagenPipe,
@@ -28,7 +30,8 @@ import { CapitalizarPipe } from './capitalizar.pipe';
     FilterPipe,
     OrderbyPipe,
     TruncatePipe,
-    CapitalizarPipe
+    CapitalizarPipe,
+    FechaPipe
   ]
 })
 export class PipesModule { }

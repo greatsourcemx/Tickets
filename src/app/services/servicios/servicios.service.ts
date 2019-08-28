@@ -71,6 +71,33 @@ export class ServiciosService {
       }));
   }
 
+  cancelar( serv: Servicio ) {
+    const url = URL_SERVICIOS + '/servicio/cancel';
+    return this.http.put( url, serv ).pipe(
+      map(data =>  {
+        return data;
+      })
+    );
+  }
+
+  abrir( srv: Servicio ) {
+    const url = URL_SERVICIOS + '/servicio/abrir';
+    return this.http.put( url, srv ).pipe(
+      map(data =>  {
+        return data;
+      })
+    );
+  }
+
+  cerrar( srv: Servicio ) {
+    const url = URL_SERVICIOS + '/servicio/cerrar';
+    return this.http.put( url, srv ).pipe(
+      map(data =>  {
+        return data;
+      })
+    );
+  }
+
   guardaTicketRapido( servicio: Servicio ) {
     const url = URL_SERVICIOS + '/ticket/quick';
     return this.http.post( url, servicio ).pipe(

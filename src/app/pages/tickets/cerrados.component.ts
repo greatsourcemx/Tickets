@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Servicio, Usuario, Tipo } from '../../models/models.index';
 import { ServiciosService, UsuarioService, SolicitanteService, TiposService } from '../../services/service.index';
 import { NgbDateStruct, NgbCalendar } from '@ng-bootstrap/ng-bootstrap';
+import swal from 'sweetalert2';
 
 const equals = (one: NgbDateStruct, two: NgbDateStruct) =>
   one && two && two.year === one.year && two.month === one.month && two.day === one.day;
@@ -47,6 +48,7 @@ export class CerradosComponent implements OnInit {
   totalRegistros: number = 0;
   cargando = false;
   showNavegacion = false;
+  isAdmin = false;
 
   // Para rango de fechas
   displayMonths = 2;
@@ -63,6 +65,10 @@ export class CerradosComponent implements OnInit {
     public _tiposService: TiposService,
     public _usuarioService: UsuarioService,
     public calendar: NgbCalendar ) {
+      this._usuarioService.esAdmin()
+      .subscribe((data: boolean) => {
+        this.isAdmin = data;
+      });
       this.fromDate = calendar.getToday(); // calendar.getNext(calendar.getToday(), 'd', -10);
       this.toDate = calendar.getToday();
     }
@@ -119,6 +125,31 @@ export class CerradosComponent implements OnInit {
     });
   }
 
+  reabrir( serv: Servicio ) {
+    swal.fire({
+      title: '¿Re abrir el Ticket?',
+      text: serv.Id + ' ' + serv.Titulo,
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#06d79c',
+      confirmButtonText: 'Sí',
+      cancelButtonText: 'No',
+      cancelButtonColor: '#398bf7',
+    }).then((result) => {
+      if (result.value) {
+        this.abrirTicket( serv );
+      }
+    });
+  }
+
+  abrirTicket( serv: Servicio) {
+    this._servicioService.abrir( serv )
+    .subscribe(() => {
+      swal.fire(serv.Id + ' : ' + serv.Titulo, 'Se ha abierto', 'success');
+      this.cargarTickets();
+    });
+  }
+
   quitarFiltros () {
     this.filtros = new Servicio('');
     this.fromDate = this.calendar.getToday();
@@ -127,25 +158,19 @@ export class CerradosComponent implements OnInit {
   }
 
   cambiarDesde( valor: number ) {
-
     let desde = this.filtros.desde + valor;
     let totalPages = Math.ceil(this.totalRegistros / 15);
-
     if ( desde >= totalPages ) {
       return;
     }
-
     if ( desde < 0 ) {
       return;
     }
-
     this.filtros.desde += valor;
     this.cargarTickets();
-
   }
 
   // Funciones para Rango de Fechas
-
   onDateSelection(date: NgbDateStruct) {
     if (!this.fromDate && !this.toDate) {
       this.fromDate = date;

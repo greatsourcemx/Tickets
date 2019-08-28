@@ -13,8 +13,8 @@
                                 </ngb-datepicker>
                                 <ng-template #t let-date="date" let-focused="focused">
                                     <span class="custom-day" [class.focused]="focused" [class.range]="isFrom(date) || isTo(date) || isInside(date) || isHovered(date)" [class.faded]="isHovered(date) || isInside(date)" (mouseenter)="hoveredDate = date" (mouseleave)="hoveredDate = null">
-                                            {{ date.day }}
-                                        </span>
+                                        {{ date.day }}
+                                    </span>
                                 </ng-template>
 
                             </div>
@@ -42,7 +42,7 @@
                                 </div>
 
                                 <div class="row">
-                                    <div *ngIf="!(_usuarioService.usuario.root === 'dashboard')" class="col-sm-6 nopadding">
+                                    <div *ngIf="isAdmin" class="col-sm-6 nopadding">
                                         <label for="solicitante">Solicitante</label>
                                         <div class="form-group">
                                             <ng-select [(ngModel)]="filtros.Solicitor" name="solicitante" [items]="users" bindLabel="nombre">
@@ -53,7 +53,7 @@
                                         </div>
                                     </div>
 
-                                    <div [ngClass]="(_usuarioService.usuario.root === 'dashboard') ? 'col-sm-12' : 'col-sm-6'" class=" nopadding">
+                                    <div [ngClass]="!isAdmin ? 'col-sm-12' : 'col-sm-6'" class=" nopadding">
                                         <label for="responsable">Responsable</label>
                                         <div class="form-group">
                                             <ng-select [(ngModel)]="filtros.AsignadoA" name="responsable" [items]="admins" bindLabel="nombre">
@@ -65,7 +65,7 @@
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-sm-6 nopadding">
+                                    <div *ngIf="isAdmin" class="col-sm-6 nopadding">
                                         <div class="form-group">
                                             <label for="tipo">Tipo</label>
                                             <div class="input-group">
@@ -110,10 +110,11 @@
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th colspan="2">Solicitante</th>
+                                <th *ngIf="isAdmin" colspan="2">Solicitante</th>
                                 <th>Título</th>
                                 <th>Fec. Creado</th>
                                 <th>Fec. Cerrado</th>
+                                <th>Estado</th>
                                 <th>Tipo</th>
                                 <th>Horas</th>
                                 <th>Responsable</th>
@@ -123,20 +124,22 @@
                         <tbody>
                             <tr *ngFor="let tick of Tickets">
                                 <td style="width:20px;">{{ tick.Id }}</td>
-                                <td style="width:50px;"><span class="round"><img [src]="tick.Solicitor.id | imagen" alt="user" width="50" height="50px"></span></td>
-                                <td>
+                                <td *ngIf="isAdmin" style="width:50px;"><span class="round"><img [src]="tick.Solicitor.id | imagen" alt="user" width="50" height="50px"></span></td>
+                                <td *ngIf="isAdmin">
                                     <h6> {{ tick.Solicitor.nombre | titlecase | capitalizar }} </h6>
                                 </td>
                                 <td> {{ tick.Titulo }} </td>
                                 <td> {{ tick.FecRegistro | date: 'yyyy-MM-dd' }} </td>
                                 <td> {{ tick.FecCerrado | date: 'yyyy-MM-dd' }} </td>
+                                <td> {{ tick.Estado }} </td>
                                 <td> {{ tick.TipoServicio.descripcion }} </td>
                                 <td> {{ tick.tiempoTotal | tiempo }} </td>
                                 <td> {{ tick.AsignadoA.nombre }} </td>
                                 <td>
                                     <span class="action-icons">
-                                      <a href="javascript:void(0)" [routerLink]="['/servicio', tick.Id ]" class="btn btn-info btn-sm text-white" title="Detalles"><i class="fa fa-bars"></i></a>
-                                  </span>
+                                      <a href="javascript:void(0)" [routerLink]="['/servicio', tick.Id ]" class="btn btn-info btn-sm text-white icon-buttons" title="Detalles"><i class="fa fa-bars"></i></a>
+                                      <a href="javascript:void(0)" (click)="reabrir( tick )" class="btn btn-info btn-sm text-white" title="Re Abrir"><i class="fa fa-folder-open"></i></a>
+                                    </span>
                                 </td>
                             </tr>
                         </tbody>

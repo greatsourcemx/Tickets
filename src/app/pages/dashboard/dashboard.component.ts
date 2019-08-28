@@ -60,25 +60,38 @@ export class DashboardComponent implements OnInit {
     });
   }
 
-  cancelar( serv: Servicio ) {
+  cancelar( serv: Servicio, cancel: boolean ) {
+    let titulo = cancel ? '¿Cancelar Ticket?' : '¿Cerrar el Ticket?';
     swal.fire({
-      title: '¿Cancelar Ticket?',
+      title: titulo,
       text: serv.Id + ' ' + serv.Titulo,
       type: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#06d79c',
-      confirmButtonText: 'OK',
-      cancelButtonText: 'Regresar',
+      confirmButtonText: 'Sí',
+      cancelButtonText: 'No',
       cancelButtonColor: '#398bf7',
     }).then((result) => {
       if (result.value) {
-        this.cancelarTicket( serv.Id );
+        this.cancelarTicket( serv, cancel );
       }
     });
   }
 
-  cancelarTicket( id: number ) {
-    console.log(id);
+  cancelarTicket( srv: Servicio, cancel: boolean ) {
+    if ( cancel ) {
+      this._serviciosService.cancelar( srv )
+      .subscribe(() => {
+        this.store.dispatch( new markActions.LoadServSoliAction( this.desde ) );
+        swal.fire(srv.Id + ' : ' + srv.Titulo, 'Se ha cancelado', 'success');
+      });
+    } else {
+      this._serviciosService.cerrar( srv )
+      .subscribe(() => {
+        this.store.dispatch( new markActions.LoadServSoliAction( this.desde ) );
+        swal.fire(srv.Id + ' : ' + srv.Titulo, 'Se ha cerrado', 'success');
+      });
+    }
   }
 
   cargarDashboard () {

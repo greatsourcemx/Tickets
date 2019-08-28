@@ -71,7 +71,7 @@
                                     <i class="fa" [ngClass]="{'fa-sort': column != 'Estado', 'fa-sort-asc': (column == 'Estado' && isDesc), 'fa-sort-desc': (column == 'Estado' && !isDesc) }" aria-hidden="true"> </i>
                                 </th>
                                 <th>Asignado a<span class="footable-sort-indicator"></span></th>
-                                <th>Action<span class="footable-sort-indicator"></span></th>
+                                <th><span class="footable-sort-indicator"></span></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -90,7 +90,8 @@
                                 <td>
                                     <span class="action-icons">
                                         <a href="javascript:void(0)" [routerLink]="['/servicio', serv.Id ]" class="btn btn-primary btn-sm text-white icon-buttons" ngbTooltip="Detalles"><i class="fa fa-bars"></i> </a>
-                                        <a href="javascript:void(0)" (click)="cancelar( serv )" class="btn btn-danger btn-sm text-white" ngbTooltip="Cancelar"><i class="fa fa-close"></i> </a>
+                                        <a *ngIf="serv.tiempoTotal === 'Sin Tiempo|Aún'" href="javascript:void(0)" (click)="cancelar( serv, true )" class="btn btn-danger btn-sm text-white" ngbTooltip="Cancelar"><i class="fa fa-close"></i> </a>
+                                        <a *ngIf="serv.tiempoTotal !== 'Sin Tiempo|Aún'" href="javascript:void(0)" (click)="cancelar( serv, false )" class="btn btn-success btn-sm text-white" ngbTooltip="Cerrar"><i class="icon icon-check"></i> </a>
                                     </span>
                                 </td>
                             </tr>

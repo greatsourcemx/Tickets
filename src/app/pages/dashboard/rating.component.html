@@ -2,8 +2,8 @@
     <div class="modal-header">
         <h4 class="modal-title" id="modal-basic-title">¿Como califica el servicio?</h4>
         <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
-      <span aria-hidden="true">&times;</span>
-    </button>
+            <span aria-hidden="true">&times;</span>
+        </button>
     </div>
     <div class="modal-body">
         <div *ngIf="evaluaciones" class="row">
@@ -12,16 +12,19 @@
                     <div class="card-body">
 
                         <li class="media" *ngFor="let rati of ratings">
-                            <div class="rating-imagen">
-                                <img class="d-flex mr-3 img-rounded" [src]="rati.servicio.AsignadoA.id | imagen" alt="Atendido por" width="40%" height="40%" />
-                            </div>
                             <div class="media-body text-center">
                                 <div class="rating-titulo">
                                     <h5 class="card-title m-t-10"><b>{{ rati.servicio.Titulo }}</b></h5>
                                 </div>
                                 <div class="rating-responsable">
-                                    <small>Atendió: {{ rati.servicio.AsignadoA.nombre }}</small>
+                                    <small>Atendió: <strong>{{ rati.servicio.AsignadoA.nombre }}</strong></small>
                                 </div>
+                                <div class="rating-responsable">
+                                    <small>Fecha Finalizado: <strong>{{ rati.servicio.FecCerrado | fecha }}</strong></small>
+                                </div>
+                                <!-- <div class="rating-imagen">
+                                    <img class="d-flex mr-3 img-rounded" [src]="rati.servicio.AsignadoA.id | imagen" alt="Atendido por" width="40%" height="40%" />
+                                </div> -->
                                 <ngb-rating [(rate)]="rati.rating">
                                     <ng-template let-fill="fill" let-index="index">
                                         <span class="star" [style.width.%]="fill" [class.filled]="fill === 100"> <i class="fa fa-star"></i> </span>
