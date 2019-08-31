@@ -82,6 +82,7 @@ import { ManteTicketComponent } from './mantenimientos/mante-ticket/mante-ticket
 import { UltimosManteComponent } from './mantenimientos/tablero/ultimos-mante/ultimos-mante.component';
 import { ManteVencidosComponent } from './mantenimientos/tablero/mante-vencidos/mante-vencidos.component';
 import { ManteMasivosComponent } from './mantenimientos/tablero/mante-masivos/mante-masivos.component';
+import { EvaluacionesComponent } from './reportes/evaluaciones.component';
 
 
 @NgModule({
@@ -136,7 +137,8 @@ import { ManteMasivosComponent } from './mantenimientos/tablero/mante-masivos/ma
         ManteTicketComponent,
         UltimosManteComponent,
         ManteVencidosComponent,
-        ManteMasivosComponent
+        ManteMasivosComponent,
+        EvaluacionesComponent
     ],
     exports: [
         DashboardComponent,

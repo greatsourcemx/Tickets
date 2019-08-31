@@ -57,4 +57,10 @@ export class RatingComponent implements OnInit {
     }
   }
 
+  cambio( rate: number, rating: Rating ) {
+    if (rate !== 0 && rate <= 3) {
+      rating.mostrarComentario = true;
+    }
+  }
+
 }

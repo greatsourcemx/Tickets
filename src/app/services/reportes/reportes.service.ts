@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { URL_SERVICIOS } from '../../config/config';
 import { Parametros } from '../../models/parametros.model';
+import { Rating } from '../../models/rating.model';
 
 @Injectable()
 export class ReportesService {
@@ -24,6 +25,14 @@ export class ReportesService {
     map( (resp: any) => {
       return resp;
     }));
+  }
+
+  obtenerEvaluaciones( param: Parametros ) {
+    const url = URL_SERVICIOS + '/reporte/evaluaciones';
+    return this.http.post( url, param ).pipe(
+      map((data: Rating[]) => {
+        return data;
+      }));
   }
 
 }

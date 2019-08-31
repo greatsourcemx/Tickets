@@ -13,23 +13,27 @@
 
                         <li class="media" *ngFor="let rati of ratings">
                             <div class="media-body text-center">
-                                <div class="rating-titulo">
-                                    <h5 class="card-title m-t-10"><b>{{ rati.servicio.Titulo }}</b></h5>
+                                <div class=row>
+                                    <div [ngClass]="rati.mostrarComentario ? 'col-6':'col-12'">
+                                        <div class="rating-titulo">
+                                            <h5 class="card-title m-t-10"><b>{{ rati.servicio.Titulo }}</b></h5>
+                                        </div>
+                                        <div class="rating-responsable">
+                                            <small>Atendió: <strong>{{ rati.servicio.AsignadoA.nombre }}</strong></small>
+                                        </div>
+                                        <div class="rating-responsable">
+                                            <small>Fecha Finalizado: <strong>{{ rati.servicio.FecCerrado | fecha }}</strong></small>
+                                        </div>
+                                        <ngb-rating (rateChange)="cambio( $event, rati )" [(rate)]="rati.rating">
+                                            <ng-template let-fill="fill" let-index="index">
+                                                <span class="star" [style.width.%]="fill" [class.filled]="fill === 100"> <i class="fa fa-star"></i> </span>
+                                            </ng-template>
+                                        </ngb-rating>
+                                    </div>
+                                    <div *ngIf="rati.mostrarComentario" class="col-6">
+                                        <textarea name="comments" [(ngModel)]="rati.comentario" class="form-control" placeholder="Agregar comentarios" rows="5"></textarea>
+                                    </div>
                                 </div>
-                                <div class="rating-responsable">
-                                    <small>Atendió: <strong>{{ rati.servicio.AsignadoA.nombre }}</strong></small>
-                                </div>
-                                <div class="rating-responsable">
-                                    <small>Fecha Finalizado: <strong>{{ rati.servicio.FecCerrado | fecha }}</strong></small>
-                                </div>
-                                <!-- <div class="rating-imagen">
-                                    <img class="d-flex mr-3 img-rounded" [src]="rati.servicio.AsignadoA.id | imagen" alt="Atendido por" width="40%" height="40%" />
-                                </div> -->
-                                <ngb-rating [(rate)]="rati.rating">
-                                    <ng-template let-fill="fill" let-index="index">
-                                        <span class="star" [style.width.%]="fill" [class.filled]="fill === 100"> <i class="fa fa-star"></i> </span>
-                                    </ng-template>
-                                </ngb-rating>
                                 <hr />
                             </div>
                         </li>

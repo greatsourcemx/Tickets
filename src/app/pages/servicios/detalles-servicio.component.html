@@ -1,4 +1,5 @@
-<div class="card">
+<div class="ribbon-wrapper card">
+    <div *ngIf="servicio.TipoServicio.descripcion === 'Soporte'" class="ribbon ribbon-default ribbon-right"> {{ servicio.FecCompromiso | fecha }} </div>
     <div class="card-body">
         <div class="row">
             <div class="col-md-3 col-xs-6 b-r"> <strong class="text-muted">Título</strong>
@@ -60,7 +61,6 @@
     <div class="col-12">
         <div class="card">
             <div class="card-body">
-
                 <h4 class="card-title pull-left"> Historial de Avances </h4>
                 <div *ngIf="isAdmin" class="text-right">
                     <button [routerLink]="['/avances', servicio.Id]" type="button" title="Agregar" class="btn btn-circle btn-primary">

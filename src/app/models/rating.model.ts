@@ -8,6 +8,8 @@ export class Rating {
         public fecha: Date = new Date(),
         public solicitante: Usuario = new Usuario(),
         public servicio: Servicio = new Servicio(),
+        public comentario: string = '',
+        public mostrarComentario: boolean = false,
         public total: number = 0
     ) { }
 }

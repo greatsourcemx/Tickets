@@ -1,0 +1,39 @@
+<div class="card">
+    <div class="card-body">
+        <div class="col-6">
+            <select [(ngModel)]="param.rango" name="range" id="range" class="form-control col-md-6 pull-left">
+                <option *ngFor="let rang of rangos" [value]="rang.value">{{ rang.displayName }}</option>
+            </select>
+            <button name="generar" class="btn btn-primary" (click)="generar()">Generar</button>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="ratings" class="card">
+    <div class="card-body">
+        <div class="col-12">
+
+            <table class="table table-sm table-hover">
+                <thead>
+                    <tr>
+                        <th>Ticket</th>
+                        <th>Responsable</th>
+                        <th>Fecha</th>
+                        <th>Evaluación</th>
+                        <th>Comentario</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let rat of ratings">
+                        <td>{{ rat.servicio.Id }} : {{ rat.servicio.Titulo }}</td>
+                        <td>{{ rat.servicio.AsignadoA.nombre }}</td>
+                        <td>{{ rat.fecha | fecha }}</td>
+                        <td>{{ rat.rating | number }}</td>
+                        <td>{{ rat.comentario }}</td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</div>

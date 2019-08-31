@@ -4,7 +4,8 @@
         "icono": "fa fa-tasks",
         "submenu": [
             { "titulo": "Tickets", "url": "/dashboard" },
-            { "titulo": "Cerrados", "url": "/cerrados" }
+            { "titulo": "Cerrados", "url": "/cerrados" },
+            { "titulo": "Evaluaciones", "url": "/reporte/evaluaciones" }
         ]
     }, {
         "titulo": "Equipo",
@@ -20,6 +21,7 @@
             { "titulo": "Inicio", "url": "/principal" },
             { "titulo": "Tickets", "url": "/tickets" },
             { "titulo": "Cerrados", "url": "/cerrados" },
+            { "titulo": "Evaluaciones", "url": "/reporte/evaluaciones" },
             { "titulo": "Recurrentes", "url": "/recurrentes" },
             { "titulo": "Gráficas", "url": "/graficas" }
         ]

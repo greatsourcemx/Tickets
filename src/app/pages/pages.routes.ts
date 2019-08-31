@@ -34,6 +34,7 @@ import { CalendarioComponent } from './calendario/calendario.component';
 import { ZonasComponent } from './mantenimientos/zonas/zonas.component';
 import { TableroComponent } from './mantenimientos/tablero/tablero.component';
 import { ManteTicketComponent } from './mantenimientos/mante-ticket/mante-ticket.component';
+import { EvaluacionesComponent } from './reportes/evaluaciones.component';
 
 const pagesRoutes: Routes = [
     {
@@ -67,6 +68,7 @@ const pagesRoutes: Routes = [
             { path: 'avances/:id', component: AvancesComponent, data: { titulo: 'Avances' }  },
             { path: 'reporte', component: ReportesComponent, data: { titulo: 'Porcentajes' }  },
             { path: 'horas', component: HorasComponent, data: { titulo: 'Horas' }  },
+            { path: 'reporte/evaluaciones', component: EvaluacionesComponent, data: { titulo: 'Evaluaciones' }  },
             { path: 'entrega', component: Equipos.EntregaComponent, data: { titulo: 'Entrega de Equipo' }  },
             { path: 'retorno', component: Equipos.SalidaComponent, data: { titulo: 'Retorno de Equipo' }  },
             { path: 'transferencias', component: Equipos.TransferenciaComponent, data: { titulo: 'Transferencia' }  },

@@ -18,6 +18,9 @@
                         <h6> {{ serv.Solicitor.nombre | titlecase | capitalizar }}
                             <span class="label label-rounded" [ngClass]="( serv.Urgencia.Nombre == 'Inmediatamente' || serv.Urgencia.Nombre == 'Urgente' ) ? 'label-warning' : 'label-info'">
                                 {{ serv.Urgencia.Nombre }}
+                            </span> &nbsp;
+                            <span class="label label-rounded label-inverse">
+                                {{ serv.FecCompromiso | fecha }}
                             </span>
                         </h6>
                         <p class="m-b-5"> {{ serv.Descripcion }} </p>
