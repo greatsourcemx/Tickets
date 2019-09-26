@@ -189,7 +189,7 @@ export class AvancesComponent implements OnInit {
     const allowedFiles = ['.doc', '.docx', '.dotx', '.xls', '.xlsx', '.zip', '.7z', '.ppt', '.pptx', '.pdf', '.msg'
                           , '.png', '.jpg', '.jpeg', '.gif', '.tiff', '.img', '.bmp', '.txt', '.xml'];
     const regex = /(?:\.([^.]+))?$/;
-    const extension = regex.exec(fileName);
+    const extension = regex.exec(fileName.toLowerCase());
     if (undefined !== extension && null !== extension) {
         for (const ext of allowedFiles) {
             if (ext === extension[0]) {

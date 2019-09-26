@@ -13,7 +13,8 @@ export class AppComponent implements OnInit {
   previousUrl: string;
   currentUrl: string;
 
-  constructor(public router: Router) {  }
+  constructor(public router: Router) {
+              }
 
   ngOnInit() {
     this.currentUrl = this.router.url;
@@ -24,6 +25,5 @@ export class AppComponent implements OnInit {
         localStorage.setItem('url', this.previousUrl);
       }
     });
-
   }
 }

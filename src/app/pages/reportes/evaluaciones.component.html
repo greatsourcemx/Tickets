@@ -1,10 +1,22 @@
 <div class="card">
     <div class="card-body">
+        <h4 class="card-title">Filtros</h4>
         <div class="col-6">
-            <select [(ngModel)]="param.rango" name="range" id="range" class="form-control col-md-6 pull-left">
-                <option *ngFor="let rang of rangos" [value]="rang.value">{{ rang.displayName }}</option>
-            </select>
-            <button name="generar" class="btn btn-primary" (click)="generar()">Generar</button>
+            <div class="row">
+                <div *ngIf="users" class="col-5">
+                    <select [(ngModel)]="param.responsable.id" name="tipo" class="form-control" required>
+                        <option *ngFor="let tipo of users" [ngValue]="tipo.id">{{ tipo.nombre }}</option>
+                    </select>
+                </div>
+                <div class="col-5">
+                    <select [(ngModel)]="param.rango" name="range" id="range" class="form-control">
+                        <option *ngFor="let rang of rangos" [value]="rang.value">{{ rang.displayName }}</option>
+                    </select>
+                </div>
+                <div class="col-2">
+                    <button name="generar" class="btn btn-primary" (click)="generar()">Generar</button>
+                </div>
+            </div>
         </div>
     </div>
 </div>
@@ -13,7 +25,9 @@
     <div class="card-body">
         <div class="col-12">
 
-            <table class="table table-sm table-hover">
+            <h2 class="text-center" *ngIf="ratings.length === 0"> No se encontraron resultados </h2>
+            <h2 *ngIf="ratings.length > 0">Promedio: <b>{{ promedio() | number: '1.2-2' }} </b> </h2>
+            <table *ngIf="ratings.length > 0" class="table table-sm table-hover">
                 <thead>
                     <tr>
                         <th>Ticket</th>
@@ -28,7 +42,13 @@
                         <td>{{ rat.servicio.Id }} : {{ rat.servicio.Titulo }}</td>
                         <td>{{ rat.servicio.AsignadoA.nombre }}</td>
                         <td>{{ rat.fecha | fecha }}</td>
-                        <td>{{ rat.rating | number }}</td>
+                        <td>
+                            <ngb-rating readonly="false" [(rate)]="rat.rating">
+                                <ng-template let-fill="fill" let-index="index">
+                                    <span class="star" [style.width.%]="fill" [class.filled]="fill === 100"> <i class="fa fa-star"></i> </span>
+                                </ng-template>
+                            </ngb-rating>
+                        </td>
                         <td>{{ rat.comentario }}</td>
                     </tr>
                 </tbody>

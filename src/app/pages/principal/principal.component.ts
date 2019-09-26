@@ -1,4 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Router } from '@angular/router';
 import { ServiciosService, UsuarioService } from '../../services/service.index';
 import { Usuario } from '../../models/models.index';
 
@@ -24,7 +25,15 @@ export class PrincipalComponent implements OnInit, OnDestroy {
 
   constructor(public _servicioService: ServiciosService,
               public store: Store<AppState>,
-              public _usuarioService: UsuarioService ) { }
+              public router: Router,
+              public _usuarioService: UsuarioService ) {
+                this._usuarioService.esAdmin()
+                .subscribe((data: boolean) => {
+                  if (!data) {
+                    this.router.navigate(['/dashboard']);
+                  }
+                });
+              }
 
   ngOnInit() {
     this.cargarTickets();
