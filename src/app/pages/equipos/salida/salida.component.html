@@ -4,22 +4,36 @@
             <div class="card-body" id="cuerpo">
                 <div class="row">
                     <div class="col-12">
-                        <div>
-                            <span>Seleccionar Empleado</span>
-                        </div>
-                        <div class="input-group">
-                            <ng-select [(ngModel)]="empleado" appendTo="body" name="empleado" class="col-lg-11" [items]="empleados" bindLabel="Nombre">
-                                <ng-template ng-option-tmp let-item="item">
-                                    {{item.Nombre}} <small>{{item.NoEmpleado}}</small>
-                                </ng-template>
-                            </ng-select>
-                            <div class="input-group-prepend">
-                                <button class="btn btn-info" (click)="buscarEquipo()" name="find" type="button">Buscar</button>
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li class="nav-item"> <a class="nav-link active" data-toggle="tab" href="#home" role="tab" aria-selected="true"><span class="hidden-sm-up"><i class="ti-home"></i></span> <span class="hidden-xs-down">Empleado</span></a> </li>
+                            <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#profile" role="tab" aria-selected="false"><span class="hidden-sm-up"><i class="ti-user"></i></span> <span class="hidden-xs-down">Equipos</span></a> </li>
+                        </ul>
+                        <div class="tab-content tabcontent-border">
+                            <div class="tab-pane active" id="home" role="tabpanel">
+                                <h5>Seleccionar Empleado</h5>
+                                <div class="input-group">
+                                    <ng-select [(ngModel)]="empleado" appendTo="body" name="empleado" class="col-lg-11" [items]="empleados" bindLabel="Nombre">
+                                        <ng-template class="col-lg-11" ng-option-tmp let-item="item">
+                                            {{item.Nombre}} <small>{{item.NoEmpleado}}</small>
+                                        </ng-template>
+                                    </ng-select>
+                                    <div class="input-group-prepend">
+                                        <button class="btn btn-info" (click)="buscarEquipoEmpleado()" name="find" type="button">Buscar</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane p-20" id="profile" role="tabpanel">
+                                <h5>Ingresar Número de Equipo</h5>
+                                <div class="input-group">
+                                    <input type="text" [(ngModel)]="equipo" name="equipo" class="form-control" placeholder="Número de equipo" />
+                                    <div class="input-group-prepend">
+                                        <button class="btn btn-info" (click)="buscaEquipo()" name="btnEquipo" type="button">Buscar</button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
     </div>

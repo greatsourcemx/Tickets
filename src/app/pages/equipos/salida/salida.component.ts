@@ -14,6 +14,7 @@ export class SalidaComponent implements OnInit {
   empleados: GLPIEmpleado[] = [];
   empleado: GLPIEmpleado = new GLPIEmpleado();
   equipos: RetornoEquipo[] = [];
+  equipo = '';
   cargando = false;
   msg = false;
   verRetorno = false;
@@ -34,7 +35,15 @@ export class SalidaComponent implements OnInit {
       this.empleados = data;
     });
   }
-  buscarEquipo() {
+  buscaEquipo() {
+    this.cargando = true;
+    this.glpiService.buscaEquipo( this.equipo )
+    .subscribe((data: RetornoEquipo[]) => {
+      this.cargando = false;
+      this.equipos = data;
+    });
+  }
+  buscarEquipoEmpleado() {
     this.cargando = true;
     this.glpiService.cargarTodoEquipoEmpleado( this.empleado )
     .subscribe((data: RetornoEquipo[]) => {

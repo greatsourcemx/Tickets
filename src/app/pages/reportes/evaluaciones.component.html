@@ -26,7 +26,7 @@
         <div class="col-12">
 
             <h2 class="text-center" *ngIf="ratings.length === 0"> No se encontraron resultados </h2>
-            <h2 *ngIf="ratings.length > 0">Promedio: <b>{{ promedio() | number: '1.2-2' }} </b> </h2>
+            <h2 *ngIf="ratings.length > 0">Promedio: ({{ ratings.length }}) <b>{{ promedio() | number: '1.2-2' }} </b> </h2>
             <table *ngIf="ratings.length > 0" class="table table-sm table-hover">
                 <thead>
                     <tr>

@@ -81,6 +81,15 @@ export class GlpiService {
     }));
   }
 
+  buscaEquipo( equipo: string ) {
+    const url = URL_SERVICIOS + '/glpi/equipo?equipo=' + equipo;
+    return this.http.get( url ).pipe(
+      map((data: any) => {
+        return data;
+      })
+    );
+  }
+
   retornarEquipo( equipos: RetornoEquipo[], empr: string, trasnf: boolean = false ) {
     if (trasnf) {
       const url = URL_SERVICIOS + '/glpi/responsiva?empr=' + empr;

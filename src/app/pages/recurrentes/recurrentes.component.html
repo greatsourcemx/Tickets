@@ -26,6 +26,7 @@
                                 <th>Título</th>
                                 <th>Recurrencia</th>
                                 <th>Descripción</th>
+                                <th>Tipo</th>
                                 <th>Fec Inicio</th>
                                 <th>Activo</th>
                                 <th>Solicitante</th>
@@ -40,6 +41,7 @@
                                 <td data-toggle="tooltip" data-placement="top" [title]="recu.descripcion">
                                     {{ recu.descripcion | truncate: [35, ' ...'] }}
                                 </td>
+                                <td>{{ recu.tipoServicio.descripcion }}</td>
                                 <td>{{ recu.fecInicio | date: 'yyyy-MM-dd' }}</td>
                                 <td>
                                     <div class="checkbox checkbox-info pull-left p-t-0">
