@@ -3,7 +3,6 @@ import { GlpiService, ExcelService } from '../../../services/service.index';
 import { GLPIEmpleado } from '../../../models/models.index';
 import { RetornoEquipo } from '../../../models/retorno.model';
 
-
 @Component({
   selector: 'app-salida',
   templateUrl: './salida.component.html',
@@ -14,11 +13,13 @@ export class SalidaComponent implements OnInit {
   empleados: GLPIEmpleado[] = [];
   empleado: GLPIEmpleado = new GLPIEmpleado();
   equipos: RetornoEquipo[] = [];
+  pdf: any;
   equipo = '';
   cargando = false;
   msg = false;
   verRetorno = false;
   retorTodos = false;
+  verPDFViewer = false;
 
   constructor(public glpiService: GlpiService,
               public excelService: ExcelService) { }
@@ -37,6 +38,7 @@ export class SalidaComponent implements OnInit {
   }
   buscaEquipo() {
     this.cargando = true;
+    this.verPDFViewer = false;
     this.glpiService.buscaEquipo( this.equipo )
     .subscribe((data: RetornoEquipo[]) => {
       this.cargando = false;
@@ -45,6 +47,7 @@ export class SalidaComponent implements OnInit {
   }
   buscarEquipoEmpleado() {
     this.cargando = true;
+    this.verPDFViewer = false;
     this.glpiService.cargarTodoEquipoEmpleado( this.empleado )
     .subscribe((data: RetornoEquipo[]) => {
       this.cargando = false;
@@ -54,6 +57,18 @@ export class SalidaComponent implements OnInit {
         entr.empleado = this.empleado;
       }
     });
+  }
+
+  limpiar() {
+    this.empleado = new GLPIEmpleado();
+    this.equipos = [];
+    this.pdf = null;
+    this.equipo = '';
+    this.cargando = false;
+    this.msg = false;
+    this.verRetorno = false;
+    this.retorTodos = false;
+    this.verPDFViewer = false;
   }
 
   retornar() {
@@ -89,11 +104,16 @@ export class SalidaComponent implements OnInit {
 
   verPDF( folio: number, empr: string ) {
     this.cargando = true;
+    this.verPDFViewer = false;
     this.glpiService.verPDFFolio( folio, empr )
     .subscribe((data: any) => {
       this.cargando = false;
-      const fileURL = URL.createObjectURL(data);
-      window.open(fileURL, '_blank');
+      this.verPDFViewer = true;
+      this.pdf = data;
+      setTimeout(function() {
+        const tabla = document.getElementById('visor');
+        tabla.scrollIntoView({ behavior: 'smooth' });
+      }, 100);
     });
   }
 

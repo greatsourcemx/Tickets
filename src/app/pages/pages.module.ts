@@ -15,6 +15,9 @@ import { DataTablesModule } from 'angular-datatables';
 // file-drop
 import { NgxFileDropModule } from 'ngx-file-drop';
 
+// pdf
+import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
+
 // Graficas
 import { ChartsModule } from 'ng2-charts';
 
@@ -157,6 +160,7 @@ import { EvaluacionesComponent } from './reportes/evaluaciones.component';
         ChartsModule,
         DataTablesModule,
         NgxFileDropModule,
+        NgxExtendedPdfViewerModule,
         StoreModule.forFeature( 'servicios', ticketReducer )
     ]
 })

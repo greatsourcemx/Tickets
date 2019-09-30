@@ -5,8 +5,8 @@
                 <div class="row">
                     <div class="col-12">
                         <ul class="nav nav-tabs" role="tablist">
-                            <li class="nav-item"> <a class="nav-link active" data-toggle="tab" href="#home" role="tab" aria-selected="true"><span class="hidden-sm-up"><i class="ti-home"></i></span> <span class="hidden-xs-down">Empleado</span></a> </li>
-                            <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#profile" role="tab" aria-selected="false"><span class="hidden-sm-up"><i class="ti-user"></i></span> <span class="hidden-xs-down">Equipos</span></a> </li>
+                            <li class="nav-item"> <a (click)="limpiar()" class="nav-link active" data-toggle="tab" href="#home" role="tab" aria-selected="true"><span class="hidden-sm-up"><i class="ti-user"></i></span> <span class="hidden-xs-down">Empleado</span></a> </li>
+                            <li class="nav-item"> <a (click)="limpiar()" class="nav-link" data-toggle="tab" href="#profile" role="tab" aria-selected="false"><span class="hidden-sm-up"><i class="ti-desktop"></i></span> <span class="hidden-xs-down">Equipos</span></a> </li>
                         </ul>
                         <div class="tab-content tabcontent-border">
                             <div class="tab-pane active" id="home" role="tabpanel">
@@ -115,6 +115,18 @@
             </div>
             <div class="button-group">
                 <button *ngIf="verRetorno" name="retorno" (click)="retornar()" class="btn btn-danger">Retornar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="verPDFViewer" class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <h4 id="visor" name="visor" class="card-title">Responsiva</h4>
+                <ngx-extended-pdf-viewer [src]="pdf" backgroundColor="#ffffff" [height]="'90vh'" [useBrowserLocale]="true">
+                </ngx-extended-pdf-viewer>
             </div>
         </div>
     </div>
