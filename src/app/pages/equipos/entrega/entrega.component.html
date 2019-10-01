@@ -84,8 +84,8 @@
                         <label for="notas">Notas</label>
                         <textarea [(ngModel)]="responsiva.notas" name="notas" id="notas" class="form-control" rows="2"></textarea>
                     </div>
-                    <button *ngIf="responsiva.id === 0 && responsiva.detalle.length > 0" name="btn-guardar" type="submit" class="btn btn-success">Guardar</button>
-                    <button *ngIf="responsiva.detalle.length > 0" (click)="verPDF()" type="button" name="btn-ver" class="btn btn-info">Preview</button>
+                    <button *ngIf="responsiva.id === 0 && responsiva.detalle.length > 0" name="btn-guardar" type="submit" class="btn btn-success icon-buttons">Guardar</button>
+                    <button *ngIf="responsiva.detalle.length > 0" (click)="verPDF()" type="button" name="btn-ver" class="btn btn-info icon-buttons">Preview</button>
                     <button *ngIf="responsiva.id !== 0" (click)="nuevo()" type="button" name="btn-nuevo" class="btn btn-danger">Nuevo</button>
                 </form>
 
@@ -103,17 +103,20 @@
                     <table class="table table-sm">
                         <thead>
                             <tr>
-                                <!-- <th>Folio</th> -->
                                 <th>Equipo</th>
+                                <th>Fec Ult Mante</th>
                                 <th></th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr *ngFor="let equi of responsiva.detalle; index as i">
-                                <!-- <td> {{ responsiva.folio }} </td> -->
                                 <td> {{ equi.equipo.Nombre }} : {{ equi.equipo.Descripcion }} </td>
                                 <td>
-                                    <button *ngIf="responsiva.id === 0" name="btn-remover" (click)="removerEquipo( i )" class="btn btn-danger btn-sm"><i class="fa fa-eraser"></i></button>
+                                    <span *ngIf="equi.equipo.mantenimiento">{{ equi.equipo.mantenimiento.fechaUltMante | fecha }}</span>
+                                    <span *ngIf="!equi.equipo.mantenimiento"> Sin Mantenimiento </span>
+                                </td>
+                                <td>
+                                    <button *ngIf="responsiva.id === 0" name="btn-remover" (click)="removerEquipo( i )" class="btn btn-danger btn-sm"><i class="ti ti-trash"></i></button>
                                 </td>
                             </tr>
                         </tbody>

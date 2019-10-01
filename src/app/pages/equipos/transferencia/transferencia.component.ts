@@ -25,6 +25,8 @@ export class TransferenciaComponent implements OnInit {
   firmado = false;
   notas = '';
   empresa = 'EBR';
+  verPDFViewer = false;
+  pdf: any;
 
   constructor(public glpiService: GlpiService) { }
 
@@ -44,6 +46,8 @@ export class TransferenciaComponent implements OnInit {
   }
 
   seleccionEmpresa( empresa: string ) {
+    this.verPDFViewer = false;
+    this.pdf = null;
     this.empresa = empresa;
     this.cargarEmpleados();
     this.nuevo();
@@ -121,11 +125,16 @@ export class TransferenciaComponent implements OnInit {
 
   verPDF( folio: number ) {
     this.cargando = true;
+    this.verPDFViewer = false;
     this.glpiService.verPDFFolio( folio, this.empresa )
     .subscribe((data: any) => {
       this.cargando = false;
-      const fileURL = URL.createObjectURL(data);
-      window.open(fileURL, '_blank');
+      this.verPDFViewer = true;
+      this.pdf = data;
+      setTimeout(function() {
+        const tabla = document.getElementById('visor');
+        tabla.scrollIntoView({ behavior: 'smooth' });
+      }, 100);
     });
   }
 

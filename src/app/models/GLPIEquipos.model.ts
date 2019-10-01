@@ -1,3 +1,4 @@
+import { Mantenimiento } from './mantenimientos/mantenimiento.model';
 
 export class GLPIEquipos {
     constructor (
@@ -10,6 +11,7 @@ export class GLPIEquipos {
         public SistemaOperativo: string = '',
         public Procesador: string = '',
         public Ram: string = '',
-        public DiscoDuro: string = ''
+        public DiscoDuro: string = '',
+        public mantenimiento: Mantenimiento = null
     ) { }
 }

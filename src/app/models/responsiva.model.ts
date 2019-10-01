@@ -1,6 +1,7 @@
 import { DetalleResponsiva } from './detalleResponsiva.model';
 import { GLPILocacion } from './GLPILocacion.model';
 import { GLPIEmpleado } from './GLPIEmpleado.model';
+import { Usuario } from './usuario.model';
 
 export class Responsiva {
     constructor (
@@ -11,6 +12,7 @@ export class Responsiva {
         public folio: string = '',
         public empresa: string = '',
         public empleado: GLPIEmpleado = new GLPIEmpleado(),
+        public responsable: Usuario = new Usuario(),
         public locacion: GLPILocacion = new GLPILocacion(),
         public detalle: DetalleResponsiva[] = []
     ) { }
