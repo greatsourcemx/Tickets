@@ -42,7 +42,6 @@ export class DetallesServicioComponent implements OnInit {
     this._servicioService.cargarDetalles( id )
     .subscribe( (resp: Servicio) => {
       this.servicio = resp;
-      console.log(this.servicio);
     });
   }
 

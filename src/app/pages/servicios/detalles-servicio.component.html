@@ -1,5 +1,6 @@
 <div class="ribbon-wrapper card">
     <div *ngIf="servicio.TipoServicio.descripcion === 'Soporte'" class="ribbon ribbon-default ribbon-right"> {{ servicio.FecCompromiso | fecha }} </div>
+    <div *ngIf="isAdmin" class="ribbon ribbon-primary ribbon-left"> {{ servicio.Solicitor?.nombre }} </div>
     <div class="card-body">
         <div class="row">
             <div class="col-md-3 col-xs-6 b-r"> <strong class="text-muted">Título</strong>

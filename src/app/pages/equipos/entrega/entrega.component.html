@@ -124,3 +124,15 @@
         </div>
     </div>
 </div>
+
+<div *ngIf="verPDFViewer" class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <h4 id="visor" name="visor" class="card-title">Responsiva</h4>
+                <ngx-extended-pdf-viewer [src]="pdf" backgroundColor="#ffffff" [height]="'90vh'" [useBrowserLocale]="true">
+                </ngx-extended-pdf-viewer>
+            </div>
+        </div>
+    </div>
+</div>

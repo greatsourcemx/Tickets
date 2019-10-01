@@ -17,8 +17,10 @@ export class EntregaComponent implements OnInit {
   locacion: GLPILocacion[] = [];
   responsiva: Responsiva = new Responsiva();
   equipo: GLPIEquipos = new GLPIEquipos();
+  pdf: any;
   cargando = false;
   esTelefono = false;
+  verPDFViewer = false;
   folio = '';
 
   constructor(public glpiService: GlpiService) { }
@@ -31,6 +33,8 @@ export class EntregaComponent implements OnInit {
   seleccionEmpresa ( empresa: string ) {
     this.cargando = true;
     this.empresa = empresa;
+    this.verPDFViewer = false;
+    this.pdf = null;
     this.glpiService.cargarEntregaGLPI( this.empresa )
     .subscribe((data: any) => {
       this.equipos = data.Equipos;
@@ -66,6 +70,7 @@ export class EntregaComponent implements OnInit {
   }
 
   removerEquipo( index: number ) {
+    this.verPDFViewer = false;
     this.responsiva.detalle.splice( index, 1 );
     if (this.esTelefono) {
       this.esTelefono = false;
@@ -74,24 +79,34 @@ export class EntregaComponent implements OnInit {
 
   guardar() {
     this.cargando = true;
+    this.verPDFViewer = false;
     this.responsiva.empresa = this.empresa;
     this.glpiService.guardarResponsiva( this.responsiva )
     .subscribe((data: any) => {
       this.cargando = false;
       this.responsiva.id = 1;
-      const fileURL = URL.createObjectURL(data);
-        window.open(fileURL, '_blank');
+      this.verPDFViewer = true;
+      this.pdf = data;
+      setTimeout(function() {
+        const tabla = document.getElementById('visor');
+        tabla.scrollIntoView({ behavior: 'smooth' });
+      }, 100);
     });
   }
 
   verPDF() {
     this.cargando = true;
+    this.verPDFViewer = false;
     this.responsiva.empresa = this.empresa;
     this.glpiService.verPDF( this.responsiva )
       .subscribe((data: any) => {
         this.cargando = false;
-        const fileURL = URL.createObjectURL(data);
-        window.open(fileURL, '_blank');
+        this.verPDFViewer = true;
+        this.pdf = data;
+        setTimeout(function() {
+          const tabla = document.getElementById('visor');
+          tabla.scrollIntoView({ behavior: 'smooth' });
+        }, 100);
     });
   }
 
@@ -99,7 +114,9 @@ export class EntregaComponent implements OnInit {
     this.responsiva = new Responsiva();
     this.equipo = new GLPIEquipos();
     this.cargando = false;
+    this.verPDFViewer = false;
     this.folio = '';
+    this.pdf = null;
   }
 
 }
