@@ -26,9 +26,8 @@
             <div class="card-body">
 
                 <div class="text-right">
-                    <button (click)="crear()" type="button" class="btn waves-effect waves-light btn-rounded btn-primary">
-                        <i class="fa fa-plus"></i> 
-                        Crear Duración
+                    <button (click)="crear()" type="button" class="btn waves-effect waves-light btn-rounded btn-info" ngbTooltip="Crear Duración">
+                        <i class="fa fa-plus"></i>
                     </button>
                 </div>
 
@@ -50,9 +49,9 @@
                                 <input [(ngModel)]="tiempo.Descripcion" name="Descripcion" type="text" class="form-control" placeholder="Descripción" />
                             </td>
                             <td>
-                                <button (click)="actualizarTiempo( tiempo )" class="btn btn-primary">
-                                <i class="fa fa-save"></i>
-                              </button>
+                                <button (click)="actualizarTiempo( tiempo )" class="btn btn-info" ngbTooltip="Guardar">
+                                    <i class="fa fa-save"></i>
+                                </button>
                             </td>
                         </tr>
                     </tbody>

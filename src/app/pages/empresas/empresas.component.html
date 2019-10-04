@@ -2,9 +2,7 @@
     <div class="col-12">
         <div class="card">
             <div class="card-body">
-
                 <input #input (keyup)="buscarEmpresa( input.value )" type="text" class="form-control" placeholder="Buscar Empresa..." />
-
             </div>
         </div>
     </div>
@@ -28,9 +26,8 @@
             <div class="card-body">
 
                 <div class="text-right">
-                    <button (click)="crearEmpresa()" type="button" class="btn waves-effect waves-light btn-rounded btn-primary">
-                      <i class="fa fa-plus"></i> 
-                      Crear Empresa
+                    <button (click)="crearEmpresa()" type="button" class="btn waves-effect waves-light btn-rounded btn-info" ngbTooltip="Crear Empresa">
+                      <i class="fa fa-plus"></i>
                   </button>
                 </div>
 
@@ -54,7 +51,7 @@
                                 </div>
                             </td>
                             <td>
-                                <button (click)="modificarEmpresa( empre )" class="btn btn-primary">
+                                <button (click)="modificarEmpresa( empre )" class="btn btn-info" ngbTooltip="Guardar">
                                   <i class="fa fa-save"></i>
                                 </button>
                             </td>

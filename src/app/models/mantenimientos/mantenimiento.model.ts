@@ -13,6 +13,7 @@ export class Mantenimiento {
         public zona: Zonas = new Zonas(),
         public tipo: string = '',
         public locacion: string = '',
-        public usuario: string = ''
+        public usuario: string = '',
+        public recalcular: boolean = false
     ) { }
 }

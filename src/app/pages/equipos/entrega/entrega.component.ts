@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { GlpiService } from '../../../services/GLPI/glpi.service';
-import { GLPIEquipos, GLPIEmpleado, GLPILocacion } from '../../../models/models.index';
+import { TiempoService } from '../../../services/service.index';
+import { GLPIEquipos, GLPIEmpleado, GLPILocacion, Tiempo } from '../../../models/models.index';
 import { Responsiva } from '../../../models/responsiva.model';
 import { DetalleResponsiva } from '../../../models/detalleResponsiva.model';
 
@@ -15,6 +16,7 @@ export class EntregaComponent implements OnInit {
   equipos: GLPIEquipos[] = [];
   empleados: GLPIEmpleado[] = [];
   locacion: GLPILocacion[] = [];
+  duracion: Tiempo[] = [];
   responsiva: Responsiva = new Responsiva();
   equipo: GLPIEquipos = new GLPIEquipos();
   pdf: any;
@@ -23,11 +25,20 @@ export class EntregaComponent implements OnInit {
   verPDFViewer = false;
   folio = '';
 
-  constructor(public glpiService: GlpiService) { }
+  constructor(public glpiService: GlpiService,
+              public _tiempoService: TiempoService) { }
 
   ngOnInit() {
     this.empresa = 'EBR';
     this.seleccionEmpresa( this.empresa );
+    this.cargarTiempos();
+  }
+
+  cargarTiempos () {
+    this._tiempoService.cargarTiemposActivos()
+    .subscribe( (resp: any) => {
+      this.duracion = resp;
+    });
   }
 
   seleccionEmpresa ( empresa: string ) {
@@ -62,6 +73,7 @@ export class EntregaComponent implements OnInit {
   agregarEquipo() {
     if (this.equipo.Id !== 0) {
       if (!this.responsiva.detalle.some((item) => item.equipo.Id === this.equipo.Id)) {
+        this.equipo.duracion = this.duracion[0];
         this.responsiva.detalle.push( new DetalleResponsiva(0, 3, new Date(), new Date(),
         false, 0, this.responsiva.locacion, this.responsiva.empleado, this.equipo));
         this.esTelefono = this.equipo.Tipo === 'Phone' ? true : false;

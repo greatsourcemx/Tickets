@@ -2,18 +2,14 @@
     <div class="col-12">
         <div class="card">
             <div class="card-body">
-
                 <input #input (keyup)="buscarTipo( input.value )" name="search" type="text" class="form-control" placeholder="Buscar Tipo de Servicio..." />
-
             </div>
         </div>
     </div>
 </div>
 
 <div class="row animated fadeIn" *ngIf="cargando">
-
     <div class="col-sm-12">
-
         <div class="alert alert-warning text-center">
             <strong>Cargando</strong>
             <br />
@@ -30,9 +26,8 @@
             <div class="card-body">
 
                 <div class="text-right">
-                    <button (click)="crearTipo()" type="button" class="btn waves-effect waves-light btn-rounded btn-primary">
+                    <button (click)="crearTipo()" type="button" class="btn waves-effect waves-light btn-rounded btn-info" ngbTooltip="Crear Tipo de Servicio">
                         <i class="fa fa-plus"></i> 
-                        Crear Tipo de Servicio
                     </button>
                 </div>
 
@@ -45,7 +40,6 @@
                             <th></th>
                         </tr>
                     </thead>
-
                     <tbody>
                         <tr *ngFor="let tipo of tipos">
                             <td>
@@ -61,9 +55,9 @@
                                 </div>
                             </td>
                             <td>
-                                <button (click)="actualizarTipo( tipo )" class="btn btn-primary">
-                                <i class="fa fa-save"></i>
-                              </button>
+                                <button (click)="actualizarTipo( tipo )" class="btn btn-info" ngbTooltip="Guardar">
+                                    <i class="fa fa-save"></i>
+                                </button>
                             </td>
                         </tr>
                     </tbody>

@@ -16,7 +16,7 @@
             <div class="card-body">
                 <div class="text-right">
                     <button [routerLink]="['/recurrente/nuevo']" type="button" class="btn waves-effect waves-light btn-rounded btn-primary">
-                      <i class="fa fa-plus"></i> Crear Recurrente
+                      <i class="fa fa-plus"></i> Nuevo
                     </button>
                 </div>
                 <div *ngIf="recurrentes.length > 0" class="table-responsive m-t-20">
@@ -38,11 +38,13 @@
                             <tr *ngFor="let recu of recurrentes">
                                 <td>{{ recu.titulo }}</td>
                                 <td>{{ recu.recurrencia }} {{ recu.frecuencia }}</td>
-                                <td data-toggle="tooltip" data-placement="top" [title]="recu.descripcion">
-                                    {{ recu.descripcion | truncate: [35, ' ...'] }}
+                                <td>
+                                    <span [ngbTooltip]="recu.descripcion">
+                                        {{ recu.descripcion | truncate: [35, ' ...'] }}
+                                    </span>
                                 </td>
                                 <td>{{ recu.tipoServicio.descripcion }}</td>
-                                <td>{{ recu.fecInicio | date: 'yyyy-MM-dd' }}</td>
+                                <td>{{ recu.fecInicio | fecha }}</td>
                                 <td>
                                     <div class="checkbox checkbox-info pull-left p-t-0">
                                         <input [(ngModel)]="recu.activo" name="activo" [id]="'r'+recu.id" type="checkbox" class="filled-in chk-col-light-blue" />

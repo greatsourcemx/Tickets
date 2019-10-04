@@ -1,4 +1,5 @@
 import { Mantenimiento } from './mantenimientos/mantenimiento.model';
+import { Tiempo } from './tiempo.model';
 
 export class GLPIEquipos {
     constructor (
@@ -12,6 +13,8 @@ export class GLPIEquipos {
         public Procesador: string = '',
         public Ram: string = '',
         public DiscoDuro: string = '',
-        public mantenimiento: Mantenimiento = null
+        public mantenimiento: Mantenimiento = null,
+        public recalcularMto: boolean = false,
+        public duracion: Tiempo = new Tiempo()
     ) { }
 }

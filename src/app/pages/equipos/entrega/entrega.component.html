@@ -2,10 +2,8 @@
     <div class="col-12">
         <div class="card">
             <div class="card-body">
-
                 <div class="row">
                     <div class="col-3">
-
                         <div>
                             <span>Empresa</span>
                         </div>
@@ -14,7 +12,6 @@
                             <button type="button" (click)="seleccionEmpresa( 'SYN' )" [ngClass]="{ 'active': empresa==='SYN' }" class="btn btn-secondary">SYN</button>
                             <button type="button" (click)="seleccionEmpresa( 'IMA' )" [ngClass]="{ 'active': empresa==='IMA' }" class="btn btn-secondary">IMA</button>
                         </div>
-
                     </div>
                     <div class="col-9">
                         <div>
@@ -23,16 +20,13 @@
                         <input type="text" [(ngModel)]="folio" name="folio" (keydown)="onKeydown($event)" class="form-control" placeholder="Buscar Folio..." />
                     </div>
                 </div>
-
             </div>
         </div>
     </div>
 </div>
 
 <div class="row animated fadeIn" *ngIf="cargando">
-
     <div class="col-sm-12">
-
         <div class="alert alert-warning text-center">
             <strong>Cargando</strong>
             <br />
@@ -77,7 +71,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <input [(ngModel)]="responsiva.firmado" type="checkbox" name="usrFirma" id="usrFirma" class="filled-in" />
+                        <input [(ngModel)]="responsiva.firmado" type="checkbox" name="usrFirma" id="usrFirma" class="filled-in chk-col-light-blue" />
                         <label for="usrFirma">Firmada</label>
                     </div>
                     <div class="form-group">
@@ -88,7 +82,6 @@
                     <button *ngIf="responsiva.detalle.length > 0" (click)="verPDF()" type="button" name="btn-ver" class="btn btn-info icon-buttons">Preview</button>
                     <button *ngIf="responsiva.id !== 0" (click)="nuevo()" type="button" name="btn-nuevo" class="btn btn-danger">Nuevo</button>
                 </form>
-
             </div>
         </div>
     </div>
@@ -105,6 +98,7 @@
                             <tr>
                                 <th>Equipo</th>
                                 <th>Fec Ult Mante</th>
+                                <th>Mantenimiento</th>
                                 <th></th>
                             </tr>
                         </thead>
@@ -116,13 +110,26 @@
                                     <span *ngIf="!equi.equipo.mantenimiento"> Sin Mantenimiento </span>
                                 </td>
                                 <td>
-                                    <button *ngIf="responsiva.id === 0" name="btn-remover" (click)="removerEquipo( i )" class="btn btn-danger btn-sm"><i class="ti ti-trash"></i></button>
+                                    <div class="row">
+                                        <div class="col-2">
+                                            <div class="checkbox checkbox-info pull-left p-t-0">
+                                                <input [(ngModel)]="equi.equipo.recalcularMto" name="actualizarPassword" id="recalcular" type="checkbox" class="filled-in chk-col-light-blue" />
+                                                <label for="recalcular">  </label>
+                                            </div>
+                                        </div>
+                                        <div class="col-10">
+                                            <ng-select [(ngModel)]="equi.equipo.duracion" name="Duracion" [items]="duracion" appendTo="body" bindLabel="Descripcion">
+                                            </ng-select>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <button *ngIf="responsiva.id === 0" name="btn-remover" ngbTooltip="Quitar Equipo" (click)="removerEquipo( i )" class="btn btn-danger btn-sm"><i class="ti ti-trash"></i></button>
                                 </td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
-
             </div>
         </div>
     </div>

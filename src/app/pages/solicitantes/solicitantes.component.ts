@@ -3,6 +3,7 @@ import { Usuario } from '../../models/usuario.model';
 import { SolicitanteService, EmpresasService } from '../../services/service.index';
 import { Empresa } from '../../models/empresa.model';
 import { GlpiService } from '../../services/GLPI/glpi.service';
+import * as data from '../../config/estados.json';
 import swal from 'sweetalert2';
 
 @Component({
@@ -14,6 +15,7 @@ export class SolicitantesComponent implements OnInit {
 
   solicitantes: Usuario[] = [];
   Empresas: Empresa[] = [];
+  estados: any = data.default;
   empresa = 'EBR';
   desde: number = 0;
   totalRegistros: number = 0;
