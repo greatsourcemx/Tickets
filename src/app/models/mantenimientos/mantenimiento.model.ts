@@ -12,6 +12,7 @@ export class Mantenimiento {
         public equipo: GLPIEquipos = new GLPIEquipos(),
         public zona: Zonas = new Zonas(),
         public tipo: string = '',
+        public color: string = '',
         public locacion: string = '',
         public usuario: string = '',
         public recalcular: boolean = false

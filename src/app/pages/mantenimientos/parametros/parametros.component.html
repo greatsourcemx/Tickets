@@ -8,7 +8,7 @@
                             <div class="card-body">
                                 <h2 class="card-title text-center">Vencidas</h2>
                                 <label for="pick">Color</label>
-                                <input [(ngModel)]="param.colorVencidas" (colorPickerClose)="guardar()" name="pick" [style.background]="param.colorVencidas" cpPosition="bottom" [(colorPicker)]="param.colorVencidas" class="form-control form-control-sm text-white" />
+                                <input [(ngModel)]="param.colorVencidas" (colorPickerClose)="guardar()" name="pick" [style.background]="param.colorVencidas" cpPosition="bottom" [(colorPicker)]="param.colorVencidas" class="form-control form-control-sm" />
                                 <label for="dias">Días</label>
                                 <input type="number" [(ngModel)]="param.diasVencidos" (focusout)="guardar()" name="dias" class="form-control form-control-sm" />
                             </div>
@@ -19,7 +19,7 @@
                             <div class="card-body">
                                 <h2 class="card-title text-center">Por Vencer</h2>
                                 <label for="pick2">Color</label>
-                                <input [(ngModel)]="param.colorPorVencer" (colorPickerClose)="guardar()" name="pick2" [style.background]="param.colorPorVencer" cpPosition="bottom" [(colorPicker)]="param.colorPorVencer" class="form-control form-control-sm text-white" />
+                                <input [(ngModel)]="param.colorPorVencer" (colorPickerClose)="guardar()" name="pick2" [style.background]="param.colorPorVencer" cpPosition="bottom" [(colorPicker)]="param.colorPorVencer" class="form-control form-control-sm" />
                                 <label for="dias2">Días</label>
                                 <input type="number" [(ngModel)]="param.diasPorVencer" (focusout)="guardar()" name="dias2" class="form-control form-control-sm" />
                             </div>

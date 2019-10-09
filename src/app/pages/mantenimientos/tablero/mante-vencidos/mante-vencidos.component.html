@@ -12,7 +12,7 @@
             </div>
         </div>
 
-        <table *ngIf="mantes" class="table table-sm">
+        <table *ngIf="mantes" class="table table-sm table-hover">
             <thead>
                 <tr>
                     <th>Equipo</th>
@@ -22,7 +22,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let mant of mantes">
+                <tr *ngFor="let mant of mantes" [style.background-color]="mant.color">
                     <td>{{ mant.equipo.Nombre }}</td>
                     <td>{{ mant.perdiodicidad }} Meses</td>
                     <td>{{ mant.fechaUltMante | fecha }}</td>

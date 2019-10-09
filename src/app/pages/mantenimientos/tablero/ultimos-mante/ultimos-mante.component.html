@@ -23,7 +23,7 @@
             </select>
         </div>
 
-        <table *ngIf="!cargando" class="table table-sm">
+        <table *ngIf="!cargando" class="table table-sm table-hover">
             <thead>
                 <tr>
                     <th>Equipo</th>
@@ -34,7 +34,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let mant of mantes">
+                <tr *ngFor="let mant of mantes" [style.background-color]="mant.color">
                     <td>{{ mant.equipo.Nombre }}</td>
                     <td>{{ mant.tipo }}</td>
                     <td>{{ mant.locacion }}</td>
