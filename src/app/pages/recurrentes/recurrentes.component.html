@@ -15,8 +15,8 @@
         <div class="card">
             <div class="card-body">
                 <div class="text-right">
-                    <button [routerLink]="['/recurrente/nuevo']" type="button" class="btn waves-effect waves-light btn-rounded btn-primary">
-                      <i class="fa fa-plus"></i> Nuevo
+                    <button [routerLink]="['/recurrente/nuevo']" type="button" class="btn waves-effect waves-light btn-rounded btn-primary" ngbTooltip="Nuevo">
+                      <i class="fa fa-plus"></i>
                     </button>
                 </div>
                 <div *ngIf="recurrentes.length > 0" class="table-responsive m-t-20">
@@ -24,8 +24,8 @@
                         <thead>
                             <tr>
                                 <th>Título</th>
-                                <th>Recurrencia</th>
                                 <th>Descripción</th>
+                                <th>Recurrencia</th>
                                 <th>Tipo</th>
                                 <th>Fec Inicio</th>
                                 <th>Activo</th>
@@ -37,12 +37,12 @@
                         <tbody>
                             <tr *ngFor="let recu of recurrentes">
                                 <td>{{ recu.titulo }}</td>
-                                <td>{{ recu.recurrencia }} {{ recu.frecuencia }}</td>
                                 <td>
                                     <span [ngbTooltip]="recu.descripcion">
                                         {{ recu.descripcion | truncate: [35, ' ...'] }}
                                     </span>
                                 </td>
+                                <td>{{ recu.recurrencia }} {{ recu.frecuencia }}</td>
                                 <td>{{ recu.tipoServicio.descripcion }}</td>
                                 <td>{{ recu.fecInicio | fecha }}</td>
                                 <td>

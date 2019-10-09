@@ -9,6 +9,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 // ng- Select
 import { NgSelectModule } from '@ng-select/ng-select';
 
+// ColorPicker
+import { ColorPickerModule } from 'ngx-color-picker';
+
 // DataTables
 import { DataTablesModule } from 'angular-datatables';
 
@@ -86,6 +89,7 @@ import { UltimosManteComponent } from './mantenimientos/tablero/ultimos-mante/ul
 import { ManteVencidosComponent } from './mantenimientos/tablero/mante-vencidos/mante-vencidos.component';
 import { ManteMasivosComponent } from './mantenimientos/tablero/mante-masivos/mante-masivos.component';
 import { EvaluacionesComponent } from './reportes/evaluaciones.component';
+import { ParametrosComponent } from './mantenimientos/parametros/parametros.component';
 
 
 @NgModule({
@@ -141,7 +145,8 @@ import { EvaluacionesComponent } from './reportes/evaluaciones.component';
         UltimosManteComponent,
         ManteVencidosComponent,
         ManteMasivosComponent,
-        EvaluacionesComponent
+        EvaluacionesComponent,
+        ParametrosComponent
     ],
     exports: [
         DashboardComponent,
@@ -159,6 +164,7 @@ import { EvaluacionesComponent } from './reportes/evaluaciones.component';
         NgSelectModule,
         ChartsModule,
         DataTablesModule,
+        ColorPickerModule,
         NgxFileDropModule,
         NgxExtendedPdfViewerModule,
         StoreModule.forFeature( 'servicios', ticketReducer )

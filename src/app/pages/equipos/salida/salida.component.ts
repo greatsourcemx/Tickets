@@ -43,6 +43,7 @@ export class SalidaComponent implements OnInit {
     .subscribe((data: RetornoEquipo[]) => {
       this.cargando = false;
       this.equipos = data;
+      console.log(this.equipos);
     });
   }
   buscarEquipoEmpleado() {

@@ -25,8 +25,8 @@
                 <tr *ngFor="let mant of mantes">
                     <td>{{ mant.equipo.Nombre }}</td>
                     <td>{{ mant.perdiodicidad }} Meses</td>
-                    <td>{{ mant.fechaUltMante | date: 'yyyy-MM-dd' }}</td>
-                    <td>{{ mant.fechaSiguiente | date: 'yyyy-MM-dd' }}</td>
+                    <td>{{ mant.fechaUltMante | fecha }}</td>
+                    <td>{{ mant.fechaSiguiente | fecha }}</td>
                 </tr>
             </tbody>
         </table>

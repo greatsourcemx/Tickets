@@ -82,6 +82,7 @@
                             <th>Dispositivo</th>
                             <th>Equipo</th>
                             <th>Tipo</th>
+                            <th *ngIf="equipo !== ''">Responsable</th>
                             <th>Modelo</th>
                             <th>Locación</th>
                             <th>Fec. Entrega</th>
@@ -100,6 +101,7 @@
                             <td>{{ equi.dispositivo }}</td>
                             <td>{{ equi.nombre }}</td>
                             <td>{{ equi.tipo }}</td>
+                            <td *ngIf="equipo !== ''">{{ equi.empleado.Nombre }}</td>
                             <td>{{ equi.modelo }}</td>
                             <td>{{ equi.locacion.Descripcion }}</td>
                             <td>{{ equi.fecEntrega | date: 'yyyy-MM-dd' }}</td>

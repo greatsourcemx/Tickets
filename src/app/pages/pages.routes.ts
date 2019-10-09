@@ -35,6 +35,7 @@ import { ZonasComponent } from './mantenimientos/zonas/zonas.component';
 import { TableroComponent } from './mantenimientos/tablero/tablero.component';
 import { ManteTicketComponent } from './mantenimientos/mante-ticket/mante-ticket.component';
 import { EvaluacionesComponent } from './reportes/evaluaciones.component';
+import { ParametrosComponent } from './mantenimientos/parametros/parametros.component';
 
 const pagesRoutes: Routes = [
     {
@@ -57,6 +58,7 @@ const pagesRoutes: Routes = [
             { path: 'tipos', component: TiposComponent, data: { titulo: 'Tipo de Servicios' }  },
             { path: 'mantenimientos', component: MantenimientosComponent, data: { titulo: 'Mantenimientos' }  },
             { path: 'mantenimientos/:id', component: ManteTicketComponent, data: { titulo: 'Mantenimiento' }  },
+            { path: 'mantenimiento/parametros', component: ParametrosComponent, data: { titulo: 'Parámetros' }  },
             { path: 'tablero', component: TableroComponent, data: { titulo: 'Tablero' }  },
             { path: 'zonas', component: ZonasComponent, data: { titulo: 'Zonas' }  },
             { path: 'prioridades', component: PrioridadComponent, data: { titulo: 'Prioridades' }  },
