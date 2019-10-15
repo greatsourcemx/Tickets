@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { HttpResponse } from '@angular/common/http';
 import { GlpiService } from '../../../services/GLPI/glpi.service';
 import { TiempoService } from '../../../services/service.index';
 import { GLPIEquipos, GLPIEmpleado, GLPILocacion, Tiempo } from '../../../models/models.index';
 import { Responsiva } from '../../../models/responsiva.model';
 import { DetalleResponsiva } from '../../../models/detalleResponsiva.model';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-entrega',
@@ -24,6 +26,8 @@ export class EntregaComponent implements OnInit {
   esTelefono = false;
   verPDFViewer = false;
   folio = '';
+  msgMante: string[] = null;
+
 
   constructor(public glpiService: GlpiService,
               public _tiempoService: TiempoService) { }
@@ -94,16 +98,33 @@ export class EntregaComponent implements OnInit {
     this.verPDFViewer = false;
     this.responsiva.empresa = this.empresa;
     this.glpiService.guardarResponsiva( this.responsiva )
-    .subscribe((data: any) => {
+    .subscribe((data: HttpResponse<Blob>) => {
       this.cargando = false;
+      const msg = data.headers.get('content-disposition');
+      this.mensajeMante(msg.substr(21));
       this.responsiva.id = 1;
       this.verPDFViewer = true;
-      this.pdf = data;
+      this.pdf = data.body;
       setTimeout(function() {
         const tabla = document.getElementById('visor');
         tabla.scrollIntoView({ behavior: 'smooth' });
       }, 100);
     });
+  }
+
+  mensajeMante( msg: string ) {
+    this.msgMante = [];
+    let split = msg.split('|');
+    for (let i = 0; i < split.length; i++) {
+      if (split[i] !== '') {
+        this.msgMante.push( split[i] );
+      }
+    }
+    if ( this.msgMante.length <= 0 ) {
+      this.msgMante = null;
+    } else {
+      Swal.fire('No se generó el mantenimiento de algún equipo');
+    }
   }
 
   verPDF() {
@@ -129,6 +150,7 @@ export class EntregaComponent implements OnInit {
     this.verPDFViewer = false;
     this.folio = '';
     this.pdf = null;
+    this.msgMante = null;
   }
 
 }

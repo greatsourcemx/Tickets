@@ -1,11 +1,12 @@
 
 import {map} from 'rxjs/operators';
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { URL_SERVICIOS } from '../../config/config';
 import { Responsiva } from '../../models/responsiva.model';
 import { GLPIEmpleado } from '../../models/GLPIEmpleado.model';
 import { RetornoEquipo } from '../../models/retorno.model';
+import { Observable } from 'rxjs/internal/Observable';
 
 @Injectable()
 export class GlpiService {
@@ -73,12 +74,13 @@ export class GlpiService {
     return this.http.get( url );
   }
 
-  guardarResponsiva( responsiva: Responsiva ) {
+  guardarResponsiva( responsiva: Responsiva ): Observable<HttpResponse<Blob>> {
     const url = URL_SERVICIOS + '/glpi/responsiva';
-    return this.http.post( url, responsiva, { responseType: 'blob' }  ).pipe(
-    map((data: any) => {
-      return new Blob([data], { type: 'application/pdf' });
-    }));
+    return this.http.post<Blob>( url, responsiva, {
+      observe: 'response',
+      responseType: 'blob' as 'json'
+    });
+
   }
 
   buscaEquipo( equipo: string ) {
