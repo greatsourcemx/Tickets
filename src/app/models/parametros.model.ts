@@ -6,6 +6,7 @@ export class Parametros {
         public fechaFinal: Date = new Date(),
         public responsable: Usuario = new Usuario('', ''),
         public solicitante: Usuario = new Usuario('', ''),
-        public rango: string = 'HOY'
+        public rango: string = 'HOY',
+        public empresa: string = 'Todos'
     ) { }
 }

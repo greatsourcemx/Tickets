@@ -88,12 +88,16 @@ export class NuevoServicioComponent implements OnInit {
   crearTicket() {
     this.servicio.FecCompromiso = new Date(this.fecCompr.year, this.fecCompr.month - 1, this.fecCompr.day);
     this._servicioService.guardarServicio(this.usuario.id, this.servicio )
-    .subscribe( usuario => {
+    .subscribe( () => {
       swal.fire('Servicio Creado', this.servicio.Titulo, 'success' );
       this.nuevo = false;
-    },
-    error => {
-      swal.fire('Aviso!', error.error, 'warning');
+    }, error => {
+      if ( error.statusText === 'Unknown Error' && error.name === 'HttpErrorResponse' ) {
+        swal.fire('Servicio Creado', this.servicio.Titulo, 'success' );
+        this.nuevo = false;
+      } else {
+        swal.fire('Ocurrio un error', 'por favor, inténtelo más tarde.', 'error' );
+      }
     });
   }
 

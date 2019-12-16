@@ -4,6 +4,8 @@ import { UsuarioService, ReportesService } from '../../services/service.index';
 import Json from '../../../assets/json/range.json';
 import { Rating } from '../../models/rating.model';
 import { Usuario } from '../../models/usuario.model';
+import { EmpresasService } from '../../services/empresas/empresas.service';
+import { Empresa } from '../../models/empresa.model';
 
 @Component({
   selector: 'app-evaluaciones',
@@ -14,10 +16,12 @@ export class EvaluacionesComponent implements OnInit {
 
   ratings: Rating[] = null;
   rangos: Listados[] = [];
+  empresas: Empresa[] = null;
   param: Parametros = new Parametros();
   users: Usuario[] = null;
 
   constructor(public reporteService: ReportesService,
+              public empresaData: EmpresasService,
               public adminService: UsuarioService) {
                 this.rangos = Json.Rangos;
                 this.adminService.esAdmin()
@@ -29,6 +33,14 @@ export class EvaluacionesComponent implements OnInit {
               }
 
   ngOnInit() {
+    this.cargarEmpresas();
+  }
+
+  cargarEmpresas() {
+    this.empresaData.cargarEmpresasActivas()
+    .subscribe((data: Empresa[]) => {
+      this.empresas = data;
+    });
   }
 
   cargarUsuarios() {
