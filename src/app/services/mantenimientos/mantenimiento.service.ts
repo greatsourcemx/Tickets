@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { URL_SERVICIOS } from '../../config/config';
 import { TicketMante } from '../../models/mantenimientos/mante-ticket.model';
+import { Mantenimiento } from './../../models/mantenimientos/mantenimiento.model';
 
 @Injectable()
 export class MantenimientoService {
@@ -36,6 +37,12 @@ export class MantenimientoService {
     const _url = URL_SERVICIOS + '/ticketmante';
     return this.http.get( _url + '?manteId=' + id ).pipe(
       map( (resp: any) => resp ));
+  }
+
+  inactivaMante( mante: Mantenimiento ) {
+    return this.http.put( this.url, mante ).pipe(
+      map(() => { })
+    );
   }
 
   guardarMante( mante: TicketMante ) {

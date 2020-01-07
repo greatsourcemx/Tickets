@@ -27,4 +27,13 @@ export class MantenimientosComponent implements OnInit {
     });
   }
 
+  inactivarMante( mante: Mantenimiento, index: number ) {
+    this.cargando = true;
+    this._manteServices.inactivaMante( mante )
+    .subscribe(() => {
+      this.mantes.slice( index, 1 );
+      this.cargando = false;
+    });
+  }
+
 }

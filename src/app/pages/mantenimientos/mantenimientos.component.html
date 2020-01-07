@@ -29,7 +29,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let equi of mantes">
+                        <tr *ngFor="let equi of mantes; let i = index;">
                             <td>{{ equi.id }}</td>
                             <td>{{ equi.zona.nombre }}</td>
                             <td>{{ equi.equipo.Nombre }}</td>
@@ -38,7 +38,8 @@
                             <td>{{ equi.fechaSiguiente | date: 'yyyy-MM-dd' }}</td>
                             <td>{{ equi.fechaUltMante | date: 'yyyy-MM-dd' }}</td>
                             <td>
-                                <button [routerLink]="['/mantenimientos', equi.id ]" class="btn btn-primary btn-sm">Ticket</button>
+                                <button ngbTooltip="Agregar Ticket de Mantenimiento" [routerLink]="['/mantenimientos', equi.id ]" class="btn btn-primary btn-sm icon-buttons">Ticket</button>
+                                <button ngbTooltip="Baja de Mantenimiento" class="btn btn-danger btn-sm" name="erase" (click)="inactivarMante( equi, i )"> <i class="fa fa-eraser"></i> </button>
                             </td>
                         </tr>
                     </tbody>
