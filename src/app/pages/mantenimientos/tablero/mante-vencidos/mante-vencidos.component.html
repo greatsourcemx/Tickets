@@ -16,16 +16,16 @@
             <thead>
                 <tr>
                     <th>Equipo</th>
-                    <th>Periodicidad</th>
-                    <th>Fec Mantenimiento</th>
+                    <th>Locacion</th>
+                    <th>Usuario</th>
                     <th>Fec Siguiente</th>
                 </tr>
             </thead>
             <tbody>
                 <tr *ngFor="let mant of mantes" [style.background-color]="mant.color">
                     <td>{{ mant.equipo.Nombre }}</td>
-                    <td>{{ mant.perdiodicidad }} Meses</td>
-                    <td>{{ mant.fechaUltMante | fecha }}</td>
+                    <td>{{ mant.locacion }} </td>
+                    <td>{{ mant.usuario }}</td>
                     <td>{{ mant.fechaSiguiente | fecha }}</td>
                 </tr>
             </tbody>
