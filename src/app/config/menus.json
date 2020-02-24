@@ -15,57 +15,68 @@
         ]
     }],
     "menuAdmin": [{
-        "titulo": "Principal",
-        "icono": "fa fa-tasks",
-        "submenu": [
-            { "titulo": "Inicio", "url": "/principal" },
-            { "titulo": "Tickets", "url": "/tickets" },
-            { "titulo": "Cerrados", "url": "/cerrados" },
-            { "titulo": "Evaluaciones", "url": "/reporte/evaluaciones" },
-            { "titulo": "Recurrentes", "url": "/recurrentes" },
-            { "titulo": "Gráficas", "url": "/graficas" }
-        ]
-    }, {
-        "titulo": "Equipos",
-        "icono": "fa fa-desktop",
-        "submenu": [
-            { "titulo": "Entrega", "url": "/entrega" },
-            { "titulo": "Retorno", "url": "/retorno" },
-            { "titulo": "Responsivas sin firmas", "url": "/nofirmas" },
-            { "titulo": "Trasnferencias", "url": "/transferencias" }
-        ]
-    }, {
-        "titulo": "Calendarios",
-        "icono": "fa fa-calendar",
-        "submenu": [
-            { "titulo": "Visitas", "url": "/calendario" }
-        ]
-    }, {
-        "titulo": "Reportes",
-        "icono": "ti ti-pie-chart",
-        "submenu": [
-            { "titulo": "Porcentaje", "url": "/reporte" },
-            { "titulo": "Horas", "url": "/horas" }
-        ]
-    }, {
-        "titulo": "Mantenimientos",
-        "icono": "fa fa-laptop",
-        "submenu": [
-            { "titulo": "Tablero", "url": "/tablero" },
-            { "titulo": "Listado", "url": "/mantenimientos" },
-            { "titulo": "Zonas", "url": "/zonas" },
-            { "titulo": "Parametros", "url": "/mantenimiento/parametros" }
-        ]
-    }, {
-        "titulo": "Catálogos",
-        "icono": "mdi mdi-account",
-        "submenu": [
-            { "titulo": "Solicitantes", "url": "/solicitantes" },
-            { "titulo": "Usuarios", "url": "/usuarios" },
-            { "titulo": "Empresas", "url": "/empresas" },
-            { "titulo": "Tiempos", "url": "/tiempos" },
-            { "titulo": "Prioridades", "url": "/prioridades" },
-            { "titulo": "Tipo Servicio", "url": "/tipos" }
-        ]
-    }]
+            "titulo": "Tickets",
+            "icono": "fa fa-tasks",
+            "submenu": [
+                { "titulo": "Principal", "url": "/principal" },
+                { "titulo": "Tickets", "url": "/tickets" },
+                { "titulo": "Cerrados", "url": "/cerrados" },
+                { "titulo": "Evaluaciones", "url": "/reporte/evaluaciones" },
+                { "titulo": "Recurrentes", "url": "/recurrentes" },
+                { "titulo": "Gráficas", "url": "/graficas" }
+            ]
+        }, {
+            "titulo": "Equipos",
+            "icono": "fa fa-desktop",
+            "submenu": [
+                { "titulo": "Entrega", "url": "/entrega" },
+                { "titulo": "Retorno", "url": "/retorno" },
+                { "titulo": "Responsivas sin firmas", "url": "/nofirmas" },
+                { "titulo": "Trasnferencias", "url": "/transferencias" }
+            ]
+        }, {
+            "titulo": "Calendarios",
+            "icono": "fa fa-calendar",
+            "submenu": [
+                { "titulo": "Visitas", "url": "/calendario" }
+
+            ]
+        }, {
+            "titulo": "Reportes",
+            "icono": "ti ti-pie-chart",
+            "submenu": [
+                { "titulo": "Porcentaje", "url": "/reporte" },
+                { "titulo": "Horas", "url": "/horas" }
+            ]
+        }, {
+            "titulo": "Mantenimientos",
+            "icono": "fa fa-laptop",
+            "submenu": [
+                { "titulo": "Tablero", "url": "/tablero" },
+                { "titulo": "Listado", "url": "/mantenimientos" },
+                { "titulo": "Zonas", "url": "/zonas" },
+                { "titulo": "Parametros", "url": "/mantenimiento/parametros" }
+            ]
+        },
+        {
+            "titulo": "Proyectos",
+            "icono": "fa fa-bug",
+            "submenu": [
+                { "titulo": "Proyectos", "url": "/mantenimiento/detalledes" }
+            ]
+        },
+        {
+            "titulo": "Catálogos",
+            "icono": "mdi mdi-account",
+            "submenu": [
+                { "titulo": "Solicitantes", "url": "/solicitantes" },
+                { "titulo": "Usuarios", "url": "/usuarios" },
+                { "titulo": "Empresas", "url": "/empresas" },
+                { "titulo": "Tiempos", "url": "/tiempos" },
+                { "titulo": "Prioridades", "url": "/prioridades" },
+                { "titulo": "Tipo Servicio", "url": "/tipos" },
+                { "titulo": "Agenda", "url": "/agenda" }
+            ]
+        }
+    ]
 }

@@ -36,6 +36,8 @@ import { TableroComponent } from './mantenimientos/tablero/tablero.component';
 import { ManteTicketComponent } from './mantenimientos/mante-ticket/mante-ticket.component';
 import { EvaluacionesComponent } from './reportes/evaluaciones.component';
 import { ParametrosComponent } from './mantenimientos/parametros/parametros.component';
+import { DetalledesComponent } from './mantenimientos/detalledes/detalledes.component';
+import { AgendaComponent } from './agenda/agenda.component';
 
 const pagesRoutes: Routes = [
     {
@@ -59,6 +61,7 @@ const pagesRoutes: Routes = [
             { path: 'mantenimientos', component: MantenimientosComponent, data: { titulo: 'Mantenimientos' }  },
             { path: 'mantenimientos/:id', component: ManteTicketComponent, data: { titulo: 'Mantenimiento' }  },
             { path: 'mantenimiento/parametros', component: ParametrosComponent, data: { titulo: 'Parámetros' }  },
+            { path: 'mantenimiento/detalledes', component: DetalledesComponent, data: { titulo: 'Proyectos' }  },
             { path: 'tablero', component: TableroComponent, data: { titulo: 'Tablero' }  },
             { path: 'zonas', component: ZonasComponent, data: { titulo: 'Zonas' }  },
             { path: 'prioridades', component: PrioridadComponent, data: { titulo: 'Prioridades' }  },
@@ -81,6 +84,7 @@ const pagesRoutes: Routes = [
             { path: 'recurrente/nuevo', component: NuevoComponent, data: { titulo: 'Recurrente' }  },
             { path: 'recurrente/:id', component: EditRecurrenteComponent, data: { titulo: 'Recurrente' }  },
             { path: 'calendario', component: CalendarioComponent, data: { titulo: 'Calendario' }  },
+            { path: 'agenda', component: AgendaComponent, data: { titulo: 'Agenda' }  },
             { path: '', redirectTo: '/principal', pathMatch: 'full'  },
         ]
     }

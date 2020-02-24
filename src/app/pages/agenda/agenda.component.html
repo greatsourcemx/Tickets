@@ -1,0 +1,47 @@
+<div class="row animated fadeIn" *ngIf="cargando">
+    <div class="col-sm-12">
+        <div class="alert alert-warning text-center">
+            <strong>Cargando</strong>
+            <br />
+            <i class="fa fa-refresh fa-spin fa-2x"></i>
+            <br />
+            <span>Espere por favor</span>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="mantes" class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Listado de Mantenimientos</h4>
+                <table datatable class="table table-sm">
+                    <thead>
+                        <tr>
+                            <th>Unidad</th>
+                            <th>Extension</th>
+                            <th>Contacto</th>
+                            <th>Area</th>
+                            <th>Correo</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let equi of mantes; let i = index;">
+                            <td>{{ equi.id }}</td>
+                            <td>{{ equi.zona.nombre }}</td>
+                            <td>{{ equi.equipo.Nombre }}</td>
+                            <td>{{ equi.equipo.Tipo }}</td>
+                            <td>{{ equi.perdiodicidad }} (Meses)</td>
+
+                            <td>
+                                <button ngbTooltip="Agregar Ticket de Mantenimiento" [routerLink]="['/mantenimientos', equi.id ]" class="btn btn-primary btn-sm icon-buttons">Ticket</button>
+                                <button ngbTooltip="Baja de Mantenimiento" class="btn btn-danger btn-sm" name="erase" (click)="inactivarMante( equi, i )"> <i class="fa fa-eraser"></i> </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

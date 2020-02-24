@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UsuarioService } from '../services/service.index';
 import { Usuario } from '../models/usuario.model';
-declare var swal: any;
+import swal from 'sweetalert2';
 declare function init_plugins();
 
 @Component({
@@ -48,11 +48,13 @@ export class RecoverComponent implements OnInit {
       texto = resp;
       icono = 'warning';
     }
-    swal({
+
+
+    swal.fire({
       title: titulo,
       text: texto,
-      icon: icono,
-      button: true
+     // icon: icono,
+      //button: true
     }).then(() => {
       this.router.navigate(['/login']);
     });
@@ -62,10 +64,11 @@ export class RecoverComponent implements OnInit {
     this.usuarioService.generaTokenRecuperacion( this.correo )
     .subscribe((data: string) => {
       if ( data === 'OK' ) {
-        swal('Correcto!', 'Se envío las instrucciones de la recuperación de la contraseña por correo electrónico', 'success');
+        swal.fire('Correcto!', 'Se envío las instrucciones de la recuperación de la contraseña por correo electrónico', 'success');
         this.correo = '';
+        this.router.navigate(['/login']);
       } else {
-        swal('Advertencia!', data, 'success');
+        swal.fire('Advertencia!', data, 'success');
       }
     });
   }

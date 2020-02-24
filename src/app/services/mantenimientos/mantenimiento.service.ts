@@ -22,7 +22,18 @@ export class MantenimientoService {
     return this.http.get( this.url ).pipe(
     map( (resp: any) => resp ));
   }
-
+  cargarProyectos () {
+    return this.http.get( this.url + '/proyectos' ).pipe(
+      map((data: any) => data));
+  }
+  guardarProyectos (proy: any) {
+    return this.http.get( this.url + '/guardaProyecto?proyecto=' + proy ).pipe(
+      map((data: any) => data));
+  }
+  actualizaProyectos (proy: any) {
+    return this.http.get( this.url + '/actualizaProyecto?proyecto=' + proy ).pipe(
+      map((data: any) => data));
+  }
   cargarUltimos( cuantos: number ) {
     return this.http.get( this.url + '/next?cuantos=' + cuantos ).pipe(
       map((resp: any) => resp ));

@@ -90,6 +90,9 @@ import { ManteVencidosComponent } from './mantenimientos/tablero/mante-vencidos/
 import { ManteMasivosComponent } from './mantenimientos/tablero/mante-masivos/mante-masivos.component';
 import { EvaluacionesComponent } from './reportes/evaluaciones.component';
 import { ParametrosComponent } from './mantenimientos/parametros/parametros.component';
+import { DetalledesComponent } from './mantenimientos/detalledes/detalledes.component';
+import { AgendaComponent } from './agenda/agenda.component';
+
 
 
 @NgModule({
@@ -146,7 +149,9 @@ import { ParametrosComponent } from './mantenimientos/parametros/parametros.comp
         ManteVencidosComponent,
         ManteMasivosComponent,
         EvaluacionesComponent,
-        ParametrosComponent
+        ParametrosComponent,
+        DetalledesComponent,
+        AgendaComponent
     ],
     exports: [
         DashboardComponent,

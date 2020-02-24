@@ -1,0 +1,48 @@
+ Detalle de proyectos
+<div class="card .bg-light">
+    <div class="card-body">
+        <div class="row">
+            <div class="col-6 pull-right">
+                <h4 class="card-title">Listado de Proyectos</h4>
+            </div>
+            <div class="col-6 pull-left">
+                <button class="btn btn-info pull-right" name="new" tabindex="0" (click)="NuevoP()"><i class="fa fa-plus"></i> Nuevo</button>
+            </div>
+        </div>
+        <table class="table table-sm">
+            <thead>
+                <tr>
+                    <th scope="col">Desarrollo</th>
+                    <th scope="col">Descripcion</th>
+                    <th scope="col">Estatus</th>
+                    <th scope="col">Version Viusual Studio</th>
+                    <th scope="col">Version MVC</th>
+                    <th scope="col">Tecnologias</th>
+                    <th scope="col">Ruta de codigo</th>
+                    <th scope="col">Base de datos</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let proy of proyes; let i = index;">
+                    <td>{{ proy.desarrollo }}</td>
+                    <td>{{ proy.nombre }}</td>
+                    <td *ngIf="proy.estatus == 'Activo'" style="color: #06D79C">{{ proy.estatus }}</td>
+                    <td *ngIf="proy.estatus == 'Inactivo'" style="color: #EF5350">{{ proy.estatus }}</td>
+                    <td>{{ proy.versionvb }}</td>
+                    <td>{{ proy.mvc }}</td>
+                    <td>{{ proy.tecnologias }} </td>
+                    <td>{{ proy.ubicacion }}</td>
+                    <td>{{ proy.bd }}</td>
+                    <td>
+                        <span class="action-icons">
+                            <button (click)="EditarP(proy)" class="btn btn-info btn-sm" ngbTooltip="Editar Proyecto">
+                                <i class="fa fa-edit"></i>
+                            </button>
+                        </span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>
