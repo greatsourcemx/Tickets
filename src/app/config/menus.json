@@ -18,12 +18,12 @@
             "titulo": "Tickets",
             "icono": "fa fa-tasks",
             "submenu": [
-                { "titulo": "Principal", "url": "/principal" },
-                { "titulo": "Tickets", "url": "/tickets" },
+                { "titulo": "Mi Tablero", "url": "/principal" },
+                { "titulo": "Abiertos", "url": "/tickets" },
                 { "titulo": "Cerrados", "url": "/cerrados" },
                 { "titulo": "Evaluaciones", "url": "/reporte/evaluaciones" },
                 { "titulo": "Recurrentes", "url": "/recurrentes" },
-                { "titulo": "Gráficas", "url": "/graficas" }
+                { "titulo": "Estadisticas", "url": "/graficas" }
             ]
         }, {
             "titulo": "Equipos",

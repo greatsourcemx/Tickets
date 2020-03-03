@@ -16,6 +16,8 @@ export class Usuario {
         public root: string = '',
         public actualizarPassword: boolean = false,
         public totalUsuarios: number = 0,
-        public empresa: Empresa = new Empresa('')
+        public empresa: Empresa = new Empresa(''),
+        public telefono: string = '',
+        public puesto: string = '',
     ) { }
 }

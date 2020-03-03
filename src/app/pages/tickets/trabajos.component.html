@@ -84,29 +84,31 @@
                         </thead>
                         <tbody>
                             <tr *ngFor="let tick of Tickets">
-                                <td style="width:20px;">{{ tick.Id }}</td>
-                                <td style="width:50px;"><span class="round"><img [src]="tick.Solicitor.id | imagen" alt="user" width="50" height="50px"></span></td>
-                                <td>
-                                    <h6> {{ tick.Solicitor.nombre | titlecase | capitalizar }} </h6>
-                                </td>
-                                <td>
-                                    <span [ngbTooltip]="tick.Titulo">
-                                        {{ tick.Titulo | truncate: [25, ' ...'] }}
-                                    </span>
-                                </td>
-                                <td> {{ tick.FecRegistro | date: 'yyyy-MM-dd' }} </td>
-                                <td><span class="label label-rounded" [ngClass]="( tick.Estado == 'Abierta' ) ? 'label-warning' :
-                                    ( tick.Estado == 'Cerrada' ) ? 'label-success' : 'label-info'">{{ tick.Estado }}</span>
-                                </td>
-                                <td> {{ tick.TipoServicio.descripcion }} </td>
-                                <td> {{ tick.tiempoTotal | tiempo }} </td>
-                                <td> {{ tick.AsignadoA.nombre }} </td>
-                                <td>
-                                    <span class="action-icons">
-                                        <a href="javascript:void(0)" [routerLink]="['/avances', tick.Id ]" class="btn btn-info btn-sm text-white" title="Avances"><i class="icon icon-layers"></i></a>
-                                        <a href="javascript:void(0)" [routerLink]="['/tickets', tick.Id ]" class="btn btn-danger btn-sm text-white" title="Cerrar"><i class="icon icon-check"></i></a>
-                                    </span>
-                                </td>
+                                <ng-container *ngIf="tick.Estado != 'Cancelado'">
+                                    <td style="width:20px;">{{ tick.Id }}</td>
+                                    <td style="width:50px;"><span class="round"><img [src]="tick.Solicitor.id | imagen" alt="user" width="50" height="50px"></span></td>
+                                    <td>
+                                        <h6> {{ tick.Solicitor.nombre | titlecase | capitalizar }} </h6>
+                                    </td>
+                                    <td>
+                                        <span [ngbTooltip]="tick.Titulo">
+                                            {{ tick.Titulo | truncate: [25, ' ...'] }}
+                                        </span>
+                                    </td>
+                                    <td> {{ tick.FecRegistro | date: 'yyyy-MM-dd' }} </td>
+                                    <td><span class="label label-rounded" [ngClass]="( tick.Estado == 'Abierta' ) ? 'label-warning' :
+                                        ( tick.Estado == 'Cerrada' ) ? 'label-success' : 'label-info'">{{ tick.Estado }}</span>
+                                    </td>
+                                    <td> {{ tick.TipoServicio.descripcion }} </td>
+                                    <td> {{ tick.tiempoTotal | tiempo }} </td>
+                                    <td> {{ tick.AsignadoA.nombre }} </td>
+                                    <td>
+                                        <span class="action-icons">
+                                            <a href="javascript:void(0)" [routerLink]="['/avances', tick.Id ]" class="btn btn-info btn-sm text-white" title="Avances"><i class="icon icon-layers"></i></a>
+                                            <a href="javascript:void(0)" [routerLink]="['/tickets', tick.Id ]" class="btn btn-danger btn-sm text-white" title="Cerrar"><i class="icon icon-check"></i></a>
+                                        </span>
+                                    </td>
+                                </ng-container>
                             </tr>
                         </tbody>
                     </table>

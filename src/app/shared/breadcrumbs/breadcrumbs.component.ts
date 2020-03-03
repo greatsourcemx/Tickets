@@ -91,11 +91,16 @@ export class BreadcrumbsComponent implements OnInit {
   }
 
   guardar( f: NgForm ) {
+    debugger;
     if ( f.invalid ) {
       return;
     }
     if ( this.ticket.Solicitor.id === 0 ) {
       swal.fire('Advertencia', 'Debe seleccionar el solicitor', 'warning');
+      return;
+    }
+    if ( this.ticket.Duracion.Descripcion == "Sin Tiempo") {
+      swal.fire('Advertencia', 'Debe seleccionar tiempo', 'warning');
       return;
     }
     this._servicioService.guardaTicketRapido( this.ticket )

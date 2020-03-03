@@ -9,6 +9,12 @@
                 <button class="btn btn-info pull-right" name="new" tabindex="0" (click)="NuevoP()"><i class="fa fa-plus"></i> Nuevo</button>
             </div>
         </div>
+        <div class="row">
+            <div class="col-12">
+                <input [(ngModel)]="query" type="text" class="form-control" placeholder="Buscar">
+            </div>
+
+        </div>
         <table class="table table-sm">
             <thead>
                 <tr>
@@ -23,7 +29,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let proy of proyes; let i = index;">
+                <tr *ngFor="let proy of proyes | filter: 'desarrollo,nombre,estatus,tecnologias': query">
                     <td>{{ proy.desarrollo }}</td>
                     <td>{{ proy.nombre }}</td>
                     <td *ngIf="proy.estatus == 'Activo'" style="color: #06D79C">{{ proy.estatus }}</td>

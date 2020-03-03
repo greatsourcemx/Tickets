@@ -86,7 +86,7 @@ export class TicketComponent implements OnInit {
   }
 
   guardar ( f: NgForm) {
-
+    
     if ( f.invalid ) {
       return;
     }

@@ -11,6 +11,8 @@ import swal from 'sweetalert2';
 export class DetalledesComponent implements OnInit {
     cargando: boolean = false;
     proyes: Proyectos[] = null;
+    query = '';
+
     constructor(public _manteServices: MantenimientoService) {
 
     }

@@ -11,7 +11,7 @@ export class ManteVencidosComponent implements OnInit {
 
   mantes: Mantenimiento[] = null;
   cargando = false;
-  color = '#b82e2e';
+  color = '#F7DCDE';
 
   constructor(public manteService: MantenimientoService) { }
 

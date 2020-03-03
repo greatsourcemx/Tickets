@@ -33,7 +33,6 @@ export class NuevoUsuarioComponent implements OnInit {
 
 
   guardarUsuario( f: NgForm ) {
-
     if ( f.invalid ) {
       return;
     }

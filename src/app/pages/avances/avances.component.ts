@@ -97,11 +97,16 @@ export class AvancesComponent implements OnInit {
     this.avance.Fecha = new Date(this._fecha.year, this._fecha.month - 1, this._fecha.day);
     this.avance.Responsable = this._usuarioService.usuario;
     this.avance.servId = this.servicio.Id;
-    this._avancesService.guardarAvance(this.avance)
-    .subscribe( (resp: any) => {
-      let url = localStorage.getItem('url');
-      this.router.navigate([url]);
-    });
+    if(this.avance['Duracion'] == undefined){
+      swal.fire('Advertencia!', 'Por favor capture Duracion', 'warning');
+      }else{
+        debugger;
+        this._avancesService.guardarAvance(this.avance)
+        .subscribe( (resp: any) => {
+          let url = localStorage.getItem('url');
+          this.router.navigate([url]);
+        });
+      }
   }
 
   borrar( index: number ) {

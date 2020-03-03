@@ -11,10 +11,14 @@
                 <li *ngFor="let menu of menu">
                     <a class="has-arrow waves-effect waves-dark" aria-expanded="false"><i [class]="menu.icono"></i><span class="hide-menu"> {{ menu.titulo }} </span></a>
                     <ul aria-expanded="false" class="collapse">
-
                         <li *ngFor="let submenu of menu.submenu">
-                            <a routerLinkActive="active" [routerLink]="[ submenu.url ]"> {{ submenu.titulo }} </a>
+                            <a *ngIf="!submenu.subsubmenu" routerLinkActive="active" [routerLink]="[ submenu.url ]"> {{ submenu.titulo }} </a>
+                            <a *ngIf="submenu.subsubmenu" class="has-arrow waves-effect waves-dark" aria-expanded="false"><i [class]="submenu.subsubmenu.icono"></i><span class="hide-menu"></span> {{ submenu.titulo }} </a>
+                            <ul *ngIf="menu.submenu.subsubmenu" class="dropdown-menu">
+                                <a routerLinkActive="active" [routerLink]="[ menu.submenu.subsubmenu.url ]"> {{ menu.submenu.subsubmenu.titulo }} </a>
+                            </ul>
                         </li>
+
                     </ul>
                 </li>
 

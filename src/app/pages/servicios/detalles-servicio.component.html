@@ -53,7 +53,16 @@
 
         <hr />
         <!-- <button class="btn btn-danger waves-effect waves-light" name="regresar" (click)="regresar()">Cerrar</button> -->
-        <button class="btn btn-info waves-effect waves-light" name="regresar" (click)="regresar()">Regresar</button>
+
+
+        <div class="row">
+            <div class="col-md-9">
+                <button class="btn btn-info waves-effect waves-light" name="regresar" (click)="regresar()">Regresar</button>
+            </div>
+            <div *ngIf="servicio.Estado != 'Cerrada'" class="col-md-3" style="text-align: right">
+                <button [routerLink]="['/tickets', servicio.Id ]" type="button" class="btn btn-danger pull-right">Cerrar</button>
+            </div>
+        </div>
     </div>
 </div>
 

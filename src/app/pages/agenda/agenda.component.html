@@ -1,3 +1,26 @@
+<div class="row animated fadeIn">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+
+                <div class="row">
+                    <div class="col-3">
+
+                        <div>
+                            <span>Empresa</span>
+                        </div>
+                        <div class="btn-group" role="group" aria-label="Basic example">
+                            <button type="button" (click)="seleccionEmpresa( 'EBR' )" [ngClass]="{ 'active': empresa==='EBR' }" class="btn btn-secondary">EBR</button>
+                            <button type="button" (click)="seleccionEmpresa( 'IMA' )" [ngClass]="{ 'active': empresa==='IMA' }" class="btn btn-secondary">IMA</button>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
 <div class="row animated fadeIn" *ngIf="cargando">
     <div class="col-sm-12">
         <div class="alert alert-warning text-center">
@@ -10,7 +33,7 @@
     </div>
 </div>
 
-<div *ngIf="mantes" class="row">
+<div *ngIf="solicitantes" class="row">
     <div class="col-md-12">
         <div class="card">
             <div class="card-body">
@@ -23,21 +46,15 @@
                             <th>Contacto</th>
                             <th>Area</th>
                             <th>Correo</th>
-
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let equi of mantes; let i = index;">
-                            <td>{{ equi.id }}</td>
-                            <td>{{ equi.zona.nombre }}</td>
-                            <td>{{ equi.equipo.Nombre }}</td>
-                            <td>{{ equi.equipo.Tipo }}</td>
-                            <td>{{ equi.perdiodicidad }} (Meses)</td>
-
-                            <td>
-                                <button ngbTooltip="Agregar Ticket de Mantenimiento" [routerLink]="['/mantenimientos', equi.id ]" class="btn btn-primary btn-sm icon-buttons">Ticket</button>
-                                <button ngbTooltip="Baja de Mantenimiento" class="btn btn-danger btn-sm" name="erase" (click)="inactivarMante( equi, i )"> <i class="fa fa-eraser"></i> </button>
-                            </td>
+                        <tr *ngFor="let solicitante of solicitantes; let i = index;">
+                            <td>{{ solicitante.puesto }}</td>
+                            <td>{{ solicitante.telefono }}</td>
+                            <td>{{ solicitante.nombre }} </td>
+                            <td>{{ solicitante.noEmpleado }}</td>
+                            <td>{{ solicitante.correo }}</td>
                         </tr>
                     </tbody>
                 </table>

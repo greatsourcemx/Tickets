@@ -63,6 +63,7 @@ export class ServiciosService {
   }
 
   guardarServicio ( Soliid: number = 0, servicio: Servicio ) {
+    debugger;
     let url = URL_SERVICIOS + '/servicio';
     return this.http.post( url, servicio ).pipe(
       map( (resp: any) => {
