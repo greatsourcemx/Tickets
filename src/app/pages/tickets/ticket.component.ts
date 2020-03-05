@@ -22,7 +22,7 @@ export class TicketComponent implements OnInit {
   estados: any = data.default;
   tipos: Tipo[];
   duracion: Tiempo;
-  cerrado: boolean = true;
+  cerrado: boolean = false;
 
   constructor(public _tiempoService: TiempoService,
     public _adminService: UsuarioService,
@@ -78,21 +78,29 @@ export class TicketComponent implements OnInit {
 
   estatusChange ( ) {
     if ( this.ticket.Estado === this.estados.Estatus[2].value ) {
-      this.cerrado = true;
-    } else {
       this.cerrado = false;
+    } else {
+      this.cerrado = true;
     }
 
   }
 
   guardar ( f: NgForm) {
-    
+    debugger;
     if ( f.invalid ) {
       return;
     }
 
     if ( this.ticket.Solicitor.id === 0 ) {
       swal.fire('Advertencia', 'Debe seleccionar el solicitor', 'warning');
+      return;
+    }
+    if ( this.ticket.Estado == 'Cerrada' && (this.ticket.Solucion == '' || this.ticket.Solucion == undefined)) {
+      swal.fire('Advertencia', 'Un ticket cerrado debe de tener solucion', 'warning');
+      return;
+    }
+    if ( this.ticket.Estado == 'Cerrada' && (this.ticket.Duracion == undefined || this.ticket.Duracion == null || this.ticket.Duracion.Descripcion == "Sin Tiempo")) {
+      swal.fire('Advertencia', 'Debe seleccionar tiempo', 'warning');
       return;
     }
     this.ticket.FecCerrado = new Date(this.fecCerrado.year, this.fecCerrado.month - 1, this.fecCerrado.day);

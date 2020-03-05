@@ -24,6 +24,8 @@ export class AgendaComponent implements OnInit {
   desde: number = 0;
   totalRegistros: number = 0;
   showNavegacion = false;
+  query = '';
+
   //dtTrigger: Subject = new Subject();
 
   constructor(public _manteServices: MantenimientoService

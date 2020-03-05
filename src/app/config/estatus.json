@@ -1,12 +1,12 @@
 {
     "Estatus": [{
-        "id": 0,
-        "value": "Abierta"
+        "id": 2,
+        "value": "Cerrada"
     }, {
         "id": 1,
         "value": "En Proceso"
     }, {
-        "id": 2,
-        "value": "Cerrada"
+        "id": 0,
+        "value": "Abierta"
     }]
 }

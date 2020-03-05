@@ -4,6 +4,8 @@ import { ServiciosService, TiempoService, UsuarioService, SolicitanteService, Ti
 import { Servicio, Tiempo, Usuario, Tipo } from '../../models/models.index';
 import { ActivatedRoute, Router } from '@angular/router';
 import * as data from '../../config/estatus.json';
+import swal from 'sweetalert2';
+
 
 @Component({
   selector: 'app-tickets',
@@ -97,6 +99,10 @@ export class TicketsComponent implements OnInit {
     if (f.invalid) {
       return;
     }
+    if(this.ticket.Solucion == "" || this.ticket.Solucion == undefined){
+      swal.fire('Advertencia!', 'Por favor capture Solucion', 'warning');
+      return;
+    } 
     this.ticket.FecCerrado = new Date(this.fecCerrado.year, this.fecCerrado.month - 1, this.fecCerrado.day);
     this._ticketService.modificarServicio( this.ticket )
     .subscribe( (resp: any) => { this.router.navigate(['/principal']); });

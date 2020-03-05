@@ -73,7 +73,7 @@
             <div class="card-body">
                 <h4 class="card-title pull-left"> Historial de Avances </h4>
                 <div *ngIf="isAdmin" class="text-right">
-                    <button [routerLink]="['/avances', servicio.Id]" type="button" title="Agregar" class="btn btn-circle btn-primary">
+                    <button *ngIf="servicio.Estado != 'Cerrada'" [routerLink]="['/avances', servicio.Id]" type="button" title="Agregar" class="btn btn-circle btn-primary">
                         <i class="fa fa-plus"></i>
                     </button>
                 </div>
