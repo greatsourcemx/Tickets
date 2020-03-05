@@ -3,32 +3,44 @@
 <!-- ============================================================== -->
 <section id="wrapper">
     <div class="login-register" style="background-image:url(../assets/images/background/login.jpg);">
-        <div class="login-box card">
+        <div class="login-box card" style="background: transparent">
+            <div class="row" style="padding-bottom: 50px">
+                <div class="col-xs-3" style="text-align: left; margin-left: auto; margin-right: auto;">
+                    <img src="../assets/images/background/logoico.png" class="card-img-top" alt="...">
+                </div>
+            </div>
             <div class="card-body">
-                <form ngNativeValidate #f="ngForm" class="form-horizontal form-material" id="loginform" (ngSubmit)="ingresar( f )">
-                    <h3 class="box-title m-b-20">Iniciar Sesión</h3>
-                    <div class="form-group ">
-                        <div class="col-xs-12">
-                            <input [(ngModel)]="correo" name="correo" class="form-control" type="email" required="" placeholder="Correo" />
-                        </div>
+                <form ngNativeValidate #f="ngForm" id="loginform" (ngSubmit)="ingresar( f )">
+
+
+                    <div style="margin-bottom: 25px" class="input-group">
+                        <i style="position: absolute; top: 6px; left: 13px; font-size: 22px; z-index: 9999;">
+                            <img src="../assets/images/background/mail.png" style="vertical-align:0 ;width: 26px; padding-bottom: 1.5px">
+                        </i>
+                        <input [(ngModel)]="correo" name="correo" class="form-control" type="email" required="" placeholder="Correo" style=" border-radius: .25rem; position: relative; padding-left: 45px; padding-bottom: 5px " />
                     </div>
-                    <div class="form-group">
-                        <div class="col-xs-12">
-                            <input ngModel name="password" class="form-control" type="password" required="" placeholder="Contraseña" />
-                        </div>
+
+                    <div style="margin-bottom: 25px" class="input-group">
+                        <i style="position: absolute; top: 6px; left: 13px; font-size: 22px; z-index: 9999;">
+                            <img src="../assets/images/background/lock.png" style="vertical-align:0 ;width: 20px;">
+                        </i>
+                        <input ngModel name="password" class="form-control" type="password" required="" placeholder="Contraseña" style=" border-radius: .25rem; position: relative; padding-left: 45px; padding-bottom: 5px " />
                     </div>
+
+
+
                     <div class="form-group row">
                         <div class="col-md-12">
-                            <div class="checkbox checkbox-info pull-left p-t-0">
+                            <div class="checkbox checkbox-info pull-left p-t-0" style="color: #fff">
                                 <input [(ngModel)]="recordar" name="recordar" id="checkbox-signup" type="checkbox" class="filled-in chk-col-light-blue" />
                                 <label for="checkbox-signup"> Recordar </label>
                             </div>
-                            <a href="javascript:void(0)" [routerLink]="['/recover']" id="to-recover" class="text-dark pull-right"><i class="fa fa-lock m-r-5"></i> ¿Olvidaste tú contraseña?</a>
+                            <a href="javascript:void(0)" [routerLink]="['/recover']" id="to-recover" class="text-white pull-right"><i class="fa fa-lock m-r-5"></i> ¿Olvidaste tú contraseña?</a>
                         </div>
                     </div>
                     <div class="form-group text-center">
                         <div class="col-xs-12 p-b-20">
-                            <button class="btn btn-block btn-lg btn-info btn-rounded" type="submit">Ingresar</button>
+                            <button style="background-color: #1b1464; border: none;" class="btn btn-block btn-lg btn-info" type="submit">I N G R E S A R</button>
                         </div>
                     </div>
                 </form>
