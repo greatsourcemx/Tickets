@@ -56,6 +56,7 @@
                             <th>Correo</th>
                             <th>Estatus</th>
                             <th>Empresa</th>
+                            <th>Empresa Agenda</th>
                             <th></th>
                         </tr>
                     </thead>
@@ -75,6 +76,11 @@
                             </td>
                             <td>
                                 <select [(ngModel)]="solicitante.empresa.id" name="empr" class="form-control">
+                                    <option *ngFor="let empre of Empresas" [ngValue]="empre.id">{{ empre.nombre }}</option>
+                                </select>
+                            </td>
+                            <td>
+                                <select [(ngModel)]="solicitante.emprage" name="emprage" class="form-control">
                                     <option *ngFor="let empre of Empresas" [ngValue]="empre.id">{{ empre.nombre }}</option>
                                 </select>
                             </td>

@@ -37,6 +37,8 @@ import { ManteTicketComponent } from './mantenimientos/mante-ticket/mante-ticket
 import { EvaluacionesComponent } from './reportes/evaluaciones.component';
 import { ParametrosComponent } from './mantenimientos/parametros/parametros.component';
 import { DetalledesComponent } from './mantenimientos/detalledes/detalledes.component';
+import { CambiosdesComponent } from './mantenimientos/detalledes/cambiosdes.component';
+
 import { AgendaComponent } from './agenda/agenda.component';
 
 const pagesRoutes: Routes = [
@@ -85,6 +87,7 @@ const pagesRoutes: Routes = [
             { path: 'recurrente/:id', component: EditRecurrenteComponent, data: { titulo: 'Recurrente' }  },
             { path: 'calendario', component: CalendarioComponent, data: { titulo: 'Calendario' }  },
             { path: 'agenda', component: AgendaComponent, data: { titulo: 'Agenda' }  },
+            { path: 'cambiosdes/:id', component: CambiosdesComponent, data: { titulo: 'Cambios Desarrollo' }  },
             { path: '', redirectTo: '/principal', pathMatch: 'full'  },
         ]
     }

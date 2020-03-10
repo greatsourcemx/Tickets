@@ -19,5 +19,7 @@ export class Usuario {
         public empresa: Empresa = new Empresa(''),
         public telefono: string = '',
         public puesto: string = '',
+        public emprage: number =0,
+        public extension: string = '',
     ) { }
 }

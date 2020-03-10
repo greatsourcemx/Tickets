@@ -1,4 +1,4 @@
-<div class="row animated fadeIn">
+<div *ngIf="isAdmin" class="row animated fadeIn">
     <div class="col-12">
         <div class="card">
             <div class="card-body">
@@ -10,8 +10,8 @@
                             <span>Empresa</span>
                         </div>
                         <div class="btn-group" role="group" aria-label="Basic example">
-                            <button type="button" (click)="seleccionEmpresa( 'EBR' )" [ngClass]="{ 'active': empresa==='EBR' }" class="btn btn-secondary">EBR</button>
-                            <button type="button" (click)="seleccionEmpresa( 'IMA' )" [ngClass]="{ 'active': empresa==='IMA' }" class="btn btn-secondary">IMA</button>
+                            <button type="button" (click)="cargarAgendasu( 'EBR' )" [ngClass]="{ 'active': empresa==='EBR' }" class="btn btn-secondary">EBR</button>
+                            <button type="button" (click)="cargarAgendasu( 'IMA' )" [ngClass]="{ 'active': empresa==='IMA' }" class="btn btn-secondary">IMA</button>
                         </div>
 
                     </div>
@@ -37,32 +37,42 @@
     <div class="col-md-12">
         <div class="card">
             <div class="card-body">
-                <h4 class="card-title">Listado de Mantenimientos</h4>
+                <h4 class="card-title">Listado de Usuarios</h4>
                 <div class="row">
                     <div class="col-12">
                         <input [(ngModel)]="query" type="text" class="form-control" placeholder="Buscar">
                     </div>
                 </div>
-                <table class="table table-sm">
-                    <thead>
-                        <tr>
-                            <th>Nombre</th>
-                            <th>Telefono</th>
-                            <th>Area</th>
-                            <th># Empleado</th>
-                            <th>Correo</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr *ngFor="let solicitante of solicitantes | filter: 'telefono,nombre,puesto': query">
-                            <td>{{ solicitante.nombre }} </td>
-                            <td>{{ solicitante.telefono }}</td>
-                            <td>{{ solicitante.puesto }}</td>
-                            <td>{{ solicitante.noEmpleado }}</td>
-                            <td>{{ solicitante.correo }}</td>
-                        </tr>
-                    </tbody>
-                </table>
+                <div style="position: relative; height: 500px; overflow: auto; display: block; ">
+                    <table class="table table-sm">
+                        <thead>
+                            <tr>
+                                <th style="background: white; position: sticky;top: 0;">Nombre</th>
+                                <th style="background: white; position: sticky;top: 0;">Telefono</th>
+                                <th style="background: white; position: sticky;top: 0;">Extension</th>
+                                <th style="background: white; position: sticky;top: 0;">Area</th>
+                                <th style="background: white; position: sticky;top: 0;">Correo</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let solicitante of solicitantes | filter: 'telefono,nombre,puesto,extension': query">
+                                <td>{{ solicitante.nombre }} </td>
+                                <td>{{ solicitante.telefono }}</td>
+                                <td *ngIf="isAdmin"><input [(ngModel)]="solicitante.extension" class="form-control" style="width: 70px" name="extension" type="text" value='{{ solicitante.extension }}'> </td>
+                                <td *ngIf="!isAdmin">{{ solicitante.extension }}</td>
+                                <td>{{ solicitante.puesto }}</td>
+                                <td>{{ solicitante.correo }}</td>
+                                <td>
+                                    <span class="action-icons">
+                                        <button *ngIf="isAdmin" (click)="updateExt(solicitante, $event.target.value)" class="btn btn-info btn-sm icon-buttons" ngbTooltip="Guardar">
+                                            <i class="fa fa-save"></i>
+                                        </button>                                    
+                                    </span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>

@@ -26,8 +26,16 @@ export class MantenimientoService {
     return this.http.get( this.url + '/proyectos' ).pipe(
       map((data: any) => data));
   }
+  cargarDesarrollo (id) {
+    return this.http.get( this.url + '/cproyectos?proyecto=' + id).pipe(
+      map((data: any) => data));
+  }
   guardarProyectos (proy: any) {
     return this.http.get( this.url + '/guardaProyecto?proyecto=' + proy ).pipe(
+      map((data: any) => data));
+  }
+  guardarAvance (proy: any) {
+    return this.http.get( this.url + '/guardaAvance?proyecto=' + proy ).pipe(
       map((data: any) => data));
   }
   actualizaProyectos (proy: any) {

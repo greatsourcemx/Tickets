@@ -48,8 +48,12 @@ export class GlpiService {
     }
     return this.http.get( url );
   }
-  cargarAgenda( empr: string) {
-    let url = URL_SERVICIOS + '/glpi/agenda?empr=' + empr;
+  cargarAgenda( usr: string) {
+    let url = URL_SERVICIOS + '/glpi/agenda?usr=' + usr;
+    return this.http.get( url );
+  }
+  cargarAgendaSU( empr: string) {
+    let url = URL_SERVICIOS + '/glpi/agendasu?empr=' + empr;
     return this.http.get( url );
   }
   cargarNuevosSolicitantes( empresa: string ) {

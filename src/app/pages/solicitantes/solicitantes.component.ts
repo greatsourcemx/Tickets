@@ -88,9 +88,11 @@ export class SolicitantesComponent implements OnInit {
   }
 
   modificarSolicitante (solicitante: Usuario) {
+    debugger;
     // Asignacion de Empresa
     let emprId = solicitante.empresa.id;
     solicitante.empresa = this.Empresas.find(e => e.id === emprId);
+    //solicitante.emprage = this.Empresas.find(e => e.id === emprId);
 
     this._solicitanteService.modificarSolicitante( solicitante )
         .subscribe( usr => {

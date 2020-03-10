@@ -12,6 +12,10 @@ export class Proyectos {
         public aux1: string = '',
         public aux2: string = '',
         public aux3: string = '',
-        public aux4: string = ''
+        public aux4: string = '',
+        public avanceid: number = 0,
+        public avancedesid: number = 0,
+        public avancedesc: string = '',
+        public avanceestado: string = ''
     ) { }
 }

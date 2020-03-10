@@ -1,0 +1,45 @@
+Detalle de proyectos
+<div class="row">
+
+    <div class="col-md-12">
+        <div class="card .bg-light">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-6 pull-right">
+                        <h4 class="card-title">Listado de Proyectos</h4>
+                    </div>
+                    <div class="col-6 pull-left">
+                        <button class="btn btn-info pull-right" name="new" tabindex="0" (click)="NuevoP()"><i class="fa fa-plus"></i> Nuevo</button>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        <input [(ngModel)]="query" type="text" class="form-control" placeholder="Buscar">
+                    </div>
+
+                </div>
+                <div style="position: relative; height: 500px; overflow: auto; display: block; ">
+                    <table class="table table-sm">
+                        <thead>
+                            <tr>
+                                <th scope="col">Estado</th>
+                                <th scope="col">Descripcion</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let proy of proyes | filter: 'est,avancedesc': query">
+                                <td style="width: 160px; ">
+                                    <select [(ngModel)]="proy.avanceestado " name="empr " class="form-control form-control-sm " style="width: 140px; ">
+                                        <option *ngFor="let est of Estados " [ngValue]="est ">{{ est }}</option>
+                                    </select>
+                                </td>
+                                <td *ngIf="proy.avanceestado=='Activo' " style="color: #188AE2;">{{ proy.avancedesc }}</td>
+                                <td *ngIf="proy.avanceestado=='Concluido' " style="color: #4BD396;">{{ proy.avancedesc }}</td>
+                                <td *ngIf="proy.avanceestado=='Cancelado' " style="color: #F5707A;">{{ proy.avancedesc }}</td>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

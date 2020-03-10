@@ -50,7 +50,15 @@ export class SolicitanteService {
                     return resp;
                   }));
     }
-
+    modificarExtension (usuario: Usuario) {
+      debugger;
+      let url = URL_SERVICIOS + '/extension';
+      return this.http.put( url, usuario ).pipe(
+                  map( (resp: any) => {
+                    swal.fire('Solicitante Actualizado', usuario.nombre, 'success');
+                    return resp;
+                  }));
+    }
     cargarSolici (id: number) {
       let url = URL_SERVICIOS + '/solicitor?id=' + id;
       return this.http.get( url ).pipe(

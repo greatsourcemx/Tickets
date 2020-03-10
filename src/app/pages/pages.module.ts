@@ -91,7 +91,10 @@ import { ManteMasivosComponent } from './mantenimientos/tablero/mante-masivos/ma
 import { EvaluacionesComponent } from './reportes/evaluaciones.component';
 import { ParametrosComponent } from './mantenimientos/parametros/parametros.component';
 import { DetalledesComponent } from './mantenimientos/detalledes/detalledes.component';
+import { CambiosdesComponent } from './mantenimientos/detalledes/cambiosdes.component';
+
 import { AgendaComponent } from './agenda/agenda.component';
+
 
 
 
@@ -151,6 +154,7 @@ import { AgendaComponent } from './agenda/agenda.component';
         EvaluacionesComponent,
         ParametrosComponent,
         DetalledesComponent,
+        CambiosdesComponent,
         AgendaComponent
     ],
     exports: [
