@@ -10,8 +10,8 @@
                             <span>Empresa</span>
                         </div>
                         <div class="btn-group" role="group" aria-label="Basic example">
-                            <button type="button" (click)="cargarAgendasu( 'EBR' )" [ngClass]="{ 'active': empresa==='EBR' }" class="btn btn-secondary">EBR</button>
-                            <button type="button" (click)="cargarAgendasu( 'IMA' )" [ngClass]="{ 'active': empresa==='IMA' }" class="btn btn-secondary">IMA</button>
+                            <button type="button" (click)="cargarAgendasu( 'EBR' )" [ngClass]="{ 'active': empresa==='EBR' }" class="btn  btnebr">EBR</button>
+                            <button type="button" (click)="cargarAgendasu( 'IMA' )" [ngClass]="{ 'active': empresa==='IMA' }" class="btn  btnima">IMA</button>
                         </div>
 
                     </div>
@@ -38,33 +38,36 @@
         <div class="card">
             <div class="card-body">
                 <h4 class="card-title">Listado de Usuarios</h4>
-                <div class="row">
-                    <div class="col-12">
-                        <input [(ngModel)]="query" type="text" class="form-control" placeholder="Buscar">
-                    </div>
+                <div style="margin-bottom: 25px" class="input-group">
+                    <i style="position: absolute; top: 6px; right: 13px; font-size: 22px; z-index: 9999; color:#999999" class="fa fa-search">
+                        
+                    </i>
+                    <input input [(ngModel)]="query" class="form-control" type="text" required="" placeholder="Busca aqui" style=" border-radius: .25rem; position: relative;" />
                 </div>
+
                 <div style="position: relative; height: 500px; overflow: auto; display: block; ">
-                    <table class="table table-sm">
+                    <table class="table-striped table-sm" style="width: 100%;">
                         <thead>
                             <tr>
-                                <th style="background: white; position: sticky;top: 0;">Nombre</th>
-                                <th style="background: white; position: sticky;top: 0;">Telefono</th>
-                                <th style="background: white; position: sticky;top: 0;">Extension</th>
-                                <th style="background: white; position: sticky;top: 0;">Area</th>
-                                <th style="background: white; position: sticky;top: 0;">Correo</th>
+                                <th class="tbl-header" style="position: sticky;top: 0;">Nombre</th>
+                                <th class="tbl-header2" style="position: sticky;top: 0;">Telefono</th>
+                                <th class="tbl-header3" style="position: sticky;top: 0;">Extension</th>
+                                <th class="tbl-header4" style="position: sticky;top: 0;">Area</th>
+                                <th class="tbl-header5" style="position: sticky;top: 0;">Correo</th>
+                                <th *ngIf="isAdmin" class="tbl-header6" style="position: sticky;top: 0;">Guardar</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr *ngFor="let solicitante of solicitantes | filter: 'telefono,nombre,puesto,extension': query">
                                 <td>{{ solicitante.nombre }} </td>
                                 <td>{{ solicitante.telefono }}</td>
-                                <td *ngIf="isAdmin"><input [(ngModel)]="solicitante.extension" class="form-control" style="width: 70px" name="extension" type="text" value='{{ solicitante.extension }}'> </td>
+                                <td *ngIf="isAdmin"><input [(ngModel)]="solicitante.extension" class="form-control form-control-sm" style="width: 70px" name="extension" type="text" value='{{ solicitante.extension }}'> </td>
                                 <td *ngIf="!isAdmin">{{ solicitante.extension }}</td>
                                 <td>{{ solicitante.puesto }}</td>
                                 <td>{{ solicitante.correo }}</td>
-                                <td>
+                                <td *ngIf="isAdmin">
                                     <span class="action-icons">
-                                        <button *ngIf="isAdmin" (click)="updateExt(solicitante, $event.target.value)" class="btn btn-info btn-sm icon-buttons" ngbTooltip="Guardar">
+                                        <button (click)="updateExt(solicitante, $event.target.value)" class="btn btn-info btn-sm icon-buttons" ngbTooltip="Guardar">
                                             <i class="fa fa-save"></i>
                                         </button>                                    
                                     </span>

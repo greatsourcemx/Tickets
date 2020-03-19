@@ -25,6 +25,7 @@ export class AsignadoComponent implements OnInit {
   }
 
   cargarEmpleado() {
+    debugger;
     this.cargando = true;
     this.glpiServicio.cargarEmpleadoGLPI()
     .subscribe((data: GLPIEmpleado) => {

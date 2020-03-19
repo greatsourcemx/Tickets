@@ -14,7 +14,8 @@ import swal from 'sweetalert2';
 @Component({
   selector: 'app-agenda',
   templateUrl: './agenda.component.html',
-  styles: []
+  styles: [],
+  styleUrls: ['./agenda.component.css']
 })
 export class AgendaComponent implements OnInit {
 
@@ -66,7 +67,6 @@ export class AgendaComponent implements OnInit {
   
 
   updateExt (solicitante: Usuario, extension: string) {
-    debugger;
     // actualiza Extension
     this._solicitanteService.modificarExtension( solicitante )
         .subscribe( usr => {
@@ -78,7 +78,6 @@ export class AgendaComponent implements OnInit {
         });
   }
   cargarAgenda (empresa : string) {
-    debugger;
     this.empresa = empresa;
     let empus ='';
     let jsonUsuario = JSON.parse(localStorage.usuario);
@@ -91,14 +90,23 @@ export class AgendaComponent implements OnInit {
     });
   }
   cargarAgendasu (empr: string) {
+    
     this.cargando = true;
     this.empresa = empr;
     this.glpiServicio.cargarAgendaSU(empr)
     .subscribe( (resp: any) => {
       this.cargando = false;
       this.solicitantes = resp;
-
+      
     });
+    if(empr=="EBR"){
+      //btn btnebr active
+      document.getElementById("btnima").className  = "btn";
+      document.getElementById("btnebr").className  = "btn btnebr active";
+    }else{
+      document.getElementById("btnima").className  = "btn  btonima active";
+      document.getElementById("btnebr").className  = "btn";
+    }
   }
   private extractData(res: Response) {
     const body = res.json();

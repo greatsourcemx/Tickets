@@ -1,0 +1,85 @@
+.tiempo {
+    height: 80px;
+    border-radius: 10px;
+    color: #fff;
+    background: linear-gradient(to right, #1ac2cc, #6ad4d4);
+}
+
+.abierto {
+    height: 80px;
+    border-radius: 10px;
+    color: #fff;
+    background: linear-gradient(to right, #f15a24, #f7931e);
+}
+
+.proceso {
+    color: #fff;
+    height: 80px;
+    border-radius: 10px;
+    background: linear-gradient(to right, #0071bc, #29abe2);
+}
+
+.cerrado {
+    height: 80px;
+    border-radius: 10px;
+    color: #fff;
+    background: linear-gradient(to right, #22b573, #00ff00);
+}
+
+.tbl-header {
+    color: #fff;
+    background: linear-gradient(to right, #5739ff, #5361FF);
+    height: 50px;
+}
+
+.btnima {
+    color: #fff;
+    background-color: #2e368f;
+}
+
+.btnebr {
+    color: #fff;
+    background-color: #51b749;
+}
+
+.tbl-header2 {
+    color: #fff;
+    background: linear-gradient(to right, #5361FF, #507DFF);
+    height: 50px;
+}
+
+.tbl-header3 {
+    color: #fff;
+    background: linear-gradient(to right, #507DFF, #4EA1FF);
+    height: 50px;
+}
+
+.tbl-header4 {
+    color: #fff;
+    background: linear-gradient(to right, #4EA1FF, #4CBBFF);
+    height: 50px;
+}
+
+.tbl-header5 {
+    color: #fff;
+    background: linear-gradient(to right, #4CBBFF, #49d2ff);
+    height: 50px;
+}
+
+.tbl-header6 {
+    color: #fff;
+    background: linear-gradient(to right, #49d2ff, #49d2ff);
+    height: 50px;
+}
+
+::-webkit-scrollbar {
+    width: 12px;
+}
+
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 16px #5aa3f8;
+}
+
+::-webkit-scrollbar-thumb {
+    -webkit-box-shadow: inset 0 0 16px #2386f8;
+}

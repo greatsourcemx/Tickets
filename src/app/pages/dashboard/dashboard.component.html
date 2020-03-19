@@ -6,72 +6,107 @@
             <div class="card-body">
                 <div *ngIf="principal" class="row m-t-40">
                     <!-- Column -->
-                    <div class="col-md-6 col-lg-3 col-xlg-3">
-                        <button (click)="nuevo = true" name="new" class="btn btn-info"> <i class="fa fa-plus"></i> Nuevo</button>
-                    </div>
-                    <!-- Column -->
-                    <div class="col-md-6 col-lg-3 col-xlg-3">
+                    <div style="width: 200px;"></div>
+                    <div class="col-md-4 col-lg-3 col-xlg-3" style="padding-right: 40px;">
                         <div class="card">
-                            <div class="box bg-warning text-center">
-                                <h1 class="font-light text-white"> {{ principal.abiertos }} </h1>
-                                <h6 class="text-white">Abiertas</h6>
+                            <div class="box abierto bg-warning text-center">
+                                <div class="row">
+                                    <div class="col-sm-4" style="font-size: 50px;"><i>
+                                        <div class="col-sm-4" style="font-size: 50px;"><i>
+                                            <img src="../assets/images/icon/abierta.png" style="vertical-align:0 ;width: 50px;">
+    
+                                        </i></div>
+                                    </i>
+                                </div>
+                                <div class="col-sm-6" style="text-align: left">
+                                    <h1 style="margin-bottom: 0rem; font-weight: bold;" class="font-light text-white"> {{ principal.abiertos }} </h1>
+                                    <h6 class="text-white">Abiertas</h6>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <!-- Column -->
-                    <div class="col-md-6 col-lg-3 col-xlg-3">
-                        <div class="card">
-                            <div class="box bg-info text-center">
-                                <h1 class="font-light text-white"> {{ principal.proceso }} </h1>
-                                <h6 class="text-white">En Proceso</h6>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Column -->
-                    <div class="col-md-6 col-lg-3 col-xlg-3">
-                        <div class="card">
-                            <div class="box bg-success text-center">
-                                <h1 class="font-light text-white"> {{ principal.cerrados }} </h1>
-                                <h6 class="text-white">Resueltos</h6>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Column -->
                 </div>
+
+                <!-- Column -->
+                <div class="col-md-4 col-lg-3 col-xlg-3" style="padding-right: 40px;">
+                    <div class="card">
+                        <div class="box  proceso bg-info text-center">
+                            <div class="row">
+                                <div class="col-sm-4" style="font-size: 50px;"><i>
+                                        <img src="../assets/images/icon/proceso.png" style="vertical-align:0 ;width: 50px;">
+                                    </i></div>
+                                <div class="col-sm-6" style="text-align: left">
+                                    <h1 style="margin-bottom: 0rem; font-weight: bold;" class="font-light text-white"> {{ principal.proceso }} </h1>
+                                    <h6 class="text-white">En Proceso</h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Column -->
+                <div class="col-md-4 col-lg-3 col-xlg-3" style="padding-right: 40px;">
+                    <div class="card">
+                        <div class="box cerrado bg-success text-center">
+                            <div class="row">
+                                <div class="col-sm-4" style="font-size: 50px;"><i>
+                                        <img src="../assets/images/icon/cerrado.png" style="vertical-align:0 ;width: 50px;">
+
+                                    </i></div>
+                                <div class="col-sm-6" style="text-align: left">
+                                    <h1 style="margin-bottom: 0rem; font-weight: bold;" class="font-light text-white"> {{ principal.cerrados }} </h1>
+                                    <h6 class="text-white">Resueltos</h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Column -->
             </div>
         </div>
     </div>
+</div>
 </div>
 
 <div class="row" *ngIf="!nuevo">
     <div class="col-12">
         <div class="card">
             <div class="card-body">
-                <h4 class="card-title"><span class="lstick"></span>Mis Solicitudes ( {{ totalRegistros }} ) </h4>
-                <input [(ngModel)]="query" type="text" class="form-control" placeholder="Término de busqueda...">
-
-                <div class="table-responsive animated fadeIn" *ngIf="!cargando">
+                <div class="row">
+                    <div class="col-md-6 col-lg-6 col-xlg-6">
+                        <h4 class="card-title"><span class="lstick"></span>Mis Solicitudes ( 0 ) </h4>
+                    </div>
+                    <div class="col-md-6 col-lg-6 col-xlg-6" style="text-align: right; padding-bottom : 15px;">
+                        <button (click)="nuevo = true" class="btn btn-info" name="new" style="height : 40px;"><i  class="fa fa-plus"></i> Nuevo</button>
+                    </div>
+                </div>
+                <div style="margin-bottom: 25px" class="input-group">
+                    <i style="position: absolute; top: 6px; right: 13px; font-size: 22px; z-index: 9999; color:#999999" class="fa fa-search">
+                        
+                    </i>
+                    <input input [(ngModel)]="query" class="form-control" type="text" required="" placeholder="Busca aqui" style=" border-radius: .25rem; position: relative;" />
+                </div>
+                <div class="table-responsive animated fadeIn position: relative; height: 500px; overflow: auto; display: block; " *ngIf="!cargando">
                     <table class="table vm no-th-brd no-wrap pro-of-month table-sm table-hover">
                         <thead>
                             <tr>
-                                <th class="pointer" (click)="sort('Id')">
+                                <th class=" tbl-header pointer" (click)="sort('Id')">
                                     # Folio
                                     <i class="fa" [ngClass]="{'fa-sort': column != 'Id', 'fa-sort-asc': (column == 'Id' && isDesc), 'fa-sort-desc': (column == 'Id' && !isDesc) }" aria-hidden="true"> </i>
                                 </th>
-                                <th class="pointer" (click)="sort('Titulo')">
+                                <th class="tbl-header2 pointer" (click)="sort('Titulo')">
                                     Titulo
                                     <i class="fa" [ngClass]="{'fa-sort': column != 'Titulo', 'fa-sort-asc': (column == 'Titulo' && isDesc), 'fa-sort-desc': (column == 'Titulo' && !isDesc) }" aria-hidden="true"> </i>
                                 </th>
-                                <th class="pointer" (click)="sort('TiempoTranscurrido')">
+                                <th class="tbl-header3 pointer" (click)="sort('TiempoTranscurrido')">
                                     Tiempo
                                     <i class="fa" [ngClass]="{'fa-sort': column != 'TiempoTranscurrido', 'fa-sort-asc': (column == 'TiempoTranscurrido' && isDesc), 'fa-sort-desc': (column == 'TiempoTranscurrido' && !isDesc) }" aria-hidden="true"> </i>
                                 </th>
-                                <th class="pointer" (click)="sort('Estado')">
+                                <th class="tbl-header4 pointer" (click)="sort('Estado')">
                                     Estatus
                                     <i class="fa" [ngClass]="{'fa-sort': column != 'Estado', 'fa-sort-asc': (column == 'Estado' && isDesc), 'fa-sort-desc': (column == 'Estado' && !isDesc) }" aria-hidden="true"> </i>
                                 </th>
-                                <th>Asignado a<span class="footable-sort-indicator"></span></th>
-                                <th><span class="footable-sort-indicator"></span></th>
+                                <th class="tbl-header5">Asignado a<span class=" footable-sort-indicator"></span></th>
+                                <th class="tbl-header6"><span class="footable-sort-indicator"></span></th>
                             </tr>
                         </thead>
                         <tbody>

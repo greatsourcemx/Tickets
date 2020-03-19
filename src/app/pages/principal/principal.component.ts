@@ -12,7 +12,9 @@ import swal from 'sweetalert2';
 @Component({
   selector: 'app-principal',
   templateUrl: './principal.component.html',
-  styles: []
+  styles: [],
+  styleUrls: ['../agenda/agenda.component.css']
+
 })
 export class PrincipalComponent implements OnInit, OnDestroy {
 

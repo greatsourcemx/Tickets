@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { URL_SERVICIOS } from '../../config/config';
 import { TicketMante } from '../../models/mantenimientos/mante-ticket.model';
 import { Mantenimiento } from './../../models/mantenimientos/mantenimiento.model';
+import { Proyectos } from '../../models/mantenimientos/proyectos.model';
 
 @Injectable()
 export class MantenimientoService {
@@ -34,6 +35,15 @@ export class MantenimientoService {
     return this.http.get( this.url + '/guardaProyecto?proyecto=' + proy ).pipe(
       map((data: any) => data));
   }
+  modificarAvance (proyecto: Proyectos) {
+    debugger;
+    let url = this.url + '/actualizaAvance';
+    return this.http.put( url, proyecto ).pipe(
+                map( (resp: any) => {
+                  return resp;
+                }));
+  }
+
   guardarAvance (proy: any) {
     return this.http.get( this.url + '/guardaAvance?proyecto=' + proy ).pipe(
       map((data: any) => data));

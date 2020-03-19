@@ -10,7 +10,8 @@ import { Parametros } from '../../models/parametros.model';
 @Component({
   selector: 'app-marcadores',
   templateUrl: './marcadores.component.html',
-  styles: []
+  styles: [],
+  styleUrls: ['../agenda/agenda.component.css']
 })
 export class MarcadoresComponent implements OnInit {
 

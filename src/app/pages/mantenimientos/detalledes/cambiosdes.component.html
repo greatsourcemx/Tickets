@@ -24,18 +24,22 @@ Detalle de proyectos
                             <tr>
                                 <th scope="col">Estado</th>
                                 <th scope="col">Descripcion</th>
+                                <th scope="col">Fecha</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr *ngFor="let proy of proyes | filter: 'est,avancedesc': query">
                                 <td style="width: 160px; ">
-                                    <select [(ngModel)]="proy.avanceestado " name="empr " class="form-control form-control-sm " style="width: 140px; ">
+                                    <select [(ngModel)]="proy.avanceestado " (change)="EditarP(proy, $event.target.value)" name="empr" class="form-control form-control-sm " style="width: 140px; ">
                                         <option *ngFor="let est of Estados " [ngValue]="est ">{{ est }}</option>
                                     </select>
                                 </td>
-                                <td *ngIf="proy.avanceestado=='Activo' " style="color: #188AE2;">{{ proy.avancedesc }}</td>
+                                <td *ngIf="proy.avanceestado=='En Proceso' " style="color: #188AE2; ">{{ proy.avancedesc }}</td>
+                                <td *ngIf="proy.avanceestado=='Activo' " style="color:#5B6D89;">{{ proy.avancedesc }}</td>
                                 <td *ngIf="proy.avanceestado=='Concluido' " style="color: #4BD396;">{{ proy.avancedesc }}</td>
                                 <td *ngIf="proy.avanceestado=='Cancelado' " style="color: #F5707A;">{{ proy.avancedesc }}</td>
+                                <td>{{ proy.avancefecha }}</td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>

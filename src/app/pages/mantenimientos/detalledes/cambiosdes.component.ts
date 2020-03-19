@@ -13,7 +13,7 @@ import swal from 'sweetalert2';
 export class CambiosdesComponent implements OnInit {
     cargando: boolean = false;
     proyes: Proyectos[] = null;
-    Estados = ['Activo', 'Concluido', 'Cancelado'];
+    Estados = ['Activo', 'Concluido', 'Cancelado', 'En Proceso'];
     query = '';
 
     constructor(public activatedRoute: ActivatedRoute,
@@ -88,58 +88,11 @@ export class CambiosdesComponent implements OnInit {
 
           //this.cargarDesarrollos();
     }
-    public EditarP(proyecto) {
-      let campos = ['Desarrollo',
-          'Descripcion',
-          'Version Viusual Studio',
-          'Version MVC', 'Tecnologias',
-          'Ruta de codigo',
-          'Base de datos']
-      let values = ['desarrollo', 'nombre', 'versionvb', 'mvc', 'tecnologias', 'ubicacion', 'bd'];
-      let htmlstr = '';
-      let i;
-      var json = JSON.parse('{}');
-      for (i = 0; i < values.length; i++) {
-        htmlstr += '<div style="text-align:left; font-weight:200; margin-bottom: 3px;" class="form-group"><label for="' +
-        values[i] + '" style="margin-bottom: 0rem;" name = "' + values[i] + '">' + campos[i] + '</label><input type="text" id="' +
-        values[i] + '" name = "' + values[i] + '" value="' + proyecto[''+ values[i] + ''] + '" class="form-control" placeholder="' +
-        campos[i] + '" aria-label="' + campos[i] + '" aria-describedby="basic-addon1"></div>';
-        }
-        htmlstr += '<div style="text-align:left; font-weight:200" class="form-group"><label for="estatus" style="margin-bottom: 0rem;">' +
-        'Estatus</label><select class="form-control" name= "estatus" id="estatus">' +
-        '<option>Activo</option><option>Inactivo</option></select></div>';
-      swal.fire({
-          html: htmlstr,
-          showCancelButton: true,
-          confirmButtonText: "Actualizar",
-          cancelButtonText: "Cancelar",
-          preConfirm: function () {
-            for(i = 0; i < values.length; i++) {
-                json[values[i]] = $('#' + values[i] + '').val();
-            }
-            json['estatus'] = $('#estatus').val();
-            if (json['desarrollo'] != "") {
-              return new Promise(function (resolve) {
-                resolve([
-                  json,
-                ])
-              })
-            }else{
-              $('#desarrollo').css('border', 'solid 1px #EF5350');
-              return false;
-            }
-            },
-      }).then((result) => {
-              const answers = JSON.stringify(result.value);
-              console.log(result.value[0]);
-              result.value[0]['proyectoid'] = proyecto['proyectoid'];
-              this._manteServices.actualizaProyectos(JSON.stringify(result.value[0]))
-              .subscribe( (resp: any) => {
-                  this.cargando = false;
-                  this.proyes = resp;
-              });
-        });
-
-        //this.cargarDesarrollos();
+    public EditarP(proyecto: Proyectos, cambio) {
+        this._manteServices.modificarAvance(proyecto).subscribe( usr => {
+          },
+          error => {
+            swal.fire('Aviso!', error.error, 'warning');
+          });;
   }
 }

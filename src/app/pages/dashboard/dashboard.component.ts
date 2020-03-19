@@ -14,7 +14,8 @@ import * as markActions from '../../store/actions';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
-  styles: []
+  styles: [],
+  styleUrls: ['../agenda/agenda.component.css']
 })
 export class DashboardComponent implements OnInit {
 

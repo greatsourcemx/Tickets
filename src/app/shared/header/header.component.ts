@@ -48,6 +48,11 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    if(document.getElementById("logoimg").style.display != "none"){
+      document.getElementById("logoimg1").style.display = "none";
+    }else{
+      document.getElementById("logoimg1").style.display = "";
+    }
     this.cargarPromedio();
     this.fire();
     this.cargarNotificaciones();
@@ -55,12 +60,23 @@ export class HeaderComponent implements OnInit, OnDestroy {
       this.fire();
     }, 60000 );
   }
-
   cargarPromedio() {
     this._usuarioService.cargarPromedio()
     .subscribe((rsp: any) => {
       this.rating = rsp;
     });
+  }
+
+  ocultarimg() {
+    if(document.getElementById('logoimg').style.display == 'none'){
+      document.getElementById('logoimg1').style.display = 'none';
+      document.getElementById('logoimg').style.display = '';
+      document.getElementById("imagens").style.backgroundImage="url(../assets/images/background/sidebar-01.png)";
+    }else{
+      document.getElementById('logoimg1').style.display = '';
+      document.getElementById('logoimg').style.display = 'none';
+      document.getElementById("imagens").style.backgroundImage="";
+    }
   }
 
   fire() {

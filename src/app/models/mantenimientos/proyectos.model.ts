@@ -16,6 +16,7 @@ export class Proyectos {
         public avanceid: number = 0,
         public avancedesid: number = 0,
         public avancedesc: string = '',
-        public avanceestado: string = ''
+        public avanceestado: string = '',
+        public avancefecha: string = '' 
     ) { }
 }
