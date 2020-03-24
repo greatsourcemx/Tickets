@@ -54,24 +54,20 @@
                                 <th class="tbl-header3" style="position: sticky;top: 0;">Extension</th>
                                 <th class="tbl-header4" style="position: sticky;top: 0;">Area</th>
                                 <th class="tbl-header5" style="position: sticky;top: 0;">Correo</th>
-                                <th *ngIf="isAdmin" class="tbl-header6" style="position: sticky;top: 0;">Guardar</th>
+
                             </tr>
                         </thead>
                         <tbody>
                             <tr *ngFor="let solicitante of solicitantes | filter: 'telefono,nombre,puesto,extension': query">
                                 <td>{{ solicitante.nombre }} </td>
-                                <td>{{ solicitante.telefono }}</td>
-                                <td *ngIf="isAdmin"><input [(ngModel)]="solicitante.extension" class="form-control form-control-sm" style="width: 70px" name="extension" type="text" value='{{ solicitante.extension }}'> </td>
-                                <td *ngIf="!isAdmin">{{ solicitante.extension }}</td>
+                                <td *ngIf="solicitante.telefono">({{ solicitante.telefono.slice(0,3) }}) {{ solicitante.telefono.slice(3, 6) }} {{ solicitante.telefono.slice(6, 10) }}</td>
+                                <td *ngIf="!solicitante.telefono">N/A</td>
+                                <td *ngIf="solicitante.extension">{{ solicitante.extension }}</td>
+                                <td *ngIf="!solicitante.extension">N/A</td>
+
                                 <td>{{ solicitante.puesto }}</td>
                                 <td>{{ solicitante.correo }}</td>
-                                <td *ngIf="isAdmin">
-                                    <span class="action-icons">
-                                        <button (click)="updateExt(solicitante, $event.target.value)" class="btn btn-info btn-sm icon-buttons" ngbTooltip="Guardar">
-                                            <i class="fa fa-save"></i>
-                                        </button>                                    
-                                    </span>
-                                </td>
+
                             </tr>
                         </tbody>
                     </table>

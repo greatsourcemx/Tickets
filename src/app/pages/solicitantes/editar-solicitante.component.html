@@ -26,12 +26,21 @@
                                 <option *ngFor="let empre of Empresas" [ngValue]="empre.id">{{ empre.nombre }}</option>
                             </select>
                         </div>
+                        <div class="form-group">
+                            <label>Area</label>
+                            <select [(ngModel)]="solicitante.puesto" name="puesto" class="form-control">
+                                <option *ngFor="let pues of Areas" [ngValue]="pues.descripcion">{{ pues.descripcion }}</option>
+                            </select>
+                        </div>
 
                         <div class="form-group">
                             <label>Constraseña</label>
                             <input [(ngModel)]="solicitante.password" name="password" type="password" class="form-control" placeholder="Constraseña" />
                         </div>
-
+                        <div class="form-group">
+                            <label>Extension</label>
+                            <input [(ngModel)]="solicitante.extension" name="extension" type="number" class="form-control" placeholder="extension" required />
+                        </div>
                         <div class="form-group">
                             <label>No. Empleado</label>
                             <input [(ngModel)]="solicitante.noEmpleado" name="noEmpleado" type="number" class="form-control" placeholder="Número de Empleado" required />

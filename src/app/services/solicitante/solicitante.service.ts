@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Usuario } from '../../models/usuario.model';
 import { URL_SERVICIOS } from '../../config/config';
+import { Areas } from '../../models/areas.model';
 
 import { Router } from '@angular/router';
 
@@ -58,6 +59,30 @@ export class SolicitanteService {
                     swal.fire('Solicitante Actualizado', usuario.nombre, 'success');
                     return resp;
                   }));
+    }
+    cargarAreas () {
+      debugger;
+      let url = URL_SERVICIOS + '/areas';
+      return this.http.get( url ).pipe(
+                map( (resp: any) => resp ));
+    }
+    guardararea ( area: Areas ) {
+      let url = URL_SERVICIOS + '/areanueva';
+  
+      return this.http.post( url, area ).pipe(
+                  map( (resp: any) => {
+                    swal.fire('Area Creada', area.descripcion, 'success');
+                    return resp;
+                  }));
+    }
+    modificarEmpresa ( area: Areas ) {
+      let url = URL_SERVICIOS + '/updatearea';
+  
+      return this.http.put( url, area ).pipe(
+                    map( (resp: any) => {
+                      swal.fire('Area Actualizada', area.descripcion, 'success');
+                      return resp;
+                    }));
     }
     cargarSolici (id: number) {
       let url = URL_SERVICIOS + '/solicitor?id=' + id;

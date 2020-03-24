@@ -5,6 +5,7 @@ export { Principal } from './principal.model';
 export { Tipo } from './tipo.model';
 export { Avances } from './avances.model';
 export { Empresa } from './empresa.model';
+export { Areas } from './areas.model';
 export { Prioridad } from './Prioridad.model';
 export { Servicio } from './servicio.model';
 export { Tiempo } from './tiempo.model';

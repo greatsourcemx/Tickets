@@ -1,9 +1,9 @@
 {
     "menu": [{
-        "titulo": "Principal",
+        "titulo": "Tickets",
         "icono": "fa fa-tasks",
         "submenu": [
-            { "titulo": "Tickets", "url": "/dashboard" },
+            { "titulo": "Mi Tablero", "url": "/dashboard" },
             { "titulo": "Cerrados", "url": "/cerrados" },
             { "titulo": "Evaluaciones", "url": "/reporte/evaluaciones" }
         ]
@@ -46,7 +46,7 @@
                 { "titulo": "Entrega", "url": "/entrega" },
                 { "titulo": "Retorno", "url": "/retorno" },
                 { "titulo": "Responsivas sin firmas", "url": "/nofirmas" },
-                { "titulo": "Trasnferencias", "url": "/transferencias" }
+                { "titulo": "Transferencias", "url": "/transferencias" }
             ]
         }, {
             "titulo": "Calendarios",
@@ -82,7 +82,8 @@
                 { "titulo": "Tiempos", "url": "/tiempos" },
                 { "titulo": "Prioridades", "url": "/prioridades" },
                 { "titulo": "Tipo Servicio", "url": "/tipos" },
-                { "titulo": "Agenda", "url": "/agenda" }
+                { "titulo": "Agenda", "url": "/agenda" },
+                { "titulo": "Areas", "url": "/areas" }
             ]
         }
     ]

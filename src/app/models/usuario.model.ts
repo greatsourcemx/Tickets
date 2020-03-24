@@ -21,5 +21,6 @@ export class Usuario {
         public puesto: string = '',
         public emprage: number =0,
         public extension: string = '',
+        public area: string = '',
     ) { }
 }
