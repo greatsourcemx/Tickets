@@ -72,6 +72,7 @@ export class ServiciosService {
   }
 
   cancelar( serv: Servicio ) {
+    debugger;
     const url = URL_SERVICIOS + '/servicio/cancel';
     return this.http.put( url, serv ).pipe(
       map(data =>  {

@@ -12,6 +12,7 @@ export class GraficasService {
   constructor(public http: HttpClient) { }
 
   cargarContadores( param: Parametros ) {
+    debugger;
     const url = URL_SERVICIOS + '/contadores';
     return this.http.post( url, param ).pipe(
       map( (resp: any) => {

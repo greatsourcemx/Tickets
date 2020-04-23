@@ -32,6 +32,9 @@ export class AgendaComponent implements OnInit {
   showNavegacion = false;
   query = '';
   isAdmin = false;
+  isDesc: boolean = false;
+  column: string = 'CategoryName';
+  direction: number;
 
   constructor(public _manteServices: MantenimientoService, public _usuarioService: UsuarioService, 
     public _solicitanteService: SolicitanteService,
@@ -78,6 +81,7 @@ export class AgendaComponent implements OnInit {
         });
   }
   cargarAgenda (empresa : string) {
+    debugger;
     this.empresa = empresa;
     let empus ='';
     let jsonUsuario = JSON.parse(localStorage.usuario);
@@ -121,5 +125,9 @@ export class AgendaComponent implements OnInit {
       this.cargando = false;
     });
   }
-
+  sort(property) {
+    this.isDesc = !this.isDesc; // change the direction
+    this.column = property;
+    this.direction = this.isDesc ? 1 : -1;
+  }
 }

@@ -39,6 +39,7 @@ import { ParametrosComponent } from './mantenimientos/parametros/parametros.comp
 import { DetalledesComponent } from './mantenimientos/detalledes/detalledes.component';
 import { CambiosdesComponent } from './mantenimientos/detalledes/cambiosdes.component';
 import { AreasComponent } from './areas/areas.component';
+import { GraficaRatings } from './graficarating/graficarating.component';
 
 import { AgendaComponent } from './agenda/agenda.component';
 
@@ -89,6 +90,7 @@ const pagesRoutes: Routes = [
             { path: 'calendario', component: CalendarioComponent, data: { titulo: 'Calendario' }  },
             { path: 'agenda', component: AgendaComponent, data: { titulo: 'Agenda' }  },
             { path: 'areas', component: AreasComponent, data: { titulo: 'Areas Laborales' }  },
+            { path: 'graficarating', component: GraficaRatings, data: { titulo: 'Graficas Rating' }  },
             { path: 'cambiosdes/:id', component: CambiosdesComponent, data: { titulo: 'Cambios Desarrollo' }  },
             { path: '', redirectTo: '/principal', pathMatch: 'full'  },
         ]

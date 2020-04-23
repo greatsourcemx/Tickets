@@ -10,6 +10,7 @@ export class Rating {
         public servicio: Servicio = new Servicio(),
         public comentario: string = '',
         public mostrarComentario: boolean = false,
-        public total: number = 0
+        public total: number = 0,
+        public mes: string = ''
     ) { }
 }

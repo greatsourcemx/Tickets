@@ -30,12 +30,12 @@
                 { "titulo": "Evaluaciones", "url": "/reporte/evaluaciones" },
                 { "titulo": "Recurrentes", "url": "/recurrentes" },
                 { "titulo": "Estadisticas", "url": "/graficas" },
+                { "titulo": "Grafica Rating", "url": "/graficarating" },
                 {
                     "titulo": "Reportes",
                     "icono": "ti ti-pie-chart",
                     "subsubmenu": [
-                        { "titulo": "Porcentaje", "url": "/reporte" },
-                        { "titulo": "Horas", "url": "/horas" }
+                        { "titulo": "Porcentaje", "url": "/reporte" }
                     ]
                 }
             ]

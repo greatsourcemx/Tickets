@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { ServiciosService, UsuarioService } from '../../services/service.index';
 import { Usuario } from '../../models/models.index';
 import { Principal, Servicio, Parametros } from '../../models/models.index';
+
 import { Store } from '@ngrx/store';
 import { AppState } from '../../store/app.reducers';
 import * as servActions from '../../store/actions';
@@ -59,12 +60,16 @@ export class PrincipalComponent implements OnInit, OnDestroy {
       cancelButtonText: 'No',
       cancelButtonColor: '#398bf7',
     }).then((result) => {
+      debugger;
       if (result.value) {
+        this._servicioService.cancelar( serv )
+        .subscribe(  (resp: any) => {
+          this.ngOnInit();
+        });
         //this.cancelarTicket( serv, cancel );
       }
     });
   }
-
   
   cargarNuevos () {
     this._servicioService.cargarServiciosNuevos()
@@ -74,6 +79,7 @@ export class PrincipalComponent implements OnInit, OnDestroy {
   }
 
   cargarTickets( ) {
+    debugger;
     this.store.select('servicios')
       .subscribe( tickets => {
         this.myTickets = tickets.tickets;

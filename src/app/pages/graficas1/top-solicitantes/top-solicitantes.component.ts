@@ -22,8 +22,9 @@ export class TopSolicitantesComponent implements OnInit {
               public store: Store<AppState>) {
                 this.store.select('marcadores')
                   .subscribe( principal => {
-                    if ( this.param.rango !== principal.param.rango ) {
+                    if ( this.param.rango !== principal.param.rango || this.param.empresa !== principal.param.empresa) {
                       this.param.rango = principal.param.rango;
+                      this.param.empresa = principal.param.empresa;
                       this.cargarTopSolicitantes();
                     }
                 });
@@ -34,6 +35,7 @@ export class TopSolicitantesComponent implements OnInit {
   }
 
   cargarTopSolicitantes() {
+    debugger;
     this.cargando = true;
     this.grafica = new Graficas();
     this.grafServicios.cargarTopSolicitantes( this.param )

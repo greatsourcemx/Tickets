@@ -29,9 +29,15 @@ export class SalidaComponent implements OnInit {
   }
 
   cargarEmpleados() {
+    debugger;
     this.cargando = true;
     this.glpiService.cargarTodosEmpleados()
     .subscribe((data: any) => {
+      for(let i = 0; i < data.length; i++){
+        if(data[i].Correo == JSON.parse(localStorage.usuario).correo){
+                data.splice(i, 1)
+            }
+        }
       this.cargando = false;
       this.empleados = data;
     });

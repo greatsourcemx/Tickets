@@ -10,8 +10,8 @@
                             <span>Empresa</span>
                         </div>
                         <div class="btn-group" role="group" aria-label="Basic example">
-                            <button type="button" (click)="cargarAgendasu( 'EBR' )" [ngClass]="{ 'active': empresa==='EBR' }" class="btn  btnebr">EBR</button>
-                            <button type="button" (click)="cargarAgendasu( 'IMA' )" [ngClass]="{ 'active': empresa==='IMA' }" class="btn  btnima">IMA</button>
+                            <button type="button" (click)="cargarAgendasu( '2' )" [ngClass]="{ 'active': empresa==='EBR' }" class="btn  btnebr">GS</button>
+                            <button type="button" (click)="cargarAgendasu( '1' )" [ngClass]="{ 'active': empresa==='IMA' }" class="btn  btnima">IMA</button>
                         </div>
 
                     </div>
@@ -49,21 +49,31 @@
                     <table class="table-striped table-sm" style="width: 100%;">
                         <thead>
                             <tr>
-                                <th class="tbl-header" style="position: sticky;top: 0;">Nombre</th>
+                                <th class=" tbl-header pointer tbl-header" style="position: sticky;top: 0;" (click)="sort('nombre')">
+                                    Nombre
+                                    <i class="fa" [ngClass]="{'fa-sort': column != 'nombre', 'fa-sort-asc': (column == 'nombre' && isDesc), 'fa-sort-desc': (column == 'nombre' && !isDesc) }" aria-hidden="true"> </i>
+                                </th>
+
                                 <th class="tbl-header2" style="position: sticky;top: 0;">Telefono</th>
-                                <th class="tbl-header3" style="position: sticky;top: 0;">Extension</th>
-                                <th class="tbl-header4" style="position: sticky;top: 0;">Area</th>
+                                <th class=" tbl-header pointer tbl-header3" style="position: sticky;top: 0;" (click)="sort('extension')">
+                                    Extension
+                                    <i class="fa" [ngClass]="{'fa-sort': column != 'extension', 'fa-sort-asc': (column == 'extension' && isDesc), 'fa-sort-desc': (column == 'extension' && !isDesc) }" aria-hidden="true"> </i>
+                                </th>
+                                <th class=" tbl-header pointer tbl-header4" style="position: sticky;top: 0;" (click)="sort('puesto')">
+                                    Area
+                                    <i class="fa" [ngClass]="{'fa-sort': column != 'puesto', 'fa-sort-asc': (column == 'puesto' && isDesc), 'fa-sort-desc': (column == 'puesto' && !isDesc) }" aria-hidden="true"> </i>
+                                </th>
                                 <th class="tbl-header5" style="position: sticky;top: 0;">Correo</th>
 
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let solicitante of solicitantes | filter: 'telefono,nombre,puesto,extension': query">
+                            <tr *ngFor="let solicitante of solicitantes | orderby: {property: column, direction: direction}| filter: 'telefono,nombre,puesto,extension': query">
                                 <td>{{ solicitante.nombre }} </td>
                                 <td *ngIf="solicitante.telefono">({{ solicitante.telefono.slice(0,3) }}) {{ solicitante.telefono.slice(3, 6) }} {{ solicitante.telefono.slice(6, 10) }}</td>
-                                <td *ngIf="!solicitante.telefono">N/A</td>
+                                <td *ngIf="!solicitante.telefono">-</td>
                                 <td *ngIf="solicitante.extension">{{ solicitante.extension }}</td>
-                                <td *ngIf="!solicitante.extension">N/A</td>
+                                <td *ngIf="!solicitante.extension">-</td>
 
                                 <td>{{ solicitante.puesto }}</td>
                                 <td>{{ solicitante.correo }}</td>

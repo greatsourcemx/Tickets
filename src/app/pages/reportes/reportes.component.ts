@@ -1,8 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbDateStruct, NgbCalendar, NgbAccordionConfig } from '@ng-bootstrap/ng-bootstrap';
-import { Servicio, Usuario, Parametros, Reporte } from '../../models/models.index';
+import { Servicio, Usuario, Parametros, Reporte, PorcentajeUser } from '../../models/models.index';
 import { UsuarioService, ReportesService } from '../../services/service.index';
 import { GroupByPipe } from '../../pipes/group-by.pipe';
+import { Color, ChartOptions, ChartType, ChartDataSets, Label, pluginDataLabels } from 'chart.js';
+//import * as pluginDataLabels from 'chartjs-plugin-datalabels';
+//import { Label } from 'ng2-charts';
+
+
 
 const equals = (one: NgbDateStruct, two: NgbDateStruct) =>
   one && two && two.year === one.year && two.month === one.month && two.day === one.day;
@@ -18,6 +23,7 @@ const after = (one: NgbDateStruct, two: NgbDateStruct) =>
 @Component({
   selector: 'app-reportes',
   templateUrl: './reportes.component.html',
+  styleUrls: ['../agenda/agenda.component.css'],
   styles: [`
     .custom-day {
       text-align: center;
@@ -38,6 +44,7 @@ const after = (one: NgbDateStruct, two: NgbDateStruct) =>
     }
   `]
 })
+
 export class ReportesComponent implements OnInit {
 
   // Para rango de fechas
@@ -50,9 +57,80 @@ export class ReportesComponent implements OnInit {
 
   filtros: Parametros = new Parametros();
   porcentaje: Reporte[];
+  porcentajeusr: PorcentajeUser[];
   cargando = false;
   admins: Usuario[];
   Total: number;
+  IMA: number = 0;
+  EBR: number = 0;
+  horasgima: number[];
+  horasggs: number[];
+  nombresg: string[];
+  pieima: number;
+  piegs: number;
+  dec: number;
+
+public pieChartOptions: ChartOptions = {
+  responsive: true,
+  legend: {
+    position: 'top',
+  },
+  plugins: {
+    datalabels: {
+      formatter: (value, ctx) => {
+        const label = ctx.chart.data.labels[ctx.dataIndex];
+        return label;
+      },
+    },
+  }
+};
+public pieChartLabels: Label[] = ['IMA', 'EBR'];
+public pieChartData: number[] = [this.pieima, this.piegs];
+public pieChartType: ChartType = 'pie';
+public pieChartLegend = true;
+public pieChartPlugins = [pluginDataLabels];
+public pieChartColors = [
+  {
+    backgroundColor: ['rgba(22,36,185,0.3)', 'rgba(82,183,74,0.3)'],
+  },
+];
+   public barChartOptions: ChartOptions = {
+    responsive: true,
+    // We use these empty structures as placeholders for dynamic theming.
+    scales: { xAxes: [{}], yAxes: [{}] },
+    plugins: {
+      datalabels: {
+        anchor: 'end',
+        align: 'end',
+      }
+    }
+  };
+  public lineChartColors: Color[] = [
+    { //azul
+      backgroundColor: 'rgba(22,36,185,0.7)',
+      borderColor: 'rgba(36,144,227,1)',
+      pointBackgroundColor: 'rgba(148,159,177,1)',
+      pointHoverBorderColor: 'rgba(47,55,143,0.7)'
+
+
+    },
+    { //verde
+      backgroundColor: 'rgba(82,183,74,0.7)',
+      borderColor: 'rgba(75,211,150,1)',
+      pointBackgroundColor: 'rgba(82,183,74,0.7)',
+      pointHoverBorderColor: 'rgba(148,159,177,0.8)'
+
+    }
+  ];
+  public barChartLabels: Label[] = this.nombresg;
+  public barChartType: ChartType = 'bar';
+  public barChartLegend = true;
+  public barChartPlugins = [pluginDataLabels];
+
+  public barChartData: ChartDataSets[] = [
+    { data: this.horasgima, label: 'IMA' },
+    { data: this.horasggs, label: 'EBR' }
+  ];
 
   // Grafica (Doughnut)
   public doughnutChartLabels: string[] = [];
@@ -61,8 +139,8 @@ export class ReportesComponent implements OnInit {
   public colors = [
     {
       backgroundColor: [
-        'rgba(57, 139, 247, 1)',
-        'rgba(6, 215, 156, 1)',
+        'rgba(46, 54, 143, 1)',
+        'rgba(81 , 183, 73, 1)',
         'rgba(255, 178, 43, 1)'
       ]
     }
@@ -81,6 +159,7 @@ export class ReportesComponent implements OnInit {
   }
 
   ngOnInit() {
+    
     this.cargarAdmins();
   }
 
@@ -90,12 +169,15 @@ export class ReportesComponent implements OnInit {
       this.admins = resp;
     });
   }
-
+  public chartClicked(e: any): void { }
+  public chartHovered(e: any): void { }
   cargarReporte () {
 
     if (this.fromDate === null || this.toDate === null) {
       return;
     }
+    this.IMA=0;
+    this.EBR=0;
     this.cargando = true;
     this.filtros.fechaInicial = new Date(this.fromDate.year, this.fromDate.month - 1, this.fromDate.day);
     this.filtros.fechaFinal = new Date(this.toDate.year, this.toDate.month - 1, this.toDate.day);
@@ -106,11 +188,66 @@ export class ReportesComponent implements OnInit {
       this.cargando = false;
       this.Total = this.porcentaje.reduce((sum, item) => sum + item.Horas, 0);
       this.grafica(resp);
+      for (let i = 0; i < resp.length; i++) {
+          if(resp[i].Empresa == 'IMA'){
+            this.IMA = this.IMA + resp[i].Horas;
+          }
+          if(resp[i].Empresa == 'EBR'){
+            this.EBR =this.EBR + resp[i].Horas;
+          }
+        }
+    });
+    this._reporteService.obtenerPorUser( this.filtros )
+    .subscribe((resp: PorcentajeUser[]) => {
+      this.porcentajeusr = resp;
+      this.horasgima =[5,5,5,5,5];
+      this.horasggs =[5,5,5,5,5];
+      this.nombresg=['','','','',''];
+      //this.Total = this.porcentaje.reduce((sum, item) => sum + item.Horas, 0);
+      //this.grafica(resp);
+      for (let i = 0; i < resp.length; i++) {
+        this.horasggs[i] = resp[i].HorasEBR;
+        this.horasgima[i] = resp[i].HorasIMA;
+        this.nombresg[i] = resp[i].usuario.nombre;
+        this.pieima = resp[i].HorasIMA;
+        this.piegs= resp[i].HorasEBR;
+        
+         /* if(resp[i].Empresa == 'IMA'){
+            this.IMA = this.IMA + resp[i].Horas;
+          }
+          if(resp[i].Empresa == 'EBR'){
+            this.EBR =this.EBR + resp[i].Horas;*/
+          }
+          this.barChartData[0].data = this.horasgima;
+          this.barChartData[1].data = this.horasggs;
+
     });
 
   }
+  obtTotalh(horas: number){
+    var hr =this.obtHoras(horas) + "H " + this.obtMin(horas) + "m";
+    return hr;
+  }
+  obtMin(horas: number){
+    var decimales = (horas % 1).toFixed(2);
+    this.dec=Number(decimales);
+    return Math.round(this.dec * 60);
 
+  }
+  obtHoras(horas: number){
+    return Math.trunc(horas);
+
+  }
+  porcentajeHoras(hemp: number, totalh: number){
+    var total =(hemp / totalh) * 100;
+    return Number(total.toFixed(2));
+  }
+  porcentajeHorasTotal(hemp: number, totalh: number){
+    var total =(hemp / this.porcentajeusr[4].horas) * 100;
+    return Number(total.toFixed(2));
+  }
   grafica ( data: Reporte[] ) {
+    debugger;
     this.doughnutChartLabels = [];
     this.doughnutChartData = [];
     let unidades: any = this._groupBy.transform(data, 'Empresa');

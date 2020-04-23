@@ -11,7 +11,9 @@ import swal from 'sweetalert2';
 export class DetalledesComponent implements OnInit {
     cargando: boolean = false;
     proyes: Proyectos[] = null;
-
+    isDesc: boolean = false;
+    column: string = 'CategoryName';
+    direction: number;
     query = '';
 
     constructor(public _manteServices: MantenimientoService) {
@@ -21,7 +23,11 @@ export class DetalledesComponent implements OnInit {
     ngOnInit() {
         this.cargarDesarrollos();
     }
-
+    sort(property) {
+      this.isDesc = !this.isDesc; // change the direction
+      this.column = property;
+      this.direction = this.isDesc ? 1 : -1;
+    }
     cargarDesarrollos () {
         this.cargando = true;
         this._manteServices.cargarProyectos()
@@ -39,11 +45,12 @@ export class DetalledesComponent implements OnInit {
             'Base de datos']
         let values = ['desarrollo', 'nombre', 'versionvb', 'mvc', 'tecnologias', 'ubicacion', 'bd'];
         let htmlstr = '';
+        let valuele = ['30', '60', '50', '20', '200', '250', '100'];
         let i;
         var json = JSON.parse('{}');
         for (i = 0; i < values.length; i++) {
             htmlstr += '<div style="text-align:left; font-weight:200; margin-bottom: 3px;" class="form-group"><label for="' + 
-            values[i] + '" style="margin-bottom: 0rem;">' + campos[i] + '</label><input type="text" id="' +
+            values[i] + '" style="margin-bottom: 0rem;">' + campos[i] + '</label><input maxlength = "' + valuele[i] + '" type="text" id="' +
                 values[i] + '" name = "' + values[i] + '" class="form-control" placeholder="' +
                 campos[i] + '" aria-label="' + campos[i] + '" aria-describedby="basic-addon1"></div>';
           }
@@ -91,12 +98,13 @@ export class DetalledesComponent implements OnInit {
           'Ruta de codigo',
           'Base de datos']
       let values = ['desarrollo', 'nombre', 'versionvb', 'mvc', 'tecnologias', 'ubicacion', 'bd'];
+      let valuele = ['30', '60', '50', '20', '200', '250', '100'];
       let htmlstr = '';
       let i;
       var json = JSON.parse('{}');
       for (i = 0; i < values.length; i++) {
         htmlstr += '<div style="text-align:left; font-weight:200; margin-bottom: 3px;" class="form-group"><label for="' +
-        values[i] + '" style="margin-bottom: 0rem;" name = "' + values[i] + '">' + campos[i] + '</label><input type="text" id="' +
+        values[i] + '" style="margin-bottom: 0rem;" name = "' + values[i] + '">' + campos[i] + '</label><input  maxlength = "' + valuele[i] + '" type="text" id="' +
         values[i] + '" name = "' + values[i] + '" value="' + proyecto[''+ values[i] + ''] + '" class="form-control" placeholder="' +
         campos[i] + '" aria-label="' + campos[i] + '" aria-describedby="basic-addon1"></div>';
         }

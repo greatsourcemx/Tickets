@@ -57,6 +57,11 @@ export class TransferenciaComponent implements OnInit {
     this.cargando = true;
     this.glpiService.cargarEntregaGLPI( this.empresa )
     .subscribe((data: any) => {
+      for(let i = 0; i < data.Empleados.length; i++){
+        if(data.Empleados[i].Correo == JSON.parse(localStorage.usuario).correo){
+                data.Empleados.splice(i, 1)
+            }
+        }
       this.cargando = false;
       this.empleados = data.Empleados;
       this.locaciones = data.Locacion;

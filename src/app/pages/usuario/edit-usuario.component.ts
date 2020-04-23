@@ -46,7 +46,10 @@ export class EditUsuarioComponent implements OnInit {
       this.Empresas = resp;
     });
   }
-
+  EditarEmpr(id, algo) {
+    debugger;
+    this.usuario.empresa ;
+  }
   guardar ( f: NgForm ) {
 
     if ( f.invalid ) {

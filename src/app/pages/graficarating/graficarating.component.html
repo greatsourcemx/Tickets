@@ -1,0 +1,193 @@
+<div class="row animated fadeIn">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+
+                <div class="row">
+                    <div class="col-3">
+
+                        <div>
+                            <span>Empresa</span>
+                        </div>
+                        <div class="btn-group" role="group" aria-label="Basic example">
+                            <button type="button" (click)="cargarGraf( 'EBR' )" [ngClass]="{ 'active': empresa==='EBR' }" class="btn  btnebr">GS</button>
+                            <button type="button" (click)="cargarGraf( 'IMA' )" [ngClass]="{ 'active': empresa==='IMA' }" class="btn  btnima">IMA</button>
+                            <button type="button" (click)="cargarGraf( 'Todos' )" [ngClass]="{ 'active': empresa==='Todos' }" class="btn">Todo</button>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-5">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Rating Anual</h4>
+                <div style="position: relative; height: 300px; overflow: auto; display: block; ">
+                    <table class="table-striped table-sm" style="margin-bottom: 0rem;  width: 100%;">
+                        <thead>
+                            <tr>
+                                <th scope="col" class="tbl-headero bordeleft" style="text-align: center; position: sticky;top: 0;">Mes</th>
+                                <th scope="col" class="tbl-headert" style="text-align: center; position: sticky;top: 0;">Total</th>
+                                <th scope="col" class="tbl-headertr" style="text-align: center; position: sticky;top: 0;">5 ⭐</th>
+                                <th scope="col" class="tbl-headerf" style="text-align: center; position: sticky;top: 0;">4 ⭐</th>
+                                <th scope="col" class="tbl-headerfi" style="text-align: center; position: sticky;top: 0;">3 ⭐</th>
+                                <th scope="col" class="tbl-headers" style="text-align: center; position: sticky;top: 0;">2 ⭐</th>
+                                <th scope="col" class="tbl-headerse" style="text-align: center; position: sticky;top: 0;">1 ⭐</th>
+                                <th scope="col" class="tbl-headere" style="text-align: center; position: sticky;top: 0;">Promedio</th>
+                                <th scope="col" class="tbl-headern borderight" style="text-align: center; position: sticky;top: 0;">Meta</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let mes of this.tablarating">
+                                <td *ngIf="mes['TotalServs'] != 0" class="bordetleft"> {{ mes['Mes'] }} </td>
+                                <td *ngIf="mes['TotalServs'] != 0" class="bordetleft" style="text-align: center;"> {{ mes['TotalServs'] }} </td>
+                                <td *ngIf="mes['TotalServs'] != 0" class="bordetmid" style="text-align: center;"> {{ mes['rating5'] }} </td>
+                                <td *ngIf="mes['TotalServs'] != 0" class="bordetmid" style="text-align: center;"> {{ mes['rating4'] }} </td>
+                                <td *ngIf="mes['TotalServs'] != 0" class="bordetmid" style="text-align: center;"> {{ mes['rating3'] }} </td>
+                                <td *ngIf="mes['TotalServs'] != 0" class="bordetmid2" style="text-align: center;"> {{ mes['rating2'] }} </td>
+                                <td *ngIf="mes['TotalServs'] != 0" class="bordetmid2" style="text-align: center;"> {{ mes['rating1'] }} </td>
+                                <td *ngIf="mes['TotalServs'] != 0" class="bordetright" style="text-align: center;"> {{ mes['AvRating'] }} </td>
+                                <td *ngIf="mes['TotalServs'] != 0" class="bordetright" style="text-align: center;"> 4.80 </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div style=" border: 0;
+                    height: 3px;
+                    background-image: -webkit-linear-gradient(left, #5172FF, #5172FF, #49D2FF);
+                    background-image: -o-linear-gradient(left, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+                    filter: progid: DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#000000', GradientType=1);" class="divbot"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-7">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Tickets Menos de 5 ⭐</h4>
+                <div style="position: relative; height: 300px; overflow: auto; display: block; ">
+                    <table class="table-striped table-sm" style="margin-bottom: 0rem;  width: 100%;" id="tablamen">
+                        <thead>
+                            <tr>
+                                <th scope="col" class="tbl-headero bordeleft" style="text-align: center; position: sticky;top: 0;">Mes</th>
+                                <th scope="col" class="tbl-headert" style="text-align: center; position: sticky;top: 0;">Solicitante</th>
+                                <th scope="col" class="tbl-headertr" style="text-align: center; position: sticky;top: 0;">Ticket</th>
+                                <th scope="col" class="tbl-headerf" style="text-align: center; position: sticky;top: 0;">Responsable</th>
+                                <th scope="col" class="tbl-headerfi" style="text-align: center; position: sticky;top: 0;">Evaluacion</th>
+                                <th scope="col" class="tbl-headers" style="text-align: center; position: sticky;top: 0;">Comentario</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            <tr *ngFor="let mes of this.ratings">
+                                <ng-template>
+                                    <td class="bordetleft"> {{ mes['Mes'] }} </td>
+                                    <td class="bordetmid" style="text-align: center;"> {{ mes.servicio.Solicitor.nombre }} </td>
+                                    <td class="bordetmid" style="text-align: center;"> {{ mes.servicio.Id }} : {{ mes.servicio.Titulo }} </td>
+                                    <td class="bordetmid" style="text-align: center;"> {{ mes.servicio.AsignadoA.nombre }} </td>
+                                    <td class="bordetmid2" style="text-align: center;"> {{ mes.rating }} </td>
+                                    <td class="bordetmid2" style="text-align: center;"> {{ mes.comentario }} </td>
+                                </ng-template>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div style=" border: 0;
+                    height: 3px;
+                    background-image: -webkit-linear-gradient(left, #5172FF, #5172FF, #49D2FF);
+                    background-image: -o-linear-gradient(left, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+                    filter: progid: DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#000000', GradientType=1);" class="divbot"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-6">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-10">
+                        <h4 class="card-title">Rating Anual 📊</h4>
+                    </div>
+                    <div class="col-2">
+                        <h4>{{ empresa }}</h4>
+                    </div>
+                </div>
+                <div>
+                    <div>
+                        <div style="display: block">
+                            <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions" [legend]="barChartLegend" [chartType]="barChartType">
+            </canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-6">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-10">
+                        <h4 class="card-title">Total Servicios Anual 📊</h4>
+                    </div>
+                    <div class="col-2">
+                        <h4>{{ empresa }}</h4>
+                    </div>
+                </div>
+
+                <div>
+                    <div>
+                        <div style="display: block">
+                            <canvas baseChart [datasets]="barChartDatatotal" [labels]="barChartLabels" [options]="barChartOptions" [legend]="barChartLegend" [chartType]="barChartType">
+            </canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-8">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-sm-10">
+                        <h4 class="card-title">Total Servicios Semanal 📊</h4>
+                    </div>
+                    <div class="col-sm-2">
+                        Semana:
+                        <select [(ngModel)]="semaselect" (change)="randomize()" name="combosema" id="combosema" class="form-control" required>
+                            <option *ngFor="let semana of this.semanum" [ngValue]="semana">{{ semana }}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        <div>
+                            <div style="display: block">
+                                <canvas id="canvass" baseChart [(datasets)]="barChartDataSemana" [(labels)]="barChartLabelsSemana" [(options)]="barChartOptions" [(legend)]="barChartLegend" [chartType]="barChartType">
+            </canvas>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div>
+                            <div style="display: block">
+                                <canvas baseChart [datasets]="barChartDataSemana2" [labels]="barChartLabelsSemana" [options]="barChartOptions" [legend]="barChartLegend" [chartType]="barChartType">
+            </canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

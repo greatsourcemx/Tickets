@@ -92,6 +92,8 @@ import { EvaluacionesComponent } from './reportes/evaluaciones.component';
 import { ParametrosComponent } from './mantenimientos/parametros/parametros.component';
 import { DetalledesComponent } from './mantenimientos/detalledes/detalledes.component';
 import { CambiosdesComponent } from './mantenimientos/detalledes/cambiosdes.component';
+import { GraficaRatings } from './graficarating/graficarating.component';
+
 import { AreasComponent } from './areas/areas.component';
 
 import { AgendaComponent } from './agenda/agenda.component';
@@ -157,7 +159,8 @@ import { AgendaComponent } from './agenda/agenda.component';
         DetalledesComponent,
         CambiosdesComponent,
         AgendaComponent,
-        AreasComponent
+        AreasComponent,
+        GraficaRatings
     ],
     exports: [
         DashboardComponent,

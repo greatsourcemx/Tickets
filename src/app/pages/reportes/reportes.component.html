@@ -4,7 +4,7 @@
             <div class="card-body">
                 <div class="row">
 
-                    <div class="col-md-5">
+                    <div class="col-md-4">
                         <div class="card">
                             <div class="card-body">
 
@@ -20,13 +20,13 @@
                         </div>
                     </div>
 
-                    <div class="col-md-7">
-                        <div class="card">
-                            <div class="card-body">
+                    <div class="col-md-8">
+                        <div class="card" style="margin-bottom: 0px;">
+                            <div class="card-body" style="padding: 0px;">
 
                                 <div class="row">
 
-                                    <div class="col-sm-12 nopadding">
+                                    <div class="col-sm-5 nopadding">
                                         <label for="responsable">Responsable</label>
                                         <div class="form-group">
                                             <ng-select [(ngModel)]="filtros.responsable" name="responsable" [items]="admins" bindLabel="nombre">
@@ -36,18 +36,77 @@
                                             </ng-select>
                                         </div>
                                     </div>
-
-                                </div>
-
-                                <div class="row">
-
-                                    <div class="col-sm-12 nopadding">
+                                    <div class="col-sm-2 nopadding" style="width: 33.33%; display: flex; align-items: flex-end;justify-content: center; ">
                                         <div class="form-group">
                                             <button type="button" (click)="cargarReporte()" class="btn btn-info waves-effect waves-light m-t-10">Buscar</button>
                                         </div>
                                     </div>
                                 </div>
 
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div *ngIf="porcentajeusr" style="position: relative; height: 215px; overflow: auto; display: block; ">
+                                        <table class=" table-striped table-sm" style=" width: 100%;">
+                                            <thead>
+                                                <tr>
+
+                                                    <th class="tbl-header bordeleft" style="text-align: center; padding-bottom: 13px; position: sticky;top: 0;">Nombre</th>
+                                                    <th class="tbl-header21" style="padding-bottom: 13px; position: sticky;top: 0;"></th>
+                                                    <th class="tbl-header22" style="padding-bottom: 13px; position: sticky;top: 0;">IMA</th>
+                                                    <th class="tbl-header23" style="padding-bottom: 13px; position: sticky;top: 0;"></th>
+                                                    <th class="tbl-header24" style="width: 25px; padding-bottom: 13px; position: sticky;top: 0;"></th>
+
+                                                    <th class="tbl-header31" style="padding-bottom: 13px; position: sticky;top: 0;"></th>
+                                                    <th class="tbl-header32" style="text-align: right; padding-bottom: 13px; position: sticky;top: 0;">GS</th>
+                                                    <th class="tbl-header33" style="padding-bottom: 13px; position: sticky;top: 0;"></th>
+                                                    <th class="tbl-header34" style="width: 25px; padding-bottom: 13px; position: sticky;top: 0;"></th>
+
+                                                    <th class="tbl-header41" style="padding-bottom: 13px; position: sticky;top: 0;"></th>
+                                                    <th class="tbl-header42" style="text-align: right; padding-bottom: 13px; position: sticky;top: 0;">IG</th>
+                                                    <th class="tbl-header43" style="padding-bottom: 13px; position: sticky;top: 0;"></th>
+                                                    <th class="tbl-header5" style="width: 25px; padding-bottom: 13px; position: sticky;top: 0;"></th>
+
+                                                    <th class="tbl-header6" style="padding-bottom: 13px; position: sticky;top: 0;"></th>
+                                                    <th class="tbl-header6" style="padding-bottom: 13px; position: sticky;top: 0;">Total</th>
+                                                    <th class="tbl-header6 borderight" style=" padding-bottom: 13px; position: sticky;top: 0;"></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr *ngFor="let solicitante of porcentajeusr">
+
+                                                    <td class="bordetleft" *ngIf=" solicitante.usuario.nombre === 'N/A'">Total </td>
+                                                    <td class="bordetleft" *ngIf=" solicitante.usuario.nombre !== 'N/A'">{{ solicitante.usuario.nombre }} </td>
+                                                    <td style="text-align: right;">{{ obtHoras(solicitante.HorasIMA) }} H</td>
+                                                    <td style="text-align: right;">{{ obtMin(solicitante.HorasIMA) }} m</td>
+                                                    <td style="text-align: right;">{{ porcentajeHoras(solicitante.HorasIMA, solicitante.horas) }} %</td>
+                                                    <td class="bordetmid" style="text-align: right;"></td>
+                                                    <td style="text-align: right;">{{ obtHoras(solicitante.HorasEBR) }} H</td>
+                                                    <td style="text-align: right;">{{ obtMin(solicitante.HorasEBR) }} m</td>
+                                                    <td style="text-align: right;">{{ porcentajeHoras(solicitante.HorasEBR, solicitante.horas) }} %</td>
+                                                    <td class="bordetmid2" style=" text-align: right;"></td>
+                                                    <td style="text-align: right;">{{ obtHoras(solicitante.HorasRS) }} H</td>
+                                                    <td style="text-align: right;">{{ obtMin(solicitante.HorasRS) }} m</td>
+                                                    <td style="text-align: right;">{{ porcentajeHoras(solicitante.HorasRS, solicitante.horas) }} %</td>
+                                                    <td class="bordetright" style=" text-align: right;"></td>
+                                                    <td style="text-align: right;">{{obtHoras(solicitante.horas)}} H</td>
+                                                    <td style="text-align: right;">{{obtMin(solicitante.horas)}} m</td>
+                                                    <td class="bordetright" style="text-align: right;">{{porcentajeHorasTotal(solicitante.horas)}} %</td>
+
+
+                                                </tr>
+
+                                            </tbody>
+                                        </table>
+                                        <div style=" border: 0;
+                                        height: 3px;
+                                        background-image: -webkit-linear-gradient(left, #5172FF, #5172FF, #49D2FF);
+                                        background-image: -o-linear-gradient(left, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+                                        filter: progid: DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#000000', GradientType=1);" class="divbot"></div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -59,61 +118,56 @@
     </div>
 </div>
 
-<div *ngIf="(porcentaje !== undefined) && !cargando" class="row">
-    <div class="col-4">
+<div class="row">
+    <div *ngFor="let unidad of porcentaje | groupBy:'Empresa'" [id]="unidad.key" class="col-6">
         <div class="card">
             <div class="card-body">
-                <canvas baseChart [data]="doughnutChartData" [colors]="colors" [labels]="doughnutChartLabels" [chartType]="doughnutChartType"></canvas>
+                <h5 class="card-title">{{ unidad.key }}</h5>
+                <div class="card-text">
+                    <div class="row">
+                        <div class="col">
+                            <h4>{{ porcenUnidad(unidad.value) | percent:'2.2-2' }}</h4>
+                        </div>
+                        <div class="col" style="text-align: right;">
+                            <h4 *ngIf="unidad.key === 'IMA'">Total Horas: {{ obtTotalh(IMA) }}</h4>
+                            <h4 *ngIf="unidad.key === 'EBR'">Total Horas: {{ obtTotalh(EBR) }}</h4>
+                        </div>
+                    </div>
+                </div>
+
+
+                <h6 class="card-title">
+
+                    <!--<p class="card-text">{{ porcenUnidad(unidad.value) | percent:'2.2-2' }}</p>-->
+                </h6>
+                <div style="position: relative; height: 300px; overflow: auto; display: block; ">
+                    <table class="table-striped table-sm" style="margin-bottom: 0rem;  width: 100%;">
+                        <thead>
+                            <tr>
+                                <th scope="col" class="tbl-header bordeleft" style="text-align: center; position: sticky;top: 0;">#</th>
+                                <th scope="col" class="tbl-header2" style="text-align: center; position: sticky;top: 0;">Título</th>
+                                <th scope="col" class="tbl-header3" style="text-align: center; position: sticky;top: 0;">Solicitante</th>
+                                <th scope="col" class="tbl-header4" style="text-align: center; position: sticky;top: 0;">Responsable</th>
+                                <th scope="col" class="tbl-header5 borderight" style="text-align: center; position: sticky;top: 0;">T. Invertido</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let ticket of unidad.value">
+                                <td class="bordetleft"> {{ ticket.Id }} </td>
+                                <td class="bordetleft"> {{ ticket.Eventos }} </td>
+                                <td class="bordetmid"> {{ ticket.Solicitante | titlecase | capitalizar }} </td>
+                                <td class="bordetmid2"> {{ ticket.Responsable }} </td>
+                                <td class="bordetright"> {{ obtTotalh(ticket.Horas) }} </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div style=" border: 0;
+                    height: 3px;
+                    background-image: -webkit-linear-gradient(left, #5172FF, #5172FF, #49D2FF);
+                    background-image: -o-linear-gradient(left, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+                    filter: progid: DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#000000', GradientType=1);" class="divbot"></div>
+                </div>
             </div>
         </div>
     </div>
-    <div *ngIf="!cargando" class="col-8 animated fadeIn">
-        <div class="card">
-            <div class="card-body">
-
-                <ngb-accordion #acc="ngbAccordion">
-                    <ngb-panel *ngFor="let unidad of porcentaje | groupBy:'Empresa'" [id]="unidad.key">
-                        <ng-template ngbPanelTitle>
-                            <!-- <span class="text-white">{{ unidad.key }}</span> -->
-                            <div class="pull-left">
-                                <h4 class="text-white">{{ unidad.key }}&nbsp;</h4>
-                            </div>
-                            <div class="pull-right">
-                                <h4 class="text-white">{{ porcenUnidad(unidad.value) | percent:'2.2-2' }}</h4>
-                            </div>
-                        </ng-template>
-                        <ng-template ngbPanelContent>
-
-                            <div class="card-body">
-                                <h6 class="card-subtitle"> Tickets </h6>
-
-                                <table class="table table-sm">
-                                    <thead>
-                                        <tr>
-                                            <th scope="col">#</th>
-                                            <th scope="col">Título</th>
-                                            <th scope="col">Solicitante</th>
-                                            <th scope="col">Responsable</th>
-                                            <th scope="col">Tiempo Invertido</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr *ngFor="let ticket of unidad.value">
-                                            <td> {{ ticket.Id }} </td>
-                                            <td> {{ ticket.Eventos }} </td>
-                                            <td> {{ ticket.Solicitante | titlecase | capitalizar }} </td>
-                                            <td> {{ ticket.Responsable }} </td>
-                                            <td> {{ ticket.Tiempo }} </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-
-                        </ng-template>
-                    </ngb-panel>
-                </ngb-accordion>
-
-            </div>
-        </div>
-    </div>
-</div>
+</div>>

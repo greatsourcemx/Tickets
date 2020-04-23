@@ -12,7 +12,9 @@ import { Parametros } from '../../../models/parametros.model';
 @Component({
   selector: 'app-contadores',
   templateUrl: './contadores.component.html',
-  styles: []
+  styles: [],
+  styleUrls: ['../../agenda/agenda.component.css']
+
 })
 export class ContadoresComponent implements OnInit {
 
@@ -20,6 +22,7 @@ export class ContadoresComponent implements OnInit {
   rangos: Listados[] = [];
   loading = false;
   param: Parametros = new Parametros();
+  empresa: string;
 
   constructor(public grafServicios: GraficasService,
               public store: Store<AppState>) {
@@ -33,9 +36,16 @@ export class ContadoresComponent implements OnInit {
   ngOnInit() {
     this.cargarContadores();
   }
+  cargarAgendasu(empr){
+    debugger;
 
+    this.empresa= empr;
+    this.cargarContadores();
+  }
   cargarContadores() {
+    debugger;
     this.loading = true;
+    this.param.empresa = this.empresa;
     this.grafServicios.cargarContadores( this.param )
     .subscribe((resp: Graficas) => {
       this.loading = false;

@@ -5,6 +5,57 @@
     background: linear-gradient(to right, #1ac2cc, #6ad4d4);
 }
 
+.border {
+    width: 400px;
+    padding: 20px;
+    border-top: 10px solid #573BFF;
+    border-bottom: 10px solid #49D2FF;
+    background-image: linear-gradient(#573BFF, #49D2FF), linear-gradient(#573BFF, #49D2FF);
+    background-size: 10px 100%;
+    background-position: 0 0, 100% 0;
+    background-repeat: no-repeat;
+}
+
+.bordeleft {
+    border-left-style: solid;
+    border-left-color: #573BFF;
+}
+
+.borderight {
+    border-right-style: solid;
+    border-right-color: #49D2FF;
+}
+
+.bordetleft {
+    border-left-style: solid;
+    border-left-color: #5172FF;
+    border-right-style: solid;
+    border-right-color: #5172FF;
+}
+
+.bordetmid {
+    border-right-style: solid;
+    border-right-color: #5172FF;
+}
+
+.bordetmid2 {
+    border-right-style: solid;
+    border-right-color: #4EA7FF;
+}
+
+.bordetright {
+    border-right-style: solid;
+    border-right-color: #49D2FF;
+}
+
+.divbot {
+    border: 0;
+    height: 3px;
+    background-image: -webkit-linear-gradient(left, #5172FF, #5172FF, #49D2FF);
+    background-image: -o-linear-gradient(left, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+    filter: progid: DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#000000', GradientType=1);
+}
+
 .abierto {
     height: 80px;
     border-radius: 10px;
@@ -48,15 +99,81 @@
     height: 50px;
 }
 
+.tbl-header21 {
+    color: #fff;
+    background: linear-gradient(to right, #5361FF, #526BFF);
+    height: 50px;
+}
+
+.tbl-header22 {
+    color: #fff;
+    background: linear-gradient(to right, #526BFF, #5172FF);
+    height: 50px;
+}
+
+.tbl-header23 {
+    color: #fff;
+    background: linear-gradient(to right, #5172FF, #5172FF);
+    height: 50px;
+}
+
+.tbl-header24 {
+    color: #fff;
+    background: linear-gradient(to right, #5172FF, #507CFF);
+    height: 50px;
+}
+
 .tbl-header3 {
     color: #fff;
     background: linear-gradient(to right, #507DFF, #4EA1FF);
     height: 50px;
 }
 
+.tbl-header31 {
+    color: #fff;
+    background: linear-gradient(to right, #507CFF, #4F87FF);
+    height: 50px;
+}
+
+.tbl-header32 {
+    color: #fff;
+    background: linear-gradient(to right, #4F87FF, #4EA7FF);
+    height: 50px;
+}
+
+.tbl-header33 {
+    color: #fff;
+    background: linear-gradient(to right, #4EA7FF, #4EA7FF);
+    height: 50px;
+}
+
+.tbl-header34 {
+    color: #fff;
+    background: linear-gradient(to right, #4EA7FF, #4EA7FF);
+    height: 50px;
+}
+
 .tbl-header4 {
     color: #fff;
     background: linear-gradient(to right, #4EA1FF, #4CBBFF);
+    height: 50px;
+}
+
+.tbl-header41 {
+    color: #fff;
+    background: linear-gradient(to right, #4EA7FF, #4DB3FF);
+    height: 50px;
+}
+
+.tbl-header42 {
+    color: #fff;
+    background: linear-gradient(to right, #4DB3FF, #4CBCFF);
+    height: 50px;
+}
+
+.tbl-header43 {
+    color: #fff;
+    background: linear-gradient(to right, #4CBCFF, #4CBCFF);
     height: 50px;
 }
 
@@ -82,4 +199,58 @@
 
 ::-webkit-scrollbar-thumb {
     -webkit-box-shadow: inset 0 0 16px #2386f8;
+}
+
+.tbl-headero {
+    color: #fff;
+    background: linear-gradient(to right, #5739FF, #5644FF);
+    height: 50px;
+}
+
+.tbl-headert {
+    color: #fff;
+    background: linear-gradient(to right, #5644FF, #544EFF);
+    height: 50px;
+}
+
+.tbl-headertr {
+    color: #fff;
+    background: linear-gradient(to right, #544EFF, #545AFF);
+    height: 50px;
+}
+
+.tbl-headerf {
+    color: #fff;
+    background: linear-gradient(to right, #545AFF, #526CFF);
+    height: 50px;
+}
+
+.tbl-headerfi {
+    color: #fff;
+    background: linear-gradient(to right, #526CFF, #507DFF);
+    height: 50px;
+}
+
+.tbl-headers {
+    color: #fff;
+    background: linear-gradient(to right, #507DFF, #4EA0FF);
+    height: 50px;
+}
+
+.tbl-headerse {
+    color: #fff;
+    background: linear-gradient(to right, #4EA0FF, #4DADFF);
+    height: 50px;
+}
+
+.tbl-headere {
+    color: #fff;
+    background: linear-gradient(to right, #4DADFF, #49CFFF);
+    height: 50px;
+}
+
+.tbl-headern {
+    color: #fff;
+    background: linear-gradient(to right, #49CFFF, #49CFFF);
+    height: 50px;
 }

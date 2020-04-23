@@ -16,7 +16,7 @@ export class EntregaComponent implements OnInit {
 
   empresa: string;
   equipos: GLPIEquipos[] = [];
-  empleados: GLPIEmpleado[] = [];
+  public empleados: GLPIEmpleado[] = [];
   locacion: GLPILocacion[] = [];
   duracion: Tiempo[] = [];
   responsiva: Responsiva = new Responsiva();
@@ -27,7 +27,7 @@ export class EntregaComponent implements OnInit {
   verPDFViewer = false;
   folio = '';
   msgMante: string[] = null;
-
+  public correouser: string="";
 
   constructor(public glpiService: GlpiService,
               public _tiempoService: TiempoService) { }
@@ -36,12 +36,15 @@ export class EntregaComponent implements OnInit {
     this.empresa = 'EBR';
     this.seleccionEmpresa( this.empresa );
     this.cargarTiempos();
+    try{this.correouser = JSON.parse(localStorage.usuario).correo;}catch{}
+    this.responsiva;
   }
 
   cargarTiempos () {
     this._tiempoService.cargarTiemposActivos()
     .subscribe( (resp: any) => {
       this.duracion = resp;
+      debugger;
     });
   }
 
@@ -52,6 +55,11 @@ export class EntregaComponent implements OnInit {
     this.pdf = null;
     this.glpiService.cargarEntregaGLPI( this.empresa )
     .subscribe((data: any) => {
+      for(let i = 0; i < data.Empleados.length; i++){
+        if(data.Empleados[i].Correo == JSON.parse(localStorage.usuario).correo){
+                data.Empleados.splice(i, 1)
+            }
+        }
       this.equipos = data.Equipos;
       this.empleados = data.Empleados;
       this.locacion = data.Locacion;
@@ -75,6 +83,20 @@ export class EntregaComponent implements OnInit {
   }
 
   agregarEquipo() {
+    debugger;
+    var correousr = "";
+    var correoent = "";
+    try{
+      correousr = JSON.parse(localStorage.usuario).correo;
+
+    } catch{correoent = "";}
+    try{
+      correoent = this.responsiva.empleado.Correo;
+
+    } catch{correoent = "";}
+    if(correousr == correoent){
+      Swal.fire('Aviso!', 'No se puede asignar equipo a si mismo', 'warning');
+    }else{
     if (this.equipo.Id !== 0) {
       if (!this.responsiva.detalle.some((item) => item.equipo.Id === this.equipo.Id)) {
         this.equipo.duracion = this.duracion[0];
@@ -82,7 +104,7 @@ export class EntregaComponent implements OnInit {
         false, 0, this.responsiva.locacion, this.responsiva.empleado, this.equipo));
         this.esTelefono = this.equipo.Tipo === 'Phone' ? true : false;
       }
-    }
+    }}
   }
 
   removerEquipo( index: number ) {

@@ -21,3 +21,5 @@ export * from './graficas/grafica.index';
 export { Listados } from './listados.model';
 export * from './mantenimientos/mantenimiento.index';
 export { Archivos } from './archivos.model';
+export { PorcentajeUser } from './porcentajeuser.model';
+

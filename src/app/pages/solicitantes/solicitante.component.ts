@@ -4,6 +4,8 @@ import { NgForm } from '@angular/forms';
 import { SolicitanteService, EmpresasService } from '../../services/service.index';
 import { Router } from '@angular/router';
 import { Empresa } from '../../models/empresa.model';
+import { Areas } from '../../models/areas.model';
+
 
 import swal from 'sweetalert2';
 
@@ -21,6 +23,8 @@ export class SolicitanteComponent implements OnInit {
 
   solicitante: Usuario = new Usuario('', '', '', '');
   Empresas: Empresa[] = [];
+  Areas: Areas[] = [];
+
 
   constructor(
     public _solicitanteService: SolicitanteService,
@@ -31,6 +35,7 @@ export class SolicitanteComponent implements OnInit {
   ngOnInit() {
     this.solicitante.actualizarPassword = true;
     this.cargarEmpresas();
+    this.cargarAreas();
   }
 
   cargarEmpresas () {
@@ -39,7 +44,12 @@ export class SolicitanteComponent implements OnInit {
       this.Empresas = resp;
     });
   }
-
+  cargarAreas () {
+    this._solicitanteService.cargarAreas()
+    .subscribe( (resp: Areas[]) => {
+      this.Areas = resp;
+    });
+  }
   generaNombreUsuario() {
     let username = this.solicitante.correo;
     if (username !== '') {
