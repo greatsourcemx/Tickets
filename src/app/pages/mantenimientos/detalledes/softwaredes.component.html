@@ -1,0 +1,71 @@
+Detalle de proyectos
+<div class="row">
+
+    <div class="col-md-12">
+        <div class="card .bg-light">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-4 pull-right">
+                        <h4 class="card-title">Listado de Proyectos</h4>
+                    </div>
+                    <div class="col-4">
+                        <input [(ngModel)]="query" type="text" class="form-control" placeholder="Buscar">
+                    </div>
+                    <div class="col-4 pull-left">
+                        <button [routerLink]="['/nuevopdes']" class="btn btn-info pull-right" name="new" ngbTooltip="Agregar Avance">
+                            <i class="fa fa-plus"></i>Nuevo
+                        </button>
+                    </div>
+                </div>
+                <div class="row" style="padding-bottom: 15px;">
+                </div>
+                <div class="row" style="height: 500px; overflow: auto; display: block;">
+                    <table class="table table-sm table-striped">
+                        <thead>
+                            <tr>
+                                <th class=" tbl-header pointer tbl-header" style="position: sticky;top: 0;" (click)="sort('Titulo')">
+                                    Desarrollo
+                                    <i class="fa" [ngClass]="{'fa-sort': column != 'Titulo', 'fa-sort-asc': (column == 'Titulo' && isDesc), 'fa-sort-desc': (column == 'Titulo' && !isDesc) }" aria-hidden="true"> </i>
+                                </th>
+                                <th class="tbl-header2" style="position: sticky;top: 0;">Descripcion</th>
+                                <th class=" tbl-header3 pointer" style="position: sticky;top: 0;" (click)="sort('AsignadoA.nombre')">
+                                    Asignado A
+                                    <i class="fa" [ngClass]="{'fa-sort': column != 'AsignadoA.nombre', 'fa-sort-asc': (column == 'AsignadoA.nombre' && isDesc), 'fa-sort-desc': (column == 'AsignadoA.nombre' && !isDesc) }" aria-hidden="true"> </i>
+                                </th>
+                                <th class=" tbl-header4 pointer" style="position: sticky;top: 0;" (click)="sort('Solicitor.nombre')">
+                                    Solicitante
+                                    <i class="fa" [ngClass]="{'fa-sort': column != 'Solicitor.nombre', 'fa-sort-asc': (column == 'Solicitor.nombre' && isDesc), 'fa-sort-desc': (column == 'Solicitor.nombre' && !isDesc) }" aria-hidden="true"> </i>
+                                </th>
+                                <th class="tbl-header5" style="position: sticky;top: 0;">Version</th>
+                                <th class="tbl-header6" style="position: sticky;top: 0;"> IDE</th>
+                                <th class="tbl-header6" style="position: sticky;top: 0;"> MVC</th>
+                                <th class="tbl-header6" style="position: sticky;top: 0;"> Editar</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let proy of proyes | orderby: {property: column, direction: direction} | filter: 'Titulo,AsignadoA.nombre,estatus,Solicitor.nombre': query">
+                                <td>{{ proy.Titulo }}</td>
+                                <td>{{ proy.Descripcion }}</td>
+                                <td *ngIf="proy.Estado == 'Activo'" style="color: #06D79C">{{ proy.estatus }}</td>
+                                <td *ngIf="proy.Estado == 'Inactivo'" style="color: #EF5350">{{ proy.estatus }}</td>
+                                <td>{{ proy.AsignadoA.nombre }}</td>
+                                <td>{{ proy.Solicitor.nombre }}</td>
+                                <td>{{ proy.Version }} </td>
+                                <td>{{ proy.IDE }} </td>
+                                <td>{{ proy.MVC }} </td>
+                                <td>
+
+                                    <span class="action-icons">
+                                        <button [routerLink]="['/detallepro', proy.id ]" class="btn btn-info btn-sm icon-buttons" ngbTooltip="Agregar Avance">
+                                            <i class="icon icon-layers"></i>
+                                        </button>
+                                    </span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

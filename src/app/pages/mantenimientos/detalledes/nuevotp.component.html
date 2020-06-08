@@ -1,0 +1,66 @@
+<div class="card card-body">
+    <div class="row">
+        <div class="col-sm-12 col-xs-12">
+            <form #f="ngForm" ngNativeValidate (ngSubmit)="guardar(f)">
+
+                <div class="form-group">
+                    <label for="titulo">Título</label>
+                    <input type="text" class="form-control" maxlength="50" name="dp" [(ngModel)]="ticket.Titulo" id="Titulo" name="Titulo" placeholder="Titulo" required />
+                </div>
+                <div class="form-group">
+                    <label for="descripcion">Descripción</label>
+                    <textarea [(ngModel)]="ticket.Descripcion" id="Descripcion" name="Descripcion" class="form-control" rows="4" placeholder="Descripcion"></textarea>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-6">
+                        <label for="solicitante">Solicitante</label>
+                        <ng-select [(ngModel)]="ticket.Solicitor" name="solicitante" [items]="users" bindLabel="nombre" required>
+                        </ng-select>
+                    </div>
+                    <div class="col-lg-6">
+                        <label for="responsable">Responsable</label>
+                        <ng-select [(ngModel)]="ticket.AsignadoA" name="responsable" [items]="admins" bindLabel="nombre">
+                            <ng-template ng-option-tmp let-item="item">
+                                {{item.nombre}} <small>{{item.noEmpleado}}</small>
+                            </ng-template>
+                        </ng-select>
+                    </div>
+                </div>
+
+                <label class="control-label m-t-20"></label>
+
+                <div class="row">
+                    <div class="col-lg-4">
+                        <label for="estatus">Estatus</label>
+                        <div class="input-group">
+                            <select [(ngModel)]="ticket.Estado" id="estatus" name="estatus" class="form-control" (change)="estatusChange()" required>
+                                <option *ngFor="let esta of estados.Estatus" [ngValue]="esta.value">{{ esta.value }}</option>
+                            </select>
+                        </div>
+                    </div>
+
+
+                </div>
+
+                <label class="control-label m-t-20"></label>
+
+                <div *ngIf="cerrado" class="row">
+                    <div class="col-lg-12">
+                        <label for="duracion">Duración</label>
+                        <ng-select [(ngModel)]="ticket.Duracion" name="Duracion" [items]="duracion" bindLabel="Descripcion">
+                        </ng-select>
+                    </div>
+                </div>
+
+                <label *ngIf="cerrado" class="control-label m-t-20 " for="solucion">Solución</label>
+                <textarea *ngIf="cerrado" [(ngModel)]="ticket.Solucion" id="solucion" name="solucion" class="form-control" rows="4"></textarea>
+                <div class="row">
+                    <button type="submit" style="background-color: #4bb750; border-color: #4bb750;" class="btn btn-success waves-effect waves-light m-r-10 borderRad">Guardar</button>
+                    <a [routerLink]="['/principal']" style="background-color: #ed1c24; border-color: #ed1c24" class="btn btn-danger waves-effect waves-light borderRad">Cancelar</a>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>

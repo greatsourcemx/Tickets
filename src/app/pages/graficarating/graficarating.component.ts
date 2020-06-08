@@ -51,6 +51,7 @@ export class GraficaRatings implements OnInit {
   public barChartPlugins = [pluginDataLabels];
 
   public barChartLabelsSemana: Label[] = [];
+  public barChartLabelsSemana1: Label[] = [];
   public barChartDataSemana: ChartDataSets[] = [
     { data: this.s2d, label: this.l2d },
     { data: this.s1d, label: this.l1d }
@@ -286,6 +287,7 @@ export class GraficaRatings implements OnInit {
       this.barChartDataSemana[1].label='Semana '+ semanas[semanas.length - 1];
       
       this.barChartLabelsSemana = ['Total Tickets'];
+      this.barChartLabelsSemana1 = ['Rating'];
 
       //this.barChartDataSemana2[0].data.push(promedios[promedios.length - 1]);
       //this.barChartDataSemana2[1].data.push(promedios[promedios.length - 2]);

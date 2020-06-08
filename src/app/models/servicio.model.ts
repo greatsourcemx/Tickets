@@ -29,6 +29,7 @@ export class Servicio {
         public desde: number = 0,
         public Total: number = 0,
         public termino: string = '',
-        public archivos: Archivos[] = []
+        public archivos: Archivos[] = [],
+        public proyecto: number = 0
     ) { }
 }

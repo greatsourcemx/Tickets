@@ -22,7 +22,7 @@ export class TicketsComponent implements OnInit {
   estados: any = data.default;
   tipos: Tipo[];
   esSoporte = false;
-
+  public selopt: string = '';
   constructor(
     public _ticketService: ServiciosService,
     public _tiempoService: TiempoService,
@@ -32,7 +32,9 @@ export class TicketsComponent implements OnInit {
     public router: Router,
     public activatedRoute: ActivatedRoute ) {
       activatedRoute.params.subscribe( params => {
+        debugger;
         let id = params['id'];
+        try{this.selopt = params['combo'];} catch{}
         this.cargarDetalles( id );
       });
     }
@@ -82,7 +84,12 @@ export class TicketsComponent implements OnInit {
       if ( this.ticket.Estado === this.estados.Estatus[0].value && this.ticket.AsignadoA.id === 0 ) {
         this.ticket.AsignadoA = this._adminService.usuario;
       }
-      this.ticket.Estado = this.estados.Estatus[2].value;
+      if ( this.selopt != "" ) {
+        this.ticket.Estado = this.estados.Estatus[0].value;
+      }else{
+        this.ticket.Estado = this.estados.Estatus[2].value;
+      }
+      
       this.esSoporte = !(this.ticket.TipoServicio.id === 1);
     });
   }
@@ -95,6 +102,7 @@ export class TicketsComponent implements OnInit {
   }
 
   guardar ( f: NgForm ) {
+    debugger;
     if (f.invalid) {
       return;
     }

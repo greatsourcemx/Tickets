@@ -5,7 +5,8 @@ import swal from 'sweetalert2';
 @Component({
   selector: 'app-detalledes',
   templateUrl: './detalledes.component.html',
-  styles: []
+  styles: [],
+  styleUrls: ['../../agenda/agenda.component.css']
 })
 
 export class DetalledesComponent implements OnInit {
@@ -36,6 +37,7 @@ export class DetalledesComponent implements OnInit {
             this.proyes = resp;
         });
     }
+ 
     public NuevoP() {
         let campos = ['Desarrollo',
             'Descripcion',

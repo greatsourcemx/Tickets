@@ -91,11 +91,18 @@ import { ManteMasivosComponent } from './mantenimientos/tablero/mante-masivos/ma
 import { EvaluacionesComponent } from './reportes/evaluaciones.component';
 import { ParametrosComponent } from './mantenimientos/parametros/parametros.component';
 import { DetalledesComponent } from './mantenimientos/detalledes/detalledes.component';
+import { NuevoDesComponent } from './mantenimientos/detalledes/nuevopdes.component';
+
+import { SoftwaredesComponent } from './mantenimientos/detalledes/softwaredes.component';
+import { DetallesProyecto } from './mantenimientos/detalledes/detallepro.component';
+import { NuevoTPComponent } from './mantenimientos/detalledes/nuevotp.component';
 import { CambiosdesComponent } from './mantenimientos/detalledes/cambiosdes.component';
 import { GraficaRatings } from './graficarating/graficarating.component';
 
 import { AreasComponent } from './areas/areas.component';
+import { AlmacenComponent } from './almacen/almacen.component';
 
+import { TipoTicketComponent } from './tipoticket/tipoticket.component';
 import { AgendaComponent } from './agenda/agenda.component';
 
 
@@ -119,11 +126,15 @@ import { AgendaComponent } from './agenda/agenda.component';
         ServiciosComponent,
         NuevoServicioComponent,
         DetallesServicioComponent,
+        NuevoTPComponent,
+        DetallesProyecto,
         PrincipalComponent,
         EmpresasComponent,
         AvancesComponent,
         TicketsComponent,
+        NuevoDesComponent,
         TiposComponent,
+        AlmacenComponent,
         TicketComponent,
         TrabajosComponent,
         CerradosComponent,
@@ -157,9 +168,11 @@ import { AgendaComponent } from './agenda/agenda.component';
         EvaluacionesComponent,
         ParametrosComponent,
         DetalledesComponent,
+        SoftwaredesComponent,
         CambiosdesComponent,
         AgendaComponent,
         AreasComponent,
+        TipoTicketComponent,
         GraficaRatings
     ],
     exports: [

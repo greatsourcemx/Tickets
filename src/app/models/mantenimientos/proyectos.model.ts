@@ -1,3 +1,5 @@
+import { Usuario } from '../usuario.model';
+
 export class Proyectos {
     constructor (
         public proyectoid: number = 0,
@@ -8,6 +10,8 @@ export class Proyectos {
         public tecnologias: string = '',
         public estatus: string = '',
         public ubicacion: string = '',
+        public AsignadoA: Usuario = new Usuario('', ''),
+        public Solicitor: Usuario = new Usuario('', ''),        
         public bd: string = '',
         public aux1: string = '',
         public aux2: string = '',

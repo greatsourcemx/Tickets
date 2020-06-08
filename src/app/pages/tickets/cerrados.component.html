@@ -98,31 +98,64 @@
         <div class="card">
             <div class="card-body">
 
-                <button type="button" (click)="quitarFiltros()" class="btn btn-info waves-effect waves-light m-t-10 pull-right">Quitar Filtros</button>
-                <div class="d-flex pull-left">
-                    <div>
-                        <h4 class="card-title"><span class="lstick"></span>Tickets Cerrados ({{ totalRegistros }})</h4>
+
+                <div class="row">
+                    <div class="col-10 btn-toolbar pull-left">
+                        <div>
+                            <h4 class="card-title"><span class="lstick"></span>Tickets Cerrados ({{ totalRegistros }}) </h4>
+                        </div>
+                    </div>
+                    <div class="col-2" style="text-align: right">
+                        <button type="button" (click)="quitarFiltros()" class="btn btn-info waves-effect waves-light m-t-10 pull-right">Quitar Filtros</button>
                     </div>
                 </div>
-
                 <div class="table-responsive m-t-20">
                     <table class="table vm no-th-brd no-wrap pro-of-month">
                         <thead>
                             <tr>
-                                <th>#</th>
-                                <th *ngIf="isAdmin" colspan="2">Solicitante</th>
-                                <th>Título</th>
-                                <th>Fec. Creado</th>
-                                <th>Fec. Cerrado</th>
-                                <th>Estado</th>
-                                <th>Tipo</th>
-                                <th>Horas</th>
-                                <th>Responsable</th>
-                                <th></th>
+                                <th class=" tbl-header pointer tbl-header" style="position: sticky;top: 0;" (click)="sort('Id')">
+                                    #
+                                    <i class="fa" [ngClass]="{'fa-sort': column != 'Id', 'fa-sort-asc': (column == 'Id' && isDesc), 'fa-sort-desc': (column == 'Id' && !isDesc) }" aria-hidden="true"> </i>
+                                </th>
+                                <th colspan="2" class=" tbl-header2 pointer tbl-header2" style="position: sticky;top: 0;" (click)="sort('nombre')">
+                                    Solicitante
+                                    <i class="fa" [ngClass]="{'fa-sort': column != 'nombre', 'fa-sort-asc': (column == 'nombre' && isDesc), 'fa-sort-desc': (column == 'nombre' && !isDesc) }" aria-hidden="true"> </i>
+                                </th>
+                                <th class=" tbl-header3 pointer tbl-header3" style="position: sticky;top: 0;" (click)="sort('Titulo')">
+                                    Título
+                                    <i class="fa" [ngClass]="{'fa-sort': column != 'Titulo', 'fa-sort-asc': (column == 'Titulo' && isDesc), 'fa-sort-desc': (column == 'Titulo' && !isDesc) }" aria-hidden="true"> </i>
+                                </th>
+                                <th class=" tbl-header4 pointer tbl-header4" style="position: sticky;top: 0;" (click)="sort('FecRegistro')">
+                                    Fec. Creado
+                                    <i class="fa" [ngClass]="{'fa-sort': column != 'FecRegistro', 'fa-sort-asc': (column == 'FecRegistro' && isDesc), 'fa-sort-desc': (column == 'FecRegistro' && !isDesc) }" aria-hidden="true"> </i>
+                                </th>
+                                <th class="pointer tbl-header5" style="position: sticky;top: 0;" (click)="sort('FecCerrado')">
+                                    Fec. Cerrado
+                                    <i class="fa" [ngClass]="{'fa-sort': column != 'FecCerrado', 'fa-sort-asc': (column == 'FecCerrado' && isDesc), 'fa-sort-desc': (column == 'FecCerrado' && !isDesc) }" aria-hidden="true"> </i>
+                                </th>
+                                <th class=" pointer tbl-header6" style="position: sticky;top: 0;" (click)="sort('Estado')">
+                                    Estatus
+                                    <i class="fa" [ngClass]="{'fa-sort': column != 'Estado', 'fa-sort-asc': (column == 'Estado' && isDesc), 'fa-sort-desc': (column == 'Estado' && !isDesc) }" aria-hidden="true"> </i>
+                                </th>
+                                <th class=" tbl-header6 pointer tbl-header6" style="position: sticky;top: 0;" (click)="sort('descripcion')">
+                                    Tipo
+                                    <i class="fa" [ngClass]="{'fa-sort': column != 'descripcion', 'fa-sort-asc': (column == 'descripcion' && isDesc), 'fa-sort-desc': (column == 'descripcion' && !isDesc) }" aria-hidden="true"> </i>
+                                </th>
+                                <th class=" tbl-header6 pointer tbl-header6" style="position: sticky;top: 0;" (click)="sort('tiempoTotal')">
+                                    Horas
+                                    <i class="fa" [ngClass]="{'fa-sort': column != 'tiempoTotal', 'fa-sort-asc': (column == 'tiempoTotal' && isDesc), 'fa-sort-desc': (column == 'tiempoTotal' && !isDesc) }" aria-hidden="true"> </i>
+                                </th>
+                                <th class=" tbl-header6 pointer tbl-header6" style="position: sticky;top: 0;" (click)="sort('AsignadoA.nombre')">
+                                    Responsable
+                                    <i class="fa" [ngClass]="{'fa-sort': column != 'AsignadoA.nombre', 'fa-sort-asc': (column == 'AsignadoA.nombre' && isDesc), 'fa-sort-desc': (column == 'AsignadoA.nombre' && !isDesc) }" aria-hidden="true"> </i>
+                                </th>
+
+                                <th class="tbl-header6" style="position: sticky;top: 0;">Editar</th>
+
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let tick of Tickets">
+                            <tr *ngFor="let tick of Tickets | orderby: {property: column, direction: direction}">
                                 <td style="width:20px;">{{ tick.Id }}</td>
                                 <td *ngIf="isAdmin" style="width:50px;"><span class="round"><img [src]="tick.Solicitor.id | imagen" alt="user" width="50" height="50px"></span></td>
                                 <td *ngIf="isAdmin">
@@ -135,7 +168,9 @@
                                 </td>
                                 <td> {{ tick.FecRegistro | date: 'yyyy-MM-dd' }} </td>
                                 <td> {{ tick.FecCerrado | date: 'yyyy-MM-dd' }} </td>
-                                <td> {{ tick.Estado }} </td>
+                                <td><span class="label label-rounded" [ngClass]="( tick.Estado == 'Abierta' ) ? 'abiertalbl' :
+                                    ( tick.Estado == 'Cerrada' ) ? 'cerradolbl' : 'canceladolbl'">{{ tick.Estado }}</span>
+                                </td>
                                 <td> {{ tick.TipoServicio.descripcion }} </td>
                                 <td> {{ tick.tiempoTotal | tiempo }} </td>
                                 <td> {{ tick.AsignadoA.nombre }} </td>

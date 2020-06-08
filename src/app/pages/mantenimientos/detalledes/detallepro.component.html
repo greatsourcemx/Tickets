@@ -1,0 +1,112 @@
+<div class="ribbon-wrapper card">
+    <div *ngIf="isAdmin" class="ribbon ribbon-primary ribbon-left">{{ proyecto.Titulo}} </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-3 col-xs-6 b-r"> <strong class="text-muted">Título</strong>
+                <br />
+                <strong># {{ proyecto.id }} {{ proyecto.Titulo }}</strong>
+
+                <br />
+                <span class="label" [ngClass]="( proyecto.Estado == 'Abierta' ) ? 'label-warning' :
+                ( proyecto.Estado == 'Cerrada' ) ? 'label-success' : 'label-info'"> {{ proyecto.Estado }}</span>
+            </div>
+            <div class="col-md-3 col-xs-6 b-r"> <strong>Responsable</strong>
+                <br />
+                <p class="text-muted">
+                    <i class="fa fa-user"></i>
+                    <span *ngIf="proyecto.AsignadoA.id !== 0" class="label label-success"> {{ proyecto.AsignadoA?.nombre }}</span>
+                    <span *ngIf="proyecto.AsignadoA.id === 0" class="label label-warning"> Sin Responsable</span>
+                </p>
+            </div>
+
+            <div class="col-md-3 col-xs-6 b-r"> <strong>Solicita</strong>
+                <br />
+                <p class="text-muted">
+                    <i class="fa fa-user"></i>
+                    <span *ngIf="proyecto.AsignadoA.id !== 0" class="label label-success"> {{ proyecto.Solicitor?.nombre }}</span>
+                    <span *ngIf="proyecto.AsignadoA.id === 0" class="label label-warning"> Sin Responsable</span>
+                </p>
+            </div>
+            <div class="col-md-3 col-xs-6 b-r"> <strong>Version</strong>
+                <br />
+                <p class="text-muted">
+                    <span *ngIf="proyecto.AsignadoA.id !== 0" class="label label-success"> {{ proyecto.Version}}</span>
+                </p>
+            </div>
+        </div>
+        <hr />
+        <p class="m-t-30">{{ proyecto.Descripcion }}</p>
+
+        <ng-template #content let-modal>
+            <div class="modal-header">
+                <h4 class="modal-title" id="modal-basic-title">Imagen Adjunta</h4>
+                <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+                <div class="" style="width: 100%">
+                    <img style="width: 100%" [src]="selId | imagen: true" alt="file" class="profile-pic" />
+                </div>
+            </div>
+        </ng-template>
+
+        <hr />
+        <!-- <button class="btn btn-danger waves-effect waves-light" name="regresar" (click)="regresar()">Cerrar</button> -->
+
+
+        <div class="row">
+            <div class="col-md-9">
+                <button class="btn btn-info waves-effect waves-light" name="regresar" (click)="regresar()">Regresar</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- Avances -->
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title pull-left"> Historial de Tareas </h4>
+                <div *ngIf="isAdmin" class="text-right">
+                    <button *ngIf="proyecto.Estado != 'Cerrada'" [routerLink]="['/nuevatarea', proyecto.id]" type="button" title="Agregar" class="btn btn-circle btn-primary">
+                        <i class="fa fa-plus"></i>
+                    </button>
+                </div>
+                <div style=" height: 500px; overflow: auto; display: block; ">
+                    <table class="table table-sm table-striped">
+                        <thead>
+                            <tr>
+                                <th class="tbl-header" style="position: sticky;top: 0;" scope="col" colspan="2">#</th>
+                                <th class="tbl-header2" style="position: sticky;top: 0;" scope="col">Titulo</th>
+                                <th class="tbl-header3" style="position: sticky;top: 0;" scope="col">Descripcion</th>
+                                <th class="tbl-header4" style="position: sticky;top: 0;" scope="col">Fecha</th>
+                                <th class="tbl-header5" style="position: sticky;top: 0;" scope="col">Responsable</th>
+                                <th class="tbl-header6" style="position: sticky;top: 0;" scope="col">Detalle</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let tareas of proyecto.Tareas">
+                                <td>
+                                    <div *ngIf="tareas.Estado === 'En Proceso'">🛠</div>
+                                </td>
+                                <td> {{ tareas.Id }} </td>
+                                <td> {{ tareas.Titulo }} </td>
+                                <td> {{ tareas.Descripcion }} </td>
+                                <td> {{ tareas.FecRegistro | date: 'yyyy-MM-dd' }} </td>
+                                <td> {{ tareas.AsignadoA.nombre }} </td>
+                                <td>
+                                    <span class="action-icons" style="font-size: 20px;">
+                                        <a href="javascript:void(0)" [routerLink]="['/servicio', tareas.Id ]"  style="color: #f7941d; padding-right: 5px"  ngbTooltip="Avances"><i class="icon-avance"></i></a>
+                                    </span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

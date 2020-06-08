@@ -186,12 +186,16 @@ a.link:focus {
 }
 
 .sidebar-nav>ul>li.active>a {
-    color: #ffffff;
+    color: #0065ff;
     border-color: #398bf7;
+    background-color: #fff;
+    /* border-radius: 60px; */
+    border-top-left-radius: 60px;
+    border-bottom-left-radius: 60px;
 }
 
 .sidebar-nav>ul>li.active>a i {
-    color: #ffffff;
+    color: #0065ff;
 }
 
 .sidebar-nav ul li a.active,

@@ -11,7 +11,9 @@ import swal from 'sweetalert2';
 @Component({
   selector: 'app-ticket',
   templateUrl: './ticket.component.html',
-  styles: []
+  styles: [],
+  styleUrls: ['./ticket.component.css']
+
 })
 export class TicketComponent implements OnInit {
 

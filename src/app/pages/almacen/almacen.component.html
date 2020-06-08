@@ -1,0 +1,192 @@
+Detalle de proyectos
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Busqueda Almacen</h4>
+                <div style="margin-bottom: 25px" class="input-group">
+                    <i style="position: absolute; top: 6px; right: 13px; font-size: 22px; z-index: 9999; color:#999999" class="fa fa-search">
+                        
+                    </i>
+
+                    <input (input)="busqueda($event.target.value)" class="form-control" type="text" required="" placeholder="Busca aqui" style=" border-radius: .25rem; position: relative;" />
+                </div>
+
+                <div style="position: relative; height: 300px; overflow: auto; display: block; ">
+                    <table class="table-striped table-sm" id="tableq" style="width: 100%;">
+                        <thead>
+                            <tr>
+                                <th class="tbl-header" style="position: sticky;top: 0;">Seccion</th>
+                                <th class="tbl-header2" style="position: sticky;top: 0;">Cajon</th>
+                                <th class="tbl-header3" style="position: sticky;top: 0;">Nombre</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tablebody" name="tablebody">
+                            <tr>
+
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+
+    <div class="col-md-4">
+        <div class="card .bg-light">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-8 pull-right">
+                        <h4 class="card-title">Secciones</h4>
+                    </div>
+
+                    <div class="col-4 pull-left">
+                        <button (click)="NuevaSec()" class="btn btn-info pull-right" ngbTooltip="Agregar Seccion">
+                            <i class="fa fa-plus"></i>Nuevo
+                        </button>
+                    </div>
+                </div>
+                <div class="row" style="padding-bottom: 15px;">
+                </div>
+                <div class="row">
+                    <div class="col-md-12" style="height: 500px; overflow: auto; display: block;">
+                        <div>
+                            <table id="infoTable" class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th class=" tbl-header pointer tbl-header" style="position: sticky;top: 0;" (click)="sort('Titulo')">
+                                            Seccion
+                                            <i class="fa" [ngClass]="{'fa-sort': column != 'Titulo', 'fa-sort-asc': (column == 'Titulo' && isDesc), 'fa-sort-desc': (column == 'Titulo' && !isDesc) }" aria-hidden="true"> </i>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let secc of secaal | orderby: {property: column, direction: direction}" [ngClass]="{'table-info' : secc.id == selectedsec}">
+                                        <td (click)="cargaCajon(secc)"> {{ secc.Nombre }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="col-md-4">
+        <div class="card .bg-light">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-8 pull-right">
+                        <h4 class="card-title">Cajones
+                            <span *ngIf="seccion.Nombre !='' "> de seccion {{seccion.Nombre}}</span>
+                        </h4>
+                    </div>
+
+                    <div *ngIf="seccion.Nombre !='' " class="col-4 pull-left">
+                        <button (click)="NuevaCaja()" class="btn btn-info pull-right" name="new" ngbTooltip="Agregar Avance">
+                            <i class="fa fa-plus"></i>Nuevo
+                        </button>
+                    </div>
+                </div>
+                <div class="row" style="padding-bottom: 15px;">
+                </div>
+                <div class="row">
+                    <div class="col-md-12" style="height: 500px; overflow: auto; display: block;">
+                        <div>
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th class=" tbl-header pointer tbl-header" style="position: sticky;top: 0;" (click)="sort('Titulo')">
+                                            Cajon
+                                            <i class="fa" [ngClass]="{'fa-sort': column != 'Titulo', 'fa-sort-asc': (column == 'Titulo' && isDesc), 'fa-sort-desc': (column == 'Titulo' && !isDesc) }" aria-hidden="true"> </i>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let alm of Almacen | orderby: {property: column, direction: direction}" [ngClass]="{'table-info' : alm.id == cajon.id}">
+                                        <td (click)="cargaItems(alm)">{{ alm.AlmCajon }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card .bg-light">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-8 pull-right">
+                        <h4 class="card-title">Contenido
+                            <span *ngIf="cajon.AlmCajon != ''"> de {{cajon.AlmCajon}}</span>
+                        </h4>
+                    </div>
+
+                    <div *ngIf="cajon.AlmCajon != ''" class="col-4 pull-left">
+                        <button (click)="add()" class="btn btn-info pull-right" name="new" ngbTooltip="Agregar Avance">
+                            <i class="fa fa-plus"></i>Nuevo
+                        </button>
+                    </div>
+
+                </div>
+                <div class="row" *ngIf="mostrar != 0" style="padding-bottom: 15px;">
+
+                </div>
+                <div class="row" *ngIf="mostrar != 0">
+                    <label style="margin-left: 15px;" for="browser">Ingrese el nombre:</label>
+                </div>
+                <div class="row" *ngIf="mostrar != 0">
+                    <div class="col-8 pull-right">
+                        <input (input)="inputquery($event.target.value)" style=" border-radius: .25rem; position: relative;" class="form-control" type="text" list="datalist" name="browser" id="browser">
+                        <datalist id="datalist">
+                        </datalist>
+                    </div>
+                    <div *ngIf="cajon.AlmCajon != ''" class="col-4 pull-left">
+                        <button (click)="NuevoItem()" class="btn btn-info pull-right" name="new" ngbTooltip="Agregar Avance">
+                            Agregar
+                        </button>
+                    </div>
+                </div>
+                <div class="row" style="padding-bottom: 15px;">
+                </div>
+                <div class="row">
+                    <div class="col-md-12" style="height: 500px; overflow: auto; display: block;">
+                        <div>
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th class=" tbl-header pointer tbl-header" style="position: sticky;top: 0;" (click)="sort('Titulo')">
+                                            Contenido
+                                            <i class="fa" [ngClass]="{'fa-sort': column != 'Titulo', 'fa-sort-asc': (column == 'Titulo' && isDesc), 'fa-sort-desc': (column == 'Titulo' && !isDesc) }" aria-hidden="true"> </i>
+                                        </th>
+                                        <th class="tbl-header2" style="position: sticky;top: 0;"></th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let italm of italmacen | orderby: {property: column, direction: direction}">
+                                        <td (dblclick)="EditarItm(italm)">{{ italm.Nombre }}</td>
+                                        <td>
+                                            <span class="action-icons" style="font-size: 20px;">
+                                            <a href="javascript:void(0)" (click)="EliminarItem(italm)" style="color: #9F9F9F; padding-right: 5px" ngbTooltip="Eliminar"><i class="icon-cancelar"></i></a>
+                                        </span>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

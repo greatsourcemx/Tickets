@@ -22,14 +22,20 @@ Detalle de proyectos
                     <table class="table table-sm">
                         <thead>
                             <tr>
-                                <th scope="col">Estado</th>
-                                <th scope="col">Descripcion</th>
-                                <th scope="col">Fecha</th>
-                                <th scope="col">Editar</th>
+                                <th class=" tbl-header pointer tbl-header" style="position: sticky;top: 0;" (click)="sort('est')">
+                                    Estado
+                                    <i class="fa" [ngClass]="{'fa-sort': column != 'est', 'fa-sort-asc': (column == 'est' && isDesc), 'fa-sort-desc': (column == 'est' && !isDesc) }" aria-hidden="true"> </i>
+                                </th>
+                                <th class="tbl-header2" style="position: sticky;top: 0;">Descripcion</th>
+                                <th class=" tbl-header3 pointer" style="position: sticky;top: 0;" (click)="sort('avancefecha')">
+                                    Fecha
+                                    <i class="fa" [ngClass]="{'fa-sort': column != 'avancefecha', 'fa-sort-asc': (column == 'avancefecha' && isDesc), 'fa-sort-desc': (column == 'avancefecha' && !isDesc) }" aria-hidden="true"> </i>
+                                </th>
+                                <th class="tbl-header4" style="position: sticky;top: 0;">Editar</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let proy of proyes | filter: 'est,avancedesc': query">
+                            <tr *ngFor="let proy of proyes | orderby: {property: column, direction: direction}| filter: 'est,avancedesc': query">
                                 <td style="width: 160px; ">
                                     <select [(ngModel)]="proy.avanceestado " (change)="EditarP(proy, $event.target.value)" name="empr" id="empr" class="form-control form-control-sm " style="width: 140px; ">
                                         <option *ngFor="let est of Estados " [ngValue]="est ">{{ est }}</option>

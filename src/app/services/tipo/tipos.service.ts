@@ -27,7 +27,9 @@ export class TiposService {
   }
 
   guardarTipo ( descripcion ) {
-    let tipo = new Tipo( descripcion );
+    debugger;
+    let tipo = new Tipo();
+    tipo.descripcion = descripcion.value;
     let url = URL_SERVICIOS + '/tipo';
     return this.http.post( url, tipo ).pipe(
             map( (resp: any) => {

@@ -7,46 +7,46 @@
                     <form #f="ngForm" ngNativeValidate (ngSubmit)="guardar(f)">
                         <div class="form-group">
                             <label>Nombre</label>
-                            <input [(ngModel)]="usuario.nombre" name="nombre" type="text" class="form-control" placeholder="Nombre" required />
+                            <input [(ngModel)]="usuario.nombre" (input)="enableButton()" name="nombre" type="text" class="form-control" placeholder="Nombre" required />
                         </div>
 
                         <div class="form-group">
                             <label>Correo </label>
-                            <input [(ngModel)]="usuario.correo" name="correo" type="email" class="form-control" placeholder="Correo Electronico" required />
+                            <input [(ngModel)]="usuario.correo" (input)="enableButton()" name="correo" type="email" class="form-control" placeholder="Correo Electronico" required />
                         </div>
 
                         <div class="form-group">
                             <label>Usuario</label>
-                            <input [(ngModel)]="usuario.usuario" name="usuario" type="text" class="form-control" placeholder="Nombre de Usuario" required />
+                            <input [(ngModel)]="usuario.usuario" (input)="enableButton()" name="usuario" type="text" class="form-control" placeholder="Nombre de Usuario" required />
                         </div>
 
                         <div class="form-group">
                             <label>Constraseña</label>
-                            <input [(ngModel)]="usuario.password" name="password" type="password" class="form-control" placeholder="Constraseña" />
+                            <input [(ngModel)]="usuario.password" (input)="enableButton()" name="password" type="password" class="form-control" placeholder="Constraseña" />
                         </div>
 
                         <div class="form-group">
                             <label>Empresa</label>
-                            <select [(ngModel)]="usuario.empresa.id" name="empresa" id="empresa" class="form-control">
+                            <select [(ngModel)]="usuario.empresa.id" (change)="enableButton()" name="empresa" id="empresa" class="form-control">
                                 <option *ngFor="let empre of Empresas" [ngValue]="empre.id">{{ empre.nombre }}</option>
                             </select>
                         </div>
 
                         <div class="form-group">
                             <label>No. Empleado</label>
-                            <input [(ngModel)]="usuario.noEmpleado" name="noEmpleado" type="number" class="form-control" placeholder="Número de Empleado" required />
+                            <input [(ngModel)]="usuario.noEmpleado" (input)="enableButton()" name="noEmpleado" type="number" class="form-control" placeholder="Número de Empleado" required />
                         </div>
 
                         <div class="form-group row">
                             <div class="col-md-12">
                                 <div class="checkbox checkbox-info pull-left p-t-0">
-                                    <input [(ngModel)]="usuario.actualizarPassword" name="actualizarPassword" id="checkbox-signup" type="checkbox" class="filled-in chk-col-light-blue" />
+                                    <input [(ngModel)]="usuario.actualizarPassword" (input)="enableButton()" name="actualizarPassword" id="checkbox-signup" type="checkbox" class="filled-in chk-col-light-blue" />
                                     <label for="checkbox-signup"> Cambiar Contraseña </label>
                                 </div>
                             </div>
                         </div>
 
-                        <button type="submit" class="btn btn-success waves-effect waves-light m-r-10">
+                        <button disabled name="botonG" id="botonG" type="submit" class="btn btn-success waves-effect waves-light m-r-10">
                           <i class="fa fa-save"></i>
                           Guardar
                         </button>

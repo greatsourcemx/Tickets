@@ -5,6 +5,43 @@
     background: linear-gradient(to right, #1ac2cc, #6ad4d4);
 }
 
+.abiertalbl {
+    background-color: #f7931e;
+}
+
+.fechalbl {
+    background-color: #fff;
+    color: #7E8994;
+    border-color: #7E8994;
+    border-style: solid;
+    border-width: 1px;
+}
+
+table tr.highlight {
+    background-color: #4CAF50 !important;
+    color: #ffffff;
+}
+
+.criticolbl {
+    background-color: #ff0000;
+}
+
+.altolbl {
+    background-color: #f15a24;
+}
+
+.mediolbl {
+    background-color: #ff931e;
+}
+
+.bajolbl {
+    background-color: #29abe2;
+}
+
+.procesolbl {
+    background-color: #5373fe;
+}
+
 .border {
     width: 400px;
     padding: 20px;

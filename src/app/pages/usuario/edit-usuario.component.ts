@@ -65,5 +65,9 @@ export class EditUsuarioComponent implements OnInit {
         });
 
   }
-
+  enableButton(){
+    //document.getElementById("botonG").disabled = true;
+    var element = <HTMLInputElement> document.getElementById("botonG");
+    element.disabled = false;
+  }
 }

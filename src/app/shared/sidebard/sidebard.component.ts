@@ -6,7 +6,9 @@ import { Usuario } from '../../models/usuario.model';
 @Component({
   selector: 'app-sidebard',
   templateUrl: './sidebard.component.html',
-  styles: []
+  styles: [],
+  styleUrls: ['./sidebar.component.css']
+
 })
 export class SidebardComponent implements OnInit {
 

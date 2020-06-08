@@ -36,7 +36,8 @@ const after = (one: NgbDateStruct, two: NgbDateStruct) =>
     .custom-day.faded {
       background-color: rgba(2, 117, 216, 0.5);
     }
-  `]
+  `],
+  styleUrls: ['./ticket.component.css']
 })
 export class CerradosComponent implements OnInit {
 
@@ -49,7 +50,9 @@ export class CerradosComponent implements OnInit {
   cargando = false;
   showNavegacion = false;
   isAdmin = false;
-
+  isDesc: boolean = false;
+  column: string = 'CategoryName';
+  direction: number;
   // Para rango de fechas
   displayMonths = 2;
   navigation = 'select';
@@ -86,7 +89,11 @@ export class CerradosComponent implements OnInit {
       this.admins = resp;
     });
   }
-
+  sort(property) {
+    this.isDesc = !this.isDesc; // change the direction
+    this.column = property;
+    this.direction = this.isDesc ? 1 : -1;
+  }
   cargarUsers ( ) {
     this._soliService.cargarSoliActivos( )
     .subscribe( (resp: any) => {
@@ -137,6 +144,33 @@ export class CerradosComponent implements OnInit {
       cancelButtonColor: '#398bf7',
     }).then((result) => {
       if (result.value) {
+        swal.fire({
+          title: "Comentario",
+          input: 'text',
+          showCancelButton: true,
+          confirmButtonText: "Aceptar",
+          cancelButtonText: "Cancelar",
+          preConfirm: function (comentario) {
+                if (comentario != "") {
+                  return new Promise(function (resolve) {
+                    resolve([
+                      comentario,
+                    ])
+                  })
+                }else{
+                  return false;
+                }
+            },
+        }).then((result) => {
+          if (result.value) {
+            serv.Descripcion = result.value;
+            this._servicioService.abrir( serv )
+            .subscribe(() => {
+              swal.fire(serv.Id + ' : ' + serv.Titulo, 'Se ha abierto', 'success');
+              this.cargarTickets();
+            });
+          }
+        });
         this.abrirTicket( serv );
       }
     });

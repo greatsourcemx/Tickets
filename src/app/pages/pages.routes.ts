@@ -37,11 +37,18 @@ import { ManteTicketComponent } from './mantenimientos/mante-ticket/mante-ticket
 import { EvaluacionesComponent } from './reportes/evaluaciones.component';
 import { ParametrosComponent } from './mantenimientos/parametros/parametros.component';
 import { DetalledesComponent } from './mantenimientos/detalledes/detalledes.component';
+import { SoftwaredesComponent } from './mantenimientos/detalledes/softwaredes.component';
 import { CambiosdesComponent } from './mantenimientos/detalledes/cambiosdes.component';
+import { NuevoDesComponent } from './mantenimientos/detalledes/nuevopdes.component';
 import { AreasComponent } from './areas/areas.component';
+import { TipoTicketComponent } from './tipoticket/tipoticket.component';
 import { GraficaRatings } from './graficarating/graficarating.component';
 
+import { DetallesProyecto } from './mantenimientos/detalledes/detallepro.component';
+import { NuevoTPComponent } from './mantenimientos/detalledes/nuevotp.component';
 import { AgendaComponent } from './agenda/agenda.component';
+import { AlmacenComponent } from './almacen/almacen.component';
+
 
 const pagesRoutes: Routes = [
     {
@@ -66,14 +73,17 @@ const pagesRoutes: Routes = [
             { path: 'mantenimientos/:id', component: ManteTicketComponent, data: { titulo: 'Mantenimiento' }  },
             { path: 'mantenimiento/parametros', component: ParametrosComponent, data: { titulo: 'Parámetros' }  },
             { path: 'mantenimiento/detalledes', component: DetalledesComponent, data: { titulo: 'Proyectos' }  },
+            { path: 'mantenimiento/softwaredes', component: SoftwaredesComponent, data: { titulo: 'Proyectos Software' }  },
             { path: 'tablero', component: TableroComponent, data: { titulo: 'Tablero' }  },
             { path: 'zonas', component: ZonasComponent, data: { titulo: 'Zonas' }  },
             { path: 'prioridades', component: PrioridadComponent, data: { titulo: 'Prioridades' }  },
             { path: 'servicio/:id', component: DetallesServicioComponent, data: { titulo: 'Detalle del Servicio' }  },
+            { path: 'detallepro/:id', component: DetallesProyecto, data: { titulo: 'Detalle del Proyecto' }  },
+
             { path: 'ticket', component: TicketComponent, data: { titulo: 'Nuevo Ticket' }  },
             { path: 'tickets', component: TrabajosComponent, data: { titulo: 'Tickets Globales' }  },
             { path: 'cerrados', component: CerradosComponent, data: { titulo: 'Tickets Cerrados' }  },
-            { path: 'tickets/:id', component: TicketsComponent, data: { titulo: 'Detalle del Ticket' }  },
+            { path: 'tickets/:id/:combo', component: TicketsComponent, data: { titulo: 'Detalle del Ticket' }  },
             { path: 'avances/:id', component: AvancesComponent, data: { titulo: 'Avances' }  },
             { path: 'reporte', component: ReportesComponent, data: { titulo: 'Porcentajes' }  },
             { path: 'horas', component: HorasComponent, data: { titulo: 'Horas' }  },
@@ -87,11 +97,16 @@ const pagesRoutes: Routes = [
             { path: 'recurrentes', component: RecurrentesComponent, data: { titulo: 'Recurrentes' }  },
             { path: 'recurrente/nuevo', component: NuevoComponent, data: { titulo: 'Recurrente' }  },
             { path: 'recurrente/:id', component: EditRecurrenteComponent, data: { titulo: 'Recurrente' }  },
+            { path: 'nuevatarea/:id', component: NuevoTPComponent, data: { titulo: 'Nueva Tarea' }  },
             { path: 'calendario', component: CalendarioComponent, data: { titulo: 'Calendario' }  },
             { path: 'agenda', component: AgendaComponent, data: { titulo: 'Agenda' }  },
             { path: 'areas', component: AreasComponent, data: { titulo: 'Areas Laborales' }  },
+            { path: 'tipoticket', component: TipoTicketComponent, data: { titulo: 'Tipos de Tickets' }  },
             { path: 'graficarating', component: GraficaRatings, data: { titulo: 'Graficas Rating' }  },
             { path: 'cambiosdes/:id', component: CambiosdesComponent, data: { titulo: 'Cambios Desarrollo' }  },
+            { path: 'nuevopdes', component: NuevoDesComponent, data: { titulo: 'Nuevo Proyecto' }  },
+            { path: 'almacen', component: AlmacenComponent, data: { titulo: 'Almacen' }  },
+
             { path: '', redirectTo: '/principal', pathMatch: 'full'  },
         ]
     }

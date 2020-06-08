@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { Usuario } from '../../models/usuario.model';
 import { URL_SERVICIOS } from '../../config/config';
 import { Areas } from '../../models/areas.model';
+import { Tipo } from '../../models/Tipo.model';
 
 import { Router } from '@angular/router';
 
@@ -66,6 +67,21 @@ export class SolicitanteService {
       return this.http.get( url ).pipe(
                 map( (resp: any) => resp ));
     }
+    cargarTiposTickets () {
+      debugger;
+      let url = URL_SERVICIOS + '/tipos/activos';
+      return this.http.get( url ).pipe(
+                map( (resp: any) => resp ));
+    }
+    guardartipoticket ( tipo: Tipo ) {
+      let url = URL_SERVICIOS + '/tipoticketnuevo';
+  
+      return this.http.post( url, tipo ).pipe(
+                  map( (resp: any) => {
+                    swal.fire('Area Creada', tipo.descripcion, 'success');
+                    return resp;
+                  }));
+    }
     guardararea ( area: Areas ) {
       let url = URL_SERVICIOS + '/areanueva';
   
@@ -75,6 +91,7 @@ export class SolicitanteService {
                     return resp;
                   }));
     }
+    
     modificarEmpresa ( area: Areas ) {
       let url = URL_SERVICIOS + '/updatearea';
   

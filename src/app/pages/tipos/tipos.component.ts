@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { TiposService } from '../../services/service.index';
 import { Tipo } from '../../models/tipo.model';
 
-declare var swal: any;
+import swal from 'sweetalert2';
 
 @Component({
   selector: 'app-tipos',
@@ -55,22 +55,20 @@ export class TiposComponent implements OnInit {
   actualizarTipo (tipo: Tipo) {
     this._tipoService.modificarTipo( tipo )
         .subscribe( usr => {
-          swal('Aviso!', 'Se registrarón los cambios', 'success');
+          swal.fire('Aviso!', 'Se registrarón los cambios', 'success');
         },
         error => {
-          swal('Aviso!', error.error, 'warning');
+          swal.fire('Aviso!', error.error, 'warning');
         });
   }
-
+  
   crearTipo() {
-    swal({
+    swal.fire({
       title: 'Crear Tipo',
       text: 'Ingrese la Descripción',
-      content: 'input',
-      icon: 'info',
-      buttons: true,
-      dangerMode: true
-    }).then( (valor: string ) => {
+      input: 'text',
+      showCancelButton: true
+    }).then( (valor) => {
 
       if ( !valor ) {
         return;
@@ -79,10 +77,10 @@ export class TiposComponent implements OnInit {
       this._tipoService.guardarTipo( valor )
               .subscribe( () => {
                 this.cargarTipos();
-                swal('Aviso!', 'Se registrarón los cambios', 'success');
+                swal.fire('Aviso!', 'Se registrarón los cambios', 'success');
               },
               error => {
-                swal('Aviso!', error.error, 'warning');
+                swal.fire('Aviso!', error.error, 'warning');
               });
 
     });

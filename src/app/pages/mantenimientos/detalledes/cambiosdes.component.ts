@@ -7,7 +7,9 @@ import swal from 'sweetalert2';
 @Component({
   selector: 'app-cambiosdes',
   templateUrl: './cambiosdes.component.html',
-  styles: []
+  styles: [],
+  styleUrls: ['../../agenda/agenda.component.css']
+
 })
 
 export class CambiosdesComponent implements OnInit {

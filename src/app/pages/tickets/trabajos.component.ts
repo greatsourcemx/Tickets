@@ -5,7 +5,8 @@ import { ServiciosService, UsuarioService, SolicitanteService, TiposService } fr
 @Component({
   selector: 'app-trabajos',
   templateUrl: './trabajos.component.html',
-  styles: []
+  styles: [],
+  styleUrls: ['./ticket.component.css']
 })
 export class TrabajosComponent implements OnInit {
 
@@ -17,7 +18,9 @@ export class TrabajosComponent implements OnInit {
   totalRegistros: number = 0;
   cargando = false;
   showNavegacion = false;
-
+  isDesc: boolean = false;
+  column: string = 'CategoryName';
+  direction: number;
   constructor(
     public _servicioService: ServiciosService,
     public _soliService: SolicitanteService,
@@ -37,7 +40,11 @@ export class TrabajosComponent implements OnInit {
       this.admins = resp;
     });
   }
-
+  sort(property) {
+    this.isDesc = !this.isDesc; // change the direction
+    this.column = property;
+    this.direction = this.isDesc ? 1 : -1;
+  }
   cargarUsers ( ) {
     this._soliService.cargarSoliActivos( )
     .subscribe( (resp: any) => {

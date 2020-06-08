@@ -1,0 +1,53 @@
+<div class="card card-body">
+    <div class="row">
+        <div class="col-sm-12 col-xs-12">
+            <form #f="ngForm" ngNativeValidate (ngSubmit)="guardar(f)">
+
+                <div class="form-group">
+                    <label for="titulo">Título</label>
+                    <input type="text" class="form-control" name="dp" [(ngModel)]="proyecto.Titulo" id="Titulo" name="Titulo" placeholder="Titulo" />
+                </div>
+                <div class="form-group">
+                    <label for="descripcion">Descripción</label>
+                    <textarea [(ngModel)]="proyecto.Descripcion" id="Descripcion" name="Descripcion" class="form-control" rows="4" placeholder="Descripcion"></textarea>
+                </div>
+
+                <div class="row">
+                    <div *ngIf="esSoporte" class="col-lg-6">
+                        <label for="solicitante">Solicitante</label>
+                        <ng-select [(ngModel)]="proyecto.Solicitor" name="solicitante" [items]="users" bindLabel="nombre">
+                        </ng-select>
+                    </div>
+                    <div [ngClass]="esSoporte ? 'col-lg-6' : 'col-lg-12'">
+                        <label for="responsable">Responsable</label>
+                        <ng-select [(ngModel)]="proyecto.AsignadoA" name="responsable" [items]="admins" bindLabel="nombre">
+                            <ng-template ng-option-tmp let-item="item">
+                                {{item.nombre}} <small>{{item.noEmpleado}}</small>
+                            </ng-template>
+                        </ng-select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="titulo">Tecnologias</label>
+                    <input type="text" class="form-control" [(ngModel)]="proyecto.Tecnologias" id="Tecnologias" name="Titulo" placeholder="Tecnologias" />
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-6">
+                        <label for="titulo">Base de Datos (Servidor/instancia/DB)</label>
+                        <input type="text" class="form-control" [(ngModel)]="proyecto.Basedatos" id="Basedatos" name="Basedatos" placeholder="Ruta DB" />
+                    </div>
+                    <div class="col-lg-6">
+                        <label for="titulo">Ruta de Codigo</label>
+                        <input type="text" class="form-control" [(ngModel)]="proyecto.Rutacodigo" id="Rutacodigo" name="Rutacodigo" placeholder="Ruta" />
+                    </div>
+                </div>
+                <label class="control-label m-t-20"></label>
+
+                <button type="submit" class="btn btn-success waves-effect waves-light m-r-10">Guardar</button>
+                <button type="button" (click)="regresar()" name="volver" class="btn btn-info waves-effect waves-light">Cancelar</button>
+            </form>
+
+        </div>
+    </div>
+</div>

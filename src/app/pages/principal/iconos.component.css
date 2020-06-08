@@ -1,0 +1,83 @@
+@font-face {
+    font-family: 'icomoon';
+    src: url('icomoon.eot?umkubu');
+    src: url('icomoon.eot?umkubu#iefix') format('embedded-opentype'), url('icomoon.ttf?umkubu') format('truetype'), url('icomoon.woff?umkubu') format('woff'), url('icomoon.svg?umkubu#icomoon') format('svg');
+    font-weight: normal;
+    font-style: normal;
+    font-display: block;
+}
+
+[class^="icon-"],
+[class*=" icon-"] {
+    /* use !important to prevent issues with browser extensions that change fonts */
+    font-family: 'icomoon' !important;
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    /* Better Font Rendering =========== */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-mantenimiento:before {
+    content: "\e90d";
+}
+
+.icon-avance:before {
+    content: "\e900";
+}
+
+.icon-cerrado:before {
+    content: "\e901";
+}
+
+.icon-tomar:before {
+    content: "\e902";
+}
+
+.icon-tickets:before {
+    content: "\e904";
+}
+
+.icon-equipos:before {
+    content: "\e905";
+}
+
+.icon-calendario:before {
+    content: "\e906";
+}
+
+.icon-cancelar:before {
+    content: "\e903";
+}
+
+.icon-proyectos:before {
+    content: "\e907";
+}
+
+.icon-catalogos:before {
+    content: "\e908";
+}
+
+.icon-CERRADOS:before {
+    content: "\e909";
+    color: #4a4a4a;
+}
+
+.icon-EN-PROCESO:before {
+    content: "\e90a";
+    color: #4a4a4a;
+}
+
+.icon-ABIERTAS:before {
+    content: "\e90b";
+    color: #4a4a4a;
+}
+
+.icon-TIEMPO:before {
+    content: "\e90c";
+    color: #4a4a4a;
+}
