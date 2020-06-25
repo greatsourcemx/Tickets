@@ -1,0 +1,87 @@
+<div class="card card-body">
+    <div class="row">
+        <div class="col-sm-12 col-xs-12">
+            <form #f="ngForm" ngNativeValidate (ngSubmit)="guardar(f)">
+                <div class="form-group">
+                    <label for="titulo">Título</label>
+                    <input type="text" class="form-control" name="dp" [(ngModel)]="proyecto.Titulo" id="Titulo" name="Titulo" placeholder="Titulo" />
+                </div>
+                <div class="form-group">
+                    <label for="descripcion">Descripcións</label>
+                    <textarea [(ngModel)]="proyecto.Descripcion" id="Descripcion" name="Descripcion" class="form-control" rows="4" placeholder="Descripcion"></textarea>
+                </div>
+
+                <div class="row">
+                    <div *ngIf="esSoporte" class="col-lg-6">
+                        <label for="solicitante">Solicitante</label>
+                        <ng-select [(ngModel)]="proyecto.Solicitor" name="solicitante" [items]="users" bindLabel="nombre">
+                        </ng-select>
+                    </div>
+                    <div [ngClass]="esSoporte ? 'col-lg-6' : 'col-lg-12'">
+                        <label for="responsable">Responsable</label>
+                        <ng-select [(ngModel)]="proyecto.AsignadoA" name="responsable" [items]="admins" bindLabel="nombre">
+                            <ng-template ng-option-tmp let-item="item">
+                                {{item.nombre}} <small>{{item.noEmpleado}}</small>
+                            </ng-template>
+                        </ng-select>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-lg-4">
+
+                        <div class="form-row" style="padding-bottom: 10px;">
+                            <label for="IDE">IDE</label>
+                            <input type="text" class="form-control" [(ngModel)]="proyecto.IDE" id="IDE" name="IDE" placeholder="IDE" />
+                        </div>
+
+                        <h4>Base de Datos</h4>
+                        <div class="form-row" style="padding-bottom: 10px;">
+
+                            <div class="col-lg-4">
+                                <label for="Basedatos">Servidor</label>
+                                <input type="text" class="form-control" id="server" name="server" placeholder="Ruta DB" />
+                            </div>
+                            <div class="col-lg-4">
+                                <label for="Basedatos">instancia</label>
+                                <input type="text" class="form-control" id="instancia" name="instancia" placeholder="Ruta DB" />
+                            </div>
+                            <div class="col-lg-4">
+                                <label for="Basedatos">DB</label>
+                                <input type="text" class="form-control" id="database" name="database" placeholder="Ruta DB" />
+                            </div>
+                        </div>
+                        <div class="form-row" style="padding-bottom: 10px;">
+                            <label for="Rutacodigo">Ruta de Codigo</label>
+                            <input type="text" class="form-control" [(ngModel)]="proyecto.RutaCodigo" id="Rutacodigo" name="Rutacodigo" placeholder="Ruta" />
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4">
+                        <div class="row">
+                            <div class="col-4 pull-left"></div>
+                            <h1>Tecnologias</h1>
+                            <div class="col-4 pull-left">
+
+                            </div>
+
+                        </div>
+
+                        <div *ngFor="let tec of tecnologias" class="form-check">
+                            <input #jscheck [checked]="saveUsername" (change)="changeCheck($event, tec)" type="checkbox" class="form-check-input" id={{tec.NombreCheck}}>
+                            <label class="form-check-label" for={{tec.NombreCheck}}>{{tec.Nombre}}</label>
+                        </div>
+                    </div>
+
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-lg-4"></div>
+                    <button type="submit" class="btn btn-success waves-effect waves-light m-r-10">Guardar</button>
+                    <button type="button" (click)="regresar()" name="volver" class="btn btn-info waves-effect waves-light">Cancelar</button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
