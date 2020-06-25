@@ -17,6 +17,7 @@ export class ReportesService {
     let url = URL_SERVICIOS + '/reporte/porcentaje';
     return this.http.post( url, params ).pipe(
     map( (resp: any) => {
+      debugger;
       return resp;
     }));
   }

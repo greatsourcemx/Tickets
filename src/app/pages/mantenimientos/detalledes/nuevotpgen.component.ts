@@ -9,14 +9,14 @@ import swal from 'sweetalert2';
 
 
 @Component({
-  selector: 'app-nuevotp',
-  templateUrl: './nuevotp.component.html',
+  selector: 'app-nuevotpgen',
+  templateUrl: './nuevotpgen.component.html',
   styles: [],
   styleUrls: ['../../tickets/ticket.component.css']
 
 
 })
-export class NuevoTPComponent implements OnInit {
+export class NuevoTPgenComponent implements OnInit {
 
   fecCerrado: any = { year: 1800, month: 1, day: 1 };
   ticket: Servicio = new Servicio('', '');

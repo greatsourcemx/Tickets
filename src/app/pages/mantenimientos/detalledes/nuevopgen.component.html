@@ -31,38 +31,12 @@
                     <div class="col-lg-4">
 
                         <div class="form-row" style="padding-bottom: 10px;">
-                            <label for="IDE">IDE</label>
-                            <input type="text" class="form-control" [(ngModel)]="proyecto.IDE" id="IDE" name="IDE" placeholder="IDE" />
-                        </div>
-
-                        <h4>Base de Datos</h4>
-                        <div class="form-row" style="padding-bottom: 10px;">
-                            <div class="col-lg-4">
-                                <label for="Basedatos">Servidor</label>
-                                <input type="text" class="form-control" id="server" name="server" placeholder="Ruta DB" />
-                            </div>
-                            <div class="col-lg-4">
-                                <label for="Basedatos">instancia</label>
-                                <input type="text" class="form-control" id="instancia" name="instancia" placeholder="Ruta DB" />
-                            </div>
-                            <div class="col-lg-4">
-                                <label for="Basedatos">DB</label>
-                                <input type="text" class="form-control" id="database" name="database" placeholder="Ruta DB" />
-                            </div>
-                        </div>
-                        <div class="form-row" style="padding-bottom: 10px;">
-                            <label for="Rutacodigo">Ruta de Codigo</label>
+                            <label for="Rutacodigo">Ruta de archivos</label>
                             <input type="text" class="form-control" [(ngModel)]="proyecto.RutaCodigo" id="Rutacodigo" name="Rutacodigo" placeholder="Ruta" />
                         </div>
                     </div>
 
-                    <div class="col-lg-4">
-                        <h1>Tecnologias</h1>
-                        <div *ngFor="let tec of tecnologias" class="form-check">
-                            <input #jscheck [checked]="saveUsername" (change)="changeCheck($event, tec)" type="checkbox" class="form-check-input" id={{tec.NombreCheck}}>
-                            <label class="form-check-label" for={{tec.NombreCheck}}>{{tec.Nombre}}</label>
-                        </div>
-                    </div>
+
 
                 </div>
                 <br>

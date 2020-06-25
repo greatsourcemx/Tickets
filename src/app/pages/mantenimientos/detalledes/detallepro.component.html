@@ -4,11 +4,10 @@
         <div class="row">
             <div class="col-md-3 col-xs-6 b-r"> <strong class="text-muted">Título</strong>
                 <br />
-                <strong># {{ proyecto.id }} {{ proyecto.Titulo }}</strong>
+                <strong>{{ proyecto.Titulo }}</strong>
 
                 <br />
-                <span class="label" [ngClass]="( proyecto.Estado == 'Abierta' ) ? 'label-warning' :
-                ( proyecto.Estado == 'Cerrada' ) ? 'label-success' : 'label-info'"> {{ proyecto.Estado }}</span>
+
             </div>
             <div class="col-md-3 col-xs-6 b-r"> <strong>Responsable</strong>
                 <br />
@@ -27,11 +26,12 @@
                     <span *ngIf="proyecto.AsignadoA.id === 0" class="label label-warning"> Sin Responsable</span>
                 </p>
             </div>
-            <div class="col-md-3 col-xs-6 b-r"> <strong>Version</strong>
-                <br />
-                <p class="text-muted">
-                    <span *ngIf="proyecto.AsignadoA.id !== 0" class="label label-success"> {{ proyecto.Version}}</span>
-                </p>
+            <div class="col-md-3 col-xs-6 b-r"> <strong>Tecnologias</strong>
+                <br/>
+                <strong>{{ proyecto.Tecnologias}}</strong>
+
+                <br/>
+
             </div>
         </div>
         <hr />
@@ -52,12 +52,37 @@
         </ng-template>
 
         <hr />
+        <div class="row">
+
+            <div class="col-md-3 col-xs-6 b-r">
+                <strong *ngIf="proyecto.Tipo == 'd'">Ruta Codigo</strong>
+                <strong *ngIf="proyecto.Tipo == 'g'">Ruta Archivos</strong>
+                <br />
+                <strong>{{ proyecto.RutaCodigo }}</strong>
+                <br />
+            </div>
+
+            <div *ngIf="proyecto.Tipo == 'd'" class="col-md-3 col-xs-6 b-r"> <strong>IDE</strong>
+                <br />
+                <strong>{{ proyecto.IDE }}</strong>
+                <br />
+            </div>
+            <div *ngIf="proyecto.Tipo == 'd'" class="col-md-3 col-xs-6 b-r"> <strong>Base de Datos</strong>
+                <br />
+                <strong>{{ proyecto.BaseDatos }}</strong>
+                <br />
+            </div>
+
+        </div>
+        <br>
         <!-- <button class="btn btn-danger waves-effect waves-light" name="regresar" (click)="regresar()">Cerrar</button> -->
 
 
         <div class="row">
             <div class="col-md-9">
-                <button class="btn btn-info waves-effect waves-light" name="regresar" (click)="regresar()">Regresar</button>
+                <button *ngIf="proyecto.Tipo == 'd'" class="btn btn-info waves-effect waves-light" name="regresar" [routerLink]="['/mantenimiento/softwaredes']">Regresar</button>
+                <button *ngIf="proyecto.Tipo == 'g'" class="btn btn-info waves-effect waves-light" name="regresar" [routerLink]="['/mantenimiento/proyectogen']">Regresar</button>
+
             </div>
 
         </div>
@@ -90,7 +115,8 @@
                         <tbody>
                             <tr *ngFor="let tareas of proyecto.Tareas">
                                 <td>
-                                    <div *ngIf="tareas.Estado === 'En Proceso'">🛠</div>
+                                    <div *ngIf="tareas.Estado === 'En Proceso'"><i style="font-size: 20px;" class="icon-mantenimiento"></i></div>
+                                    <div style="color: #06D79C; padding-right: 5px" *ngIf="tareas.Estado === 'Cerrada'"><i style="font-size: 20px;" class="icon-tickets"></i></div>
                                 </td>
                                 <td> {{ tareas.Id }} </td>
                                 <td> {{ tareas.Titulo }} </td>

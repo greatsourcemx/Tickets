@@ -52,6 +52,13 @@ editarItem (nombre, id) {
 return this.http.get( this.url + '/editaritem?nombre=' + nombre + '&id=' + id).pipe(
   map((data: any) => data));
 }
+
+eliminarSeccion (id, seccion) {
+  return this.http.get( this.url + '/eliminarSeccion?id=' + id + '&seccion=' + seccion).pipe(
+    map((data: any) => data));
+  }
+
+
   guardarAvance (proy: any) {
     return this.http.get( this.url + '/guardaAvance?proyecto=' + proy ).pipe(
       map((data: any) => data));

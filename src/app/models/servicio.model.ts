@@ -30,6 +30,7 @@ export class Servicio {
         public Total: number = 0,
         public termino: string = '',
         public archivos: Archivos[] = [],
-        public proyecto: number = 0
+        public proyecto: number = 0,
+        public Reabrir: string = ''
     ) { }
 }

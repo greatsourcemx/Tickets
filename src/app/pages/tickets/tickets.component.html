@@ -15,7 +15,7 @@
                 <div class="row">
                     <div *ngIf="esSoporte" class="col-lg-6">
                         <label for="solicitante">Solicitante</label>
-                        <ng-select [(ngModel)]="ticket.Solicitor" name="solicitante" [items]="users" bindLabel="nombre">
+                        <ng-select [(ngModel)]="ticket.Solicitor" name="solicitante" id="solicitante" [items]="users" bindLabel="nombre">
                         </ng-select>
                     </div>
                     <div [ngClass]="esSoporte ? 'col-lg-6' : 'col-lg-12'">

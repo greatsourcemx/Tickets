@@ -105,11 +105,17 @@ Detalle de proyectos
                                             Cajon
                                             <i class="fa" [ngClass]="{'fa-sort': column != 'Titulo', 'fa-sort-asc': (column == 'Titulo' && isDesc), 'fa-sort-desc': (column == 'Titulo' && !isDesc) }" aria-hidden="true"> </i>
                                         </th>
+                                        <th class="tbl-header2" style="position: sticky;top: 0;"></th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr *ngFor="let alm of Almacen | orderby: {property: column, direction: direction}" [ngClass]="{'table-info' : alm.id == cajon.id}">
                                         <td (click)="cargaItems(alm)">{{ alm.AlmCajon }}</td>
+                                        <td style="text-align: right;">
+                                            <span class="action-icons" style="font-size: 20px;">
+                                                <a href="javascript:void(0)" (click)="EliminarSeccion(alm)" style="color: #9F9F9F; padding-right: 5px" ngbTooltip="Eliminar"><i class="icon-cancelar"></i></a>
+                                            </span>
+                                        </td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -174,10 +180,10 @@ Detalle de proyectos
                                 <tbody>
                                     <tr *ngFor="let italm of italmacen | orderby: {property: column, direction: direction}">
                                         <td (dblclick)="EditarItm(italm)">{{ italm.Nombre }}</td>
-                                        <td>
+                                        <td style="text-align: right;">
                                             <span class="action-icons" style="font-size: 20px;">
-                                            <a href="javascript:void(0)" (click)="EliminarItem(italm)" style="color: #9F9F9F; padding-right: 5px" ngbTooltip="Eliminar"><i class="icon-cancelar"></i></a>
-                                        </span>
+                                                <a href="javascript:void(0)" (click)="EliminarItem(italm)" style="color: #9F9F9F; padding-right: 5px" ngbTooltip="Eliminar"><i class="icon-cancelar"></i></a>
+                                            </span>
                                         </td>
                                     </tr>
                                 </tbody>

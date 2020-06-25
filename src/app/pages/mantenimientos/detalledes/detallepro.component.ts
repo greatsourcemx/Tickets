@@ -45,6 +45,7 @@ export class DetallesProyecto implements OnInit {
   cargarDetalles ( id: number ) {
     this._ProyectoService.cargarDesarrollo( id )
     .subscribe( (resp: Proyecto) => {
+      debugger;
       this.proyecto = resp;
     });
   }

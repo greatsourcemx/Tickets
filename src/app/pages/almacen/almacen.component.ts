@@ -157,6 +157,28 @@ export class AlmacenComponent implements OnInit {
         });
     }
 
+    EliminarSeccion (cajon) {
+      debugger;
+      swal.fire({
+        title: "Eliminar seccion " + cajon.AlmCajon,
+        showCancelButton: true,
+        confirmButtonText: "Si",
+        cancelButtonText: "No", 
+        
+        }).then((result) => {
+            if (result.value) {
+              this._AlmacenService.eliminarSeccion(cajon.id, this.seccion.id)
+              .subscribe( (resp: any) => {
+                  this.cargando = false;
+                  this.Almacen = resp;
+              });
+              swal.fire(
+                'Se elimino la seccion.',
+                'success'
+              )
+            }
+          });
+  }
 
  public NuevaSec() {
         let seccionin;

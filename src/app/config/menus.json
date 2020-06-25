@@ -1,7 +1,7 @@
 {
     "menu": [{
         "titulo": "Tickets",
-        "icono": "fa fa-tasks",
+        "icono": "icon-tickets",
         "submenu": [
             { "titulo": "Mi Tablero", "url": "/dashboard" },
             { "titulo": "Cerrados", "url": "/cerrados" },
@@ -9,13 +9,13 @@
         ]
     }, {
         "titulo": "Equipo",
-        "icono": "fa fa-laptop",
+        "icono": "icon-equipos",
         "submenu": [
             { "titulo": "Asignado", "url": "/asignado" }
         ]
     }, {
         "titulo": "Catálogos",
-        "icono": "fa fa-laptop",
+        "icono": "icon-catalogos",
         "submenu": [
             { "titulo": "Agenda", "url": "/agenda" }
         ]
@@ -70,7 +70,7 @@
             "titulo": "Proyectos",
             "icono": "icon-proyectos",
             "submenu": [
-                { "titulo": "Proyectos", "url": "/mantenimiento/detalledes" },
+                { "titulo": "Proyectos", "url": "/mantenimiento/proyectogen" },
                 { "titulo": "Proyectos Software", "url": "/mantenimiento/softwaredes" }
             ]
         },
@@ -85,7 +85,8 @@
                 { "titulo": "Prioridades", "url": "/prioridades" },
                 { "titulo": "Tipo Servicio", "url": "/tipos" },
                 { "titulo": "Agenda", "url": "/agenda" },
-                { "titulo": "Areas", "url": "/areas" }
+                { "titulo": "Areas", "url": "/areas" },
+                { "titulo": "Tecnologias", "url": "/tecnologias" }
 
             ]
         }

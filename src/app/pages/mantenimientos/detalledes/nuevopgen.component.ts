@@ -11,11 +11,11 @@ import swal from 'sweetalert2';
 
 
 @Component({
-  selector: 'app-nuevopdes',
-  templateUrl: './nuevopdes.component.html',
+  selector: 'app-nuevopgen',
+  templateUrl: './nuevopgen.component.html',
   styles: []
 })
-export class NuevoDesComponent implements OnInit {
+export class NuevoDesGenComponent implements OnInit {
 
   duracion: Tiempo;
   ticket: Servicio = new Servicio('');
@@ -27,7 +27,6 @@ export class NuevoDesComponent implements OnInit {
   proyecto : Proyecto = new Proyecto('');
   esSoporte = false;
   Angular = true;
-  tecnologias: Tecnologia[] = [];
   public wpcheck:boolean;
   public saveUsername:boolean;
 
@@ -61,25 +60,13 @@ export class NuevoDesComponent implements OnInit {
     this.cargarAdmins();
     this.cargarUsers();
     this.cargarTipos();
-    this.cargarTecnologias();
   }
-  cargarTecnologias ( ) {
-    this._ProyectoService.cargarTecnologias('d', 0)
-    .subscribe( (resp: any) => {
-      this.tecnologias = resp;
-    });
-  }
+  
   regresar() {
     let url = localStorage.getItem('url');
     this.router.navigate([url]);
   }
-  public changeCheck(value , nombre){
-    for (let i = 0; i < this.tecnologias.length; i++) {
-      if(this.tecnologias[i].id == nombre.id){
-        this.tecnologias[i].Estado = value.target.checked;
-      }
-    }
-}
+  
   cargarTiempos () {
     this._tiempoService.cargarTiemposActivos()
     .subscribe( (resp: any) => {
@@ -133,11 +120,10 @@ export class NuevoDesComponent implements OnInit {
     }
 
     this.proyecto.BaseDatos = $('#server').val() + "/"+ $('#instancia').val() + "/" +$('#database').val();
-    this.proyecto.Tecno = this.tecnologias;
     this.ticket.FecCerrado = new Date(this.fecCerrado.year, this.fecCerrado.month - 1, this.fecCerrado.day);
-    this._ProyectoService.crearProyecto( this.proyecto )
+    this._ProyectoService.crearProyectoGen( this.proyecto )
     .subscribe( (resp: any) => { 
-      this.router.navigate(['/mantenimiento/softwaredes']); 
+      this.router.navigate(['/mantenimiento/proyectogen']); 
       swal.fire('Aviso!', 'Se registrarón los cambios', 'success');
     });
   }

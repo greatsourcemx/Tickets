@@ -25,8 +25,16 @@
                 <strong>{{ servicio.TiempoTranscurrido }}</strong>
             </div>
         </div>
-        <hr />
+        <hr/>
         <p class="m-t-30">{{ servicio.Descripcion }}</p>
+
+        <ng-container *ngIf="servicio.Reabrir != '' && servicio.Reabrir != null" class="col-md-12 col-xs-6 b-r">
+            <hr/>
+            <strong class="text-muted">Comentario Reabrir</strong>
+            <br />
+            <p class="m-t-30">{{ servicio.Reabrir }}</p>
+        </ng-container>
+
         <div *ngIf="servicio.archivos.length > 0" class="archivos">
             <h4 class="font-medium m-t-30">Archivos</h4>
             <hr />

@@ -11,11 +11,11 @@ import swal from 'sweetalert2';
 
 
 @Component({
-  selector: 'app-nuevopdes',
-  templateUrl: './nuevopdes.component.html',
+  selector: 'app-editardes',
+  templateUrl: './editardes.component.html',
   styles: []
 })
-export class NuevoDesComponent implements OnInit {
+export class EditarDesComponent implements OnInit {
 
   duracion: Tiempo;
   ticket: Servicio = new Servicio('');
@@ -27,6 +27,9 @@ export class NuevoDesComponent implements OnInit {
   proyecto : Proyecto = new Proyecto('');
   esSoporte = false;
   Angular = true;
+  server: string= '';
+  instance: string= '';
+  database: string= '';
   tecnologias: Tecnologia[] = [];
   public wpcheck:boolean;
   public saveUsername:boolean;
@@ -45,7 +48,6 @@ export class NuevoDesComponent implements OnInit {
     public router: Router,
     public activatedRoute: ActivatedRoute ) {
       activatedRoute.params.subscribe( params => {
-        debugger;
         let id = params['id'];
         try{this.selopt = params['combo'];} catch{}
         this.cargarDetalles( id );
@@ -61,10 +63,9 @@ export class NuevoDesComponent implements OnInit {
     this.cargarAdmins();
     this.cargarUsers();
     this.cargarTipos();
-    this.cargarTecnologias();
   }
-  cargarTecnologias ( ) {
-    this._ProyectoService.cargarTecnologias('d', 0)
+  cargarTecnologias (id) {
+    this._ProyectoService.cargarTecnologias(this.proyecto.Tipo, id)
     .subscribe( (resp: any) => {
       this.tecnologias = resp;
     });
@@ -74,12 +75,19 @@ export class NuevoDesComponent implements OnInit {
     this.router.navigate([url]);
   }
   public changeCheck(value , nombre){
-    for (let i = 0; i < this.tecnologias.length; i++) {
-      if(this.tecnologias[i].id == nombre.id){
-        this.tecnologias[i].Estado = value.target.checked;
-      }
+        for (let i = 0; i < this.tecnologias.length; i++) {
+          if(this.tecnologias[i].id == nombre.id){
+            this.tecnologias[i].Estado = value.target.checked;
+          }
+        }
     }
-}
+    public changeact(value , nombre){
+        this.proyecto.Estado = value.target.checked;
+       
+    }
+
+
+
   cargarTiempos () {
     this._tiempoService.cargarTiemposActivos()
     .subscribe( (resp: any) => {
@@ -103,19 +111,35 @@ export class NuevoDesComponent implements OnInit {
   }
 
   cargarDetalles ( id: number = 0 ) {
-    this._ticketService.cargarDetTickets(id)
+    this.cargarTecnologias(id);
+    this._ProyectoService.cargarDesarrollo(id)
     .subscribe( (resp: any) => {
-      this.ticket = resp;
-      if ( this.ticket.Estado === this.estados.Estatus[0].value && this.ticket.AsignadoA.id === 0 ) {
-        this.ticket.AsignadoA = this._adminService.usuario;
-      }
-      if ( this.selopt != "" ) {
-        this.ticket.Estado = this.estados.Estatus[0].value;
-      }else{
-        this.ticket.Estado = this.estados.Estatus[2].value;
-      }
-      
-      this.esSoporte = !(this.ticket.TipoServicio.id === 1);
+      this.proyecto = resp;
+    try{
+        debugger;
+        var base =resp.BaseDatos.split("/");
+        try{this.server = base[0]}catch{}
+        try{this.instance = base[1]}catch{}
+        try{this.database = base[2]}catch{}
+        //$( "#agcheck" ).prop( "checked", true );
+        var tecnos =resp.Tecnologias.split(',');
+        this.tecnologias
+        for (let i = 0; i < this.tecnologias.length; i++) {
+            for (let z = 0; z < tecnos.length; z++) {
+                try{
+                    if(tecnos[z].trim() == this.tecnologias[i].Nombre){
+                        $( "#"+this.tecnologias[i].NombreCheck ).prop( "checked", true );
+                        this.tecnologias[i].Estado = true;
+                    }
+                }catch{}
+            }
+        }
+        if(resp.Estado == "false"){
+              $( "#activocheck" ).prop( "checked", false );
+        }else{
+                $( "#activocheck" ).prop( "checked", true );
+            }
+    }catch{}
     });
   }
 
@@ -135,11 +159,14 @@ export class NuevoDesComponent implements OnInit {
     this.proyecto.BaseDatos = $('#server').val() + "/"+ $('#instancia').val() + "/" +$('#database').val();
     this.proyecto.Tecno = this.tecnologias;
     this.ticket.FecCerrado = new Date(this.fecCerrado.year, this.fecCerrado.month - 1, this.fecCerrado.day);
-    this._ProyectoService.crearProyecto( this.proyecto )
+    this._ProyectoService.actualizaProyecto( this.proyecto )
     .subscribe( (resp: any) => { 
-      this.router.navigate(['/mantenimiento/softwaredes']); 
-      swal.fire('Aviso!', 'Se registrarón los cambios', 'success');
+        this.router.navigate(['/mantenimiento/softwaredes']); 
+        swal.fire('Aviso!', 'Se registrarón los cambios', 'success');
+
     });
   }
+  
 
+  
 }

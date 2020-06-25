@@ -61,6 +61,7 @@ export class CerradosComponent implements OnInit {
   fromDate: NgbDateStruct;
   toDate: NgbDateStruct;
 
+
   constructor(
     public _servicioService: ServiciosService,
     public _soliService: SolicitanteService,
@@ -143,7 +144,8 @@ export class CerradosComponent implements OnInit {
       cancelButtonText: 'No',
       cancelButtonColor: '#398bf7',
     }).then((result) => {
-      if (result.value) {
+      debugger;
+      if (result.value && !this.isAdmin) {
         swal.fire({
           title: "Comentario",
           input: 'text',
@@ -158,20 +160,29 @@ export class CerradosComponent implements OnInit {
                     ])
                   })
                 }else{
-                  return false;
+                  swal.fire(
+                    'Alerta',
+                    'Debes de escribir un comentario al reabrir :)',
+                    'error'
+                  )
                 }
             },
         }).then((result) => {
-          if (result.value) {
-            serv.Descripcion = result.value;
-            this._servicioService.abrir( serv )
-            .subscribe(() => {
-              swal.fire(serv.Id + ' : ' + serv.Titulo, 'Se ha abierto', 'success');
-              this.cargarTickets();
-            });
+          if (result.value != "") {
+            serv.Reabrir = result.value[0];
+            this.abrirTicket( serv );
+          }else{
+            swal.fire(
+              'Alerta',
+              'Debes de escribir un comentario al reabrir :)',
+              'error'
+            )
           }
         });
+      } 
+      if (result.value && this.isAdmin){
         this.abrirTicket( serv );
+
       }
     });
   }

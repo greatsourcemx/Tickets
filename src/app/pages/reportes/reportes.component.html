@@ -29,7 +29,7 @@
                                     <div class="col-sm-5 nopadding">
                                         <label for="responsable">Responsable</label>
                                         <div class="form-group">
-                                            <ng-select [(ngModel)]="filtros.responsable" name="responsable" [items]="admins" bindLabel="nombre">
+                                            <ng-select [(ngModel)]="filtros.responsable" (change)="changeFn()" name="responsable" id="responsable" [items]="admins" bindLabel="nombre">
                                                 <ng-template ng-option-tmp let-item="item">
                                                     {{item.nombre}} <small>{{item.noEmpleado}}</small>
                                                 </ng-template>
@@ -38,7 +38,7 @@
                                     </div>
                                     <div class="col-sm-2 nopadding" style="width: 33.33%; display: flex; align-items: flex-end;justify-content: center; ">
                                         <div class="form-group">
-                                            <button type="button" (click)="cargarReporte()" class="btn btn-info waves-effect waves-light m-t-10">Buscar</button>
+                                            <button type="button" (click)="cargarReporte()" disabled id="botonG" class="btn btn-info waves-effect waves-light m-t-10">Buscar</button>
                                         </div>
                                     </div>
                                 </div>
@@ -75,28 +75,46 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr *ngFor="let solicitante of porcentajeusr">
-
-                                                    <td class="bordetleft" *ngIf=" solicitante.usuario.nombre === 'N/A'">Total </td>
-                                                    <td class="bordetleft" *ngIf=" solicitante.usuario.nombre !== 'N/A'">{{ solicitante.usuario.nombre }} </td>
-                                                    <td style="text-align: right;">{{ obtHoras(solicitante.HorasIMA) }} H</td>
-                                                    <td style="text-align: right;">{{ obtMin(solicitante.HorasIMA) }} m</td>
-                                                    <td style="text-align: right;">{{ porcentajeHoras(solicitante.HorasIMA, solicitante.horas) }} %</td>
-                                                    <td class="bordetmid" style="text-align: right;"></td>
-                                                    <td style="text-align: right;">{{ obtHoras(solicitante.HorasEBR) }} H</td>
-                                                    <td style="text-align: right;">{{ obtMin(solicitante.HorasEBR) }} m</td>
-                                                    <td style="text-align: right;">{{ porcentajeHoras(solicitante.HorasEBR, solicitante.horas) }} %</td>
-                                                    <td class="bordetmid2" style=" text-align: right;"></td>
-                                                    <td style="text-align: right;">{{ obtHoras(solicitante.HorasRS) }} H</td>
-                                                    <td style="text-align: right;">{{ obtMin(solicitante.HorasRS) }} m</td>
-                                                    <td style="text-align: right;">{{ porcentajeHoras(solicitante.HorasRS, solicitante.horas) }} %</td>
-                                                    <td class="bordetright" style=" text-align: right;"></td>
-                                                    <td style="text-align: right;">{{obtHoras(solicitante.horas)}} H</td>
-                                                    <td style="text-align: right;">{{obtMin(solicitante.horas)}} m</td>
-                                                    <td class="bordetright" style="text-align: right;">{{porcentajeHorasTotal(solicitante.horas)}} %</td>
-
-
-                                                </tr>
+                                                <ng-container *ngFor="let solicitante of porcentajeusr">
+                                                    <tr *ngIf=" filtros.responsable.nombre.trim() === 'TODOS' || filtros.responsable.nombre.trim() === ''">
+                                                        <td class="bordetleft" *ngIf=" solicitante.usuario.nombre === 'TODOS'">Total </td>
+                                                        <td class="bordetleft" *ngIf=" solicitante.usuario.nombre !== 'TODOS'">{{ solicitante.usuario.nombre }} </td>
+                                                        <td style="text-align: right;">{{ obtHoras(solicitante.HorasIMA) }} H</td>
+                                                        <td style="text-align: right;">{{ obtMin(solicitante.HorasIMA) }} m</td>
+                                                        <td style="text-align: right;">{{ porcentajeHoras(solicitante.HorasIMA, solicitante.horas) }} %</td>
+                                                        <td class="bordetmid" style="text-align: right;"></td>
+                                                        <td style="text-align: right;">{{ obtHoras(solicitante.HorasEBR) }} H</td>
+                                                        <td style="text-align: right;">{{ obtMin(solicitante.HorasEBR) }} m</td>
+                                                        <td style="text-align: right;">{{ porcentajeHoras(solicitante.HorasEBR, solicitante.horas) }} %</td>
+                                                        <td class="bordetmid2" style=" text-align: right;"></td>
+                                                        <td style="text-align: right;">{{ obtHoras(solicitante.HorasRS) }} H</td>
+                                                        <td style="text-align: right;">{{ obtMin(solicitante.HorasRS) }} m</td>
+                                                        <td style="text-align: right;">{{ porcentajeHoras(solicitante.HorasRS, solicitante.horas) }} %</td>
+                                                        <td class="bordetright" style=" text-align: right;"></td>
+                                                        <td style="text-align: right;">{{obtHoras(solicitante.horas)}} H</td>
+                                                        <td style="text-align: right;">{{obtMin(solicitante.horas)}} m</td>
+                                                        <td class="bordetright" style="text-align: right;">{{porcentajeHorasTotal(solicitante.horas)}} %</td>
+                                                    </tr>
+                                                    <tr *ngIf="filtros.responsable.nombre.trim() !== 'TODOS' && solicitante.usuario.nombre === filtros.responsable.nombre.trim()">
+                                                        <td class="bordetleft" *ngIf=" solicitante.usuario.nombre === 'TODOS'">Total </td>
+                                                        <td class="bordetleft" *ngIf=" solicitante.usuario.nombre !== 'TODOS'">{{ solicitante.usuario.nombre }} </td>
+                                                        <td style="text-align: right;">{{ obtHoras(solicitante.HorasIMA) }} H</td>
+                                                        <td style="text-align: right;">{{ obtMin(solicitante.HorasIMA) }} m</td>
+                                                        <td style="text-align: right;">{{ porcentajeHoras(solicitante.HorasIMA, solicitante.horas) }} %</td>
+                                                        <td class="bordetmid" style="text-align: right;"></td>
+                                                        <td style="text-align: right;">{{ obtHoras(solicitante.HorasEBR) }} H</td>
+                                                        <td style="text-align: right;">{{ obtMin(solicitante.HorasEBR) }} m</td>
+                                                        <td style="text-align: right;">{{ porcentajeHoras(solicitante.HorasEBR, solicitante.horas) }} %</td>
+                                                        <td class="bordetmid2" style=" text-align: right;"></td>
+                                                        <td style="text-align: right;">{{ obtHoras(solicitante.HorasRS) }} H</td>
+                                                        <td style="text-align: right;">{{ obtMin(solicitante.HorasRS) }} m</td>
+                                                        <td style="text-align: right;">{{ porcentajeHoras(solicitante.HorasRS, solicitante.horas) }} %</td>
+                                                        <td class="bordetright" style=" text-align: right;"></td>
+                                                        <td style="text-align: right;">{{obtHoras(solicitante.horas)}} H</td>
+                                                        <td style="text-align: right;">{{obtMin(solicitante.horas)}} m</td>
+                                                        <td class="bordetright" style="text-align: right;">{{porcentajeHorasTotal(solicitante.horas)}} %</td>
+                                                    </tr>
+                                                </ng-container>
 
                                             </tbody>
                                         </table>

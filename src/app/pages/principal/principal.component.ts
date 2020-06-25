@@ -28,7 +28,7 @@ export class PrincipalComponent implements OnInit, OnDestroy {
   intervalo;
   error: any;
   loaded = false;
-
+  public checkTarea:boolean;
   constructor(public _servicioService: ServiciosService,
               public store: Store<AppState>,
               public router: Router,
@@ -71,7 +71,10 @@ export class PrincipalComponent implements OnInit, OnDestroy {
       }
     });
   }
-  
+  changeCheck(valor){
+    console.log(valor.target.checked);
+    this.checkTarea = valor.target.checked;
+  }
   cargarNuevos () {
     this._servicioService.cargarServiciosNuevos()
       .subscribe(  (resp: any) => {

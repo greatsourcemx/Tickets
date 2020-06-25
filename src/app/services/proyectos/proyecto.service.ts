@@ -15,9 +15,31 @@ export class ProyectosService {
   url = URL_SERVICIOS + '/proyectos';
 
   constructor(public http: HttpClient) { }
-
+  
   cargarProyectos () {
     return this.http.get( this.url + '/cargaproyectos' ).pipe(
+      map((data: any) => data));
+  }
+  cargarProyectosGen () {
+    return this.http.get( this.url + '/cargaproyectosgen' ).pipe(
+      map((data: any) => data));
+  }
+  guardaTecnologia (tecnologia) {
+    return this.http.get( this.url + '/guardatecno?tecnologia=' + tecnologia).pipe(
+      map((data: any) => data));
+      
+    }
+
+    editaTecnologia (tecnologia) {
+    
+      let url = this.url + '/editatec';
+    return this.http.put( url, tecnologia ).pipe(
+                map( (resp: any) => {
+                  return resp;
+                }));
+    }
+  cargarTecnologias (tipo, id) {
+    return this.http.get( this.url + '/cargatecnologias?tipo=' + tipo + '&id='+id ).pipe(
       map((data: any) => data));
   }
   cargarDesarrollo (id) {
@@ -29,9 +51,29 @@ export class ProyectosService {
     return this.http.get( this.url + '/guardaProyecto?proyecto=' + Proyecto ).pipe(
       map((data: any) => data));
   }
+  
+
   crearProyecto (proyecto: Proyecto) {
     debugger;
     let url = this.url + '/crearproyecto';
+    return this.http.put( url, proyecto ).pipe(
+                map( (resp: any) => {
+                  return resp;
+                }));
+  }
+  crearProyectoGen (proyecto: Proyecto) {
+    debugger;
+    let url = this.url + '/crearproyectogen';
+    return this.http.put( url, proyecto ).pipe(
+                map( (resp: any) => {
+                  return resp;
+                }));
+  }
+
+
+  actualizaProyecto (proyecto: Proyecto) {
+    debugger;
+    let url = this.url + '/actualizarproyecto';
     return this.http.put( url, proyecto ).pipe(
                 map( (resp: any) => {
                   return resp;

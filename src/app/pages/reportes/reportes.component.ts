@@ -159,20 +159,35 @@ public pieChartColors = [
   }
 
   ngOnInit() {
-    
+    this.filtros.responsable.nombre.trim() !== 'TODOS';
     this.cargarAdmins();
+    //this.cargarReporte ();
+   
   }
+  changeFn() {
+    var element = <HTMLInputElement> document.getElementById("botonG");
+    element.disabled = false;
 
+}
   cargarAdmins ( ) {
     this._adminService.cargarUsuaActivos( )
     .subscribe( (resp: any) => {
+      debugger;
+      for(let i = 0; i < resp.length; i++){
+        if(resp[i].noEmpleado == 459){
+            resp.splice(i, 1)
+        }    
+    }
+
       this.admins = resp;
     });
   }
   public chartClicked(e: any): void { }
   public chartHovered(e: any): void { }
-  cargarReporte () {
 
+
+  cargarReporte () {
+debugger;
     if (this.fromDate === null || this.toDate === null) {
       return;
     }

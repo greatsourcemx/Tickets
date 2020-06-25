@@ -48,7 +48,7 @@ export class EvaluacionesComponent implements OnInit {
     .subscribe((data: Usuario[]) => {
       this.users = data;
       for (const item of this.users) {
-        if (item.nombre === 'N/A') {
+        if (item.nombre === 'TODOS') {
           item.nombre = 'Todos';
         }
       }

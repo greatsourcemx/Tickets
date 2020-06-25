@@ -48,6 +48,7 @@ export class TicketsComponent implements OnInit {
     this.cargarAdmins();
     this.cargarUsers();
     this.cargarTipos();
+    //this.ticket.Solicitor
   }
 
   regresar() {
@@ -74,6 +75,16 @@ export class TicketsComponent implements OnInit {
     this._soliService.cargarSoliActivos( )
     .subscribe( (resp: any) => {
       this.users = resp;
+      debugger;
+      var user = JSON.parse(localStorage.usuario);
+      for (let i = 0; i < resp.length; i++) {
+        if(user.usuario == resp[i].usuario){
+          if (this.ticket.AsignadoA.usuario == null || this.ticket.AsignadoA.usuario == ""){
+            this.ticket.AsignadoA = resp[i];
+          }
+         
+        }
+      }
     });
   }
 

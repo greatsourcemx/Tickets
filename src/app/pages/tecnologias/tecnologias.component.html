@@ -1,0 +1,68 @@
+<div class="row animated fadeIn">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <input input [(ngModel)]="query" class="form-control" type="text" required="" placeholder="Busca aqui" style=" border-radius: .25rem; position: relative;" />
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row animated fadeIn" *ngIf="cargando">
+    <div class="col-sm-12">
+        <div class="alert alert-warning text-center">
+            <strong>Cargando</strong>
+            <br />
+            <i class="fa fa-refresh fa-spin fa-2x"></i>
+            <br />
+            <span>Espere por favor</span>
+        </div>
+    </div>
+</div>
+
+
+<div class="row animated fadeIn" *ngIf="!cargando">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+
+                <div class="text-right">
+                    <button (click)="NuevaTec()" type="button" class="btn waves-effect waves-light btn-rounded btn-info" ngbTooltip="Nueva Tecnologia">
+                      <i class="fa fa-plus"></i>
+                  </button>
+                </div>
+
+                <table class="table table-hover table-sm">
+                    <thead>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Tipo</th>
+                            <th>Guardar</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let tec of tecnologias | filter: 'descripcion': query">
+                            <td>
+                                <input [(ngModel)]="tec.Nombre" style="text-transform: uppercase" name="nombre" type="text" class="form-control" placeholder="Nombre" required />
+                            </td>
+                            <td>
+
+                                <ng-select [(ngModel)]="tec.Tipo" name="solicitante" [items]="['Desarrollo', 'Generico']" bindLabel="nombre">
+                                </ng-select>
+                            </td>
+                            <td>
+                                <button (click)="modificarTec( tec )" class="btn btn-info" ngbTooltip="Guardar">
+                                  <i class="fa fa-save"></i>
+                                </button>
+                            </td>
+
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+</div>

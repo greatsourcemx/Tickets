@@ -93,15 +93,24 @@ import { ParametrosComponent } from './mantenimientos/parametros/parametros.comp
 import { DetalledesComponent } from './mantenimientos/detalledes/detalledes.component';
 import { NuevoDesComponent } from './mantenimientos/detalledes/nuevopdes.component';
 
+import { NuevoDesGenComponent } from './mantenimientos/detalledes/nuevopgen.component';
+
 import { SoftwaredesComponent } from './mantenimientos/detalledes/softwaredes.component';
 import { DetallesProyecto } from './mantenimientos/detalledes/detallepro.component';
+import { EditarDesComponent } from './mantenimientos/detalledes/editardes.component';
+import { ProyectoGenComponent } from './mantenimientos/detalledes/proyectogen.component';
+
 import { NuevoTPComponent } from './mantenimientos/detalledes/nuevotp.component';
+import { NuevoTPgenComponent } from './mantenimientos/detalledes/nuevotpgen.component';
+
+
 import { CambiosdesComponent } from './mantenimientos/detalledes/cambiosdes.component';
 import { GraficaRatings } from './graficarating/graficarating.component';
 
 import { AreasComponent } from './areas/areas.component';
-import { AlmacenComponent } from './almacen/almacen.component';
+import { TecnologiasComponent } from './tecnologias/tecnologias.component';
 
+import { AlmacenComponent } from './almacen/almacen.component';
 import { TipoTicketComponent } from './tipoticket/tipoticket.component';
 import { AgendaComponent } from './agenda/agenda.component';
 
@@ -120,6 +129,7 @@ import { AgendaComponent } from './agenda/agenda.component';
         SolicitantesComponent,
         SolicitanteComponent,
         EditarSolicitanteComponent,
+        NuevoDesGenComponent,
         TiemposComponent,
         MantenimientosComponent,
         PrioridadComponent,
@@ -128,12 +138,16 @@ import { AgendaComponent } from './agenda/agenda.component';
         DetallesServicioComponent,
         NuevoTPComponent,
         DetallesProyecto,
+        NuevoTPgenComponent,
+        TecnologiasComponent,
+        ProyectoGenComponent,
         PrincipalComponent,
         EmpresasComponent,
         AvancesComponent,
         TicketsComponent,
         NuevoDesComponent,
         TiposComponent,
+        EditarDesComponent,
         AlmacenComponent,
         TicketComponent,
         TrabajosComponent,

@@ -40,11 +40,20 @@ import { DetalledesComponent } from './mantenimientos/detalledes/detalledes.comp
 import { SoftwaredesComponent } from './mantenimientos/detalledes/softwaredes.component';
 import { CambiosdesComponent } from './mantenimientos/detalledes/cambiosdes.component';
 import { NuevoDesComponent } from './mantenimientos/detalledes/nuevopdes.component';
+import { NuevoDesGenComponent } from './mantenimientos/detalledes/nuevopgen.component';
+
+
+import { EditarDesComponent } from './mantenimientos/detalledes/editardes.component';
+
+
 import { AreasComponent } from './areas/areas.component';
 import { TipoTicketComponent } from './tipoticket/tipoticket.component';
 import { GraficaRatings } from './graficarating/graficarating.component';
 
 import { DetallesProyecto } from './mantenimientos/detalledes/detallepro.component';
+import { ProyectoGenComponent } from './mantenimientos/detalledes/proyectogen.component';
+import { TecnologiasComponent } from './tecnologias/tecnologias.component';
+
 import { NuevoTPComponent } from './mantenimientos/detalledes/nuevotp.component';
 import { AgendaComponent } from './agenda/agenda.component';
 import { AlmacenComponent } from './almacen/almacen.component';
@@ -74,12 +83,14 @@ const pagesRoutes: Routes = [
             { path: 'mantenimiento/parametros', component: ParametrosComponent, data: { titulo: 'Parámetros' }  },
             { path: 'mantenimiento/detalledes', component: DetalledesComponent, data: { titulo: 'Proyectos' }  },
             { path: 'mantenimiento/softwaredes', component: SoftwaredesComponent, data: { titulo: 'Proyectos Software' }  },
+            { path: 'mantenimiento/proyectogen', component: ProyectoGenComponent, data: { titulo: 'Proyectos' }  },
+
             { path: 'tablero', component: TableroComponent, data: { titulo: 'Tablero' }  },
             { path: 'zonas', component: ZonasComponent, data: { titulo: 'Zonas' }  },
             { path: 'prioridades', component: PrioridadComponent, data: { titulo: 'Prioridades' }  },
             { path: 'servicio/:id', component: DetallesServicioComponent, data: { titulo: 'Detalle del Servicio' }  },
             { path: 'detallepro/:id', component: DetallesProyecto, data: { titulo: 'Detalle del Proyecto' }  },
-
+            { path: 'editardes/:id', component: EditarDesComponent, data: { titulo: 'Editar Desarrollo' }  },
             { path: 'ticket', component: TicketComponent, data: { titulo: 'Nuevo Ticket' }  },
             { path: 'tickets', component: TrabajosComponent, data: { titulo: 'Tickets Globales' }  },
             { path: 'cerrados', component: CerradosComponent, data: { titulo: 'Tickets Cerrados' }  },
@@ -98,13 +109,17 @@ const pagesRoutes: Routes = [
             { path: 'recurrente/nuevo', component: NuevoComponent, data: { titulo: 'Recurrente' }  },
             { path: 'recurrente/:id', component: EditRecurrenteComponent, data: { titulo: 'Recurrente' }  },
             { path: 'nuevatarea/:id', component: NuevoTPComponent, data: { titulo: 'Nueva Tarea' }  },
+            
             { path: 'calendario', component: CalendarioComponent, data: { titulo: 'Calendario' }  },
             { path: 'agenda', component: AgendaComponent, data: { titulo: 'Agenda' }  },
             { path: 'areas', component: AreasComponent, data: { titulo: 'Areas Laborales' }  },
+            { path: 'tecnologias', component: TecnologiasComponent, data: { titulo: 'Tecnologias' }  },
+            
             { path: 'tipoticket', component: TipoTicketComponent, data: { titulo: 'Tipos de Tickets' }  },
             { path: 'graficarating', component: GraficaRatings, data: { titulo: 'Graficas Rating' }  },
             { path: 'cambiosdes/:id', component: CambiosdesComponent, data: { titulo: 'Cambios Desarrollo' }  },
             { path: 'nuevopdes', component: NuevoDesComponent, data: { titulo: 'Nuevo Proyecto' }  },
+            { path: 'nuevopgen', component: NuevoDesGenComponent, data: { titulo: 'Nuevo Proyecto' }  },
             { path: 'almacen', component: AlmacenComponent, data: { titulo: 'Almacen' }  },
 
             { path: '', redirectTo: '/principal', pathMatch: 'full'  },
