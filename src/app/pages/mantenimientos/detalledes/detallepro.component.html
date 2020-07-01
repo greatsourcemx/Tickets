@@ -26,7 +26,7 @@
                     <span *ngIf="proyecto.AsignadoA.id === 0" class="label label-warning"> Sin Responsable</span>
                 </p>
             </div>
-            <div class="col-md-3 col-xs-6 b-r"> <strong>Tecnologias</strong>
+            <div *ngIf="proyecto.Tipo == 'd'" class="col-md-3 col-xs-6 b-r"> <strong>Tecnologias</strong>
                 <br/>
                 <strong>{{ proyecto.Tecnologias}}</strong>
 
@@ -107,8 +107,10 @@
                                 <th class="tbl-header" style="position: sticky;top: 0;" scope="col" colspan="2">#</th>
                                 <th class="tbl-header2" style="position: sticky;top: 0;" scope="col">Titulo</th>
                                 <th class="tbl-header3" style="position: sticky;top: 0;" scope="col">Descripcion</th>
-                                <th class="tbl-header4" style="position: sticky;top: 0;" scope="col">Fecha</th>
-                                <th class="tbl-header5" style="position: sticky;top: 0;" scope="col">Responsable</th>
+                                <th class="tbl-header4" style="width: 120px; position: sticky;top: 0;" scope="col">Fecha Cierre</th>
+                                <th class="tbl-header5" style="width: 120px; position: sticky;top: 0;" scope="col">Fecha</th>
+
+                                <th class="tbl-header6" style="position: sticky;top: 0;" scope="col">Responsable</th>
                                 <th class="tbl-header6" style="position: sticky;top: 0;" scope="col">Detalle</th>
                             </tr>
                         </thead>
@@ -116,16 +118,26 @@
                             <tr *ngFor="let tareas of proyecto.Tareas">
                                 <td>
                                     <div *ngIf="tareas.Estado === 'En Proceso'"><i style="font-size: 20px;" class="icon-mantenimiento"></i></div>
+                                    <div style="color: #2D64FA; padding-right: 5px" *ngIf="tareas.Estado === 'Abierta'"><i style="font-size: 20px;" class="icon-pendiente"></i></div>
+
                                     <div style="color: #06D79C; padding-right: 5px" *ngIf="tareas.Estado === 'Cerrada'"><i style="font-size: 20px;" class="icon-tickets"></i></div>
+                                    <div style="color: #7F7F7E; padding-right: 5px" *ngIf="tareas.Estado === 'Cancelado'"><i style="font-size: 20px;" class="icon-cancelar"></i></div>
+
                                 </td>
                                 <td> {{ tareas.Id }} </td>
                                 <td> {{ tareas.Titulo }} </td>
                                 <td> {{ tareas.Descripcion }} </td>
+                                <td *ngIf="tareas.FecCerrado.toString()  == '1800-01-01T00:00:00'"> N/A</td>
+                                <td *ngIf="tareas.FecCerrado.toString()  != '1800-01-01T00:00:00'"> {{ tareas.FecCerrado | date: 'yyyy-MM-dd' }} </td>
                                 <td> {{ tareas.FecRegistro | date: 'yyyy-MM-dd' }} </td>
                                 <td> {{ tareas.AsignadoA.nombre }} </td>
                                 <td>
                                     <span class="action-icons" style="font-size: 20px;">
                                         <a href="javascript:void(0)" [routerLink]="['/servicio', tareas.Id ]"  style="color: #f7941d; padding-right: 5px"  ngbTooltip="Avances"><i class="icon-avance"></i></a>
+                                        <a *ngIf="tareas.Estado != 'Cerrada'  && tareas.Estado !== 'Cancelado'" href="javascript:void(0)" [routerLink]="['/tickets', tareas.Id, 'Cerrada']" style="color: #8dc63f; padding-right: 5px" class="" ngbTooltip="Cerrar"><i class="icon-tickets"></i></a>
+                                        <a *ngIf="tareas.Estado == 'Cerrada' || tareas.Estado === 'Cancelado'" href="javascript:void(0)" (click)="reabrir( tareas )" style="color: #2D64FA;" class="" ngbTooltip="Re Abrir"><i class="icon-re-abrir"></i></a>
+                                        
+
                                     </span>
                                 </td>
                             </tr>

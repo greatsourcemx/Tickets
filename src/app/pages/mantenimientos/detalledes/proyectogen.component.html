@@ -36,7 +36,7 @@
                                     <i class="fa" [ngClass]="{'fa-sort': column != 'Solicitor.nombre', 'fa-sort-asc': (column == 'Solicitor.nombre' && isDesc), 'fa-sort-desc': (column == 'Solicitor.nombre' && !isDesc) }" aria-hidden="true"> </i>
                                 </th>
                                 <th class="tbl-header5" style="position: sticky;top: 0;">En uso</th>
-
+                                <th class="tbl-header6" style="position: sticky;top: 0;"> Est</th>
                                 <th class="tbl-header6" style="position: sticky;top: 0;"> Tareas</th>
                             </tr>
                         </thead>
@@ -48,6 +48,21 @@
                                 <td>{{ proy.Solicitor.nombre }}</td>
                                 <td *ngIf="proy.Estado == 'true'" style="color: #06D79C">En Uso</td>
                                 <td *ngIf="proy.Estado == 'false'" style="color: #EF5350">Inactivo</td>
+                                <td *ngIf="proy.Proceso == 1">
+                                    <div class="led-box">
+                                        <div class="led-green"></div>
+                                    </div>
+                                </td>
+                                <td *ngIf="proy.Proceso == 2">
+                                    <div class="led-box">
+                                        <div class="led-orange"></div>
+                                    </div>
+                                </td>
+                                <td *ngIf="proy.Proceso == 0">
+                                    <div class="led-box">
+                                        <div class="led-gray"></div>
+                                    </div>
+                                </td>
                                 <td>
                                     <span class="action-icons">
                                         <a href="javascript:void(0)" [routerLink]="['/detallepro', proy.id ]"  style="color: #f7941d; padding-right: 5px" ngbTooltip="Tareas/Detalles"><i class="icon-avance"></i></a>

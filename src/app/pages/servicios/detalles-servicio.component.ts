@@ -39,6 +39,7 @@ export class DetallesServicioComponent implements OnInit {
   }
 
   cargarDetalles ( id: number ) {
+    debugger;
     this._servicioService.cargarDetalles( id )
     .subscribe( (resp: Servicio) => {
       this.servicio = resp;

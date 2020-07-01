@@ -7,17 +7,17 @@
                     <input type="text" class="form-control" name="dp" [(ngModel)]="proyecto.Titulo" id="Titulo" name="Titulo" placeholder="Titulo" />
                 </div>
                 <div class="form-group">
-                    <label for="descripcion">Descripcións</label>
+                    <label for="descripcion">Descripción</label>
                     <textarea [(ngModel)]="proyecto.Descripcion" id="Descripcion" name="Descripcion" class="form-control" rows="4" placeholder="Descripcion"></textarea>
                 </div>
 
                 <div class="row">
-                    <div *ngIf="esSoporte" class="col-lg-6">
+                    <div class="col-lg-6">
                         <label for="solicitante">Solicitante</label>
                         <ng-select [(ngModel)]="proyecto.Solicitor" name="solicitante" [items]="users" bindLabel="nombre">
                         </ng-select>
                     </div>
-                    <div [ngClass]="esSoporte ? 'col-lg-6' : 'col-lg-12'">
+                    <div class="col-lg-6">
                         <label for="responsable">Responsable</label>
                         <ng-select [(ngModel)]="proyecto.AsignadoA" name="responsable" [items]="admins" bindLabel="nombre">
                             <ng-template ng-option-tmp let-item="item">
@@ -27,8 +27,16 @@
                     </div>
                 </div>
                 <br>
+
                 <div class="row">
-                    <div class="col-lg-4">
+                    <div *ngIf="proyecto.Tipo == 'g'" class="col-lg-4">
+                        <div class="form-row" style="padding-bottom: 10px;">
+                            <label for="Rutacodigo">Ruta de archivos
+                            </label>
+                            <input type="text" class="form-control" [(ngModel)]="proyecto.RutaCodigo" id="Rutacodigo" name="Rutacodigo" placeholder="Ruta" />
+                        </div>
+                    </div>
+                    <div class="col-lg-4" id="sistemdiv" name="sistemdiv">
 
                         <div class="form-row" style="padding-bottom: 10px;">
                             <label for="IDE">IDE</label>
@@ -55,24 +63,62 @@
                             <label for="Rutacodigo">Ruta de Codigo</label>
                             <input type="text" class="form-control" [(ngModel)]="proyecto.RutaCodigo" id="Rutacodigo" name="Rutacodigo" placeholder="Ruta" />
                         </div>
+                        <div class="col-6">
+                            Version {{auxver}} <button type="button" class="btn btn-info waves-effect waves-light " data-toggle="modal" data-target="#myModal">+</button>
+                        </div>
                     </div>
 
-                    <div class="col-lg-4">
+                    <div class="col-lg-3" id="tecnodiv" name="tecnodiv">
                         <div class="row">
-                            <div class="col-4 pull-left"></div>
                             <h1>Tecnologias</h1>
-                            <div class="col-4 pull-left">
-
-                            </div>
-
                         </div>
 
                         <div *ngFor="let tec of tecnologias" class="form-check">
                             <input #jscheck [checked]="saveUsername" (change)="changeCheck($event, tec)" type="checkbox" class="form-check-input" id={{tec.NombreCheck}}>
                             <label class="form-check-label" for={{tec.NombreCheck}}>{{tec.Nombre}}</label>
                         </div>
+
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="form-check">
+                            <input #jscheck [checked]="saveUsername" (change)="changeact($event)" type="checkbox" class="form-check-input" id="activocheck">
+                            <label class="form-check-label" for="activocheck">En Uso</label>
+                        </div>
+
                     </div>
 
+                    <div class="modal fade" id="myModal" role="dialog">
+                        <div class="modal-dialog">
+
+                            <!-- Modal content-->
+                            <div class="modal-content">
+                                <div class="card card-body">
+
+                                    <div class="container">
+                                        <div class="row">
+                                            <h1>Nueva Version</h1>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="titulo">Version</label>
+                                            <input type="text" disabled class="form-control" [(ngModel)]="proyecto.Version" id="pver" name="pver" placeholder="version" />
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="DescripcionVer">Descripción</label>
+                                            <textarea [(ngModel)]="proyecto.VersionDes" id="DescripcionVer" name="DescripcionVer" class="form-control" rows="5" placeholder="Descripcion"></textarea>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <button type="button" (click)="GuardaVersion()" class="btn btn-success waves-effect waves-light m-r-10 pull-left" data-dismiss="modal">Guardar</button>
+                                                <button type="button" class="btn btn-info waves-effect waves-light pull-right" data-dismiss="modal">Cancelar</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
                 </div>
                 <br>
                 <div class="row">

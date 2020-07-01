@@ -42,6 +42,12 @@ export class ProyectosService {
     return this.http.get( this.url + '/cargatecnologias?tipo=' + tipo + '&id='+id ).pipe(
       map((data: any) => data));
   }
+
+  cargarVersiones (id) {
+    return this.http.get( this.url + '/cargaversiones?id='+ id ).pipe(
+      map((data: any) => data));
+  }
+
   cargarDesarrollo (id) {
     return this.http.get( this.url + '/cproyectos?proyecto=' + id).pipe(
       map((data: any) => data));
@@ -74,6 +80,14 @@ export class ProyectosService {
   actualizaProyecto (proyecto: Proyecto) {
     debugger;
     let url = this.url + '/actualizarproyecto';
+    return this.http.put( url, proyecto ).pipe(
+                map( (resp: any) => {
+                  return resp;
+                }));
+  }
+  actualizaVersion (proyecto: Proyecto) {
+    debugger;
+    let url = this.url + '/actualizarversion';
     return this.http.put( url, proyecto ).pipe(
                 map( (resp: any) => {
                   return resp;

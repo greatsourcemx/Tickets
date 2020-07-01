@@ -36,6 +36,7 @@
                                 </th>
                                 <th class="tbl-header5" style="position: sticky;top: 0;">En uso</th>
                                 <th class="tbl-header6" style="position: sticky;top: 0;"> IDE</th>
+                                <th class="tbl-header6" style="position: sticky;top: 0;"> Ver</th>
                                 <th class="tbl-header6" style="position: sticky;top: 0;"> Est</th>
                                 <th class="tbl-header6" style="position: sticky;top: 0;"> Tareas</th>
                             </tr>
@@ -51,16 +52,22 @@
                                 <td *ngIf="proy.Estado == 'false'" style="color: #EF5350">Inactivo</td>
 
                                 <td>{{ proy.IDE }} </td>
-                                <td *ngIf="proy.Proceso != 0">
+
+                                <td><a data-toggle="modal" class="hipelink" style="cursor: pointer" data-target="#myModal" href="javascript:void(0);" (click)="cargaVersiones(proy)" ng-click="cargaVersiones(proy)">{{ proy.Version }} </a></td>
+
+                                <td *ngIf="proy.Proceso == 1">
                                     <div class="led-box">
                                         <div class="led-green"></div>
-
+                                    </div>
+                                </td>
+                                <td *ngIf="proy.Proceso == 2">
+                                    <div class="led-box">
+                                        <div class="led-orange"></div>
                                     </div>
                                 </td>
                                 <td *ngIf="proy.Proceso == 0">
                                     <div class="led-box">
                                         <div class="led-gray"></div>
-
                                     </div>
                                 </td>
                                 <td>
@@ -70,6 +77,38 @@
                                     </span>
                                 </td>
                             </tr>
+                            <div class="modal fade" id="myModal" role="dialog">
+                                <div class="modal-dialog">
+
+                                    <!-- Modal content-->
+                                    <div class="modal-content">
+                                        <div class="card card-body">
+                                            <div class="container">
+                                                <span data-dismiss="modal" class="close">&times;</span>
+                                                <div class="row">
+                                                    <h1>Versiones</h1>
+                                                </div>
+                                                <div class="list-group" style=" height: 350px; overflow: auto; display: block; ">
+
+                                                    <a *ngFor="let ver of versiones" class="list-group-item list-group-item-action flex-column align-items-start ">
+                                                        <div class="d-flex w-100 justify-content-between">
+                                                            <h5 class="mb-1">{{ ver.VersionDes }}</h5>
+                                                            <small>{{ver.fecha | date: 'dd-MM-yyyy'}}</small>
+                                                        </div>
+                                                        <p class="mb-1">{{ver.DescripcionDes}}</p>
+                                                        <!-- <small>More small text here.</small>-->
+                                                    </a>
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+
+                                    </div>
+
+                                </div>
+                            </div>
                         </tbody>
                     </table>
                 </div>

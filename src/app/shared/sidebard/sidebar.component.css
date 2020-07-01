@@ -1,7 +1,7 @@
 @font-face {
     font-family: 'icomoon';
-    src: url('icomoon.eot?umkubu');
-    src: url('icomoon.eot?umkubu#iefix') format('embedded-opentype'), url('icomoon.ttf?umkubu') format('truetype'), url('icomoon.woff?umkubu') format('woff'), url('icomoon.svg?umkubu#icomoon') format('svg');
+    src: url('icomoon.eot?pz8o5a');
+    src: url('icomoon.eot?pz8o5a#iefix') format('embedded-opentype'), url('icomoon.ttf?pz8o5a') format('truetype'), url('icomoon.woff?pz8o5a') format('woff'), url('icomoon.svg?pz8o5a#icomoon') format('svg');
     font-weight: normal;
     font-style: normal;
     font-display: block;
@@ -11,7 +11,7 @@
 [class*=" icon-"] {
     /* use !important to prevent issues with browser extensions that change fonts */
     font-family: 'icomoon' !important;
-    speak: none;
+    speak: never;
     font-style: normal;
     font-weight: normal;
     font-variant: normal;
@@ -20,6 +20,14 @@
     /* Better Font Rendering =========== */
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-pendiente:before {
+    content: "\e90e";
+}
+
+.icon-re-abrir:before {
+    content: "\e90f";
 }
 
 .icon-mantenimiento:before {

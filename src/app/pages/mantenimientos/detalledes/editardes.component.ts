@@ -30,6 +30,7 @@ export class EditarDesComponent implements OnInit {
   server: string= '';
   instance: string= '';
   database: string= '';
+  auxver : string = '';
   tecnologias: Tecnologia[] = [];
   public wpcheck:boolean;
   public saveUsername:boolean;
@@ -81,7 +82,7 @@ export class EditarDesComponent implements OnInit {
           }
         }
     }
-    public changeact(value , nombre){
+    public changeact(value){
         this.proyecto.Estado = value.target.checked;
        
     }
@@ -115,6 +116,10 @@ export class EditarDesComponent implements OnInit {
     this._ProyectoService.cargarDesarrollo(id)
     .subscribe( (resp: any) => {
       this.proyecto = resp;
+      var aux=0;
+     try{aux =Number(this.proyecto.Version) + .1}catch{}
+     this.auxver = this.proyecto.Version;
+     this.proyecto.Version = aux.toFixed(1).toString();
     try{
         debugger;
         var base =resp.BaseDatos.split("/");
@@ -122,18 +127,24 @@ export class EditarDesComponent implements OnInit {
         try{this.instance = base[1]}catch{}
         try{this.database = base[2]}catch{}
         //$( "#agcheck" ).prop( "checked", true );
-        var tecnos =resp.Tecnologias.split(',');
-        this.tecnologias
-        for (let i = 0; i < this.tecnologias.length; i++) {
-            for (let z = 0; z < tecnos.length; z++) {
-                try{
-                    if(tecnos[z].trim() == this.tecnologias[i].Nombre){
-                        $( "#"+this.tecnologias[i].NombreCheck ).prop( "checked", true );
-                        this.tecnologias[i].Estado = true;
-                    }
-                }catch{}
-            }
+        if(this.proyecto.Tipo == 'd'){
+          var tecnos =resp.Tecnologias.split(',');
+          this.tecnologias;
+          for (let i = 0; i < this.tecnologias.length; i++) {
+              for (let z = 0; z < tecnos.length; z++) {
+                  try{
+                      if(tecnos[z].trim() == this.tecnologias[i].Nombre){
+                          $( "#"+this.tecnologias[i].NombreCheck ).prop( "checked", true );
+                          this.tecnologias[i].Estado = true;
+                      }
+                  }catch{}
+              }
+          }
+        }else{
+          $("#tecnodiv").hide();
+          $("#sistemdiv").hide();
         }
+        
         if(resp.Estado == "false"){
               $( "#activocheck" ).prop( "checked", false );
         }else{
@@ -149,19 +160,30 @@ export class EditarDesComponent implements OnInit {
       this.tipos = resp;
     });
   }
-
+  GuardaVersion(){
+    debugger;
+    this._ProyectoService.actualizaVersion( this.proyecto )
+    .subscribe( (resp: any) => { 
+        this.router.navigate(['/mantenimiento/softwaredes']); 
+        swal.fire('Aviso!', 'Se registrarón los cambios', 'success');
+    });
+  }
   guardar ( f: NgForm ) {
     debugger;
     if (f.invalid) {
       return;
     }
-
+    this.proyecto.Version = this.auxver;
     this.proyecto.BaseDatos = $('#server').val() + "/"+ $('#instancia').val() + "/" +$('#database').val();
     this.proyecto.Tecno = this.tecnologias;
     this.ticket.FecCerrado = new Date(this.fecCerrado.year, this.fecCerrado.month - 1, this.fecCerrado.day);
     this._ProyectoService.actualizaProyecto( this.proyecto )
     .subscribe( (resp: any) => { 
-        this.router.navigate(['/mantenimiento/softwaredes']); 
+      if(this.proyecto.Tipo=='d'){
+        this.router.navigate(['/mantenimiento/softwaredes']);
+      }else{
+        this.router.navigate(['/mantenimiento/proyectogen']);
+      }
         swal.fire('Aviso!', 'Se registrarón los cambios', 'success');
 
     });
