@@ -1,19 +1,20 @@
 import { Component, OnInit } from '@angular/core';
-import { GlpiService, ExcelService } from '../../../services/service.index';
-import { GLPIEmpleado } from '../../../models/models.index';
+import { GlpiService, ExcelService, AccesoService } from '../../../services/service.index';
+import { GLPIEmpleado, Accesos } from '../../../models/models.index';
 import { RetornoEquipo } from '../../../models/retorno.model';
 
 @Component({
-  selector: 'app-salida',
-  templateUrl: './salida.component.html',
+  selector: 'app-equiposrh',
+  templateUrl: './equiposrh.component.html',
   styles: [],
   styleUrls: ['../../agenda/agenda.component.css']
 
 })
-export class SalidaComponent implements OnInit {
+export class EqiposRHComponent implements OnInit {
 
   empleados: GLPIEmpleado[] = [];
   empleado: GLPIEmpleado = new GLPIEmpleado();
+  acceso: Accesos = new Accesos();
   equipos: RetornoEquipo[] = [];
   pdf: any;
   equipo = '';
@@ -22,28 +23,44 @@ export class SalidaComponent implements OnInit {
   verRetorno = false;
   retorTodos = false;
   verPDFViewer = false;
+  usuarioon: string ="";
 
   constructor(public glpiService: GlpiService,
-              public excelService: ExcelService) { }
+              public excelService: ExcelService,
+              public accesosService: AccesoService,
+              ) { }
 
-  ngOnInit() {
-    this.cargarEmpleados();
+  ngOnInit() { 
+    debugger;
+
+    this.cargauser();
+
+    
   }
-
+  cargauser(){
+    this.accesosService.cargaUsuario()
+    .subscribe((data: Accesos) => {
+      this.cargando = false;
+      this.acceso = data;
+      if (this.acceso.IMA == true || this.acceso.EBR == true){
+        this.cargarEmpleados();
+      }
+    });
+  }
   cargarEmpleados() {
     debugger;
+    var usuario="";
+    try {usuario= JSON.parse(localStorage.usuario)} catch{}
+    JSON.parse(localStorage.usuario)
     this.cargando = true;
-    this.glpiService.cargarTodosEmpleados()
+    this.glpiService.cargarTodosEmpleadosrh(usuario['usuario'])
     .subscribe((data: any) => {
-      for(let i = 0; i < data.length; i++){
-        if(data[i].Correo == JSON.parse(localStorage.usuario).correo){
-                data.splice(i, 1)
-            }
-        }
+       
       this.cargando = false;
       this.empleados = data;
     });
   }
+
   buscaEquipo() {
     this.cargando = true;
     this.verPDFViewer = false;
@@ -56,7 +73,7 @@ export class SalidaComponent implements OnInit {
   buscarEquipoEmpleado() {
     this.cargando = true;
     this.verPDFViewer = false;
-    this.glpiService.cargarTodoEquipoEmpleado( this.empleado )
+    this.glpiService.cargarTodoEquipoEmpleadorh( this.empleado )
     .subscribe((data: RetornoEquipo[]) => {
       this.cargando = false;
       this.msg = true;

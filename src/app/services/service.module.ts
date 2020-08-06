@@ -24,7 +24,8 @@ import {
   ExcelService,
   GraficasService,
   ZonasService,
-  ParametrosService } from './service.index';
+  ParametrosService,
+  AccesoService } from './service.index';
 
 @NgModule({
   imports: [
@@ -57,7 +58,8 @@ import {
     ExcelService,
     GraficasService,
     ZonasService,
-    ParametrosService
+    ParametrosService,
+    AccesoService
   ],
   declarations: []
 })

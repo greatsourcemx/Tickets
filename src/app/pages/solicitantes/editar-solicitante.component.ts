@@ -33,7 +33,7 @@ export class EditarSolicitanteComponent implements OnInit {
 
   ngOnInit() {
     this.activatedRoute.params.subscribe( params => {
-
+debugger;
       let id = params['id'];
       this.cargarSolicitante( id );
 

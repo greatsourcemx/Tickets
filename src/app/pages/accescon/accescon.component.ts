@@ -1,20 +1,26 @@
 import { Component, OnInit } from '@angular/core';
-import { GlpiService, ExcelService } from '../../../services/service.index';
-import { GLPIEmpleado } from '../../../models/models.index';
-import { RetornoEquipo } from '../../../models/retorno.model';
+import { GlpiService, ExcelService, AccesoService } from '../../services/service.index';
+import { GLPIEmpleado, Accesos } from '../../models/models.index';
+import { RetornoEquipo,  } from '../../models/retorno.model';
+import { Usuario } from '../../models/usuario.model';
+import swal from 'sweetalert2';
 
 @Component({
   selector: 'app-salida',
-  templateUrl: './salida.component.html',
+  templateUrl: './accescon.component.html',
   styles: [],
-  styleUrls: ['../../agenda/agenda.component.css']
+  styleUrls: ['../agenda/agenda.component.css']
 
 })
-export class SalidaComponent implements OnInit {
+export class AccesConComponent implements OnInit {
 
   empleados: GLPIEmpleado[] = [];
   empleado: GLPIEmpleado = new GLPIEmpleado();
   equipos: RetornoEquipo[] = [];
+  accesos: Accesos[] = [];
+  acces: Accesos = new Accesos();
+
+
   pdf: any;
   equipo = '';
   cargando = false;
@@ -24,35 +30,69 @@ export class SalidaComponent implements OnInit {
   verPDFViewer = false;
 
   constructor(public glpiService: GlpiService,
-              public excelService: ExcelService) { }
+              public excelService: ExcelService,
+              public accesosService: AccesoService,
+              ) { }
 
   ngOnInit() {
     this.cargarEmpleados();
+    this.cargarAccesos();
   }
 
-  cargarEmpleados() {
-    debugger;
+  cargarEmpleados() { 
     this.cargando = true;
     this.glpiService.cargarTodosEmpleados()
     .subscribe((data: any) => {
-      for(let i = 0; i < data.length; i++){
-        if(data[i].Correo == JSON.parse(localStorage.usuario).correo){
-                data.splice(i, 1)
-            }
-        }
+       
       this.cargando = false;
       this.empleados = data;
     });
   }
-  buscaEquipo() {
+  cargarAccesos(){
     this.cargando = true;
-    this.verPDFViewer = false;
-    this.glpiService.buscaEquipo( this.equipo )
-    .subscribe((data: RetornoEquipo[]) => {
+    this.accesosService.cargarAll()
+    .subscribe((data: any) => {
       this.cargando = false;
-      this.equipos = data;
+      this.accesos = data;
     });
   }
+  AgregarEmpleado() {
+    debugger; 
+    var aux=0;
+    let usuario:  Usuario = new Usuario('', '');
+    usuario.nombre= this.empleado.Nombre;
+    usuario.correo= this.empleado.Correo;
+    usuario.noEmpleado= this.empleado.NoEmpleado;
+    for(let i = 0; i < this.accesos.length; i++){
+     if(this.accesos[i].User.noEmpleado == this.empleado.NoEmpleado){
+       aux = 1;
+     }
+    }
+    if(aux == 1){
+      swal.fire('Aviso!', 'El usuario ya existe', 'warning');
+    }else{
+      this.accesos[this.accesos.length]= {'User':usuario, Empresas: '', IMA: false,  EBR: false}; 
+    }
+  }
+  modificarUser(acc){
+        this.accesosService.AgregarAcceso( acc )
+        .subscribe( () => {
+          //this.cargarAreas();
+          swal.fire('Se guardaron los cambios','', 'success');
+        },
+        error => {
+          swal.fire('Aviso!', error.error, 'warning');
+        });
+  }
+  public changeact(value, acc, empr ){
+        if(empr == "IMA"){
+          acc.IMA = value.target.checked;
+        }
+        if(empr == "EBR"){
+          acc.EBR = value.target.checked;
+        }
+        //this.proyecto.Estado = value.target.checked; 
+    }
   buscarEquipoEmpleado() {
     this.cargando = true;
     this.verPDFViewer = false;

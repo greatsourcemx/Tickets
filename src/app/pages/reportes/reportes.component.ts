@@ -258,7 +258,8 @@ debugger;
     return Number(total.toFixed(2));
   }
   porcentajeHorasTotal(hemp: number, totalh: number){
-    var total =(hemp / this.porcentajeusr[4].horas) * 100;
+    debugger;
+    var total =(hemp / this.porcentajeusr[5].horas) * 100;
     return Number(total.toFixed(2));
   }
   grafica ( data: Reporte[] ) {

@@ -22,4 +22,6 @@ export { Listados } from './listados.model';
 export * from './mantenimientos/mantenimiento.index';
 export { Archivos } from './archivos.model';
 export { PorcentajeUser } from './porcentajeuser.model';
+export { BitacoraRh } from './bitacorarh.model';
+export { Accesos } from './accesos.model';
 

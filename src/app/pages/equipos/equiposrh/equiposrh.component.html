@@ -6,7 +6,6 @@
                     <div class="col-12">
                         <ul class="nav nav-tabs" role="tablist">
                             <li class="nav-item"> <a (click)="limpiar()" class="nav-link active" data-toggle="tab" href="#home" role="tab" aria-selected="true"><span class="hidden-sm-up"><i class="ti-user"></i></span> <span class="hidden-xs-down">Empleado</span></a> </li>
-                            <li class="nav-item"> <a (click)="limpiar()" class="nav-link" data-toggle="tab" href="#profile" role="tab" aria-selected="false"><span class="hidden-sm-up"><i class="ti-desktop"></i></span> <span class="hidden-xs-down">Equipo</span></a> </li>
                         </ul>
                         <div class="tab-content tabcontent-border">
                             <div class="tab-pane active" id="home" role="tabpanel">
@@ -19,15 +18,6 @@
                                     </ng-select>
                                     <div class="input-group-prepend">
                                         <button class="btn btn-info" (click)="buscarEquipoEmpleado()" name="find" type="button">Buscar</button>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="tab-pane p-20" id="profile" role="tabpanel">
-                                <h5>Ingresar Número de Equipo</h5>
-                                <div class="input-group">
-                                    <input type="text" [(ngModel)]="equipo" name="equipo" class="form-control" placeholder="Número de equipo" />
-                                    <div class="input-group-prepend">
-                                        <button class="btn btn-info" (click)="buscaEquipo()" name="btnEquipo" type="button">Buscar</button>
                                     </div>
                                 </div>
                             </div>
@@ -86,15 +76,12 @@
                             <th class="tbl-header6">Modelo</th>
                             <th class="tbl-header6">Locación</th>
                             <th class="tbl-header6">Fec. Entrega</th>
-                            <th class="tbl-header6">
-                                <input name="reto-all" [(ngModel)]="retorTodos" id="reto-all" type="checkbox" (change)="RetorTodos()" class="filled-in chk-col-light-blue" />
-                                <label for="reto-all" style="margin-bottom: 0rem;"> Retornar </label>
-                            </th>
+
                         </tr>
                     </thead>
                     <tbody>
                         <tr *ngFor="let equi of equipos; index as i">
-                            <td class="pointer" (click)="verPDF(equi.folio, equi.empresa)"><strong>{{ equi.folio }}</strong></td>
+                            <td class="pointer"><strong>{{ equi.folio }}</strong></td>
                             <td><b>{{ equi.empresa }}</b></td>
                             <td>{{ equi.dispositivo }}</td>
                             <td>{{ equi.nombre }}</td>
@@ -103,30 +90,13 @@
                             <td>{{ equi.modelo }}</td>
                             <td>{{ equi.locacion.Descripcion }}</td>
                             <td>{{ equi.fecEntrega | date: 'yyyy-MM-dd' }}</td>
-                            <td>
-                                <div>
-                                    <input name="retronar" (change)="verBotones()" [(ngModel)]="equi.retornar" [id]="equi.nombre" type="checkbox" class="filled-in chk-col-light-blue" />
-                                    <label [for]="equi.nombre">  </label>
-                                </div>
-                            </td>
+
                         </tr>
                     </tbody>
                 </table>
             </div>
             <div class="button-group">
                 <button *ngIf="verRetorno" name="retorno" (click)="retornar()" class="btn btn-danger">Retornar</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div *ngIf="verPDFViewer" class="row">
-    <div class="col-12">
-        <div class="card">
-            <div class="card-body">
-                <h4 id="visor" name="visor" class="card-title">Responsiva</h4>
-                <ngx-extended-pdf-viewer [src]="pdf" backgroundColor="#ffffff" [height]="'90vh'" [useBrowserLocale]="true">
-                </ngx-extended-pdf-viewer>
             </div>
         </div>
     </div>

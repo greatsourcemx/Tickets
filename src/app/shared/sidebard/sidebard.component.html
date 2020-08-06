@@ -13,16 +13,26 @@
                         <a class="has-arrow waves-effect waves-dark" aria-expanded="false"><i [class]="menu.icono"></i><span class="hide-menu" > {{ menu.titulo }} </span></a>
                         <div style="height: 15px;"></div>
                         <ul aria-expanded="false" class="collapse ">
-                            <li *ngFor="let submenu of menu.submenu">
-                                <a *ngIf="!submenu.subsubmenu" routerLinkActive="active" [routerLink]="[ submenu.url ]"> {{ submenu.titulo }} </a>
-                                <a *ngIf="submenu.subsubmenu" class="has-arrow waves-effect waves-dark" aria-expanded="false"><i [class]="submenu.subsubmenu.icono"></i><span class="hide-menu"></span> {{ submenu.titulo }} </a>
-                                <ul *ngIf="submenu.subsubmenu" aria-expanded="false" class="collapse">
-                                    <li *ngFor="let submenus of submenu.subsubmenu">
-                                        <a routerLinkActive="active" [routerLink]="[ submenus.url ]"> {{ submenus.titulo }} </a>
-                                    </li>
-                                </ul>
-                            </li>
-
+                            <ng-container *ngFor="let submenu of menu.submenu">
+                                <li *ngIf="submenu.titulo == 'Equipo Asignado' && (acceso.IMA == true || acceso.EBR == true)">
+                                    <a *ngIf="!submenu.subsubmenu" routerLinkActive="active" [routerLink]="[ submenu.url ]"> {{ submenu.titulo }} </a>
+                                    <a *ngIf="submenu.subsubmenu" class="has-arrow waves-effect waves-dark" aria-expanded="false"><i [class]="submenu.subsubmenu.icono"></i><span class="hide-menu"></span> {{ submenu.titulo }} </a>
+                                    <ul *ngIf="submenu.subsubmenu" aria-expanded="false" class="collapse">
+                                        <li *ngFor="let submenus of submenu.subsubmenu">
+                                            <a routerLinkActive="active" [routerLink]="[ submenus.url ]"> {{ submenus.titulo }} </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li *ngIf="submenu.titulo != 'Equipo Asignado'">
+                                    <a *ngIf="!submenu.subsubmenu" routerLinkActive="active" [routerLink]="[ submenu.url ]"> {{ submenu.titulo }} </a>
+                                    <a *ngIf="submenu.subsubmenu" class="has-arrow waves-effect waves-dark" aria-expanded="false"><i [class]="submenu.subsubmenu.icono"></i><span class="hide-menu"></span> {{ submenu.titulo }} </a>
+                                    <ul *ngIf="submenu.subsubmenu" aria-expanded="false" class="collapse">
+                                        <li *ngFor="let submenus of submenu.subsubmenu">
+                                            <a routerLinkActive="active" [routerLink]="[ submenus.url ]"> {{ submenus.titulo }} </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ng-container>
                         </ul>
                     </li>
 

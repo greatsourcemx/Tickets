@@ -38,9 +38,19 @@
                                 <option *ngFor="let esta of estados.Estatus" [ngValue]="esta.value">{{ esta.value }}</option>
                             </select>
                         </div>
+
                     </div>
-
-
+                    <div class="col-lg-4">
+                        <label for="fecha">Fecha Cierre</label>
+                        <div class="input-group">
+                            <input class="form-control" placeholder="yyyy-mm-dd" name="dp" [(ngModel)]="fecCerrado" ngbDatepicker #d="ngbDatepicker" required />
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-secondary" (click)="d.toggle()" type="button">
+                                <i class="fa fa-calendar"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 <label class="control-label m-t-20"></label>

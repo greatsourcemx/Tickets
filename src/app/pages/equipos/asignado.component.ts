@@ -6,7 +6,9 @@ import { RetornoEquipo } from '../../models/retorno.model';
 @Component({
   selector: 'app-asignado',
   templateUrl: './asignado.component.html',
-  styles: []
+  styles: [],
+  styleUrls: ['../agenda/agenda.component.css']
+
 })
 export class AsignadoComponent implements OnInit {
 
@@ -25,7 +27,6 @@ export class AsignadoComponent implements OnInit {
   }
 
   cargarEmpleado() {
-    debugger;
     this.cargando = true;
     this.glpiServicio.cargarEmpleadoGLPI()
     .subscribe((data: GLPIEmpleado) => {

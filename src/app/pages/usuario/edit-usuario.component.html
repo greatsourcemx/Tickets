@@ -31,7 +31,16 @@
                                 <option *ngFor="let empre of Empresas" [ngValue]="empre.id">{{ empre.nombre }}</option>
                             </select>
                         </div>
-
+                        <div class="form-group">
+                            <label>Area</label>
+                            <select [(ngModel)]="usuario.puesto" (change)="enableButton()" name="puesto" class="form-control">
+                                <option *ngFor="let pues of Areas" [ngValue]="pues.descripcion">{{ pues.descripcion }}</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Extension</label>
+                            <input [(ngModel)]="usuario.extension" (input)="enableButton()" name="extension" type="number" class="form-control" ng-required="false" placeholder="extension" />
+                        </div>
                         <div class="form-group">
                             <label>No. Empleado</label>
                             <input [(ngModel)]="usuario.noEmpleado" (input)="enableButton()" name="noEmpleado" type="number" class="form-control" placeholder="Número de Empleado" required />

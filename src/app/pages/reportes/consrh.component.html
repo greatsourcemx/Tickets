@@ -1,0 +1,64 @@
+<div class="row animated fadeIn" *ngIf="cargando">
+    <div class="col-sm-12">
+        <div class="alert alert-warning text-center">
+            <strong>Cargando</strong>
+            <br />
+            <i class="fa fa-refresh fa-spin fa-2x"></i>
+            <br />
+            <span>Espere por favor</span>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="bitacora" class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Listado de Usuarios</h4>
+                <div style="margin-bottom: 25px" class="input-group">
+                    <i style="position: absolute; top: 6px; right: 13px; font-size: 22px; z-index: 9999; color:#999999" class="fa fa-search">
+                        
+                    </i>
+                    <input input [(ngModel)]="query" class="form-control" type="text" required="" placeholder="Busca aqui" style=" border-radius: .25rem; position: relative;" />
+                </div>
+
+                <div style="position: relative; height: 500px; overflow: auto; display: block; ">
+                    <table class="table-striped table-sm" style="width: 100%;">
+                        <thead>
+                            <tr>
+                                <th class="tbl-header pointer tbl-header" style="position: sticky;top: 0;" (click)="sort('nombrehr')">
+                                    Nombre
+                                    <i class="fa" [ngClass]="{'fa-sort': column != 'nombrehr', 'fa-sort-asc': (column == 'nombrehr' && isDesc), 'fa-sort-desc': (column == 'nombrehr' && !isDesc) }" aria-hidden="true"> </i>
+                                </th>
+                                <th class=" tbl-header pointer tbl-header2" style="position: sticky;top: 0;" (click)="sort('nombre')">
+                                    Consulto
+                                    <i class="fa" [ngClass]="{'fa-sort': column != 'nombre', 'fa-sort-asc': (column == 'nombre' && isDesc), 'fa-sort-desc': (column == 'nombre' && !isDesc) }" aria-hidden="true"> </i>
+                                </th>
+                                <th class=" tbl-header pointer tbl-header3" style="position: sticky;top: 0;" (click)="sort('fecha')">
+                                    Fecha
+                                    <i class="fa" [ngClass]="{'fa-sort': column != 'fecha', 'fa-sort-asc': (column == 'fecha' && isDesc), 'fa-sort-desc': (column == 'fecha' && !isDesc) }" aria-hidden="true"> </i>
+                                </th>
+                                <th class=" tbl-header pointer tbl-header4" style="position: sticky;top: 0;">
+                                    Hora
+                                </th>
+                                <th class=" tbl-header pointer tbl-header5" style="position: sticky;top: 0;" (click)="sort('vista')">
+                                    Vista
+                                    <i class="fa" [ngClass]="{'fa-sort': column != 'vista', 'fa-sort-asc': (column == 'vista' && isDesc), 'fa-sort-desc': (column == 'vista' && !isDesc) }" aria-hidden="true"> </i>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let bit of bitacora | orderby: {property: column, direction: direction}| filter: 'Userrh,User,Vista,FechaCon': query">
+                                <td>{{ bit.Userrh}} </td>
+                                <td>{{ bit.User }}</td>
+                                <td>{{ bit.FechaCon | date: 'yyyy-MM-dd'}}</td>
+                                <td>{{ bit.FechaCon | date: 'HH: mm'}}</td>
+                                <td>{{ bit.Vista}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

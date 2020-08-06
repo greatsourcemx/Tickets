@@ -58,6 +58,10 @@ import { NuevoTPComponent } from './mantenimientos/detalledes/nuevotp.component'
 import { AgendaComponent } from './agenda/agenda.component';
 import { AlmacenComponent } from './almacen/almacen.component';
 
+import { EqiposRHComponent } from './equipos/equiposrh/equiposrh.component';
+import { ConsRHComponent } from './reportes/consrh.component';
+import { AccesConComponent } from './accescon/accescon.component';
+
 
 const pagesRoutes: Routes = [
     {
@@ -101,6 +105,10 @@ const pagesRoutes: Routes = [
             { path: 'reporte/evaluaciones', component: EvaluacionesComponent, data: { titulo: 'Evaluaciones' }  },
             { path: 'entrega', component: Equipos.EntregaComponent, data: { titulo: 'Entrega de Equipo' }  },
             { path: 'retorno', component: Equipos.SalidaComponent, data: { titulo: 'Retorno de Equipo' }  },
+            { path: 'equiposrh', component:  EqiposRHComponent, data: { titulo: 'Consulta de Equipo' }  },
+            { path: 'reporterh', component:  ConsRHComponent, data: { titulo: 'Retorno de Equipo' }  },
+            { path: 'accescon', component:  AccesConComponent, data: { titulo: 'Acceso Equipos' }  },
+
             { path: 'transferencias', component: Equipos.TransferenciaComponent, data: { titulo: 'Transferencia' }  },
             { path: 'nofirmas', component: Equipos.SinFirmaComponent, data: { titulo: 'Responsiva sin Firmar' }  },
             { path: 'asignado', component: Equipos.AsignadoComponent, data: { titulo: 'Equipo Asignado' }  },

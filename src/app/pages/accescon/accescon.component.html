@@ -18,16 +18,7 @@
                                         </ng-template>
                                     </ng-select>
                                     <div class="input-group-prepend">
-                                        <button class="btn btn-info" (click)="buscarEquipoEmpleado()" name="find" type="button">Buscar</button>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="tab-pane p-20" id="profile" role="tabpanel">
-                                <h5>Ingresar Número de Equipo</h5>
-                                <div class="input-group">
-                                    <input type="text" [(ngModel)]="equipo" name="equipo" class="form-control" placeholder="Número de equipo" />
-                                    <div class="input-group-prepend">
-                                        <button class="btn btn-info" (click)="buscaEquipo()" name="btnEquipo" type="button">Buscar</button>
+                                        <button class="btn btn-info" (click)="AgregarEmpleado()" name="find" type="button">Agregar</button>
                                     </div>
                                 </div>
                             </div>
@@ -59,7 +50,7 @@
     </div>
 </div>
 
-<div class="row" *ngIf="!cargando && equipos.length > 0">
+<div class="row">
     <div class="col-sm-12">
         <div class="card card-body">
             <div>
@@ -69,46 +60,43 @@
                         Excel
                     </button>
                 </div>
-                <div class="text-left float-left">
-                    <h3 class="card-title">Total de Equipos ( <small>{{ equipos.length }}</small> )</h3>
-                </div>
             </div>
             <div class="table-responsive m-t-20">
                 <table id="myTable" class="table table-sm table-striped">
                     <thead>
                         <tr>
-                            <th class="tbl-header">Folio</th>
-                            <th class="tbl-header2">Empresa</th>
-                            <th class="tbl-header3">Dispositivo</th>
-                            <th class="tbl-header4">Equipo</th>
-                            <th class="tbl-header5">Tipo</th>
-                            <th *ngIf="equipo !== ''">Responsable</th>
-                            <th class="tbl-header6">Modelo</th>
-                            <th class="tbl-header6">Locación</th>
-                            <th class="tbl-header6">Fec. Entrega</th>
-                            <th class="tbl-header6">
-                                <input name="reto-all" [(ngModel)]="retorTodos" id="reto-all" type="checkbox" (change)="RetorTodos()" class="filled-in chk-col-light-blue" />
-                                <label for="reto-all" style="margin-bottom: 0rem;"> Retornar </label>
-                            </th>
+                            <th class="tbl-header">Nombre</th>
+                            <th class="tbl-header2" colspan="2">Empresa</th>
+                            <th class="tbl-header3"></th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let equi of equipos; index as i">
-                            <td class="pointer" (click)="verPDF(equi.folio, equi.empresa)"><strong>{{ equi.folio }}</strong></td>
-                            <td><b>{{ equi.empresa }}</b></td>
-                            <td>{{ equi.dispositivo }}</td>
-                            <td>{{ equi.nombre }}</td>
-                            <td>{{ equi.tipo }}</td>
-                            <td *ngIf="equipo !== ''">{{ equi.empleado.Nombre }}</td>
-                            <td>{{ equi.modelo }}</td>
-                            <td>{{ equi.locacion.Descripcion }}</td>
-                            <td>{{ equi.fecEntrega | date: 'yyyy-MM-dd' }}</td>
+                        <tr *ngFor="let acc of accesos; index as i">
+                            <td>{{ acc.User.nombre }}</td>
                             <td>
+                                <div class="form-check">
+                                    <input #jscheck [checked]="acc.IMA" type="checkbox" (change)="changeact($event, acc, 'IMA')" class="form-check-input" id={{acc.User.noEmpleado}}+IMA>
+                                    <label class="form-check-label" for={{acc.User.noEmpleado}}+IMA>IMA</label>
+                                </div>
+
+                            </td>
+                            <td>
+                                <div class="form-check">
+                                    <input #jscheck [checked]="acc.EBR" type="checkbox" (change)="changeact($event, acc, 'EBR')" class="form-check-input" id={{acc.User.noEmpleado}}+EBR>
+                                    <label class="form-check-label" for={{acc.User.noEmpleado}}+EBR>EBR</label>
+                                </div>
+                            </td>
+                            <td>
+                                <button (click)="modificarUser( acc )" class="btn btn-info" ngbTooltip="Guardar">
+                                  <i class="fa fa-save"></i>
+                                </button>
+                            </td>
+                            <!--<td>
                                 <div>
                                     <input name="retronar" (change)="verBotones()" [(ngModel)]="equi.retornar" [id]="equi.nombre" type="checkbox" class="filled-in chk-col-light-blue" />
                                     <label [for]="equi.nombre">  </label>
                                 </div>
-                            </td>
+                            </td>-->
                         </tr>
                     </tbody>
                 </table>

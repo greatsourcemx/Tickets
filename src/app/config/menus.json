@@ -11,7 +11,8 @@
         "titulo": "Equipo",
         "icono": "icon-equipos",
         "submenu": [
-            { "titulo": "Asignado", "url": "/asignado" }
+            { "titulo": "Asignado", "url": "/asignado" },
+            { "titulo": "Equipo Asignado", "url": "/equiposrh" }
         ]
     }, {
         "titulo": "Catálogos",
@@ -35,7 +36,8 @@
                     "titulo": "Reportes",
                     "icono": "ti ti-pie-chart",
                     "subsubmenu": [
-                        { "titulo": "Porcentaje", "url": "/reporte" }
+                        { "titulo": "Porcentaje", "url": "/reporte" },
+                        { "titulo": "Consultas Equipos", "url": "/reporterh" }
                     ]
                 }
             ]
@@ -43,11 +45,13 @@
             "titulo": "Equipos",
             "icono": "icon-equipos",
             "submenu": [
+                { "titulo": "Asignado", "url": "/asignado" },
                 { "titulo": "Entrega", "url": "/entrega" },
                 { "titulo": "Retorno", "url": "/retorno" },
                 { "titulo": "Responsivas sin firmas", "url": "/nofirmas" },
                 { "titulo": "Transferencias", "url": "/transferencias" },
-                { "titulo": "Almacen", "url": "/almacen" }
+                { "titulo": "Almacen", "url": "/almacen" },
+                { "titulo": "Equipo Asignado", "url": "/equiposrh" }
             ]
         }, {
             "titulo": "Calendarios",
@@ -86,8 +90,8 @@
                 { "titulo": "Tipo Servicio", "url": "/tipos" },
                 { "titulo": "Agenda", "url": "/agenda" },
                 { "titulo": "Areas", "url": "/areas" },
-                { "titulo": "Tecnologias", "url": "/tecnologias" }
-
+                { "titulo": "Tecnologias", "url": "/tecnologias" },
+                { "titulo": "Acceso equipo asignado", "url": "/accescon" }
             ]
         }
     ]

@@ -27,7 +27,10 @@ export class GlpiService {
     const url = URL_SERVICIOS + '/glpi/all';
     return this.http.get( url );
   }
-
+  cargarTodosEmpleadosrh(usr) {
+    const url = URL_SERVICIOS + '/glpi/allusuariosrh?usr='+ usr;
+    return this.http.get( url );
+  }
   cargarEquipoEmpleado( empleado: GLPIEmpleado, empresa: string ) {
     const url = URL_SERVICIOS + '/glpi/empleados/responsivas?id=' + empleado.Id + '&empresa=' + empresa;
     return this.http.get( url );
@@ -40,7 +43,20 @@ export class GlpiService {
       return data;
     }));
   }
-
+  cargarTodoEquipoEmpleadorh( empleado: GLPIEmpleado) {
+    const url = URL_SERVICIOS + '/glpi/allrh';
+    return this.http.post( url, empleado ).pipe(
+    map((data: any) => {
+      return data;
+    }));
+  }
+  cargarBitacorarh(  ) {
+    const url = URL_SERVICIOS + '/glpi/consbitacora';
+    return this.http.get( url ).pipe(
+    map((data: any) => {
+      return data;
+    }));
+  }
   cargarSolicitantes( empr: string, desde = 0, termino = '' ) {
     let url = URL_SERVICIOS + '/glpi/solicitantes?empr=' + empr + '&desde=' + desde;
     if ( termino !== '' ) {

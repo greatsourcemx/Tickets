@@ -113,13 +113,20 @@ import { TecnologiasComponent } from './tecnologias/tecnologias.component';
 import { AlmacenComponent } from './almacen/almacen.component';
 import { TipoTicketComponent } from './tipoticket/tipoticket.component';
 import { AgendaComponent } from './agenda/agenda.component';
+import { EqiposRHComponent } from './equipos/equiposrh/equiposrh.component';
 
+import { ConsRHComponent } from './reportes/consrh.component';
+
+import { AccesConComponent } from './accescon/accescon.component';
 
 
 
 @NgModule({
     declarations: [
         PagesComponent,
+        ConsRHComponent,
+        EqiposRHComponent,
+        AccesConComponent,
         DashboardComponent,
         ProgressComponent,
         Graficas1Component,

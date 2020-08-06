@@ -24,34 +24,34 @@
                 </div>
             </div>
             <div class="table-responsive m-t-20">
-                <table id="myTable" class="table table-sm table-hover">
+                <table id="myTable" class="table table-sm table-striped">
                     <thead>
                         <tr>
-                            <th class="pointer" (click)="sort('folio')">
+                            <th class="pointer tbl-header" (click)="sort('folio')">
                                 Folio
                                 <i class="fa" [ngClass]="{'fa-sort': column != 'folio', 'fa-sort-asc': (column == 'folio' && isDesc), 'fa-sort-desc': (column == 'folio' && !isDesc) }" aria-hidden="true"> </i>
                             </th>
-                            <th class="pointer" (click)="sort('dispositivo')">
+                            <th class="pointer tbl-header2" (click)="sort('dispositivo')">
                                 Dispositivo
                                 <i class="fa" [ngClass]="{'fa-sort': column != 'dispositivo', 'fa-sort-asc': (column == 'dispositivo' && isDesc), 'fa-sort-desc': (column == 'dispositivo' && !isDesc) }" aria-hidden="true"> </i>
                             </th>
-                            <th class="pointer" (click)="sort('nombre')">
+                            <th class="pointer tbl-header3" (click)="sort('nombre')">
                                 Equipo
                                 <i class="fa" [ngClass]="{'fa-sort': column != 'nombre', 'fa-sort-asc': (column == 'nombre' && isDesc), 'fa-sort-desc': (column == 'nombre' && !isDesc) }" aria-hidden="true"> </i>
                             </th>
-                            <th class="pointer" (click)="sort('tipo')">
+                            <th class="pointer tbl-header4" (click)="sort('tipo')">
                                 Tipo
                                 <i class="fa" [ngClass]="{'fa-sort': column != 'tipo', 'fa-sort-asc': (column == 'tipo' && isDesc), 'fa-sort-desc': (column == 'tipo' && !isDesc) }" aria-hidden="true"> </i>
                             </th>
-                            <th class="pointer" (click)="sort('modelo')">
+                            <th class="pointer tbl-header5" (click)="sort('modelo')">
                                 Modelo
                                 <i class="fa" [ngClass]="{'fa-sort': column != 'modelo', 'fa-sort-asc': (column == 'modelo' && isDesc), 'fa-sort-desc': (column == 'modelo' && !isDesc) }" aria-hidden="true"> </i>
                             </th>
-                            <th class="pointer" (click)="sort('locacion.Descripcion')">
+                            <th class="pointer tbl-header6" (click)="sort('locacion.Descripcion')">
                                 Locación
                                 <i class="fa" [ngClass]="{'fa-sort': column != 'locacion.Descripcion', 'fa-sort-asc': (column == 'locacion.Descripcion' && isDesc), 'fa-sort-desc': (column == 'locacion.Descripcion' && !isDesc) }" aria-hidden="true"> </i>
                             </th>
-                            <th class="pointer" (click)="sort('fecEntrega')">
+                            <th class="pointer tbl-header6" (click)="sort('fecEntrega')">
                                 Fec. Entrega
                                 <i class="fa" [ngClass]="{'fa-sort': column != 'fecEntrega', 'fa-sort-asc': (column == 'fecEntrega' && isDesc), 'fa-sort-desc': (column == 'fecEntrega' && !isDesc) }" aria-hidden="true"> </i>
                             </th>
