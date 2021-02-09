@@ -3,23 +3,42 @@
         <h4 class="card-title">Filtros</h4>
         <div class="col-8">
             <div class="row">
-                <div *ngIf="users" class="col-3">
+                <div *ngIf="users" class="col-2">
                     <select [(ngModel)]="param.responsable.id" name="tipo" class="form-control" required>
                         <option *ngFor="let tipo of users" [ngValue]="tipo.id">{{ tipo.nombre }}</option>
                     </select>
                 </div>
-                <div class="col-3">
-                    <select [(ngModel)]="param.rango" name="range" id="range" class="form-control">
+                <div class="col-2">
+                    <select [(ngModel)]="param.rango" name="range" (change)="EditarP($event.target.value)" id="range" class="form-control">
+                        <option  value="OTRA">Seleccione Usuario</option>
+
                         <option *ngFor="let rang of rangos" [value]="rang.value">{{ rang.displayName }}</option>
+                        <option  value="OTRA">Otra</option>
+
                     </select>
                 </div>
-                <div class="col-3">
+                <div class="col-6" id="calendario" style="display:none;">
+                    <div class="card">
+                        <div class="card-body">
+
+                            <ngb-datepicker #dp (select)="onDateSelection($event)" [displayMonths]="2" [dayTemplate]="t">
+                            </ngb-datepicker>
+                            <ng-template #t let-date="date" let-focused="focused">
+                                <span class="custom-day" [class.focused]="focused" [class.range]="isFrom(date) || isTo(date) || isInside(date) || isHovered(date)" [class.faded]="isHovered(date) || isInside(date)" (mouseenter)="hoveredDate = date" (mouseleave)="hoveredDate = null">
+                                          {{ date.day }}
+                                      </span>
+                            </ng-template>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-2">
                     <select [(ngModel)]="param.empresa" name="empr" id="empr" class="form-control">
                         <option value='Todos'>Todos</option>
                         <option *ngFor="let empr of empresas" [value]="empr.nombre">{{ empr.nombre }}</option>
                     </select>
                 </div>
-                <div class="col-3">
+                <div class="col-2">
                     <button name="generar" class="btn btn-primary" (click)="generar()">Generar</button>
                 </div>
             </div>
