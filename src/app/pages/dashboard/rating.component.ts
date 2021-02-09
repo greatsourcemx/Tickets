@@ -28,6 +28,7 @@ export class RatingComponent implements OnInit {
   }
 
   cargarEvaluaciones() {
+    debugger;
     this._serviciosService.cargarSinEvaluaciones()
     .subscribe((resp: Servicio[]) => {
       this.evaluaciones = resp;

@@ -131,7 +131,10 @@ export class ServiciosService {
     let url = URL_SERVICIOS + '/tickets';
     return this.http.post( url, servicio );
   }
-
+  cargarTicketsAbiertos ( servicio: Servicio ) {
+    let url = URL_SERVICIOS + '/ticketsabiertos';
+    return this.http.post( url, servicio );
+  }
   cargarTicketsCerrados (servicio: Servicio) {
     let url = URL_SERVICIOS + '/tickets/cerrados';
     return this.http.post( url, servicio );

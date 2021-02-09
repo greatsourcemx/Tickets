@@ -20,11 +20,19 @@ export class ManteVencidosComponent implements OnInit {
   }
 
   cargar() {
+    debugger;
     this.cargando = true;
     this.manteService.cargarVencidos()
-    .subscribe((data: Mantenimiento[]) => {
-      this.cargando = false;
-      this.mantes = data;
+    .subscribe((data: any) => {
+      this.cargando = false; 
+      for(let i = 0; i < data.length; i++){
+        console.log(i);
+        if(data[i].equipo == null){
+          data[i] = data[i+1];
+        }
+
+        this.mantes = data;
+      } 
     });
   }
 

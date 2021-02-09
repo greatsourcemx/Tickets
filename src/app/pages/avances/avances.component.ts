@@ -78,6 +78,7 @@ export class AvancesComponent implements OnInit {
   }
 
   guardarAvance() {
+    debugger;
     if ( this.avance.archivos.length > 0 ) {
       this._servicioService.uploadFile( this.formData )
       .subscribe((data: string[]) => {

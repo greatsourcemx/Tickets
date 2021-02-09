@@ -1,23 +1,25 @@
 <div class="card">
     <div class="card-body">
-        <h4 class="card-title">Filtros</h4>
-        <div class="col-8">
+        <h4 class="card-title" style="margin-bottom: 0rem;">Filtros</h4>
+        <div class="col-12">
             <div class="row">
                 <div *ngIf="users" class="col-2">
+                    <label for="range" style="font-size: 14px;font-weight: bold;"> Seleccione Usuario </label>
+
                     <select [(ngModel)]="param.responsable.id" name="tipo" class="form-control" required>
                         <option *ngFor="let tipo of users" [ngValue]="tipo.id">{{ tipo.nombre }}</option>
                     </select>
                 </div>
                 <div class="col-2">
-                    <select [(ngModel)]="param.rango" name="range" (change)="EditarP($event.target.value)" id="range" class="form-control">
-                        <option  value="OTRA">Seleccione Usuario</option>
-
-                        <option *ngFor="let rang of rangos" [value]="rang.value">{{ rang.displayName }}</option>
-                        <option  value="OTRA">Otra</option>
+                    <label for="fehcas" style="font-size: 14px;font-weight: bold;"> Seleccione Fecha </label>
+                    <select [(ngModel)]="param.rango" name="fehcas" (change)="EditarP($event.target.value)" id="fehcas" class="form-control">
+ 
+                        <option *ngFor="let rang of rangos" [value]="rang.value">{{ rang.displayName.toUpperCase() }}</option>
+                        <option  value="OTRA">OTRA</option>
 
                     </select>
                 </div>
-                <div class="col-6" id="calendario" style="display:none;">
+                <div class="col-4" id="calendario" style="display:none;">
                     <div class="card">
                         <div class="card-body">
 
@@ -33,8 +35,9 @@
                     </div>
                 </div>
                 <div class="col-2">
+                    <label for="empr" style="font-size: 14px;font-weight: bold;"> Unidad(Empresa) </label>
                     <select [(ngModel)]="param.empresa" name="empr" id="empr" class="form-control">
-                        <option value='Todos'>Todos</option>
+                        <option value='Todos'>TODOS</option>
                         <option *ngFor="let empr of empresas" [value]="empr.nombre">{{ empr.nombre }}</option>
                     </select>
                 </div>

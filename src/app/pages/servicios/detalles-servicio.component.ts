@@ -43,6 +43,15 @@ export class DetallesServicioComponent implements OnInit {
     this._servicioService.cargarDetalles( id )
     .subscribe( (resp: Servicio) => {
       this.servicio = resp;
+      try{ 
+        this.servicio.Descripcion = this.servicio.Descripcion.replace('|', '\n');
+        this.servicio.Descripcion = this.servicio.Descripcion.replace('|', '\n');
+        this.servicio.Descripcion = this.servicio.Descripcion.replace('|','\n');
+        this.servicio.Descripcion = this.servicio.Descripcion.replace('|', '\n');
+        this.servicio.Descripcion = this.servicio.Descripcion.replace('|', '\n');
+        this.servicio.Descripcion = this.servicio.Descripcion.replace('|', '\n');
+        this.servicio.Descripcion = this.servicio.Descripcion.replace('|', '\n');
+      }catch{}
     });
   }
 

@@ -40,28 +40,22 @@ import { DetalledesComponent } from './mantenimientos/detalledes/detalledes.comp
 import { SoftwaredesComponent } from './mantenimientos/detalledes/softwaredes.component';
 import { CambiosdesComponent } from './mantenimientos/detalledes/cambiosdes.component';
 import { NuevoDesComponent } from './mantenimientos/detalledes/nuevopdes.component';
-import { NuevoDesGenComponent } from './mantenimientos/detalledes/nuevopgen.component';
-
-
-import { EditarDesComponent } from './mantenimientos/detalledes/editardes.component';
-
-
+import { NuevoDesGenComponent } from './mantenimientos/detalledes/nuevopgen.component'; 
+import { EditarDesComponent } from './mantenimientos/detalledes/editardes.component'; 
 import { AreasComponent } from './areas/areas.component';
 import { TipoTicketComponent } from './tipoticket/tipoticket.component';
-import { GraficaRatings } from './graficarating/graficarating.component';
-
+import { GraficaRatings } from './graficarating/graficarating.component'; 
 import { DetallesProyecto } from './mantenimientos/detalledes/detallepro.component';
 import { ProyectoGenComponent } from './mantenimientos/detalledes/proyectogen.component';
-import { TecnologiasComponent } from './tecnologias/tecnologias.component';
-
+import { TecnologiasComponent } from './tecnologias/tecnologias.component'; 
 import { NuevoTPComponent } from './mantenimientos/detalledes/nuevotp.component';
 import { AgendaComponent } from './agenda/agenda.component';
-import { AlmacenComponent } from './almacen/almacen.component';
-
+import { AlmacenComponent } from './almacen/almacen.component'; 
 import { EqiposRHComponent } from './equipos/equiposrh/equiposrh.component';
 import { ConsRHComponent } from './reportes/consrh.component';
 import { AccesConComponent } from './accescon/accescon.component';
-
+import { NuevoServiciocComponent } from './servicioc/nuevoservicio.component'; 
+import { ServiciocComponent } from './servicioc/servicioc.component';
 
 const pagesRoutes: Routes = [
     {
@@ -108,6 +102,10 @@ const pagesRoutes: Routes = [
             { path: 'equiposrh', component:  EqiposRHComponent, data: { titulo: 'Consulta de Equipo' }  },
             { path: 'reporterh', component:  ConsRHComponent, data: { titulo: 'Retorno de Equipo' }  },
             { path: 'accescon', component:  AccesConComponent, data: { titulo: 'Acceso Equipos' }  },
+            { path: 'nuevoservicio', component:  NuevoServiciocComponent, data: { titulo: 'Nuevo Servicio' }  },
+            { path: 'nuevoservicio/:id', component:  NuevoServiciocComponent, data: { titulo: 'Nuevo Servicio' }  },
+
+            { path: 'servicioc', component:  ServiciocComponent, data: { titulo: 'Servicios' }  }, 
 
             { path: 'transferencias', component: Equipos.TransferenciaComponent, data: { titulo: 'Transferencia' }  },
             { path: 'nofirmas', component: Equipos.SinFirmaComponent, data: { titulo: 'Responsiva sin Firmar' }  },

@@ -1,0 +1,193 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="card .bg-light">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-4 pull-right">
+                        <h4 class="card-title">Listado de Servicios</h4>
+                    </div>
+                    <div class="col-3">
+                        <input [(ngModel)]="query" type="text" class="form-control" placeholder="Buscar">
+                    </div>
+                    <div class="col-3 pull-left">
+                        <button [routerLink]="['/nuevoservicio']" class="btn btn-info pull-right" name="new" ngbTooltip="Agregar Avance">
+                            <i class="fa fa-plus"></i>Nuevo
+                        </button>
+                    </div>
+                    <div class="switch text-right col -2">
+                        <label>
+                            Todo
+                            <input type="checkbox" id="checkactivos" (change)="changeCheck($event)">
+                            <span class="lever"></span>
+                            Activos
+                            </label>
+                    </div>
+                </div>
+                <div class="row" style="padding-bottom: 15px;">
+                </div>
+                <div class="row" style="height: 650px; overflow: auto; display: block;">
+                    <table class="table table-sm table-striped">
+                        <thead>
+                            <tr>
+                                <th class=" tbl-header pointer tbl-header" style="position: sticky;top: 0;" (click)="sort('Titulo')">
+                                    Nombre
+                                    <i class="fa" [ngClass]="{'fa-sort': column != 'Titulo', 'fa-sort-asc': (column == 'Titulo' && isDesc), 'fa-sort-desc': (column == 'Titulo' && !isDesc) }" aria-hidden="true"> </i>
+                                </th>
+                                <th class="tbl-header2" style="position: sticky;top: 0;" (click)="sort('Descripcion')">Descripcion
+                                    <i class="fa" [ngClass]="{'fa-sort': column != 'Descripcion', 'fa-sort-asc': (column == 'Descripcion' && isDesc), 'fa-sort-desc': (column == 'Descripcion' && !isDesc) }" aria-hidden="true"> </i>
+
+                                </th>
+                                <th class=" tbl-header3 pointer" style="position: sticky;top: 0;" (click)="sort('NombreProveedor')">
+                                    Proveedor
+                                    <i class="fa" [ngClass]="{'fa-sort': column != 'NombreProveedor', 'fa-sort-asc': (column == 'NombreProveedor' && isDesc), 'fa-sort-desc': (column == 'NombreProveedor' && !isDesc) }" aria-hidden="true"> </i>
+                                </th>
+                                <th class="tbl-header4" style="position: sticky;top: 0; text-align: center; " (click)="sort('Fecha')">Fecha Creado
+                                    <i class="fa" [ngClass]="{'fa-sort': column != 'Fecha', 'fa-sort-asc': (column == 'Fecha' && isDesc), 'fa-sort-desc': (column == 'Fecha' && !isDesc) }" aria-hidden="true"> </i>
+
+                                </th>
+                                <th class="tbl-header5" style="position: sticky;top: 0; text-align: center;width: 130px;" (click)="sort('FechaCreado')">Fecha <br>Inicio
+                                    <i class="fa" [ngClass]="{'fa-sort': column != 'FechaCreado', 'fa-sort-asc': (column == 'FechaCreado' && isDesc), 'fa-sort-desc': (column == 'FechaCreado' && !isDesc) }" aria-hidden="true"> </i>
+                                </th>
+                                <th class="tbl-header6" style="position: sticky;top: 0; text-align: center;width: 120px;" (click)="sort('FechaVencimiento')">Fecha Vencimiento
+                                    <i class="fa" [ngClass]="{'fa-sort': column != 'FechaVencimiento', 'fa-sort-asc': (column == 'FechaVencimiento' && isDesc), 'fa-sort-desc': (column == 'FechaVencimiento' && !isDesc) }" aria-hidden="true"> </i>
+
+                                </th>
+                                <th class="tbl-header6" style="position: sticky;top: 0; text-align: center;width: 80px;" (click)="sort('FechaVencimiento')">Vence en (dias)
+                                    <i class="fa" [ngClass]="{'fa-sort': column != 'FechaVencimiento', 'fa-sort-asc': (column == 'FechaVencimiento' && isDesc), 'fa-sort-desc': (column == 'FechaVencimiento' && !isDesc) }" aria-hidden="true"> </i>
+
+                                </th>
+                                <th class="tbl-header6" style="position: sticky;top: 0;">Recordar en</th>
+                                <th class="tbl-header6" style="position: sticky;top: 0;"></th>
+                                <th class="tbl-header6" style="position: sticky;top: 0;"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            <tr *ngFor="let serv of servicios | orderby: {property: column, direction: direction} | filter: 'Nombre,Descripcion,NombreProveedor,Fecha,FechaCreado,FechaVencimiento': query">
+                                <ng-container *ngIf="checkTarea && serv.Estatus==1">
+                                    <td>{{ serv.Nombre }}</td>
+                                    <td>{{ serv.Descripcion }}</td>
+                                    <td>{{ serv.NombreProveedor }}</td>
+                                    <td>{{ fechaMes(serv.Fecha.split('T')[0])}}</td>
+                                    <td style="text-align: center;"> {{ fechaMes(serv.FechaCreado.split('T')[0])}}</td>
+
+                                    <td style="text-align: center;">{{ fechaMes(serv.FechaVencimiento.split('T')[0])}}</td>
+                                    <td style="text-align: end; padding-right: 20px;">{{restarFechas(serv.FechaVencimiento)}}</td>
+
+                                    <td *ngIf="serv.Recordar == 1">1 dia Antes</td>
+                                    <td *ngIf="serv.Recordar == 2">2 dias Antes</td>
+                                    <td *ngIf="serv.Recordar == 3">3 dias Antes</td>
+                                    <td *ngIf="serv.Recordar == 4">4 dias Antes</td>
+                                    <td *ngIf="serv.Recordar == 5">5 dias Antes</td>
+                                    <td *ngIf="serv.Recordar == 6">6 dias Antes</td>
+                                    <td *ngIf="serv.Recordar == 7">1 semana Antes</td>
+                                    <td *ngIf="serv.Recordar == 14">2 semanas Antes</td>
+                                    <td *ngIf="serv.Recordar == 21">3 semanas Antes</td>
+                                    <td *ngIf="serv.Recordar == 30">1 mes Antes</td>
+                                    <td *ngIf="serv.Recordar == 60">2 meses Antes</td>
+                                    <td *ngIf="serv.Recordar == 90">3 meses Antes</td>
+                                    <td>
+                                        <span *ngIf="serv.archivos.length > 1"> 
+                                                <span (click)="openModal(content, serv.archivos)"  ngbTooltip="Ver documentos" class="" ><i class="fa fa-image"></i></span>
+                                        </span>
+                                        <span *ngIf="serv.archivos.length == 1">
+                                            <span *ngFor="let arc of serv.archivos">
+                                                <span (click)="open(content, arc)" ngbTooltip="Ver documento" class=""><i class="fa fa-image"></i></span>
+                                        </span>
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <span class="action-icons">
+                                            <a href="javascript:void(0)" [routerLink]="['/nuevoservicio', serv.id ]"  style="color: #4f4de0; padding-right: 5px" ngbTooltip="Editar"><i class="fa fa-edit"></i></a>
+                                        </span>
+                                    </td>
+                                </ng-container>
+                                <ng-container *ngIf="!checkTarea">
+                                    <td>{{ serv.Nombre }}</td>
+                                    <td>{{ serv.Descripcion }}</td>
+                                    <td>{{ serv.NombreProveedor }}</td>
+                                    <td>{{ fechaMes(serv.Fecha.split('T')[0])}}</td>
+                                    <td style="text-align: center;">{{ fechaMes(serv.FechaCreado.split('T')[0])}}</td>
+
+                                    <td style="text-align: center;">{{ fechaMes(serv.FechaVencimiento.split('T')[0])}}</td>
+                                    <td style="text-align: end; padding-right: 20px;">{{restarFechas(serv.FechaVencimiento)}}</td>
+
+                                    <td *ngIf="serv.Recordar == 1">1 dia Antes</td>
+                                    <td *ngIf="serv.Recordar == 2">2 dias Antes</td>
+                                    <td *ngIf="serv.Recordar == 3">3 dias Antes</td>
+                                    <td *ngIf="serv.Recordar == 4">4 dias Antes</td>
+                                    <td *ngIf="serv.Recordar == 5">5 dias Antes</td>
+                                    <td *ngIf="serv.Recordar == 6">6 dias Antes</td>
+                                    <td *ngIf="serv.Recordar == 7">1 semana Antes</td>
+                                    <td *ngIf="serv.Recordar == 14">2 semanas Antes</td>
+                                    <td *ngIf="serv.Recordar == 21">3 semanas Antes</td>
+                                    <td *ngIf="serv.Recordar == 30">1 mes Antes</td>
+                                    <td *ngIf="serv.Recordar == 60">2 meses Antes</td>
+                                    <td *ngIf="serv.Recordar == 90">3 meses Antes</td>
+                                    <td>
+                                        <span *ngIf="serv.archivos.length > 1"> 
+                                                <span (click)="openModal(content, serv.archivos)" ngbTooltip="Ver documentos" class=""><i class="fa fa-image"></i></span>
+                                        </span>
+                                        <span *ngIf="serv.archivos.length == 1">
+                                            <span *ngFor="let arc of serv.archivos">
+                                                <span (click)="open(content, arc)" ngbTooltip="Ver documento" class=""><i class="fa fa-image"></i></span>
+                                        </span>
+                                        </span>
+                                    </td>
+                                    <td>
+
+                                        <span class="action-icons">
+                                            <a href="javascript:void(0)" [routerLink]="['/nuevoservicio', serv.id ]"  style="color: #4f4de0; padding-right: 5px" ngbTooltip="Editar"><i class="fa fa-edit"></i></a>
+                                        </span>
+                                    </td>
+                                </ng-container>
+                            </tr>
+                            <ng-template #content let-modal>
+                                <div class="modal-header">
+                                    <h4 class="modal-title" id="modal-basic-title">Imagen Adjunta</h4>
+                                    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                                    <span aria-hidden="true">&times;</span>
+                                  </button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="" style="width: 100%">
+                                        <img style="width: 100%" [src]="selId | servicioimagen: true" alt="file" class="profile-pic" />
+                                    </div>
+                                </div>
+                            </ng-template>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="myModal" class="modal {{visible}}">
+    <!-- Modal content -->
+    <div class="modal-content">
+
+        <div *ngIf="servcat?.length > 0" class="upload-table">
+            <table *ngIf="!cargando" class="table table-sm table-bordered">
+                <thead>
+                    <tr>
+                        <th>Archivos Seleccionados</th>
+                        <th>Abrir/Descargar</th>
+                    </tr>
+                </thead>
+                <tbody class="upload-name-style">
+                    <tr *ngFor="let item of servcat; let i=index">
+                        <td> <strong (click)="open(content, item)" ngbTooltip="descargar">{{ item.ArchNombre }}</strong></td>
+                        <td><span ngbTooltip="descargar" (click)="open(content, item)" class=""><i class="fa fa-download"></i></span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="row form-group-sm">
+            <a (click)="CloseModal()" style="color: #fff; left: 88%;" class="btn btn-danger waves-effect waves-light m-r-10">Cerrar</a>
+        </div>
+
+    </div>
+
+</div>

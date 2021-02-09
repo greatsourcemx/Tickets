@@ -28,10 +28,12 @@ export class TrabajosComponent implements OnInit {
     public _tiposService: TiposService ) { }
 
   ngOnInit() {
-    this.cargarTickets();
+    //this.cargarTickets();
+    this.cargarTicketsAbiertos();
     this.cargarUsers();
     this.cargarAdmins();
     this.cargarTipos();
+    
   }
 
   cargarAdmins ( ) {
@@ -53,8 +55,22 @@ export class TrabajosComponent implements OnInit {
   }
 
   cargarTickets() {
+     
     this.cargando = true;
     this._servicioService.cargarTicketsTrabajo( this.filtros )
+    .subscribe((resp: any) => {
+      if (resp.length !== 0) {
+        this.totalRegistros = resp[0].Total;
+      }
+      this.showNavegacion = this.totalRegistros >= 15;
+      this.Tickets = resp;
+      this.cargando = false;
+    });
+  }
+  cargarTicketsAbiertos() {
+    debugger;
+    this.cargando = true;
+    this._servicioService.cargarTicketsAbiertos( this.filtros )
     .subscribe((resp: any) => {
       if (resp.length !== 0) {
         this.totalRegistros = resp[0].Total;
@@ -74,7 +90,7 @@ export class TrabajosComponent implements OnInit {
 
   quitarFiltros () {
     this.filtros = new Servicio('');
-    this.cargarTickets();
+    this.cargarTicketsAbiertos();
   }
 
   cambiarDesde( valor: number ) {
@@ -91,7 +107,7 @@ export class TrabajosComponent implements OnInit {
     }
 
     this.filtros.desde += valor;
-    this.cargarTickets();
+    this.cargarTicketsAbiertos();
 
   }
 

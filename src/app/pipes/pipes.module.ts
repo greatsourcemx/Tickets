@@ -8,11 +8,14 @@ import { OrderbyPipe } from './orderby.pipe';
 import { TruncatePipe } from './truncate.pipe';
 import { CapitalizarPipe } from './capitalizar.pipe';
 import { FechaPipe } from './fecha.pipe';
+import { ImagenesPipe } from './imagenes.pipe';
+
 
 @NgModule({
   imports: [],
   declarations: [
     ImagenPipe,
+    ImagenesPipe,
     TiempoPipe,
     GroupByPipe,
     HorasPipe,
@@ -24,6 +27,7 @@ import { FechaPipe } from './fecha.pipe';
   ],
   exports: [
     ImagenPipe,
+    ImagenesPipe,
     TiempoPipe,
     GroupByPipe,
     HorasPipe,

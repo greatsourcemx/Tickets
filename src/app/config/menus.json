@@ -11,7 +11,7 @@
         "titulo": "Equipo",
         "icono": "icon-equipos",
         "submenu": [
-            { "titulo": "Asignado", "url": "/asignado" },
+            { "titulo": " Mi Equipo Asignado", "url": "/asignado" },
             { "titulo": "Equipo Asignado", "url": "/equiposrh" }
         ]
     }, {
@@ -28,16 +28,22 @@
                 { "titulo": "Mi Tablero", "url": "/principal" },
                 { "titulo": "Abiertos", "url": "/tickets" },
                 { "titulo": "Cerrados", "url": "/cerrados" },
-                { "titulo": "Evaluaciones", "url": "/reporte/evaluaciones" },
                 { "titulo": "Recurrentes", "url": "/recurrentes" },
                 { "titulo": "Estadisticas", "url": "/graficas" },
-                { "titulo": "Grafica Rating", "url": "/graficarating" },
+                {
+                    "titulo": "Evaluaciones",
+                    "icono": "ti ti-pie-chart",
+                    "subsubmenu": [
+                        { "titulo": "Evaluaciones por Fecha", "url": "/reporte/evaluaciones" },
+                        { "titulo": "Grafica Rating", "url": "/graficarating" }
+
+                    ]
+                },
                 {
                     "titulo": "Reportes",
                     "icono": "ti ti-pie-chart",
                     "subsubmenu": [
-                        { "titulo": "Porcentaje", "url": "/reporte" },
-                        { "titulo": "Consultas Equipos", "url": "/reporterh" }
+                        { "titulo": "Porcentaje", "url": "/reporte" }
                     ]
                 }
             ]
@@ -45,13 +51,14 @@
             "titulo": "Equipos",
             "icono": "icon-equipos",
             "submenu": [
-                { "titulo": "Asignado", "url": "/asignado" },
+                { "titulo": "Mi Equipo Asignado", "url": "/asignado" },
                 { "titulo": "Entrega", "url": "/entrega" },
                 { "titulo": "Retorno", "url": "/retorno" },
                 { "titulo": "Responsivas sin firmas", "url": "/nofirmas" },
                 { "titulo": "Transferencias", "url": "/transferencias" },
                 { "titulo": "Almacen", "url": "/almacen" },
-                { "titulo": "Equipo Asignado", "url": "/equiposrh" }
+                { "titulo": "Ver Equipo Asignado", "url": "/equiposrh" },
+                { "titulo": "Consulta Equipo Asignado", "url": "/reporterh" }
             ]
         }, {
             "titulo": "Calendarios",
@@ -91,7 +98,8 @@
                 { "titulo": "Agenda", "url": "/agenda" },
                 { "titulo": "Areas", "url": "/areas" },
                 { "titulo": "Tecnologias", "url": "/tecnologias" },
-                { "titulo": "Acceso equipo asignado", "url": "/accescon" }
+                { "titulo": "Acceso  ver equipo asignado", "url": "/accescon" },
+                { "titulo": "Servicios", "url": "/servicioc" }
             ]
         }
     ]

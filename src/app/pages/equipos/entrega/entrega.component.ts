@@ -59,6 +59,9 @@ export class EntregaComponent implements OnInit {
         if(data.Empleados[i].Correo == JSON.parse(localStorage.usuario).correo){
                 data.Empleados.splice(i, 1)
             }
+        if(data.Empleados[i].Activo == false){
+          data.Empleados.splice(i, 1)
+        }
         }
       this.equipos = data.Equipos;
       this.empleados = data.Empleados;

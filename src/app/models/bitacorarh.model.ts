@@ -7,5 +7,7 @@ export class BitacoraRh {
         public User: string = '', 
         public FechaCon?: Date,
         public Vista: string = '', 
+        public UserBus: string = '', 
+
     ) { }
 }

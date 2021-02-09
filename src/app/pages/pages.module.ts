@@ -118,12 +118,15 @@ import { EqiposRHComponent } from './equipos/equiposrh/equiposrh.component';
 import { ConsRHComponent } from './reportes/consrh.component';
 
 import { AccesConComponent } from './accescon/accescon.component';
+import { NuevoServiciocComponent } from './servicioc/nuevoservicio.component';
 
+import { ServiciocComponent } from './servicioc/servicioc.component';
 
 
 @NgModule({
     declarations: [
         PagesComponent,
+        ServiciocComponent,
         ConsRHComponent,
         EqiposRHComponent,
         AccesConComponent,
@@ -131,6 +134,7 @@ import { AccesConComponent } from './accescon/accescon.component';
         ProgressComponent,
         Graficas1Component,
         UsuarioComponent,
+        NuevoServiciocComponent,
         NuevoUsuarioComponent,
         EditUsuarioComponent,
         SolicitantesComponent,

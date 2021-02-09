@@ -34,7 +34,7 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './login/register.component';
 import { RecoverComponent } from './login/recover.component';
 import { ChartsModule } from 'ng2-charts';
-
+  
 
 
 @NgModule({
@@ -52,7 +52,7 @@ import { ChartsModule } from 'ng2-charts';
     ReactiveFormsModule,
     ServiceModule,
     NgbModule,
-    StoreModule.forRoot( appReducers ),
+     StoreModule.forRoot( appReducers ),
     EffectsModule.forRoot( effectsArr ),
     ChartsModule,
     // StoreDevtoolsModule.instrument({

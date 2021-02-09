@@ -23,4 +23,5 @@ export { GraficasService } from './graficas/graficas.service';
 export { ZonasService } from './zonas/zonas.service';
 export { ParametrosService } from './mantenimientos/parametros.service';
 export { AccesoService } from './accescon/accescon.service';
+export { ServicioCatalogoService } from './serviciocatalogo/serviciocatalogo.service';
 

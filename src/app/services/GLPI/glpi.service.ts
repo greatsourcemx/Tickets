@@ -7,6 +7,7 @@ import { Responsiva } from '../../models/responsiva.model';
 import { GLPIEmpleado } from '../../models/GLPIEmpleado.model';
 import { RetornoEquipo } from '../../models/retorno.model';
 import { Observable } from 'rxjs/internal/Observable';
+import { Listados, Parametros } from '../../models/models.index';
 
 @Injectable()
 export class GlpiService {
@@ -56,6 +57,13 @@ export class GlpiService {
     map((data: any) => {
       return data;
     }));
+  }
+  cargarBitacorarh2( param: Parametros ) {
+    const url = URL_SERVICIOS + '/glpi/consbitacora2';
+    return this.http.post( url, param ).pipe(
+      map((data: any[]) => {
+        return data;
+      }));
   }
   cargarSolicitantes( empr: string, desde = 0, termino = '' ) {
     let url = URL_SERVICIOS + '/glpi/solicitantes?empr=' + empr + '&desde=' + desde;

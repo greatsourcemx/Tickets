@@ -30,12 +30,14 @@ export class MarcadoresComponent implements OnInit {
   }
 
   ngOnInit() {
+
     this.cargarInfoPrincipal();
     this.store.dispatch( new markActions.LoadUsersAction() );
     this.store.dispatch( new markActions.LoadMarkAction( this.range ) );
   }
 
   cargarInfoPrincipal () {
+    debugger;
     this.store.select('marcadores')
     .subscribe( principal => {
       this.principal = principal.principal;
