@@ -108,7 +108,10 @@ export class CerradosComponent implements OnInit {
       this.tipos = resp;
     });
   }
-
+  cargarbuscar () {
+    this.filtros.desde = 0;
+    this.cargarTickets();
+  }
   cargarTickets () {
     this.cargando = true;
     this.filtros.FecRegistro = new Date(this.fromDate.year, this.fromDate.month - 1, this.fromDate.day);

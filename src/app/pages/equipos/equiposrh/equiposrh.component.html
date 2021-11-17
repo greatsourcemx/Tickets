@@ -81,7 +81,7 @@
                     </thead>
                     <tbody>
                         <tr *ngFor="let equi of equipos; index as i">
-                            <td class="pointer"><strong>{{ equi.folio }}</strong></td>
+                            <td class="pointer" (click)="verPDF(equi.folio, equi.empresa)"><strong>{{ equi.folio }}</strong></td>
                             <td><b>{{ equi.empresa }}</b></td>
                             <td>{{ equi.dispositivo }}</td>
                             <td>{{ equi.nombre }}</td>
@@ -97,6 +97,17 @@
             </div>
             <div class="button-group">
                 <button *ngIf="verRetorno" name="retorno" (click)="retornar()" class="btn btn-danger">Retornar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div *ngIf="verPDFViewer" class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <h4 id="visor" name="visor" class="card-title">Responsiva</h4>
+                <ngx-extended-pdf-viewer [src]="pdf" backgroundColor="#ffffff" [height]="'90vh'" [useBrowserLocale]="true">
+                </ngx-extended-pdf-viewer>
             </div>
         </div>
     </div>

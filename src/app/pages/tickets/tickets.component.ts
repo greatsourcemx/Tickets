@@ -113,17 +113,23 @@ export class TicketsComponent implements OnInit {
   }
 
   guardar ( f: NgForm ) {
+    $('#btnenviar').hide()
     debugger;
     if (f.invalid) {
+      $('#btnenviar').show();
       return;
     }
     if(this.ticket.Solucion == "" || this.ticket.Solucion == undefined){
       swal.fire('Advertencia!', 'Por favor capture Solucion', 'warning');
+      $('#btnenviar').show();
       return;
-    } 
+    }
     this.ticket.FecCerrado = new Date(this.fecCerrado.year, this.fecCerrado.month - 1, this.fecCerrado.day);
     this._ticketService.modificarServicio( this.ticket )
-    .subscribe( (resp: any) => { this.router.navigate(['/principal']); });
-  }
+    .subscribe( (resp: any) => { 
+      $('#btnenviar').show();
+      this.router.navigate(['/principal']); 
+    });
+   }
 
 }

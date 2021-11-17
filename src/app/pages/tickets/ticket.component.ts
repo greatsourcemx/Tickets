@@ -74,7 +74,7 @@ export class TicketComponent implements OnInit {
     this._tiposService.cargarTiposActivos()
     .subscribe( (resp: any) => {
       this.tipos = resp;
-      this.ticket.TipoServicio = resp[1];
+      this.ticket.TipoServicio = resp[7];
     });
   }
 
@@ -88,28 +88,34 @@ export class TicketComponent implements OnInit {
   }
 
   guardar ( f: NgForm) {
+    $('#btnenviar').hide();
     if ( f.invalid ) {
       return;
     }
 
     if ( this.ticket.Solicitor.id === 0 ) {
+      $('#btnenviar').show();
       swal.fire('Advertencia', 'Debe seleccionar el solicitor', 'warning');
       return;
     }
     if ( this.ticket.Estado == 'Cerrada' && (this.ticket.Solucion == '' || this.ticket.Solucion == undefined)) {
+      $('#btnenviar').show();
       swal.fire('Advertencia', 'Un ticket cerrado debe de tener solucion', 'warning');
       return;
     }
     if ( this.ticket.Estado == 'Cerrada' && (this.ticket.Duracion == undefined || this.ticket.Duracion == null || this.ticket.Duracion.Descripcion == "Sin Tiempo")) {
+      $('#btnenviar').show();
       swal.fire('Advertencia', 'Debe seleccionar tiempo', 'warning');
       return;
     }
     this.ticket.FecCerrado = new Date(this.fecCerrado.year, this.fecCerrado.month - 1, this.fecCerrado.day);
     this._servicioService.guardarServicio( this.ticket.Solicitor.id, this.ticket )
     .subscribe(
+      
       (resp: any) => { this.router.navigate(['/principal']);
     },
     error => {
+      $('#btnenviar').show();
       swal.fire('Aviso!', error.error, 'warning');
     });
 

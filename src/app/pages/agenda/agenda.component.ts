@@ -46,7 +46,7 @@ export class AgendaComponent implements OnInit {
     .subscribe((data: boolean) => {
       this.isAdmin = data;
     });
-    this.cargarAgenda('EBR');
+    this.cargarAgenda('IMA');
   }
   seleccionEmpresa( empr: string ) {
     this.desde = 0;
